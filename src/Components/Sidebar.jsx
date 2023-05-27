@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineClose, AiFillCaretDown, AiOutlineKey } from "react-icons/ai";
+import { AiOutlineClose, AiFillCaretDown,AiOutlineDown, AiOutlineKey } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import {
   FaRegListAlt,
@@ -14,11 +14,11 @@ import { RiAdminLine, RiOrganizationChart } from "react-icons/ri";
 import { MdLibraryAdd, MdPassword } from "react-icons/md";
 import { useState } from "react";
 
-const activeRouteCss = "text-[#222940]";
+const activeRouteCss = "text-[#5658b0]";
 const activetoggleCss = "text-[#1abc9c]/100";
 const routes = [
   {
-    path: "/list",
+    path: "/profile",
     name: "Profile",
     icon: <FaUser />,
   },
@@ -116,22 +116,23 @@ const SideItem = ({ routeObj, sidebarOpen }) => {
 
   return routeObj.submenus ? (
     <div className={`w-full  h-full `} onClick={toggleSubMenu}>
-      <div className=" hover:bg-white hover:text-purple-400 cursor-pointer justify-start font-bold py-2 px-3  rounded flex gap-4 items-center">
+      <div className=" hover:bg-white hover:text-purple-400 cursor-pointer justify-start font-medium py-2 px-3  rounded flex gap-4 items-center">
         <span className={`${showSubMenu && activetoggleCss}`}>
           {" "}
           {routeObj.icon}
         </span>
-        {sidebarOpen && <span className="mr-4"> {routeObj.name}</span>}
-        {sidebarOpen && <span>{<AiFillCaretDown />}</span>}
+        {sidebarOpen && <span className="mr-6"> {routeObj.name}</span>}
+        {sidebarOpen && <span className="text-xs">{<AiOutlineDown />}</span>}
       </div>
       {showSubMenu && (
         <div className="transition-all ring-1 rounded ring-white mt-2 flex flex-col gap-1 p-1">
           {routeObj.submenus.map((submenu, index) => {
             return (
               <NavLink
+              key={index}
                 to={submenu.path}
                 className={({ isActive }) =>
-                  `hover:bg-white hover:text-blue justify-start  font-bold py-2 px-3  rounded flex  gap-2 items-center ${
+                  `hover:bg-white hover:text-blue justify-start  font-medium py-2 px-3  rounded flex  gap-2 items-center ${
                     isActive && activeRouteCss
                   } ${sidebarOpen ? " justify-start" : "justify-center"}`
                 }
@@ -148,7 +149,7 @@ const SideItem = ({ routeObj, sidebarOpen }) => {
     <NavLink
       to={routeObj.path}
       className={({ isActive }) =>
-        `hover:bg-white hover:text-blue font-bold py-2 px-3 mb-2  rounded flex justify-start gap-2 items-center ${
+        `hover:bg-white hover:text-blue font-medium py-2 px-3 mb-2  rounded flex justify-start gap-2 items-center ${
           isActive && activeRouteCss
         }`
       }
@@ -179,7 +180,7 @@ const Sidebar = ({ toggleSidebar, sidebarOpen }) => {
         {/* Routes Area */}
         <div className="w-full mt-3 p-3 flex flex-col gap-3">
           {routes.map((route, index) => {
-            return <SideItem routeObj={route} sidebarOpen={sidebarOpen} />;
+            return <SideItem routeObj={route} sidebarOpen={sidebarOpen} key={index} />;
           })}
         </div>
       </div>

@@ -1,15 +1,15 @@
 import React from "react";
 import {  useNavigate } from "react-router-dom";
-//  import {useAuth } from "../contexs/auth";
+ import {useAuth } from "../contexs/auth";
 
 const Nav2 = ({ toggleSidebar }) => {
-  //   const  {setAuth}  = useAuth();
+  const {setAuth } = useAuth();
 
-  // const logout = () => {
-  //   sessionStorage.removeItem("token");
-  //   setAuth({ token: null });
-    
-  // };
+  const logout = () => {
+    sessionStorage.removeItem("token");
+    setAuth({ token: null });
+  };
+
   return (
     <nav className="bg-white m-4 flex justify-between ">
       <div className="flex ">
@@ -32,10 +32,10 @@ const Nav2 = ({ toggleSidebar }) => {
       </div>
       <div className="">
         <button
-          className="bg-purple-400 rounded-full px-5 p-1 text-white  justify-end "
-          //  onClick={logout(setAuth)}
+          className="bg-purple-400 hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600  rounded-full px-5 p-1 text-white  justify-end "
+            onClick={logout}
         >
-          Logout
+          Logouts
         </button>
       </div>
     </nav>

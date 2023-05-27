@@ -33,46 +33,22 @@ const handleApi =(e)=>{
     })
     .then((result) => {
       console.log(result.data.token);
-      // setAuth({ token: result?.data?.token });
-      // sessionStorage.setItem("token", result.data.token);
-      console.log(result.data.user_is_admin);
-      console.log(emailData.current.value)
+      setAuth({ token: result?.data?.token });
+      sessionStorage.setItem("token", result.data.token);
+      console.log(result.data)
       localStorage.setItem("emailinput",emailData.current.value)
       localStorage.setItem("passwordinput",passwordData.current.value)
-      sessionStorage.setItem("token", result.data.token);
+    
       notify("sucess","sucessfully login");
-      if(result.data.user_is_admin='false'){
+      if(result.data.user_is_admin='true'){
+        navigate("/profile",{replace:true});
+      }  else if(result.data.user_is_admin='false'){
         navigate("/about",{replace:true})
-      } if(result.data.user_is_admin='true'){
-        navigate("/list",{replace:true});
-      }
+      } 
+    
     
     })
     .catch((error) => {
-      // setError(error.response.data.message);
-      // if (error.response) {
-      //   // The request was made and the server responded with a status code
-      //   const { status, data } = error.response;
-      //   if (status === 404) {
-      //     // Handle 404 error
-      //     console.log('Resource not found');
-      //     notify("error","enter the valid data");
-      //   } else {
-      //     // Handle other status codes
-      //     console.log(`Error ${status}: ${data}`);
-      //     notify("error","enter the valid data");
-      //   }
-      // }
-      //  else if (error.request) {
-      //   // The request was made but no response was received
-      //   console.log('No response received');
-      // } else {
-      //   // Something happened in setting up the request that triggered an error
-      //   console.log('Error:', error.message);
-      // }
-      // else {
-      //   navigate("/list", { replace: true });
-      // }
     
       console.log(error);
     })
@@ -97,8 +73,7 @@ return result;
       if(!visible) return null;
   return (
     <>
-    <div  className='fixed inset-0 z-10   transition transition-shadow delay-150 duration-300 ease-in-out  bg-black bg-opacity-30 
-    backdrop-blur-sm flex justify-center items-center '>
+    <div  className='fixed inset-0 z-10   transition transition-shadow delay-150 duration-300 ease-in-out  bg-black        bg-opacity-30 backdrop-blur-sm flex justify-center items-center '>
     <AnimatePresence>
        <motion.div
        initial={{y:'-300'}}
@@ -141,7 +116,7 @@ return result;
   <div>
 <button className=' hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  px-20 mx-10 py-2  rounded-2xl'onClick={handleApi}>Login</button>
   </div>
-  <div
+    <div
   className='text-slate-500  mt-16 mx-12 '>
  Sign Up using
   <span className="hover:underline hover:decoration-purple-500 hover:decoration-2 mx-2 " onClick={()=>setHasaccount(false)}>Sign Up</span>

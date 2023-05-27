@@ -7,7 +7,7 @@ function ContentCreate() {
   const[heading,setHeading]=useState('')
   const[content,setContent]=useState('')
   const[updated_by,setUpdatedBy]=useState('')
-  const[status,setStatus]=useState('')
+  const[status,setStatus]=useState('Publish')
   const username = localStorage.getItem('emailinput') 
   const userPassword = localStorage.getItem('passwordinput');
   const handleHeading =(e)=>{
@@ -55,7 +55,7 @@ function ContentCreate() {
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Content</div>
 {/* for heading */}
  <div className='relative mb-8  mx-12 '>
- <label for="email" class="absolute   text-gray-600 cursor-text ">Heading</label>
+ <label htmlFor="heading" className="absolute   text-gray-600 cursor-text ">Heading</label>
 <input
 className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autocomplete="off"
  id="heading"
@@ -68,20 +68,20 @@ className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-n
 </div>
 {/* for content */}
 <div className='relative mb-4   mx-12  '> 
-<label for="Password" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
+<label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
 <Editor
-className="w-24  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
-id="content"
-type="text"
-name="content"
-value={content}
-onEditorChange={(value) => setContent(value)}
+ className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
+ id="content"
+ type="text"
+ name="content"
+ value={content}
+ onEditorChange={(value) => setContent(value)}
 // onChange={handleContent}
 />   
 </div>
 {/* for updated_by */}
 <div className='relative mb-4   mx-12  '> 
-<label for="Password" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
+<label htmlFor="updatedby" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
 <input
 className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
 id="updated_by"
@@ -93,7 +93,7 @@ onChange={handleUpadedBy}
 </div>
 {/* for Status */}
 <div className='relative mb-4   mx-12  '> 
-<label for="Password" class="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
+<label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
 {/* <input
 className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
 id="status"

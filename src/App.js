@@ -5,16 +5,19 @@ import PrivateLayout from './layout/PrivateLayout';
 import PublicLayout from './layout/PublicLayout'; 
 import Protected from './utlis/Protected';
 import List from './Components/List';
+import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import { ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate} from './pages';
+import {Profile, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
 import ContentPublish from './pages/ContentPublish';
+import Profiles from './pages/Profiles';
+
 function App() {
   return (
     <>
-    {/* <AuthProvider> */}
+    <AuthProvider>
     <Routes>
       <Route element ={<PublicLayout />}>
       <Route path='/' element={<Home/>}/>
@@ -29,7 +32,10 @@ function App() {
       </Route>
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
+      <Route path='/profile' element={<Profiles />} />
+      <Route path='/profiles' element={<Profile />} />
       <Route path='/list' element={<List />} />
+      <Route path='/nav' element={<Nav2 />} />
       <Route path='/alist' element={<ArtistList />} />
       <Route path='/aadd' element={<ArtistCreate/>} />
       <Route path='/aupdate' element={<ArtistUpdate/>} />
@@ -43,7 +49,7 @@ function App() {
       </Route>
       </Route>
     </Routes>
-    {/* </AuthProvider> */}
+    </AuthProvider>
     </>
   );
 }

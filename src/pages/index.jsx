@@ -5,5 +5,5 @@ export {default as ContentCreate} from './ContentCreate'
 export {default as ContentList} from './ContentList'
 export {default as ArtistCreate}from './ArtistCreate'
 export {default as ChangePassword}from './ChangePassword'
-
+export {default as Profile}from './Profile'
 

@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import img from '../assets/13.jpg'
 function Header() {
   return (
     <>
@@ -22,7 +23,7 @@ function Header() {
       {/* for image part */}
     <div>
      <img className="h-120"
-     src="13.jpg" alt=""></img>
+     src={img} alt=""></img>
    </div>
     </div>
     </div>

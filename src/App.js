@@ -7,12 +7,16 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate} from './pages';
+import {Profile,User, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
 import ContentPublish from './pages/ContentPublish';
 import Profiles from './pages/Profiles';
+import PasswordReset2 from './Components/PasswordReset2';
+import ArtistLayout from './layout/ArtistLayout';
+import UserLayout from './layout/UserLayout';
+import UsersForm from './Components/UsersForm';
 
 function App() {
   return (
@@ -21,9 +25,11 @@ function App() {
     <Routes>
       <Route element ={<PublicLayout />}>
       <Route path='/' element={<Home/>}/>
+      <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
       <Route path='/reset' element={<ResetPassword />} />
+      <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/aform' element={<Artistform/>} />
@@ -33,7 +39,7 @@ function App() {
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
-      <Route path='/profiles' element={<Profile />} />
+
       <Route path='/list' element={<List />} />
       <Route path='/nav' element={<Nav2 />} />
       <Route path='/alist' element={<ArtistList />} />
@@ -46,7 +52,20 @@ function App() {
       <Route path='/contentlist' element={<ContentList />} />
       <Route path='/put' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />
+      <Route path='/sponseradd' element={<SponserCreate/>} />
+      <Route path='/sponserlist' element={<SponserList />} />
+      <Route path='/sponserupdate' element={<SponserUpdate />} />
       </Route>
+      </Route>
+      {/* for userlayout */}
+      <Route element={<ArtistLayout />}>
+     
+      <Route path='/profiles' element={<Profiles />} />
+      </Route>
+      {/* for usersLayout */}
+      <Route element={<UserLayout />}>
+     
+      <Route path='/user' element={<User />} />
       </Route>
     </Routes>
     </AuthProvider>

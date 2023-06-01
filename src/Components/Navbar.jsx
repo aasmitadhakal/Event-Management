@@ -52,7 +52,7 @@ function Navbar(){
                <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Home</Link></div>
                 
                 {/* for About us */}
-                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>About us</Link></div>
+                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>About</Link></div>
                 {/* for Contact */}
                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Blog</Link></div>
                  {/* for Event */}

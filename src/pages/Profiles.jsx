@@ -1,10 +1,12 @@
 import { useState,useEffect } from "react"
 import axios from 'axios';
+import {MdVerified} from 'react-icons/md'
+import {AiTwotoneEdit} from 'react-icons/ai'
  import img from '../assets/avatar.png'
 function Profiles() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         username: '',
@@ -13,7 +15,10 @@ function Profiles() {
         isAdmin: false,
         isArtist: false
       });
-
+      const handleEditClick = (event) => {
+        event.preventDefault();
+        setIsEditing(true);
+      };
       useEffect(() => {
         axios.get('https://ayushkandel.pythonanywhere.com/user-profile/',config)
           .then(response => {
@@ -26,6 +31,7 @@ function Profiles() {
               isAdmin: data.is_admin,
               isArtist: data.is_artist
             });
+            setIsEditing(false);
           })
           .catch(error => {
             console.error('Error fetching data:', error);
@@ -44,6 +50,12 @@ function Profiles() {
           'Content-Type': 'application/json'
         }
       };
+      const handleSaveClick = (e) => {
+        e.preventDefault()
+        setIsEditing(false);
+        
+      };
+    
 
   
   return (
@@ -51,13 +63,13 @@ function Profiles() {
     <div>
 
     <div className=" bg-transparent w-full  flex items-center justify-center p-3">
-          <form className="bg-white shadow-lg rounded px-8 pt-3 pb-8 mb-4 md:w-1/3 lg:w-2/4 ">
+          <form className="bg-white shadow-lg rounded px-8 pt-3 pb-8 mb-4   ">
             <div className="mb-2 text-gray-800 font-semibold text-center mx-auto">
-              <h3 className="py-2 block text-gray-700  font-bold mb-2 text text-xl">
-                Profile
+              <h3 className=" text-purple-400 py-2 block text-gray-700  font-bold mb-2 text text-xl">
+               My Profile
               </h3>
               <div className="flex justify-center w-full">
-                <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 bg-gray-500">
+                <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 ">
                   <a >
                     <img
                       src={img}
@@ -80,90 +92,114 @@ function Profiles() {
                   </span>
                 </div>
               </div>
+              {/* for name and username */}
+              <div className="my-4 border-b-2 pb-4 ">
+                <div className="text-medium font-bold flex justify-center items-center ">{formData.name}<MdVerified className="text-blue-600   "/></div>
+                <div className="flex justify-center items-center text-slate-500 gap-2 ">{formData.username}</div>
+                {/* for edit button */}
+                <div className="mt-2 flex items-center justify-center gap-2">
+                  {/* for icons */}
+                  <div className="border rounded px-1 py-2 border-purple-400">
+                    <AiTwotoneEdit  onClick={handleEditClick} className="text-purple-400"/>
+                  </div>
+                  {/* for button */}
+                  <div>
+                    <button className=" bg-white text-purple-400 border rounded px-2 py-1 border-purple-400 ">View Edit Profile</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className=" w-full justify-center">
+             {/* for text */}
+
+
+
+              
+            {/* for text */}
+            <div className="flex justify-center items-center font-medium text-slate-700">Account Information</div>
+            <div className=" w-full justify-center ml-12">
               {/* for name */}
-              <div className="mb-4 text-left">
+              <div className="   mb-4 text-left ">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="Name"
                 //   onChange={handleFileUpload}
                 >
-                  Name
+                  Name :
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className=" ml-8 text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3 leading-tight "
                   type="text"
                   name="name"
                   placeholder="name"
                   value={formData.name}  
                   onChange={handleChange}
-                 
+                  // disabled={!isEditing}
+                  readOnly={!isEditing}
                 />
-
-             
 
               </div>
                 {/* for username */}
 
-                <div className="mb-4 text-left">
+                <div className="   mb-4 text-left ">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="username"
+                  className=" text-gray-500 text-sm font-medium mb-2"
+                  htmlFor="Name"
+                //   onChange={handleFileUpload}
                 >
-                  Username
+                 UserName :
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="username"
+                  className=" text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
                   type="text"
-                  placeholder="username"
+                  name="Username"
                   value={formData.username}  
                   onChange={handleChange}
-                 
+                  // disabled={!isEditing}
+                  readOnly={!isEditing}
                 />
+
               </div>
 
               {/* for email */}
-              <div className=" text-left">
+              <div className="   mb-4 text-left ">
                 <label
-                  className="block text-gray-700 text-sm font-bold mb-2"
-                  htmlFor="email"
+                  className=" text-gray-500 text-sm font-medium mb-2"
+                  htmlFor="Name"
+                //   onChange={handleFileUpload}
                 >
-                  Email
+                  Email :
                 </label>
                 <input
-                  readOnly={true}
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                  id="email"
+                  className=" ml-8 text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
                   type="text"
                   name="email"
-                  placeholder="email"
                   value={formData.email}  
                   onChange={handleChange}
-                
+                  // disabled={!isEditing}
+                  readOnly={true}
                 />
+
               </div>
 
           
             </div>
 
-            {/* for button */}
-            <div className="flex flex-col items-center justify-between">
-              <button
-                className="w-medium bg-blue hover:bg-blue text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="button"
             
-              >
-                Submit
-              </button>
-              <div
-                className=" rounded cursor-pointer inline-block align-baseline font-bold text-sm text-blue hover:text-blue"
-               
-              >
-               <button className="hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600  px-20 bg-purple-500 text-white rounded-2xl py-2 border-2">Edit Profile</button>
-              </div>
-            </div>
+             {isEditing ? (
+        <button
+          onClick={handleSaveClick}
+          className="hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 mx-24  px-8 bg-purple-500 text-white rounded-2xl py-2 border-2"
+        >
+          Save changes
+        </button>
+      ) : (
+        <button
+          onClick={handleEditClick}
+          className="hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 mx-24  px-20 bg-purple-500 text-white rounded-2xl py-2 border-2 "
+        >
+          Edits
+        </button>
+      )}
           </form>
         </div>
 

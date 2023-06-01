@@ -12,6 +12,7 @@ function ContentList() {
     const [deleted, setDeleted] = useState(false);
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
+    //saving data at local storage to update the values
     const settoLocalstorage =(id,heading,content,updated_by,status)=>{
       localStorage.setItem("id",id)
       localStorage.setItem("heading",heading)
@@ -19,6 +20,7 @@ function ContentList() {
       localStorage.setItem("updated_by",updated_by)
       localStorage.setItem("status",status)
     }
+    //for authorization
     const config = {
       headers: {
         'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,

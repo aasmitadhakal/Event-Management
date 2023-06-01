@@ -40,7 +40,14 @@ function ChangePassword() {
     })
     .catch(error => {
       console.error('Error changing password', error);
-      // Handle error
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errorMessages = Object.values(error.response.data.errors).flat(); 
+         errorMessages.forEach(errorMessage => {
+         notify("error",errorMessage)
+        });
+      } else {
+        console.log("Error:", error);
+      }
     });
 
   }

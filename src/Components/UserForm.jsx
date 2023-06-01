@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {RxCross1} from 'react-icons/rx'
 import { ToastContainer } from 'react-toastify';
 import notify from '../utlis/notifier'
-
+import axios from 'axios';
 export default function UserForm({setHasaccount}) {
   
   const[user,setUser]=useState("");
@@ -11,14 +11,14 @@ export default function UserForm({setHasaccount}) {
   const[gender,setGender]=useState("");
   const[district,setDistrict]=useState("");
   const[municipality,setMunicipality]=useState("");
-  const[provinve,setProvince]=useState("");
+  const[province,setProvince]=useState("");
   const[ward,setWard]=useState("");
 
   const handleuser =(e)=>{
     setUser(e.target.value);
   }
   const handlephoto =(e)=>{
-    setPhoto(e.target.value);
+    setPhoto({ photo: e.target.files[0] });
   }
   const handlecontact =(e)=>{
     setContact(e.target.value);
@@ -40,9 +40,24 @@ export default function UserForm({setHasaccount}) {
   }
   const handleApi =(e)=>{
   e.preventDefault();
-  if(validate ()){
-
-  }
+  axios.post("https://ayushkandel.pythonanywhere.com/normal-user/create/", {
+   contact:contact,
+   gender:gender,
+   province:province,
+   district:district,
+   municipality:municipality,
+   ward:ward,
+   user:user,
+  photo:photo,
+  }, )
+    .then((response) => {
+      console.log(e.target.file)
+      console.log(response.data);
+      console.log('Data posted successfully!', response.data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   }
   const validate = ()=>{
     let result = true;
@@ -61,11 +76,11 @@ export default function UserForm({setHasaccount}) {
         <div className='pl-8'>
             {/* for User */}
       <div className='relative'>
-      <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Text</label>
+      <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">User</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
             id="user"
-            type="text"
+            type="number"
             name="user"
             value={user}
             onChange={handleuser}
@@ -77,11 +92,10 @@ export default function UserForm({setHasaccount}) {
           <input
             className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="photo"
-            type="text"
-           
+            type="file"
             name="photo"
-            value={photo}
             onChange={handlephoto}
+            accept="image/*"
           />
       </div >
         {/* for contact*/}
@@ -90,7 +104,7 @@ export default function UserForm({setHasaccount}) {
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="contact"
-            type="text"
+            type="number"
             
             name="Contact"
             value={contact}
@@ -147,7 +161,7 @@ export default function UserForm({setHasaccount}) {
             id="province"
             type="text"
             name="province"
-            value={provinve}
+            value={province}
             onChange={handleprovince}
           />
       </div>
@@ -157,7 +171,7 @@ export default function UserForm({setHasaccount}) {
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="ward"
-            type="text"
+            type="number"
            
             name="ward"
             value={ward}

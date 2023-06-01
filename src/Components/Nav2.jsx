@@ -13,7 +13,7 @@ const Nav2 = ({ toggleSidebar }) => {
   return (
     <nav className="bg-white m-4 flex justify-between ">
       <div className="flex ">
-        <span onClick={toggleSidebar}>
+        {/* <span onClick={toggleSidebar}>
           <svg
             className="w-6 h-6"
             fill="none"
@@ -28,14 +28,14 @@ const Nav2 = ({ toggleSidebar }) => {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-        </span>
+        </span> */}
       </div>
       <div className="">
         <button
-          className="bg-purple-400 hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600  rounded-full px-5 p-1 text-white  justify-end "
+          className="bg-purple-400 rounded-full px-5 p-1 text-white  justify-end "
             onClick={logout}
         >
-          Logouts
+          LogOut
         </button>
       </div>
     </nav>

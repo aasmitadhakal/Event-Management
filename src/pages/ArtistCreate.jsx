@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 function ArtistCreate() {
-  const [statuss, setStatuss] = useState('Publish');
+  const [statuss, setStatuss] = useState('All');
     const navigate = useNavigate()
     const [data, setData] = useState([]);
      const [deleted, setDeleted] = useState(false);
@@ -62,18 +62,18 @@ function ArtistCreate() {
   return (
     <>
    <div className='flex justify-end mr-24 '>
-   <Link to='/Ccreate'> <button className='bg-purple-400  ml-4 text-white  py-2 mt-4 mr-2 px-8 rounded-xl hover:bg-purple-900'>Add</button></Link>
-         <select className='w-44  hover:bg-purple-900 focus:outline-none bg-purple-400 text-white my-4 flex justify-center items-center py-2 px-6 rounded-xl ' value={statuss} onChange={handleStatusChange}>
-        <option value='' className=''>Fliter Status</option>
-        <option value="Draft">Draft</option>
-        <option value="Publish">Publish</option>
+   {/* <Link to='/Ccreate'> <button className='bg-purple-400  ml-4 text-white  py-2 mt-4 mr-2 px-8 rounded-xl hover:bg-purple-900'>Add</button></Link> */}
+         <select className=' focus:outline-none border-gray-200 p-2 ml-4 border-2 my-4 flex justify-center items-center py-2 px-6 rounded-xl ' value={statuss} onChange={handleStatusChange}>
+        <option value='All' className=''>Fliter Status</option>
+        <option value="Draft" className=''>Draft</option>
+        <option value="Publish" className=''>Publish</option>
       
       </select>
       </div>
     <div className="  overflow-auto rounded-lg shadow mx-24 mt-8 "  >
          
  
-         <table className="w-full mb-8 ">
+         <table className="w-full mb-4 ">
       <thead className='bg-white border-b-2 border-gray-200'>
         <tr className="">
           <th className=" p-3 text-sm font-semibold ">ID</th>

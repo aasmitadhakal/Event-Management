@@ -7,7 +7,9 @@ module.exports = {
     extend: {
       width: {
         '128': '86rem',
+        '15': '3.8rem',
       },
+     
       height: {
         '128': '35rem',
         '120': '28rem',
@@ -30,6 +32,7 @@ module.exports = {
       colors: {
         'blues': '#6AB187',
         'pink':'#b340d6',
+        'light-white':'rgba(255,255,255,0.50)'
       },
      
     },

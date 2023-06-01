@@ -6,4 +6,7 @@ export {default as ContentList} from './ContentList'
 export {default as ArtistCreate}from './ArtistCreate'
 export {default as ChangePassword}from './ChangePassword'
 export {default as Profile}from './Profile'
-
+export {default as SponserCreate}from './SponserCreate'
+export {default as SponserList}from './SponserList'
+export {default as SponserUpdate}from './SponserUpdate'
+export {default as User}from './User'

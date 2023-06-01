@@ -42,9 +42,12 @@ const handleApi =(e)=>{
       notify("sucess","sucessfully login");
       if(result.data.user_is_admin='true'){
         navigate("/profile",{replace:true});
-      }  else if(result.data.user_is_admin='false'){
-        navigate("/about",{replace:true})
-      } 
+        } 
+       else if(result.data.user_is_admin='false'){
+        navigate("/profiles",{replace:true})
+        }
+       
+      
     
     
     })

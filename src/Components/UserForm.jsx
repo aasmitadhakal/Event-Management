@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import {RxCross1} from 'react-icons/rx'
 import { ToastContainer } from 'react-toastify';
 import notify from '../utlis/notifier'
@@ -18,7 +18,7 @@ export default function UserForm({setHasaccount}) {
     setUser(e.target.value);
   }
   const handlephoto =(e)=>{
-    setPhoto({ photo: e.target.files[0] });
+  setPhoto(e.target.files[0])
   }
   const handlecontact =(e)=>{
     setContact(e.target.value);
@@ -38,18 +38,23 @@ export default function UserForm({setHasaccount}) {
   const handleward =(e)=>{
     setWard(e.target.value);
   }
+  useEffect(()=>{
+    setUser(localStorage.getItem("uid"));
+  
+ },[])
+      const formData = new FormData;
+      formData.append('contact', contact);
+      formData.append('gender', gender);
+      formData.append('province', province);
+      formData.append('district', district);
+      formData.append('municipality', municipality);
+      formData.append('ward', ward);
+      formData.append('user', user);
+      formData.append('photo', photo);
+    
   const handleApi =(e)=>{
   e.preventDefault();
-  axios.post("https://ayushkandel.pythonanywhere.com/normal-user/create/", {
-   contact:contact,
-   gender:gender,
-   province:province,
-   district:district,
-   municipality:municipality,
-   ward:ward,
-   user:user,
-  photo:photo,
-  }, )
+  axios.post("https://ayushkandel.pythonanywhere.com/normal-user/create/", formData )
     .then((response) => {
       console.log(e.target.file)
       console.log(response.data);
@@ -68,15 +73,18 @@ export default function UserForm({setHasaccount}) {
   }
   return (
     <>
-   <div className=' w-screen h-screen flex justify-center items-center'>
-     <div className='  mx-96 '>
-        <form className=' border pl-2  bg-white shadow-md rounded'>
-        <div className='text-3xl mx-52 mt-4 mb-4 font-bold text-purple-600 '>User form</div>
-        <div  className='grid grid-cols-2 gap-4'>
-        <div className='pl-8'>
+   <div className=' grid grid-cols-2 h-screen w-screen'>
+    <div>
+      <img src='img2.png'></img>
+    </div>
+     <div className='   '>
+        <form className='  pl-2  bg-white rounded'>
+        {/* <div className='text-3xl mx-52 mt-4 mb-4 font-bold text-purple-600 '>User form</div> */}
+        <div  className='grid '>
+        <div className=''>
             {/* for User */}
       <div className='relative'>
-      <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">User</label>
+      <label for="gender" className="absolute left-0 top-1 text-gray-600 cursor-text ">User</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
             id="user"
@@ -88,7 +96,7 @@ export default function UserForm({setHasaccount}) {
       </div>
         {/* for photo */}
         <div className='relative'>
-        <label for="photo" class="absolute left-0 top-1 text-gray-600 cursor-text ">Photo</label>
+        <label for="photo" className="absolute left-0 top-1 text-gray-600 cursor-text ">Photo</label>
           <input
             className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="photo"
@@ -100,7 +108,7 @@ export default function UserForm({setHasaccount}) {
       </div >
         {/* for contact*/}
         <div className='relative'>
-        <label for="contact" class="absolute left-0 top-1 text-gray-600 cursor-text ">Contact</label>
+        <label for="contact" className="absolute left-0 top-1 text-gray-600 cursor-text ">Contact</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="contact"
@@ -113,7 +121,7 @@ export default function UserForm({setHasaccount}) {
       </div>
        {/* for Gender */}
        <div className='relative'>
-       <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Gender</label>
+       <label for="gender" className="absolute left-0 top-1 text-gray-600 cursor-text ">Gender</label>
           <input
             className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
             id="gender"
@@ -130,7 +138,7 @@ export default function UserForm({setHasaccount}) {
       <div>
         {/* for district */}
         <div className='relative'>
-        <label for="photo" class="absolute left-0 top-1 text-gray-600 cursor-text ">District</label>
+        <label for="photo" className="absolute left-0 top-1 text-gray-600 cursor-text ">District</label>
           <input
             className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="district"
@@ -143,7 +151,7 @@ export default function UserForm({setHasaccount}) {
       </div>
         {/* for municipality */}
         <div className='relative'>
-        <label for="municipality" class="absolute left-0 top-1 text-gray-600 cursor-text ">Municipality</label>
+        <label for="municipality" className="absolute left-0 top-1 text-gray-600 cursor-text ">Municipality</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="municipality"
@@ -155,7 +163,7 @@ export default function UserForm({setHasaccount}) {
       </div>
         {/* for province*/}
         <div className='relative'>
-        <label for="province" class="absolute left-0 top-1 text-gray-600 cursor-text ">Province</label>
+        <label for="province" className="absolute left-0 top-1 text-gray-600 cursor-text ">Province</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="province"
@@ -167,7 +175,7 @@ export default function UserForm({setHasaccount}) {
       </div>
        {/* for ward */}
         <div className='relative'>
-        <label for="ward" class="absolute left-0 top-1 text-gray-600 cursor-text ">Ward</label>
+        <label for="ward" className="absolute left-0 top-1 text-gray-600 cursor-text ">Ward</label>
           <input
             className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="ward"

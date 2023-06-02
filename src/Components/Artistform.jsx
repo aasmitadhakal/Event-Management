@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {RxCross1} from 'react-icons/rx'
@@ -14,8 +14,8 @@ export default function ArtistForm({setHasaccount}) {
   const[type_of_the_performer,setTypeofPerformer]=useState('')
   const[performed_in,setPerformedIn]=useState('')
   const[description,setDescription]=useState('')
-  const[is_available,setIsavailable]=useState('')
-  const[manager,setManager]=useState('')
+  const[is_available,setIsavailable]=useState(false)
+  const[manager,setManager]=useState(false)
   const[photo,setPhoto]=useState('')
   const handlePhoto =(e)=>{
     setPhoto(e.target.files[0])
@@ -56,26 +56,31 @@ export default function ArtistForm({setHasaccount}) {
   const handleUser=(e)=>{
     setUser(e.target.value)
   } 
-
+  //for automatic value on uid
+  useEffect(()=>{
+    setUser(localStorage.getItem("uid"));
+ },[])
+  const formData = new FormData;
+  console.log(photo);
+  formData.append('contact', contact);
+  formData.append('gender', gender);
+  formData.append('province', province);
+  formData.append('district', district);
+  formData.append('municipality', municipality);
+  formData.append('ward', ward);
+  formData.append('user', user);
+  formData.append('photo', photo);
+  formData.append('type_of_the_performer', type_of_the_performer);
+  formData.append('performed_in', performed_in);
+  formData.append('description',description );
+  formData.append('is_available',is_available );
+  formData.append('manager',manager );
+  console.log(formData);
 
 
   const handleApi = (e) => {
     e.preventDefault();
-    axios.post("https://ayushkandel.pythonanywhere.com/artist/create/", {
-      contact:contact,
-      gender:gender,
-      province:province,
-      district:district,
-      municipality:municipality,
-      ward:ward,
-      type_of_the_performer:type_of_the_performer,
-      performed_in:performed_in,
-      description:description,
-      is_available:is_available,
-      manager:manager,
-      user:user,
-    
-    }, )
+    axios.post("https://ayushkandel.pythonanywhere.com/artist/create/", formData )
       .then((response) => {
         console.log(e.target.file)
         console.log(response.data);

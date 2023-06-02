@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import notify from '../utlis/notifier';
 const UsersForm = () => {
-  const [contact, setContact] = useState(0);
-  const [gender, setGender] = useState('Male');
+  const [contact, setContact] = useState('');
+  const [gender, setGender] = useState('');
   const [province, setProvince] = useState('');
   const [district, setDistrict] = useState('');
   const [municipality, setMunicipality] = useState('');
-  const [ward, setWard] = useState(0);
-  const [user, setUser] = useState(0);
+  const [ward, setWard] = useState('');
+  const [user, setUser] = useState('');
   const [photo, setPhoto] = useState(null);
 
   const handleContactChange = (event) => {
@@ -46,7 +46,8 @@ const UsersForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
+    const formData = new FormData;
+    console.log(photo);
     formData.append('contact', contact);
     formData.append('gender', gender);
     formData.append('province', province);
@@ -55,6 +56,7 @@ const UsersForm = () => {
     formData.append('ward', ward);
     formData.append('user', user);
     formData.append('photo', photo);
+    console.log(formData);
 
     axios
       .post('https://ayushkandel.pythonanywhere.com/normal-user/create/', formData)
@@ -65,6 +67,14 @@ const UsersForm = () => {
       .catch((error) => {
         // Handle error
         console.error(error);
+        if (error.response && error.response.data && error.response.data.errors) {
+          const errorMessages = Object.values(error.response.data.errors).flat(); 
+           errorMessages.forEach(errorMessage => {
+           notify("error",errorMessage)
+          });
+        } else {
+          console.log("Error:", error);
+        }
       });
   };
 
@@ -107,7 +117,7 @@ const UsersForm = () => {
       <br />
       <label>
         Photo:
-        <input type="file" onChange={handlePhotoChange} />
+        <input type="file" onChange={handlePhotoChange}  accept="image/*" />
       </label>
       <br />
       <button type="submit">Submit</button>

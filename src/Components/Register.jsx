@@ -54,6 +54,7 @@ export default function Register({setHasaccount,visible,onClose}) {
     .then((result) => {
       console.log(result.data);
       sessionStorage.setItem("token", result.data.token);
+      localStorage.setItem("uid",result.data.uid)
       if(isArtist){
         navigate("/aform", { replace: true });
       }else{

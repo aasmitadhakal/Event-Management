@@ -46,10 +46,6 @@ const handleApi =(e)=>{
        else if(result.data.user_is_admin='false'){
         navigate("/profiles",{replace:true})
         }
-       
-      
-    
-    
     })
     .catch((error) => {
     
@@ -108,7 +104,6 @@ return result;
       ref={passwordData}
       type="password"
       name="password"
-      // placeholder="**************"
       value={password}
       onChange={handlePassword}
     />
@@ -120,15 +115,15 @@ return result;
 <button className=' hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  px-20 mx-10 py-2  rounded-2xl'onClick={handleApi}>Login</button>
   </div>
     <div
-  className='text-slate-500  mt-16 mx-12 '>
- Sign Up using
-  <span className="hover:underline hover:decoration-purple-500 hover:decoration-2 mx-2 " onClick={()=>setHasaccount(false)}>Sign Up</span>
+  className='text-slate-500  mb-12 ml-12 mt-4  '>
+    Not a member ?
+  <span className="hover:underline hover:decoration-purple-500 hover:decoration-2 mx-2 text-purple-400 " onClick={()=>setHasaccount(false)}>SignUp now</span>
   </div>
 </form>
     {/* <ToastContainer /> */}
     </div>
     <div className='absolute top-32 right-96 mx-36 text-black font-bold text-2xl' onClick={onClose}><RxCross1 /></div>
-     {/* <button className='absolute top-36 mx-24 left-96 font-bold text-2xl' onClick={onClose}>x</button>     */}
+ 
    </motion.div>
    </AnimatePresence>
   <ToastContainer />
@@ -136,4 +131,4 @@ return result;
   </>
   )
 }
-// export default Login
+

@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from 'axios';
- import img from '../assets/avatar.png'
+import img from '../assets/avatar.png'
 function Profile() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');

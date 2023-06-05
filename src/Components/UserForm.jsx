@@ -3,6 +3,7 @@ import {RxCross1} from 'react-icons/rx'
 import { ToastContainer } from 'react-toastify';
 import notify from '../utlis/notifier'
 import axios from 'axios';
+import img2 from '../assets/img2.png'
 export default function UserForm({setHasaccount}) {
   
   const[user,setUser]=useState("");
@@ -73,20 +74,20 @@ export default function UserForm({setHasaccount}) {
   }
   return (
     <>
-   <div className=' grid grid-cols-2 h-screen w-screen'>
-    <div>
-      <img src='img2.png'></img>
+   <div className=' grid grid-cols-2 fixed gap-2 '>
+    <div className=' '>
+      <img src = {img2} className='w-2/3 h-screen mt-24 ml-12'></img>
     </div>
-     <div className='   '>
+     <div className=' '>
         <form className='  pl-2  bg-white rounded'>
-        {/* <div className='text-3xl mx-52 mt-4 mb-4 font-bold text-purple-600 '>User form</div> */}
-        <div  className='grid '>
+        <div className='text-2xl mx-40 mt-12 mb-8 font-medium text-purple-600 '>User Registratons form</div>
+        <div  className='grid grid-cols-2 gap-12 p-2 '>
         <div className=''>
             {/* for User */}
-      <div className='relative'>
-      <label for="gender" className="absolute left-0 top-1 text-gray-600 cursor-text ">User</label>
+      <div className='relative  '>
+      <label for="gender" className=" absolute left-0 top-1 text-gray-600 cursor-text ">User</label>
           <input
-            className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
+            className=" mb-8 pt-6 flex justify-center items-center border-b py-2 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
             id="user"
             type="number"
             name="user"
@@ -95,10 +96,10 @@ export default function UserForm({setHasaccount}) {
           />
       </div>
         {/* for photo */}
-        <div className='relative'>
+        <div className='relative  '>
         <label for="photo" className="absolute left-0 top-1 text-gray-600 cursor-text ">Photo</label>
           <input
-            className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className="mb-8 pt-6 flex justify-center items-center py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="photo"
             type="file"
             name="photo"
@@ -107,10 +108,10 @@ export default function UserForm({setHasaccount}) {
           />
       </div >
         {/* for contact*/}
-        <div className='relative'>
+        <div className='relative  '>
         <label for="contact" className="absolute left-0 top-1 text-gray-600 cursor-text ">Contact</label>
           <input
-            className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className=" mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="contact"
             type="number"
             
@@ -120,10 +121,10 @@ export default function UserForm({setHasaccount}) {
           />
       </div>
        {/* for Gender */}
-       <div className='relative'>
+       <div className='relative  '>
        <label for="gender" className="absolute left-0 top-1 text-gray-600 cursor-text ">Gender</label>
           <input
-            className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
+            className="mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
             id="gender"
             type="text"
            
@@ -135,12 +136,13 @@ export default function UserForm({setHasaccount}) {
      
       
       </div>
+      
       <div>
         {/* for district */}
-        <div className='relative'>
+        <div className='relative  '>
         <label for="photo" className="absolute left-0 top-1 text-gray-600 cursor-text ">District</label>
           <input
-            className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="district"
             type="text"
           
@@ -149,11 +151,12 @@ export default function UserForm({setHasaccount}) {
             onChange={handledistrict}
           />
       </div>
+     
         {/* for municipality */}
-        <div className='relative'>
+        <div className='relative  '>
         <label for="municipality" className="absolute left-0 top-1 text-gray-600 cursor-text ">Municipality</label>
           <input
-            className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className=" mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="municipality"
             type="text"
             name="Municipality"
@@ -162,10 +165,10 @@ export default function UserForm({setHasaccount}) {
           />
       </div>
         {/* for province*/}
-        <div className='relative'>
+        <div className='relative  '>
         <label for="province" className="absolute left-0 top-1 text-gray-600 cursor-text ">Province</label>
           <input
-            className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className=" mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="province"
             type="text"
             name="province"
@@ -174,10 +177,10 @@ export default function UserForm({setHasaccount}) {
           />
       </div>
        {/* for ward */}
-        <div className='relative'>
+        <div className='relative '>
         <label for="ward" className="absolute left-0 top-1 text-gray-600 cursor-text ">Ward</label>
           <input
-            className=" mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className=" mb-8 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="ward"
             type="number"
            
@@ -190,7 +193,7 @@ export default function UserForm({setHasaccount}) {
       </div>
              {/* for button */}
              <div>
-              <button className=' mt-4 mx-44 px-20 py-2  hover:text-white hover:from-purple-400 hover:to-blue-400 transition-all bg-gradient-to-r from-purple-600 to-blue-300 text-white rounded mb-4'
+              <button className='  mx-44 px-28 py-2  hover:text-white hover:from-purple-400 hover:to-blue-400 transition-all bg-gradient-to-r from-purple-600 to-blue-300 text-white rounded mb-8'
               onClick={handleApi}
               >Submit</button>
              </div>

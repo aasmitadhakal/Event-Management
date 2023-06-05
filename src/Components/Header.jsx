@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import img from '../assets/13.jpg'
+import img from '../assets/img7.png'
 function Header() {
   return (
     <>

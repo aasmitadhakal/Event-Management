@@ -4,8 +4,9 @@ import { ToastContainer } from 'react-toastify';
 import notify from '../utlis/notifier'
 import axios from 'axios';
 import img2 from '../assets/img2.png'
+import { useNavigate } from 'react-router-dom';
 export default function UserForm({setHasaccount}) {
-  
+  const navigate = useNavigate()
   const[user,setUser]=useState("");
   const[photo,setPhoto]=useState("");
   const[contact,setContact]=useState("");
@@ -60,6 +61,7 @@ export default function UserForm({setHasaccount}) {
       console.log(e.target.file)
       console.log(response.data);
       console.log('Data posted successfully!', response.data);
+      navigate('/user',{replace:true})
     })
     .catch((error) => {
       console.error('Error:', error);

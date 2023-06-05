@@ -86,6 +86,7 @@ export default function ArtistForm({setHasaccount}) {
         console.log(e.target.file)
         console.log(response.data);
         console.log('Data posted successfully!', response.data);
+        navigate('/profiles',{replace:true})
       })
       .catch((error) => {
         console.error('Error:', error);

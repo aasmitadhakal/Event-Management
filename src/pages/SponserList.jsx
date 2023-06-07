@@ -1,32 +1,93 @@
 import { useState,useEffect } from "react"
-import axios from "../api/axios";
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import notify from "../utlis/notifier";
 function SponserList() {
     const[data,setData]=useState()
     const [deleted, setDeleted] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     //getting api data
-    const getData =()=>{
-        axios.get('sponser/list/')
-        .then (response=>{
-            setData(response.data.results);
+    const fetchData = () => {
+      axios
+        .get(`https://ayushkandel.pythonanywhere.com/sponser/list/?page=${currentPage}`)
+        .then(response => {
+          const { results, count } = response.data;
+          setData(results);
+          setTotalPages(Math.ceil(count / 10)); // Assuming 10 items per page
         })
-        .catch(error=>{
-            console.log(error)
+        .catch(error => {
+          console.error('Error fetching API data:', error);
         });
-    }
+    };
     useEffect(()=>{
-        getData();
-    },[])
+        fetchData();
+    },[currentPage])
+
+    //for pagination
+    const handlePageChange = (page) => {
+      if (page >= 1 && page <= totalPages) {
+        setCurrentPage(page);
+      }
+    };
+  
+    const handlePrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
+    };
+  
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+    const renderPagination = () => {
+      if (totalPages === 1) return null;
+  
+      const pageNumbers = [];
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+      //for pagination part
+      return (
+        <div className="flex items-center justify-center mt-4 mb-12">
+          <button
+            className="px-3 py-2 mr-2 bg-purple-400 text-white rounded"
+            onClick={handlePrevPage}
+          >
+            Previous
+          </button>
+          {pageNumbers.map((page) => (
+            <button
+              key={page}
+              className={`px-3 py-2 mx-1 ${
+                page === currentPage ? 'bg-purple-400 text-white' : 'bg-white text-purple-400'
+              } rounded`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="px-3 py-2 ml-2 bg-purple-400 text-white rounded"
+            onClick={handleNextPage}
+          >
+            Next
+          </button>
+        </div>
+      );
+    };
+  
     //posting delete api
     const DeleteData=(id,e)=>{
         e.preventDefault();
-        axios.delete(`/sponser/delete/${id}`)
+        axios.delete(`https://ayushkandel.pythonanywhere.com/sponser/delete/${id}`)
         .then(response => {
           console.log('Data deleted successfully:', response);
           notify("success","Data Deleted successfully")
-          getData();
+          fetchData();
           setDeleted(true);
          
         })
@@ -43,7 +104,8 @@ function SponserList() {
       }
     
   return (
-    <div className="  overflow-auto rounded-lg shadow mx-24 mt-12 "  >
+    <div>
+    <div className="  overflow-auto rounded-lg shadow mx-24 mt-4  "  >
          <table className="w-full mb-8 ">
       <thead className='bg-white border-b-2 border-gray-200'>
         <tr className="">
@@ -84,10 +146,12 @@ function SponserList() {
         ))}
       </tbody>
     </table>
+   
   <ToastContainer/>
 
     </div>
-    
+    {renderPagination()}
+    </div>
 
   )
 }

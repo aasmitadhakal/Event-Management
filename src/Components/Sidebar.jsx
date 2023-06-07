@@ -150,6 +150,7 @@ const SideItem = ({ routeObj, sidebarOpen }) => {
       {routeObj.submenus.map((submenu, index) => {
         return (
           <NavLink
+          key={index}
             to={submenu.path}
             className={({ isActive }) =>
             `text-white justify-start  font-bold  px-3  hover:bg-light-white py-2  rounded flex  gap-2 items-center ${
@@ -167,6 +168,7 @@ const SideItem = ({ routeObj, sidebarOpen }) => {
 </div>
 ) : (
 <NavLink
+  
   to={routeObj.path}
   className={({ isActive }) =>
     `  px-3   rounded flex justify-start gap-4 items-center hover:bg-light-white py-2 text-white ${
@@ -244,7 +246,7 @@ return (
     {/* Routes Area */}
     <div className="w-full mt-3 p-3 flex flex-col gap-3">
       {routes.map((route, index) => {
-        return <SideItem routeObj={route}  />;
+        return <SideItem key={index} routeObj={route}  />;
       })}
     </div>
   </div>

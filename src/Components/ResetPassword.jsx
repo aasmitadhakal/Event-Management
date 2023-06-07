@@ -49,9 +49,9 @@ function ResetPassword() {
               </div>
               <div className="text-sm font-medium my-4 text-slate-500 flex-wrap">Please check your email for a link to reset your password. Just click on the link, and you'll be able to create a new password in no time. Thank you!" </div>
 
-          <label for="email" className="absolute font-normal    text-gray-500 cursor-text "> Enter your email Address</label>
+          <label  className="absolute font-normal    text-gray-500 cursor-text "> Enter your email Address</label>
           <input
-          className=" pt-4 mt-2 border-b-2 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autocomplete="off"
+          className=" pt-4 mt-2 border-b-2 py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
           id="email"
           type="text"
           name="email"

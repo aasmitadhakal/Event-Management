@@ -61,6 +61,7 @@ function App() {
       <Route element={<ArtistLayout />}>
      
       <Route path='/profiles' element={<Profiles />} />
+      <Route path='/profilesss' element={<Profile />} />
       </Route>
       {/* for usersLayout */}
       <Route element={<UserLayout />}>

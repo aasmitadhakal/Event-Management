@@ -32,7 +32,7 @@ function Card() {
          className="mx-12 grid lg:grid-cols-3 gap-10">
        {data.map((card,index) =>(
    
-   <div className={`shadow-lg rounded-lg bg-white `} >
+   <div  key={index} className={`shadow-lg rounded-lg bg-white `}  >
     <img
      className={`rounded-t-lg h-52 ml-4 w-94${
       index === focusedIndex ? "transform scale-110" : ""

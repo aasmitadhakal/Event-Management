@@ -180,7 +180,7 @@ const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
         {/* Routes Area */}
         <div className="w-full mt-3 p-3 flex flex-col gap-3">
           {routes.map((route, index) => {
-            return <SideItem routeObj={route}  />;
+            return <SideItem  key={index} routeObj={route}  />;
           })}
         </div>
       </div>

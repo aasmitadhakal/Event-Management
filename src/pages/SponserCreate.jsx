@@ -29,8 +29,8 @@ function SponserCreate() {
     })
     .then((result) => {
       console.log(result.data);
-      notify("success","data updated successfully")
-      navigate("/sponserlist",{replace:true});
+      notify("success","data Created successfully")
+      // navigate("/sponserlist",{replace:true});
      
      
     })

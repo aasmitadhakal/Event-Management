@@ -35,7 +35,7 @@ function ContentList() {
     };
     
     const getData =()=>{
-      axios.get(`https://ayushkandel.pythonanywhere.com/content-management/list/search/${statuss}/?page=${currentPage}`,config)
+      axios.get(`https://ayushkandel.pythonanywhere.com/content-management/list/${statuss}/?page=${currentPage}`,config)
       .then(response => {
         const { results, count } = response.data;
           setData(results);
@@ -85,9 +85,35 @@ function ContentList() {
       if (totalPages === 1) return null;
   
       const pageNumbers = [];
-      for (let i = 1; i <= totalPages; i++) {
+      const visiblePages = 5; // Number of visible page buttons (excluding Previous and Next)
+      
+      // Calculate start and end page numbers based on the current page and the number of visible pages
+      let startPage = Math.max(currentPage - Math.floor(visiblePages / 2), 1);
+      let endPage = Math.min(startPage + visiblePages - 1, totalPages);
+    
+      if (endPage - startPage + 1 < visiblePages) {
+        startPage = Math.max(endPage - visiblePages + 1, 1);
+      }
+    
+      for (let i = startPage; i <= endPage; i++) {
         pageNumbers.push(i);
       }
+      //foe select tag css
+      const customStyles = {
+        control: (provided, state) => ({
+          ...provided,
+          border: '2px solid #E5E7EB',
+          borderRadius: '0.375rem',
+          boxShadow: state.isFocused ? '0 0 0 3px rgba(156, 163, 175, 0.5)' : 'none',
+          '&:hover': {
+            border: '2px solid #CBD5E0',
+          },
+        }),
+        indicatorSeparator: () => ({
+          display: 'none',
+        }),
+      };
+      
       //for pagination part
       return (
         
@@ -124,7 +150,7 @@ function ContentList() {
     <div>
    <div className='flex justify-end mr-24 '>
    {/* <Link to='/Ccreate'> <button className='bg-purple-400  ml-4 text-white  py-2 mt-4 mr-2 px-8 rounded-xl hover:bg-purple-900'>Add</button></Link> */}
-         <select className='  border-gray-200 border-2  ' value={statuss} onChange={handleStatusChange}>
+         <select className='  border-gray-200 border-2 py-2 px-8 rounded-xl focus:outline-none flex items-center justify-center ' value={statuss} onChange={handleStatusChange}>
         <option value='All' className=''>Fliter Status</option>
         <option value="Draft" className=''>Draft</option>
         <option value="Publish" className=''>Publish</option>

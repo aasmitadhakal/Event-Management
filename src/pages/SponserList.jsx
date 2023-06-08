@@ -43,13 +43,25 @@ function SponserList() {
         setCurrentPage(currentPage + 1);
       }
     };
-    const renderPagination = () => {
-      if (totalPages === 1) return null;
+   
   
-      const pageNumbers = [];
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-      }
+      const renderPagination = () => {
+        if (totalPages === 1) return null;
+    
+        const pageNumbers = [];
+        const visiblePages = 4; // Number of visible page buttons (excluding Previous and Next)
+        
+        // Calculate start and end page numbers based on the current page and the number of visible pages
+        let startPage = Math.max(currentPage - Math.floor(visiblePages / 2), 1);
+        let endPage = Math.min(startPage + visiblePages - 1, totalPages);
+      
+        if (endPage - startPage + 1 < visiblePages) {
+          startPage = Math.max(endPage - visiblePages + 1, 1);
+        }
+      
+        for (let i = startPage; i <= endPage; i++) {
+          pageNumbers.push(i);
+        }
       //for pagination part
       return (
         <div className="flex items-center justify-center mt-4 mb-12">

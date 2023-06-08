@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -42,6 +42,9 @@ function App() {
 
       <Route path='/list' element={<List />} />
       <Route path='/nav' element={<Nav2 />} />
+      <Route path='/listuser' element={<UserList/>} />
+      <Route path='/adduser' element={<UserCreate/>} />
+      <Route path='/updateuser' element={<UserUpdate/>} />
       <Route path='/alist' element={<ArtistList />} />
       <Route path='/aadd' element={<ArtistCreate/>} />
       <Route path='/aupdate' element={<ArtistUpdate/>} />

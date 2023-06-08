@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-function ArtistList() {
+function UserList() {
     const [data,setData] =useState('')
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -13,7 +13,7 @@ function ArtistList() {
         }
       };
     const getData =()=>{
-            axios.get('https://ayushkandel.pythonanywhere.com/artist/list/',config)
+            axios.get('https://ayushkandel.pythonanywhere.com/normal-user/list/',config)
             .then(result=>{
                 setData(result.data.results)
                 console.log(result.data.results)
@@ -43,9 +43,6 @@ function ArtistList() {
                     <th className=" p-2 text-sm font-semibold ">Name</th>
                     <th className=" p-2 text-sm font-semibold ">Username</th>
                     <th className=" p-2 text-sm font-semibold ">Email</th>
-                    <th className=" p-2 text-sm font-semibold ">Type of Performer</th>
-                    <th className=" p-2 text-sm font-semibold ">Performed In</th>
-                    <th className=" p-2 text-sm font-semibold ">Description</th>
                     <th className=" p-2 text-sm font-semibold ">Action</th>
               </tr>
              </thead>
@@ -62,9 +59,6 @@ function ArtistList() {
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.name}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.username}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.email}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.type_of_the_performer}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.performed_in}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.description}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
               <Link to ="">
               <button
@@ -79,4 +73,4 @@ function ArtistList() {
   )
 }
 
-export default ArtistList
+export default UserList

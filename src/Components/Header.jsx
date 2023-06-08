@@ -3,16 +3,16 @@ import img from '../assets/img7.png'
 function Header() {
   return (
     <>
-    <div className="  z-0 mt-2 w-128 h-128 ">
-    <div className=' grid grid-cols-2'>
+    <div className="  z-0  w-128 h-128  ">
+    <div className=' grid grid-cols-2 '>
       {/* for description part */}
       <motion.div 
         initial={{x:'-100vw'}}
         animate={{x:0}}
        transition={{duration:4.5}}
-      className="my-44 m-12 z-[-1] ">
+      className="my-44 m-12 z-[-1]  ">
         <p 
-        className="text-4xl font-bold mb-2  ">Unleash the <span className=" text-purple-400"> power of music</span></p>
+        className="text-4xl font-bold mb-2  ">Unleash the <span className=" text-purple-400 "> power of music</span></p>
         <p className="text-xl text-gray-500">Te abe and emotional power 
           of music and positions the event management company as a facilitator of that experience.</p>
           <div className="">

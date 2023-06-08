@@ -30,12 +30,17 @@ const routes = [
       {
         name: "View Users",
         icon: <FaRegListAlt />,
-        path: "/user",
+        path: "/listuser",
       },
       {
         name: "Add Users",
         icon: <FaRegListAlt />,
-        path: "/add-users",
+        path: "/adduser",
+      },
+      {
+        name: "Update Users",
+        icon: <FaRegListAlt />,
+        path: "/updateuser",
       },
     ],
   },

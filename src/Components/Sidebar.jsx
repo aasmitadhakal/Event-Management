@@ -45,6 +45,27 @@ const routes = [
     ],
   },
   {
+    name: "All Users",
+    icon: <FaUsers />,
+    submenus: [
+      {
+        name: "View Users",
+        icon: <FaRegListAlt />,
+        path: "/alluserlist",
+      },
+      {
+        name: "Add Users",
+        icon: <FaRegListAlt />,
+        path: "/adduser",
+      },
+      {
+        name: "Update Users",
+        icon: <FaRegListAlt />,
+        path: "/updateuser",
+      },
+    ],
+  },
+  {
     name: "Artist",
     icon: <FaBook />,
     submenus: [

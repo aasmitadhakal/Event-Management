@@ -14,6 +14,7 @@ import img6 from '../assets/img4 (2).png'
 function Slider() {
   return (
     <>
+    <div className="z-[-1]">
     <div className="mt-4 mb-12">
     <div className="mb-8">
         <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center    ">Event</p></div>
@@ -22,7 +23,7 @@ function Slider() {
     </div>
     <div className="mb-8">
      <Swiper
-       
+        
         slidesPerView={1}
         spaceBetween={10}
         pagination={{
@@ -51,7 +52,7 @@ function Slider() {
           },
         }}
         modules={[Pagination,Autoplay]}
-        className="mySwiper"
+        className="mySwiper ,z-[-1]"
       >
         <SwiperSlide><img src={img}></img></SwiperSlide>
         <SwiperSlide><img src={img1}></img></SwiperSlide>
@@ -67,6 +68,7 @@ function Slider() {
       </Swiper>
       </div>
       <div className="mt-12"></div>
+      </div>
     </>
   )
 }

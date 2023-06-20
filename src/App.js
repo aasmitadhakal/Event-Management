@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -58,6 +58,7 @@ function App() {
       <Route path='/sponseradd' element={<SponserCreate/>} />
       <Route path='/sponserlist' element={<SponserList />} />
       <Route path='/sponserupdate' element={<SponserUpdate />} />
+      <Route path='/alluserlist' element={<AlluserList />} />
       </Route>
       </Route>
       {/* for userlayout */}

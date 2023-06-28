@@ -109,7 +109,7 @@ function SponserList() {
       }
      //saving data at local storage to update the values
      const settoLocalstorage =(id,sponser_type,name,amount)=>{
-        localStorage.setItem("id",id)
+        localStorage.setItem("sid",id)
         localStorage.setItem("sponser_type",sponser_type)
         localStorage.setItem("sname",name)
         localStorage.setItem("samount",amount)

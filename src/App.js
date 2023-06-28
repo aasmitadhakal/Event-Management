@@ -17,6 +17,7 @@ import PasswordReset2 from './Components/PasswordReset2';
 import ArtistLayout from './layout/ArtistLayout';
 import UserLayout from './layout/UserLayout';
 import UsersForm from './Components/UsersForm';
+import AlluserUpdate from './pages/AlluserUpdate';
 
 function App() {
   return (
@@ -59,6 +60,8 @@ function App() {
       <Route path='/sponserlist' element={<SponserList />} />
       <Route path='/sponserupdate' element={<SponserUpdate />} />
       <Route path='/alluserlist' element={<AlluserList />} />
+      <Route path='/alluserupdate' element={<AlluserUpdate />} />
+      
       </Route>
       </Route>
       {/* for userlayout */}

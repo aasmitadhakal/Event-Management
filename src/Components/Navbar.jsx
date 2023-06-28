@@ -37,7 +37,7 @@ function Navbar(){
         //  initial={{y:-250}}
         //  animate ={{y:-10}}
         //  transition={{duration: 1, stiffness: 5}}
-         className={` ${navBackground} transition-colors duration-300  sticky top-0   w-screen `}>
+         className={` ${navBackground} transition-colors duration-300  sticky top-0 z-10000  w-screen `}>
           <div className='grid grid-cols-2 border-b '>
               {/* for logo */}
               <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src="logo.jpg" className="h-16 w-28"></img></div>

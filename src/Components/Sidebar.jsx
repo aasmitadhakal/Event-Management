@@ -54,15 +54,11 @@ const routes = [
         path: "/alluserlist",
       },
       {
-        name: "Add Users",
-        icon: <FaRegListAlt />,
-        path: "/adduser",
-      },
-      {
         name: "Update Users",
         icon: <FaRegListAlt />,
-        path: "/updateuser",
+        path: "/alluserupdate",
       },
+      
     ],
   },
   {

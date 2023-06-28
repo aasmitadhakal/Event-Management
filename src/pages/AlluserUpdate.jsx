@@ -3,34 +3,47 @@ import { ToastContainer } from "react-toastify"
 import notify from "../utlis/notifier"
 import axios from "../api/axios"
 import { useNavigate } from "react-router-dom"
-function SponserUpdate() {
+function AlluserUpdate() {
   const navigate =useNavigate()
-  const[sponser_type,setSponserType]=useState('')
+  const[email,setEmail]=useState('')
   const[name,setName]=useState('')
-  const[amount,setAmount]=useState('')
+  const[Ausername,setAllUsername]=useState('')
+  const[password,setPassword]=useState('')
   const[id,setID]=useState(0)
-  const handleSponser=(e)=>{
-    setSponserType(e.target.value)
-  }
+  const username = localStorage.getItem('emailinput') 
+  const userPassword = localStorage.getItem('passwordinput');
+  const config = {
+    headers: {
+      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+      'Content-Type': 'application/json'
+    }
+  };
   const handleName=(e)=>{
     setName(e.target.value)
   }
-  const handleAmount=(e)=>{
-    setAmount(e.target.value)
+  const handleEmail=(e)=>{
+    setEmail(e.target.value)
+  }
+  const handlePassword=(e)=>{
+    setPassword(e.target.value)
+  }
+  const handleUsername=(e)=>{
+    setAllUsername(e.target.value)
   }
   //calling update api
   const handleAPi =(e)=>{
     e.preventDefault();
     axios
-    .put(`/sponser/update/${id}/`, {
-     sponser_type: sponser_type,
+    .put(`/all-user-data-update/${id}/`, {
+     email: email,
      name: name,
-     amount: amount,
-    })
+     username: Ausername,
+     password: password,
+    },config)
     .then((result) => {
       console.log(result.data);
       notify("success","data updated successfully")
-      navigate("/sponserlist",{replace:true});
+      navigate("/alluserlist",{replace:true});
      
      
     })
@@ -42,26 +55,26 @@ function SponserUpdate() {
     });
   }
   useEffect (()=>{
-    setID(localStorage.getItem("sid"));
-   setSponserType(localStorage.getItem("sponser_type"));
-   setName(localStorage.getItem("sname"));
-   setAmount(localStorage.getItem("samount"));
+    setID(localStorage.getItem("Alluserid"));
+   setEmail(localStorage.getItem("Alluseremail"));
+   setName(localStorage.getItem("Allname"));
+   setAllUsername(localStorage.getItem("Allusername"));
   
  },[])
   return (
 <div className='  mt-18 flex justify-center items-center p-12 '>
    <form onSubmit={handleAPi}
      className='   p-6 border bg-white shadow-md rounded'>
-     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Update Sponser</div>
+     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Update Alluser</div>
       {/* for sponser_type */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Heading</label>
+      <label  class="absolute   text-gray-600 cursor-text ">Email</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
-      name="sponser_type"
-      value={sponser_type}
-      onChange={handleSponser}
+      name="email"
+      value={email}
+      onChange={handleEmail}
       />
       </div>
       {/* forname */}
@@ -77,13 +90,24 @@ function SponserUpdate() {
       </div>
       {/* for amount */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Amount</label>
+      <label  class="absolute   text-gray-600 cursor-text ">Username</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
-      name="amount"
-      value={amount}
-      onChange={handleAmount}
+      name="usernmae"
+      value={Ausername}
+      onChange={handleUsername}
+      />
+      </div>
+       {/* for Password */}
+       <div className='relative mb-8  mx-12 '>
+      <label  class="absolute   text-gray-600 cursor-text ">Password</label>
+      <input
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      type="text"
+      name="password"
+      value={password}
+      onChange={handlePassword}
       />
       </div>
 
@@ -97,4 +121,4 @@ function SponserUpdate() {
   )
 }
 
-export default SponserUpdate
+export default AlluserUpdate

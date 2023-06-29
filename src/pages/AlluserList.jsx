@@ -3,6 +3,7 @@ import axios from 'axios';
 import notify from '../utlis/notifier';
 import { Link } from 'react-router-dom';
 function AlluserList() {
+  const [searchQuery, setSearchQuery] = useState('');
     const [data, setData] = useState([]);
     const username = localStorage.getItem('emailinput') 
     const [deleted, setDeleted] = useState(false);
@@ -17,7 +18,7 @@ function AlluserList() {
       
     // calling api data
     const getData =()=>{
-        axios.get(`https://ayushkandel.pythonanywhere.com/all-user-data/`,config)
+        axios.get(`https://ayushkandel.pythonanywhere.com/all-user-data-search/?search=${searchQuery}`,config)
         .then(result=>{
             setData(result.data.results)
             console.log(result.data.results)
@@ -54,7 +55,17 @@ function AlluserList() {
     }
   return (
     <div>
-  
+   <div className='flex justify-end items-end mx-24'>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Enter search query"
+          className='border p-2 rounded-2xl '
+        />
+        <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button>
+      </div>
+
      <div className="  overflow-auto rounded-lg shadow mx-24 mt-8 "  >
           
   
@@ -78,7 +89,7 @@ function AlluserList() {
          </tr>
        </thead>
        <tbody className='divide-y divide-gray-100'>
-         {data.map(item => (
+       {data && data.map(item => (
            <tr className="bg-white border-r text-center border-b text-sm text-gray-600" key={item.id}>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.name}</td>

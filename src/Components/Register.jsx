@@ -127,7 +127,7 @@ export default function Register({setHasaccount,visible,onClose}) {
            <div>
               {/* for Name */}
               <div className='relative mb-8  mx-12'>
-                <label for="name" class="absolute left-0 top-1 text-gray-600 cursor-text ">Name</label>
+                <label htmlFor="name" className="absolute left-0 top-1 text-gray-600 cursor-text ">Name</label>
                   <input
                     className=" pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
                     id="name"
@@ -138,9 +138,9 @@ export default function Register({setHasaccount,visible,onClose}) {
                   />
                   
               </div>
-                {/* for username */}
+                {/* htmlFor username */}
               <div className='relative mb-8  mx-12'> 
-                <label for="username" class="absolute left-0 top-1 text-gray-600 cursor-text">Username</label>
+                <label htmlFor="username" className="absolute left-0 top-1 text-gray-600 cursor-text">Username</label>
                     <input
                       className="pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
                       id="username"
@@ -153,7 +153,7 @@ export default function Register({setHasaccount,visible,onClose}) {
               </div>
                   {/* for email */}
               <div className='relative mb-8  mx-12'> 
-                <label for="email" class="absolute left-0 top-1 text-gray-600 cursor-text">Email</label>
+                <label htmlFor="email" className="absolute left-0 top-1 text-gray-600 cursor-text">Email</label>
                     <input
                       className=" pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
                       id="email"
@@ -169,7 +169,7 @@ export default function Register({setHasaccount,visible,onClose}) {
             <div>
               {/* for password */}
               <div className='relative mb-8  mx-12'> 
-              <label for="name" class="absolute left-0 top-1 text-gray-600 cursor-text ">Password</label>
+              <label htmlFor="name" className="absolute left-0 top-1 text-gray-600 cursor-text ">Password</label>
                   <input
                     className="pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
                     id="password"
@@ -182,7 +182,7 @@ export default function Register({setHasaccount,visible,onClose}) {
                 </div>
                   {/* for cpassword */}
               <div className='relative mb-8  mx-12'> 
-                <label for="name" class="absolute left-0 top-1 text-gray-600 cursor-text "> Confirm Password</label>
+                <label htmlFor="name" className="absolute left-0 top-1 text-gray-600 cursor-text "> Confirm Password</label>
                     <input
                       className=" pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer"
                       id="cpassword"

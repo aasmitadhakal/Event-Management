@@ -32,11 +32,7 @@ const routes = [
         icon: <FaRegListAlt />,
         path: "/listuser",
       },
-      {
-        name: "Add Users",
-        icon: <FaRegListAlt />,
-        path: "/adduser",
-      },
+     
       {
         name: "Update Users",
         icon: <FaRegListAlt />,

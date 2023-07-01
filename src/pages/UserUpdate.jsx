@@ -97,7 +97,7 @@ function UserUpadate() {
     <div className='mt-18 flex justify-center items-center p-12'>
       <form className='p-6 border bg-white shadow-md rounded'>
         <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center'>
-          Update Content
+          Update Normal User
         </div>
         <div className='grid grid-cols-2'>
           <div>

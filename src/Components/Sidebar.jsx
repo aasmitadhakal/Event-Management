@@ -24,7 +24,7 @@ const routes = [
     icon: <FaUser />,
   },
   {
-    name: "Users",
+    name: "Normal Users",
     icon: <FaUsers />,
     submenus: [
       {

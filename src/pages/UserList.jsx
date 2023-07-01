@@ -6,10 +6,11 @@ import { ToastContainer } from 'react-toastify';
 
 function UserList() {
     const [searchQuery, setSearchQuery] = useState(''); 
-       const [data,setData] =useState('')
+    const [data,setData] =useState('')
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
     const [deleted, setDeleted] = useState(false);
+    
     const config = {
         headers: {
           'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
@@ -44,6 +45,19 @@ function UserList() {
         console.error('Error deleting data:', error);
       });
     }
+    //saving value on local storage for update
+    const settoLocalstorage =(id,contact,gender,province,district,municipality,ward,photo,user)=>{
+      localStorage.setItem("normaluserid",id)
+      localStorage.setItem("normalusercontact",contact)
+      localStorage.setItem("normalusergender",gender)
+      localStorage.setItem("normaluserprovince",province)
+      localStorage.setItem("normaluserdistrict",district)
+      localStorage.setItem("normalusermunicipality",municipality)
+      localStorage.setItem("normaluserward",ward)
+      localStorage.setItem("normaluserphoto",photo)
+      localStorage.setItem("normaluseruser",user)
+    }
+ 
       
   return (
     <div>
@@ -59,8 +73,8 @@ function UserList() {
       </div>
         <div className=''>
             <table className='rounded-lg shadow  mx-4 mt-8 mb-4'>
-            <thead className='bg-white border-b-2 border-gray-200'>
-              <tr className="">
+              <thead className='bg-white border-b-2 border-gray-200'>
+                <tr className="">
                     <th className=" p-2 text-sm font-semibold ">ID</th>
                     <th className=" p-2 text-sm font-semibold ">Name</th>
                     <th className=" p-2 text-sm font-semibold ">Username</th>
@@ -71,31 +85,47 @@ function UserList() {
                     <th className=" p-2 text-sm font-semibold ">Municipality</th>
                     <th className=" p-2 text-sm font-semibold ">Ward</th>
                     <th className=" p-2 text-sm font-semibold ">Email</th>
+                    <th className=" p-2 text-sm font-semibold ">Photo</th>
+                    <th className=" p-2 text-sm font-semibold ">User</th>
                     <th className=" p-2 text-sm font-semibold ">Action</th>
-              </tr>
-             </thead>
-             <tbody className='divide-y divide-gray-100'>
-             {data&&data.map(item => (
-          <tr className="bg-white border-r text-center border-b text-sm text-gray-600 " key={item.id}>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.name}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.username}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.contact}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.gender}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.province}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.district}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.municipality}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.ward}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.email}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
-              <Link to ="">
-              <button
-              className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'>Update</button></Link>
-            <button onClick={(e)=>{DeleteData(item.id,e)}} 
-             className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
-         </tr>
+                </tr>
+              </thead>
+              <tbody className='divide-y divide-gray-100'>
+                {data&&data.map(item => (
+                    <tr className="bg-white border-r text-center border-b text-sm text-gray-600 " key={item.id}>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.name}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.username}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.contact}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.gender}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.province}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.district}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.municipality}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.ward}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.email}</td>
+                          <td><img className='h-20 w-18' src={item.photo} alt='img'></img></td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.id}</td>
+                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
+                            <Link to ="/updateuser">
+                          <button
+                            className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'
+                            onClick={(e)=>settoLocalstorage(
+                              item.id,
+                              item.contact,
+                              item.gender,
+                              item.province,
+                              item.district,
+                              item.municipality,
+                              item.ward,
+                              item.photo,
+                              item.user.id,
+                            )}
+                            >Update</button></Link>
+                          <button onClick={(e)=>{DeleteData(item.id,e)}} 
+                          className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
+                    </tr>
              ))}
-         </tbody>
+            </tbody>
             </table>
             <ToastContainer />
         </div>

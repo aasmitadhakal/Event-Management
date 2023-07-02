@@ -131,16 +131,6 @@ const routes = [
         icon: <MdPassword />,
         path: "/change",
       },
-      {
-        name: "Permissions",
-        icon: <AiOutlineKey />,
-        path: "/permissions",
-      },
-      {
-        name: "Faculties",
-        icon: <RiOrganizationChart />,
-        path: "/faculties",
-      },
       
     ],
   },

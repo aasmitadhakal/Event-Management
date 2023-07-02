@@ -96,7 +96,7 @@ function UserUpadate() {
   return (
     <div className='mt-18 flex justify-center items-center p-12'>
       <form className='p-6 border bg-white shadow-md rounded'>
-        <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center'>
+        <div className='mt-4 text-2xl mb-8 font-medium text-purple-400 flex justify-center items-center'>
           Update Normal User
         </div>
         <div className='grid grid-cols-2'>
@@ -187,8 +187,8 @@ function UserUpadate() {
                 onChange={handleDistrict}
               />
             </div>
-            <div className='relative'>
-              <label htmlFor='photo' className='absolute left-0 top-1 text-gray-600 cursor-text'>
+            <div className='relative mx-10'>
+              <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
                 Photo
               </label>
               <input
@@ -218,7 +218,7 @@ function UserUpadate() {
           </div>
         </div>
         <div>
-          <button onClick={handleAPI} className='mx-44 bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4 px-20 py-2 rounded-2xl'>
+          <button onClick={handleAPI} className='mx-64 bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4 px-20 py-2 rounded-2xl'>
             Update
           </button>
         </div>

@@ -136,10 +136,10 @@ function AlluserList() {
           <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button>
         </div>
 
-     <div className="  overflow-auto rounded-lg shadow mx-24 mt-8 "  >
+     <div className="  overflow-auto rounded-lg shadow mx-12 mt-8 "  >
           
   
-          <table className="w-full mb-4 ">
+          <table className="rounded-lg shadow  mx-4 mt-8 mb-4 ">
        <thead className='bg-white border-b-2 border-gray-200'>
          <tr className="">
            <th className=" p-3 text-sm font-semibold ">ID</th>

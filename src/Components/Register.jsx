@@ -56,9 +56,9 @@ export default function Register({setHasaccount,visible,onClose}) {
           sessionStorage.setItem("token", result.data.token);
           localStorage.setItem("uid",result.data.uid)
           if(isArtist){
-            navigate("/aform", { replace: true });
+            navigate("/artistform", { replace: true });
           }else{
-            navigate("/uform",{replace:true});
+            navigate("/userform",{replace:true});
           }
           notify("success","Register successfully")
           setName('')
@@ -72,18 +72,26 @@ export default function Register({setHasaccount,visible,onClose}) {
         .catch((error) => {
               // setError(error.response.data.message);
           console.log(error);
-          if (error.response) {
-            // The request was made and the server responded with a status code
-            const { status, data } = error.response;
-            if (status === 404) {
-              // Handle 404 error
-              console.log('Resource not found');
-              notify("error","enter the valid data");
-            } else {
-              // Handle other status codes
-              console.log(`Error ${status}: ${data}`);
-              notify("error","enter valid credentails")
-            }}
+          if (error.response && error.response.data && error.response.data.errors) {
+            const errorMessages = Object.values(error.response.data.errors).flat(); 
+             errorMessages.forEach(errorMessage => {
+             notify("error",errorMessage)
+            });
+          } else {
+            console.log("Error:", error);
+          }
+          // if (error.response) {
+          //   // The request was made and the server responded with a status code
+          //   const { status, data } = error.response;
+          //   if (status === 404) {
+          //     // Handle 404 error
+          //     console.log('Resource not found');
+          //     notify("error","enter the valid data");
+          //   } else {
+          //     // Handle other status codes
+          //     console.log(`Error ${status}: ${data}`);
+          //     notify("error","enter valid credentails")
+          //   }}
       })
       .finally(() => {
         // setLoading(false);
@@ -224,10 +232,11 @@ export default function Register({setHasaccount,visible,onClose}) {
             className='text-slate-500 mx-44 mt-2  m-2 mb-12 '>
              Already have an account ?<span className="hover:underline hover:decoration-pink hover:decoration-2 ">Login</span>
             </div>
+            <ToastContainer />
     </form>
         </div>
         <div className='absolute top-24 right-96  font-bold text-black text-2xl'onClick={onClose} ><RxCross1 /></div>
-        <ToastContainer />
+       
         </div> 
   
     </>

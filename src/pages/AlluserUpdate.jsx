@@ -68,7 +68,7 @@ function AlluserUpdate() {
      <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Update Alluser</div>
       {/* for sponser_type */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Email</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Email</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
@@ -79,7 +79,7 @@ function AlluserUpdate() {
       </div>
       {/* forname */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Name</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Name</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
@@ -90,21 +90,21 @@ function AlluserUpdate() {
       </div>
       {/* for amount */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Username</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Username</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
-      name="usernmae"
+      name="username"
       value={Ausername}
       onChange={handleUsername}
       />
       </div>
        {/* for Password */}
        <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Password</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Password</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
-      type="text"
+      
       name="password"
       value={password}
       onChange={handlePassword}

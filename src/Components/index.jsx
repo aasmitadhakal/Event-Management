@@ -7,6 +7,7 @@ export {default as Card} from './Card'
 export {default as Artistform}from './Artistform'
 export {default as Managerform}from './Managerform'
 export {default as UserForm} from './UserForm'
+export {default as newManager} from './newManager'
 
 
              

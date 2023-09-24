@@ -57,7 +57,7 @@ function ContentCreate() {
  <div className='relative mb-8  mx-12 '>
  <label htmlFor="heading" className="absolute   text-gray-600 cursor-text ">Heading</label>
 <input
-className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autocomplete="off"
+className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
  id="heading"
  type="text"
  name="heading"
@@ -70,7 +70,7 @@ className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-n
 <div className='relative mb-4   mx-12  '> 
 <label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
 <Editor
- className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
+ className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
  id="content"
  type="text"
  name="content"
@@ -83,7 +83,7 @@ className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-n
 <div className='relative mb-4   mx-12  '> 
 <label htmlFor="updatedby" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
 <input
-className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
+className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
 id="updated_by"
 type="text"
 name="updated_by"
@@ -95,7 +95,7 @@ onChange={handleUpadedBy}
 <div className='relative mb-4   mx-12  '> 
 <label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
 {/* <input
-className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autocomplete="off"
+className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
 id="status"
 type="text"
 name="status"
@@ -105,7 +105,7 @@ onChange={handleStatus}
 <select
 value={status}
 onChange={handleStatus}
- className='flex pt-6 text-gray-800 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'>
+ className='flex pt-6 text-gray-800 justify-center items-center border-b py-1 px-10 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'>
   <option className='text-gray-400 ' value='Publish' >Publish</option>
   <option className='text-gray-400 ' value='Draft' >Draft</option>
 </select>

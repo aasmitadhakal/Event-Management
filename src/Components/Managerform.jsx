@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import img9 from '../assets/img9.png'
 function Managerform() {
   const [artist,setAritist] =useState('')
   const[name,setName]=useState('')
@@ -19,10 +19,17 @@ function Managerform() {
     setContact(e.target.value);
   }
   return (
+
     <div className=''>
-    <div className=' mt-12 mx-96 p-6 '>
-    <form className=' mx-20 p-12 border bg-white shadow-md rounded'>
-      <div className='text-2xl flex justify-center items-center mb-4 font-bold text-purple-400 '>Manager</div>
+      <div className="grid md:grid-cols-2 grid-cols-1 md:gap-8 mx-8 md:mx-56 shadow-2xl my-4  md:my-24 round">
+      {/* for image */}
+      
+      <div>
+      <img src={img9} alt=""></img>
+      </div>
+    <div className=' '>
+    <form className='md:mx-12 '>
+      <div className='text-2xl   font-bold text-purple-400 mx-8 mt-4 '>Manager</div>
       {/* for artist */}
       <div className='relative ml-8 mb-4'>
       <label for="artist" class="absolute left-0 top-1 text-gray-600 cursor-text ">Artist</label>
@@ -73,10 +80,11 @@ function Managerform() {
         </div>
         {/* for buttom */}
         <div>
-    <button className='hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  px-20 mx-10 py-2  rounded-2xl'>Save</button>
+    <button className='hover:text-white hover:from-purple-700 hover:to-blue-400 transition-all bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  px-20 mx-10 py-2 mb-2 rounded-2xl'>Save</button>
         </div>
        
     </form>
+    </div>
     </div>
     </div>
 

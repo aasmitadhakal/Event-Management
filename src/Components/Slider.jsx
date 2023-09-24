@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -15,7 +15,7 @@ function Slider() {
   return (
     <>
     <div className="z-[-1]">
-    <div className="mt-4 mb-12">
+    <div className=" mb-12">
     <div className="mb-8">
         <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center    ">Event</p></div>
        <div><p className="text-4xl font-bold  text-gray-700 flex justify-center item-center ">POPULAR EVENT</p></div> 
@@ -23,7 +23,7 @@ function Slider() {
     </div>
     <div className="mb-8">
      <Swiper
-        
+
         slidesPerView={1}
         spaceBetween={10}
         pagination={{
@@ -54,15 +54,15 @@ function Slider() {
         modules={[Pagination,Autoplay]}
         className="mySwiper ,z-[-1]"
       >
-        <SwiperSlide><img src={img}></img></SwiperSlide>
-        <SwiperSlide><img src={img1}></img></SwiperSlide>
-        <SwiperSlide><img src={img2}></img></SwiperSlide>
-        <SwiperSlide><img src={img3}></img></SwiperSlide>
-        <SwiperSlide><img src={img4}></img></SwiperSlide>
-        <SwiperSlide><img src={img5}></img></SwiperSlide>
-        <SwiperSlide><img src={img6}></img></SwiperSlide>
-        <SwiperSlide><img src={img4}></img></SwiperSlide>
-        <SwiperSlide><img src={img}></img></SwiperSlide>
+        <SwiperSlide><img src={img} alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img1}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img2}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img3}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img4}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img5}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img6} alt=""className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img4}alt="" className='z-[-1]'></img></SwiperSlide>
+        <SwiperSlide><img src={img}alt="" className='z-[-1]'></img></SwiperSlide>
         
 
       </Swiper>

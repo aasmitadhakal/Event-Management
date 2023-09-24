@@ -65,7 +65,7 @@ function Profiles() {
     <div className=" bg-transparent w-full  flex items-center justify-center p-3">
           <form className="bg-white shadow-lg rounded px-8 pt-3 pb-8 mb-4   ">
             <div className="mb-2 text-gray-800 font-semibold text-center mx-auto">
-              <h3 className=" text-purple-400 py-2 block text-gray-700  font-bold mb-2 text text-xl">
+              <h3 className="  py-2 block text-gray-700  font-bold mb-2 text text-xl">
                My Profiles
               </h3>
               <div className="flex justify-center w-full">

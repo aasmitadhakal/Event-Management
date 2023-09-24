@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import notify from '../utlis/notifier';
+import { ToastContainer } from 'react-toastify';
 function ArtistCreate() {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +18,8 @@ function ArtistCreate() {
       setData(results);
       setTotalPages(Math.ceil(count / 10)); // Assuming 10 items per page
     } catch (error) {
-      console.error('Error fetching API data:', error);
+      // console.error('Error fetching API data:', error);
+    
     }
   };
   const handleNextPage = () => {
@@ -65,7 +68,9 @@ function ArtistCreate() {
       >
         Next
       </button>
+      
     </div>
+    <ToastContainer />
   </div>
   )
 }

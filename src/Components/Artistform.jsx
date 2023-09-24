@@ -1,15 +1,16 @@
 import { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import img2 from '../assets/img2.png'
-import {RxCross1} from 'react-icons/rx'
+import notify from '../utlis/notifier';
+import { ToastContainer } from 'react-toastify';
+import img9 from '../assets/img9.png'
 export default function ArtistForm({setHasaccount}) {
   const navigate = useNavigate();
   const[user,setUser]=useState('')
   const[district,setDistrict]=useState('')
   const[municipality,setMunicipality]=useState('')
   const[contact,setContact]=useState('')
-  const[gender,setGender]=useState('')
+  const[gender,setGender]=useState('Male')
   const[province,setProvince]=useState('')
   const[ward,setWard]=useState('')
   const[type_of_the_performer,setTypeofPerformer]=useState('')
@@ -61,7 +62,7 @@ export default function ArtistForm({setHasaccount}) {
   useEffect(()=>{
     setUser(localStorage.getItem("uid"));
  },[])
-  const formData = new FormData;
+  const formData = new FormData();
   console.log(photo);
   formData.append('contact', contact);
   formData.append('gender', gender);
@@ -90,27 +91,35 @@ export default function ArtistForm({setHasaccount}) {
       })
       .catch((error) => {
         console.error('Error:', error);
+        if (error.response && error.response.data && error.response.data.errors) {
+          const errorMessages = Object.values(error.response.data.errors).flat(); 
+           errorMessages.forEach(errorMessage => {
+           notify("error",errorMessage)
+          });
+        } else {
+          console.log("Error:", error);
+        }
       });
   };
     
    
   return (
     <>
-   <div className='fixed '> 
-     <div className=' grid grid-cols-2 gap-8   '>
+   <div className=' '> 
+     <div className=' grid md:grid-cols-2 grid-cols-1 md:gap-8 mx-8 md:mx-12 shadow-2xl mt-4 my-2 round '>
       <div>
-        <img src={img2} className='w-2/3 mt-24 ml-24'></img>
+        <img src={img9} alt='' className=''></img>
       </div>
       <div>
         <form  onSubmit={handleApi} className='p-4  bg-white  '>
-        <div className='text-2xl mx-44 mt-4 mb-8 font-medium text-purple-400 '>Artist Registration Form</div>
-        <div  className='grid grid-cols-2 gap-8'>
-        <div className='pl-8'>
+        <div className='text-2xl md:mx-12 my-4 font-medium text-purple-400 '>Artist Registration Form</div>
+        <div  className='grid md:grid-cols-2 grid-cols-1 md:gap-8'>
+        <div className='md:pl-8 pl-2'>
             {/* for User */}
       <div className='relative'>
       <label for="user" class="absolute left-0 top-1 text-gray-600 cursor-text  ">User</label>
           <input
-            className="mb-6 pt-6 flex justify-center items-center py-1 border-b  focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  " autoComplete='off'
+            className="mb-4 pt-6 flex justify-center items-center py-1 border-b  focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  " autoComplete='off'
             id="user"
             type="text"
             name="user"
@@ -122,7 +131,7 @@ export default function ArtistForm({setHasaccount}) {
         <div className='relative'>
         {/* <label for="photo" class="absolute left-0 top-1 text-gray-600 cursor-text ">photo</label> */}
           <input
-            className="mt-1 sm:text-sm border-gray-300 rounded-md mb-6 pt-6 flex justify-center items-center py-1  transition-colors  "
+            className="mt-1 sm:text-sm border-gray-300 rounded-md mb-4 pt-6 flex justify-center items-center py-1  transition-colors  "
             id="photo"
             type="file"
             name="photo"
@@ -135,7 +144,7 @@ export default function ArtistForm({setHasaccount}) {
         <label for="user" class="absolute left-0 top-1 text-gray-600 cursor-text  ">Contact</label>
       
           <input
-            className="mb-6 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="mb-4 pt-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="contact"
             type="text"
             value={contact}
@@ -144,22 +153,24 @@ export default function ArtistForm({setHasaccount}) {
           />
       </div>
        {/* for Gender */}
-       <div className='relative'>
-       <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Gender</label>
-          <input
-            className="pt-6 mb-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
-            id="gender"
-            type="text"
-            value={gender}
-            onChange={handleGender}
-            name="gender"
-          />
+       
+      <div className='relative  '>
+       <label for="gender" className="absolute left-0 top-1 text-gray-600 cursor-text ">Gender</label>
+       <select
+          value={gender}
+          onChange={handleGender}
+          className='flex pt-6 text-gray-800 justify-center items-center border-b mb-2 py-2 px-10 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'>
+            <option className='text-gray-400  ' value='Male' >Male</option>
+            <option className='text-gray-400 ' value='Female' >Female</option>
+        </select>
+     
       </div>
+
        {/* type of performer */}
        <div className='relative'>
-       <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Performer</label>
+       <label for="performer" class="absolute left-0 top-1 text-gray-600 cursor-text ">Performer</label>
           <input
-            className="pt-6 mb-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="pt-6 mb-4 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="performer"
             type="text"
             name="performer"
@@ -169,9 +180,9 @@ export default function ArtistForm({setHasaccount}) {
       </div>
        {/* for performed in */}
        <div className='relative'>
-       <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Performed In</label>
+       <label for="performedin" class="absolute left-0 top-1 text-gray-600 cursor-text ">Performed In</label>
           <input
-            className="pt-6 flex  mb-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="pt-6 flex  mb-4 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="performed in"
             type="text"
             name="performed in"
@@ -180,12 +191,12 @@ export default function ArtistForm({setHasaccount}) {
           />
       </div>
       </div>
-      <div className='ml-8'>
+      <div className='md:ml-8 ml-2'>
         {/* for district */}
         <div className='relative'>
-        <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">District</label>
+        <label for="district" class="absolute left-0 top-1 text-gray-600 cursor-text ">District</label>
           <input
-            className="pt-6 flex  mb-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
+            className="pt-6 flex  mb-4 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors "
             id="district"
             type="text"
             name="district"
@@ -195,9 +206,9 @@ export default function ArtistForm({setHasaccount}) {
       </div>
         {/* for municipality */}
         <div className='relative'>
-        <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Municiplaity</label>
+        <label for="municipality" class="absolute left-0 top-1 text-gray-600 cursor-text ">Municiplaity</label>
           <input
-            className="pt-6 mb-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="pt-6 mb-4 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="municipality"
             type="text"
             value={municipality}
@@ -209,7 +220,7 @@ export default function ArtistForm({setHasaccount}) {
         <div className='relative'>
         <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Province</label>
           <input
-            className="pt-6 mb-6  flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="pt-6 mb-4  flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="province"
             type="text"
             name="province"
@@ -221,7 +232,7 @@ export default function ArtistForm({setHasaccount}) {
         <div className='relative'>
         <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Ward</label>
           <input
-            className="pt-6 mb-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
+            className="pt-6 mb-4 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  "
             id="ward"
             type="number"
             name="ward"
@@ -233,7 +244,7 @@ export default function ArtistForm({setHasaccount}) {
        <div className='relative'>
        <label for="gender" class="absolute left-0 top-1 text-gray-600 cursor-text ">Description</label>
           <input
-            className="pt-6 mb-6 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors    "
+            className="pt-6 mb-4 flex justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors    "
             id="descriptions"
             type="text"
             value={description}
@@ -262,13 +273,14 @@ export default function ArtistForm({setHasaccount}) {
       </div>
       </div>
              <div>
-              <button className='  mt-4 mx-44 px-24 py-2  hover:text-white hover:from-purple-400 hover:to-blue-400 transition-all bg-gradient-to-r from-purple-600 to-blue-300 text-white rounded mb-4'
+              <button className='  mt-4 md:mx-44 mx-12 px-12 md:px-24 py-2  hover:text-white hover:from-purple-400 hover:to-blue-400 transition-all bg-gradient-to-r from-purple-600 to-blue-300 text-white rounded mb-4'
            type="submit"
               >Submit</button>
              </div>
         </form>
         </div>
       </div>
+      <ToastContainer/>
       </div>
     </>
   )

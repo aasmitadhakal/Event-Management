@@ -159,9 +159,9 @@ const handleNextPage = () => {
                 </tr>
               </thead>
               <tbody className='divide-y divide-gray-100'>
-                {data&&data.map(item => (
-                    <tr className="bg-white border-r text-center border-b text-sm text-gray-600 " key={item.id}>
-                          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
+   {data && data.map(item => (
+      <tr className="bg-white border-r text-center border-b text-sm text-gray-600" key={item.id}>
+          <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
                           <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.name}</td>
                           <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.username}</td>
                           <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.contact}</td>
@@ -192,8 +192,10 @@ const handleNextPage = () => {
                           <button onClick={(e)=>{DeleteData(item.id,e)}} 
                           className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
                     </tr>
-             ))}
-            </tbody>
+      
+   ))}
+</tbody>
+              
             </table>
             <ToastContainer />
         </div>

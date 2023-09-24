@@ -89,7 +89,7 @@ function ArtistUpadate() {
       .then((result) => {
         console.log(result.data);
         notify('success', 'Data updated successfully');
-        navigate('/listuser', { replace: true });
+        navigate('/alist', { replace: true });
       })
       .catch((error) => {
         console.log(error);

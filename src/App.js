@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -29,13 +29,14 @@ function App() {
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
+      <Route path='/event' element={<Card2 />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
       <Route path='/register' element={<Register/>} />
-      <Route path='/aform' element={<Artistform/>} />
+      <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
-      <Route path='/uform' element={<UserForm/>} />
+      <Route path='/userform' element={<UserForm/>} />
       </Route>
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
@@ -53,6 +54,7 @@ function App() {
       <Route path='/cdraft' element={<ContentDraft />} />
       <Route path='/clist' element={<ContentPublish />} />
       <Route path='/Ccreate' element={<ContentCreate />} />
+      <Route path='/eventadd' element={<EventCreate />} />
       <Route path='/contentlist' element={<ContentList />} />
       <Route path='/put' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />

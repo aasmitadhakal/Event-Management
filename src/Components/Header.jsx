@@ -3,8 +3,8 @@ import img from '../assets/img7.png'
 function Header() {
   return (
     <>
-    <div className="  z-0  w-128 h-128  ">
-    <div className=' grid grid-cols-2 '>
+    <div className="  z-0  ">
+    <div className=' grid md:grid-cols-2 grid-cols-1 '>
       {/* for description part */}
       <motion.div 
         initial={{x:'-100vw'}}
@@ -22,7 +22,7 @@ function Header() {
       </motion.div>
       {/* for image part */}
     <div>
-     <img className="h-120"
+     <img className="md:h-120"
      src={img} alt=""></img>
    </div>
     </div>

@@ -100,6 +100,27 @@ const routes = [
     ],
   },
   
+  {
+    name: "Event",
+    icon: <FaBook />,
+    submenus: [
+      {
+        name: "View Event",
+        icon: <FaRegListAlt />,
+        path: "/eventlist",
+      },
+      {
+        name: "Add Event ",
+        icon: <MdLibraryAdd />,
+        path: "/eventadd",
+      },
+      {
+        name: "Update Event",
+        icon: <MdLibraryAdd />,
+        path: "/eventupdate",
+      },
+    ],
+  },
   
   {
     name: "CMS",

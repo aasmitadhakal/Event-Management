@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -55,6 +55,7 @@ function App() {
       <Route path='/clist' element={<ContentPublish />} />
       <Route path='/Ccreate' element={<ContentCreate />} />
       <Route path='/eventadd' element={<EventCreate />} />
+      <Route path='/eventlist' element={<EventList />} />
       <Route path='/contentlist' element={<ContentList />} />
       <Route path='/put' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />

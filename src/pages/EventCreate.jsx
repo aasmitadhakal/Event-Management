@@ -4,6 +4,7 @@ import axios from '../api/axios'
 import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate } from 'react-router-dom'
 function EventCreate() {
+    const navigate = useNavigate()
     const[event_name,setEvent_name]=useState('')
     const[date,setDate]=useState('')
     const[time,setTime]=useState('')
@@ -64,7 +65,7 @@ function EventCreate() {
         },config)
         .then((result) => {
           console.log(result.data);
-          // navigate("/contentlist",{replace:true});
+           navigate("/eventlist",{replace:true});
         })
         .catch((error) => {
           console.log(error);

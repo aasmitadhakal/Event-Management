@@ -1,5 +1,5 @@
 import {Route,Routes} from 'react-router-dom'
-import {Header, Home,Login,Register,Artistform,Managerform,UserForm} from './Components';
+import {Header, Home,Login,Register,Artistform,Managerform,UserForm,EventSlider} from './Components';
 import ResetPassword from './Components/ResetPassword';
 import PrivateLayout from './layout/PrivateLayout';
 import PublicLayout from './layout/PublicLayout'; 
@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList,} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';

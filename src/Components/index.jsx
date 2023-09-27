@@ -8,6 +8,6 @@ export {default as Artistform}from './Artistform'
 export {default as Managerform}from './Managerform'
 export {default as UserForm} from './UserForm'
 export {default as newManager} from './newManager'
-
+export {default as EventSlider} from './EventSlider'
 
              

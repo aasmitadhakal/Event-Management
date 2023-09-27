@@ -2,6 +2,12 @@ import Navbar from "./Navbar"
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import {BsCalendar2Date }from 'react-icons/bs'
+import {AiOutlineFieldTime} from 'react-icons/ai'
+import {CiLocationOn} from 'react-icons/ci'
+import {MdReduceCapacity} from 'react-icons/md'
+import {BsCashCoin} from 'react-icons/bs'
+import {BsPeople} from 'react-icons/bs'
+import {FaPeopleGroup} from 'react-icons/fa6'
 import img from '../assets/card.jpg'
 function Card2() {
   const [data,setData] =useState('')
@@ -100,7 +106,7 @@ function Card2() {
     <div className="z-0">
       <Navbar/>
     <div className="card-container">
-      <div className="mb-8">
+      <div className="my-8">
         <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center    ">Event</p></div>
         <div><p className="text-4xl font-bold  text-gray-700 flex justify-center item-center ">POPULAR EVENT</p></div>   
         </div>
@@ -110,18 +116,18 @@ function Card2() {
                   <div className="shadow-md hover:shadow-xl hover:translate-y-0.5 ">
                  
                   <div className="flex items-center justify-center z-0"><img src={img} alt=""></img></div>
-                  <div className="flex items-center justify-center text-gray-400   text-2xl ">{item.event_name}</div>
+                  <div className="flex items-center justify-center text-gray-400 hover:text-purple-600  text-xl hover:text-2xl cursor-pointer ">{item.event_name}</div>
                   <div className=" ">
                     <div className="">
-                  <div className="ml-4 flex font-serif text-gray-600"><span className=" ml-2  font-serif text-l">Date:</span> :{item.date}</div>
-                  <div className=" ml-4 text-gray-600"><span className="font-serif  ml-2 mb-4 font-medium">Time:</span>:{item.time}</div>
-                  <div className=" ml-4 text-gray-600"><span className="font-serif  ml-2 mb-4 font-medium">Location:</span>{item.location}</div>
-                  <div className=" ml-4 text-gray-600"><span className="font-serif  ml-2 mb-4 font-medium">Capacity:</span>{item.capacity}</div>
+                  <div className="ml-4 flex font-serif text-gray-600"><span className="ml-4 mb-1 pr-1 font-serif text-l text-purple-600">Date</span> <span className="text-purple-600 pr-2 mt-1"><BsCalendar2Date /></span> {item.date}</div>
+                  <div className=" ml-4 flex text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium  text-purple-600">Time</span><span className="text-purple-600 pr-2 mt-1"> <AiOutlineFieldTime /></span>{item.time}</div>
+                  <div className="flex ml-4 text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium text-purple-600">Location</span><span className="text-purple-600 pr-2 mt-1"> <CiLocationOn /></span>{item.location}</div>
+                  <div className=" ml-4 text-gray-600 flex"><span className="text-purple-600 mb-1 font-serif ml-4  pr-2 font-medium">Capacity</span><span className="text-purple-600 pr-2 mt-1"> <MdReduceCapacity /></span>{item.capacity}</div>
                   </div>
                   <div>
-                  <div className=" ml-4 text-gray-600"><span className="font-serif  ml-2 mb-4 font-medium">Entry Fee:</span>{item.entry_fee}</div>
-                  <div className="ml-4  text-gray-600"> <span className="font-serif   ml-2 mb-4 font-medium">Artist:</span>{item.artist}</div>
-                  <div className=" ml-4 text-gray-600"><span className=" font-serif  ml-2 mb-4 font-medium">Sponser:</span>{item.sponser}</div>
+                  <div className=" ml-4 flex text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium text-purple-600">Entry Fee</span><span className="text-purple-600 pr-2 mt-1"> <BsCashCoin /></span>{item.entry_fee}</div>
+                  <div className="ml-4 flex text-gray-600"> <span className="font-serif  ml-4 mb-1 pr-2 font-medium text-purple-600">Artist</span><span className="text-purple-600 pr-2 mt-1"> <BsPeople /></span>{item.artist}</div>
+                  <div className=" ml-4 flex text-gray-600"><span className=" font-serif ml-4  pr-2 mb-1 font-medium text-purple-600" >Sponser</span><span className="text-purple-600 pr-2 mt-1"> <FaPeopleGroup /></span> {item.sponser}</div>
                   </div>
                   </div>
                   </div>

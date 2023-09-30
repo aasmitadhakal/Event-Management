@@ -7,7 +7,9 @@ import {CiLocationOn} from 'react-icons/ci'
 import {MdReduceCapacity} from 'react-icons/md'
 import {BsCashCoin} from 'react-icons/bs'
 import {BsPeople} from 'react-icons/bs'
+import {CiSaveUp2} from 'react-icons/ci'
 import {FaPeopleGroup} from 'react-icons/fa6'
+import {BsFillHeartFill} from 'react-icons/bs'
 import img from '../assets/events.jpg'
 import { motion } from "framer-motion"
 function Card2() {
@@ -135,10 +137,17 @@ function Card2() {
                     animate={{opacity:2}}
                     exit={{opacity:0}}
                     transition={{duration:0.5}}
-                    className="shadow-xl bg-white mt-12  rounded-2xl"
+                    className="shadow-xl bg-white mt-12 relative rounded-2xl"
                      variants={cardVariants}>
                  
-                    <div className="  flex  items-center justify-center   "><img src={img} className="  rounded h-44 w-full" alt=""></img></div>
+                    <div className="  flex  items-center  justify-center   "><img src={img} className="  rounded h-44 w-full" alt=""></img></div>
+                    <div className="flex justify-between absolute -top-0.5 mt-4   ">
+                      <div className="  rounded mr-36 mx-8 bg-white text-gray-800 font-serif px-3 ">$100</div>
+                      <div className="flex text-white gap-x-2">
+                        <span className="bg-white text-gray-800 px-1 pt-1  rounded-3xl "><CiSaveUp2/></span>
+                        <span className="bg-white text-red-600 px-1 pt-1  rounded-3xl"><BsFillHeartFill/></span>
+                      </div>
+                    </div>
                     <div className="flex items-center justify-center text-gray-800 font-serif hover:text-purple-600  text-xl hover:text-2xl cursor-pointer ">{item.event_name}</div>
                     <div className="ml-4 flex font-serif text-gray-600"><span className="ml-4 mb-1 pr-1 font-serif text-l text-purple-600">Date</span> <span className="text-purple-600 pr-2 mt-1"><BsCalendar2Date /></span> {item.date}</div>
                     <div className=" ml-4 flex text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium  text-purple-600">Time</span><span className="text-purple-600 pr-2 mt-1"> <AiOutlineFieldTime /></span>{item.time}</div>

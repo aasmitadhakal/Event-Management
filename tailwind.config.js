@@ -32,6 +32,7 @@ module.exports = {
       colors: {
         'blues': '#6AB187',
         'pink':'#b340d6',
+        'grays':'#6B7280',
         'light-white':'rgba(255,255,255,0.50)'
       },
      

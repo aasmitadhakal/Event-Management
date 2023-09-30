@@ -4,12 +4,12 @@ function Header() {
   return (
     <>
     <div className="  z-0  ">
-    <div className=' grid md:grid-cols-2 grid-cols-1 '>
+    <div className=' grid md:grid-cols-2 grid-cols-1  '>
       {/* for description part */}
       <motion.div 
         initial={{x:'-100vw'}}
         animate={{x:0}}
-       transition={{duration:4.5}}
+       transition={{duration:2.5}}
       className="my-44 m-12 z-[-1]  ">
         <p 
         className="text-4xl font-bold mb-2  ">Unleash the <span className=" text-purple-400 "> power of music</span></p>
@@ -21,10 +21,14 @@ function Header() {
           </div>
       </motion.div>
       {/* for image part */}
-    <div>
+    <motion.div
+      initial={{x:'100vw'}}
+      animate={{x:0}}
+     transition={{duration:2.5}}
+    >
      <img className="md:h-120"
      src={img} alt=""></img>
-   </div>
+   </motion.div>
     </div>
     </div>
     </>

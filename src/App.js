@@ -1,4 +1,4 @@
-import {Route,Routes} from 'react-router-dom'
+import {Route,Routes, useLocation} from 'react-router-dom'
 import {Header, Home,Login,Register,Artistform,Managerform,UserForm,EventSlider} from './Components';
 import ResetPassword from './Components/ResetPassword';
 import PrivateLayout from './layout/PrivateLayout';
@@ -18,18 +18,23 @@ import ArtistLayout from './layout/ArtistLayout';
 import UserLayout from './layout/UserLayout';
 import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
+import EventPage from './Components/EventPage';
+
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
+  const location = useLocation();
   return (
     <>
     <AuthProvider>
-    <Routes>
+      <AnimatePresence wait>
+    <Routes location={location} key={location.pathname}>
       <Route element ={<PublicLayout />}>
       <Route path='/' element={<Home/>}/>
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
-      <Route path='/event' element={<Card2 />} />
+      <Route path='/event' element={<EventPage />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
@@ -79,6 +84,7 @@ function App() {
       <Route path='/user' element={<User />} />
       </Route>
     </Routes>
+    </AnimatePresence>
     </AuthProvider>
     </>
   );

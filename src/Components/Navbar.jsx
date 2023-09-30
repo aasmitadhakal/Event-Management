@@ -51,9 +51,9 @@ function Navbar(){
                ><BiAlignJustify /></div>
                 {/* for content */}
                 
-              <div className={`hidden text-gray-500 z-1000 transition-all my-2 duration-500 ease-in md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid grid md:grid-cols-6 md:mx-0  text-xl `}>
+              <div className={`hidden font-sans-serif text-grays z-1000 transition-all my-2 duration-500 ease-in md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid  md:grid-cols-6 md:mx-0  text-xl `}>
                     {/* for home */}
-               <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Home</Link></div>
+               <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/'>Home</Link></div>
                 
                 {/* for About us */}
                  <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>About</Link></div>
@@ -70,8 +70,8 @@ function Navbar(){
                 </div>
                 {/* for mobile view */}
                 {mobileView &&(
-                  <div className="block md:hidden duration-150 ease-out md:ease-in text-gray-500 z-1000 transition-all my-2  md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid grid md:grid-cols-6 md:mx-0  text-xl" >
-                  <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Home</Link></div>
+                  <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all my-2  md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid grid md:grid-cols-6 md:mx-0  text-xl" >
+                  <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/'>Home</Link></div>
                  
                  {/* for About us */}
                   <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>About</Link></div>

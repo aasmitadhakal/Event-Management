@@ -128,10 +128,10 @@ export default function Register({setHasaccount,visible,onClose}) {
       <div  className='fixed inset-0 z-10   delay-150 duration-300 ease-in-out  bg-black bg-opacity-30 
        backdrop-blur-sm flex justify-center items-center '>
       <div className='  mt-2'>
-        <form className='mx-96    border bg-white shadow-md rounded'>
+        <form className=' md:mx-2 mx-44   border bg-white shadow-md rounded'>
           <h1 className='text-2xl mt-12 mb-8 flex justify-center items-center  font-medium text-purple-400 '>Registration</h1>
           {/* for all field */}
-          <div className='grid grid-cols-2 '>
+          <div className='grid md:grid-cols-2  md:mx-4 mx-56'>
            <div>
               {/* for Name */}
               <div className='relative mb-8  mx-12'>
@@ -143,8 +143,7 @@ export default function Register({setHasaccount,visible,onClose}) {
                     onChange={handlename}
                     type="text"
                     name="name"
-                  />
-                  
+                  /> 
               </div>
                 {/* htmlFor username */}
               <div className='relative mb-8  mx-12'> 
@@ -226,16 +225,16 @@ export default function Register({setHasaccount,visible,onClose}) {
           
         </div>
       </div>
-        <button className='bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  hover:text-white  hover:to-blue-400   px-36 mx-36 py-2 rounded' onClick={handleApi}>Register</button>
+        <button className='bg-gradient-to-r from-blue-300 to-purple-600 text-white mt-4  hover:text-white  hover:to-blue-400   px-36 mx-44 py-2  rounded' onClick={handleApi}>Register</button>
         {/* for text */}
             <div onClick={()=>setHasaccount(true)}
-            className='text-slate-500 mx-44 mt-2  m-2 mb-12 '>
+            className='text-slate-500 mx-56 mt-2  m-2 mb-12 '>
              Already have an account ?<span className="hover:underline hover:decoration-pink hover:decoration-2 ">Login</span>
             </div>
             <ToastContainer />
     </form>
         </div>
-        <div className='absolute top-24 right-96  font-bold text-black text-2xl'onClick={onClose} ><RxCross1 /></div>
+        <div className='absolute md:top-28 md:right-96 right-8 top-8 font-bold text-black text-2xl'onClick={onClose} ><RxCross1 /></div>
        
         </div> 
   

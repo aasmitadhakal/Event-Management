@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier'
+import { ToastContainer } from 'react-toastify'
 function EventList() {
     const [data,setData] =useState('')
     const [deleted, setDeleted] = useState(false);
@@ -32,6 +33,19 @@ function EventList() {
 useEffect(()=>{
  getData()
 },[])
+//posting event complete
+const EventComplete=(id,e)=>{
+  e.preventDefault();
+  axios.post(`https://ayushkandel.pythonanywhere.com/event/complete/${id}/`,config)
+  .then(response => {
+    console.log('Event Complete successfully:', response);
+    notify("success"," Event Complete successfully")
+
+  })
+  .catch(error => {
+    console.error('error sending data:', error);
+  });
+}
  //posting delete api
  const DeleteData=(id,e)=>{
     e.preventDefault();
@@ -155,12 +169,14 @@ useEffect(()=>{
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
             <button   onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
+           <td> <button   onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 hover:text-red'>Event Complete</button></td>
          </tr>
              ))}
          </tbody>
             </table>
         </div>
         {renderPagination()}
+        <ToastContainer/>
     </div>
   )
 }

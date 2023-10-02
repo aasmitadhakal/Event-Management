@@ -18,6 +18,7 @@ module.exports = {
       margin: {
         '1px':'1px',
         '3px':'3px',
+        '98px':'26rem',
         '99px': '490px',
         '100px': '390px',
       },

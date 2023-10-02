@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier'
+import { ToastContainer } from 'react-toastify'
 
 function ArtistList() {
     const [data,setData] =useState('')
@@ -23,8 +24,7 @@ function ArtistList() {
               const { value, count } = result.data.results;
               setData(result.data.results);
               setTotalPages(Math.ceil(count / 10));
-              // setData(result.data.results)
-               console.log(result.data.results)
+             
             })
             .catch(error=>{
                 console.error(error);
@@ -32,7 +32,7 @@ function ArtistList() {
     }
     useEffect(()=>{
      getData()
-    },[])
+    },[searchQuery])
 
      //saving value on local storage for update
      const settoLocalstorage =(id,contact,gender,province,district,municipality,ward,photo,user,description,type_of_the_performer,performed_in)=>{
@@ -49,6 +49,19 @@ function ArtistList() {
       localStorage.setItem("artistPerformer",type_of_the_performer)
       localStorage.setItem("artistuser",user)
     }
+    //sending email
+    const SendEmail=(id,e)=>{
+      e.preventDefault();
+      axios.post(`https://ayushkandel.pythonanywhere.com/send-email/${id}/`,config)
+      .then(response => {
+        console.log('Email send successfully:', response);
+        notify("success","Email send successfully")
+
+      })
+      .catch(error => {
+        console.error('error sending data:', error);
+      });
+    }
      //posting delete api
      const DeleteData=(id,e)=>{
       e.preventDefault();
@@ -61,9 +74,10 @@ function ArtistList() {
        
       })
       .catch(error => {
-        console.error('Error deleting data:', error);
+        console.error('Error deleting email:', error);
       });
     }
+    
     //for pagination
     const handlePageChange = (page) => {
       if (page >= 1 && page <= totalPages) {
@@ -202,11 +216,15 @@ function ArtistList() {
                 )}
               className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'>Update</button></Link>
             <button   onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
+            <td>
+            <button onClick={(e)=>{SendEmail(item.id,e)}} className='bg-orange-400 text-white px-8 py-2 rounded-lg hover:bg-orange-600 hover:text-red'> Email</button>
+            </td>
          </tr>
              ))}
          </tbody>
             </table>
         </div>
+        <ToastContainer/>
         {renderPagination()}
     </div>
   )

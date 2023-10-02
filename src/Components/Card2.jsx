@@ -119,16 +119,16 @@ function Card2() {
     animate={{opacity:1}}
     exit={{opacity:0}}
     transition={{duration:0.5}}
-    className="z-[-1] "
+    className="z-[-1]  "
     >
     <div className="">
-      {/* <Navbar/> */}
-    <div className="card-container">
-      <div className=" p-4">
+     
+    <div className="card-container ">
+      <div className=" p-4 ">
         <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center   ">Event</p></div>
         <div><p className="text-4xl font-serif  text-gray-700 flex justify-center item-center ">Upcoming Events</p></div>   
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mx-36 '>
+        <div className='z-[-1] grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-36 mx-12'>
              {data&&data.map(item => (
                
                   <motion.div
@@ -137,25 +137,29 @@ function Card2() {
                     animate={{opacity:2}}
                     exit={{opacity:0}}
                     transition={{duration:0.5}}
-                    className="shadow-xl bg-white mt-12 relative rounded-2xl"
+                    className="shadow-xl bg-white mt-12 relative  rounded-2xl"
                      variants={cardVariants}>
                  
                     <div className="  flex  items-center  justify-center   "><img src={img} className="  rounded h-44 w-full" alt=""></img></div>
-                    <div className="flex justify-between absolute -top-0.5 mt-4   ">
-                      <div className="  rounded mr-36 mx-8 bg-white text-gray-800 font-serif px-3 ">$100</div>
+                      <div className="flex justify-between -top-0.5 absolute  mt-4   ">
+                      <div className="  rounded mr-36 mx-8 bg-white text-gray-800 font-serif px-3 ">{item.entry_fee}</div>
                       <div className="flex text-white gap-x-2">
-                        <span className="bg-white text-gray-800 px-1 pt-1  rounded-3xl "><CiSaveUp2/></span>
-                        <span className="bg-white text-red-600 px-1 pt-1  rounded-3xl"><BsFillHeartFill/></span>
+                        <span className="bg-white text-gray-800 px-1 pt-1 py-1 rounded-3xl "><CiSaveUp2/></span>
+                        <span className="bg-white text-red-400 px-1 py-1 pt-1  rounded-3xl"><BsFillHeartFill/></span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-center text-gray-800 font-serif hover:text-purple-600  text-xl hover:text-2xl cursor-pointer ">{item.event_name}</div>
-                    <div className="ml-4 flex font-serif text-gray-600"><span className="ml-4 mb-1 pr-1 font-serif text-l text-purple-600">Date</span> <span className="text-purple-600 pr-2 mt-1"><BsCalendar2Date /></span> {item.date}</div>
-                    <div className=" ml-4 flex text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium  text-purple-600">Time</span><span className="text-purple-600 pr-2 mt-1"> <AiOutlineFieldTime /></span>{item.time}</div>
-                    <div className="flex ml-4 text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium text-purple-600">Location</span><span className="text-purple-600 pr-2 mt-1"> <CiLocationOn /></span>{item.location}</div>
-                    <div className=" ml-4 text-gray-600 flex"><span className="text-purple-600 mb-1 font-serif ml-4  pr-2 font-medium">Capacity</span><span className="text-purple-600 pr-2 mt-1"> <MdReduceCapacity /></span>{item.capacity}</div>
-                    <div className=" ml-4 flex text-gray-600"><span className="font-serif ml-4 mb-1  pr-2 font-medium text-purple-600">Entry Fee</span><span className="text-purple-600 pr-2 mt-1"> <BsCashCoin /></span>{item.entry_fee}</div>
-                    <div className="ml-4 flex text-gray-600"> <span className="font-serif  ml-4 mb-1 pr-2 font-medium text-purple-600">Artist</span><span className="text-purple-600 pr-2 mt-1"> <BsPeople /></span>{item.artist}</div>
-                    <div className=" ml-4 flex text-gray-600"><span className=" font-serif ml-4  pr-2 mb-1 font-medium text-purple-600" >Sponser</span><span className="text-purple-600 pr-2 mt-1"> <FaPeopleGroup /></span> {item.sponser}</div>
+                  <div className="grid grid-cols-2 mt-4 mx-4">
+                    <div>
+                    <div className=" flex font-serif text-gray-600"><span className="text-purple-600 pr-2 mt-1"><BsCalendar2Date /></span> {item.date}</div>
+                    </div>
+                    <div>
+                    <div className="flex  text-gray-800 font-serif     cursor-pointer ">{item.event_name}</div>
+                    <div className="flex  text-gray-600"><span className="text-purple-600 pr-1 mt-1"> <CiLocationOn /></span>{item.location}</div>
+                    </div>
+                   
+                    </div>
+                    {/* <div className=" ml-4 flex text-gray-600"><span className=" font-serif ml-4  pr-2 mb-1 font-medium text-purple-600" >Sponser</span><span className="text-purple-600 pr-2 mt-1"> <FaPeopleGroup /></span> {item.artist.join(', ')}</div> */}
+                   
                   </motion.div>
                   
                  

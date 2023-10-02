@@ -10,16 +10,13 @@ function Navbar(){
     const[showNavbar,setShownavbar]=useState(false)
     const[hasaccount,setHasaccount]=useState(true)
     const[mobileView,setMobileview]=useState(true)
-    // const [navBackground, setNavBackground] = useState('bg-gray-900');
+   
     const [navBackground, setNavBackground] = useState('bg-white');
     const handleclose=(e)=>{
-      // if(e.target.id==='container') onClose()
+      
         setShownavbar(false);
     }
-    // const handleMobileView =(e)=>{
-    //   setMobileview(false);
-    // }
-    // for changing background color
+   
     useEffect(() => {
         const handleScroll = () => {
           const currentScrollPosition = window.pageYOffset;
@@ -37,6 +34,7 @@ function Navbar(){
       }, []);
     return(
         <>
+       
         <motion.div
         //  initial={{y:-250}}
         //  animate ={{y:-10}}
@@ -47,7 +45,6 @@ function Navbar(){
               <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src="logo.jpg" className="h-16 w-28"></img></div>
               <div className={"md:hidden block text-3xl font-bold ml-auto mt-2 pr-8"}
                  onClick={()=>setMobileview(!mobileView)}
-              //  onClick={()=>settoggle(!toggle)}
                ><BiAlignJustify /></div>
                 {/* for content */}
                 
@@ -70,7 +67,7 @@ function Navbar(){
                 </div>
                 {/* for mobile view */}
                 {mobileView &&(
-                  <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all my-2  md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid grid md:grid-cols-6 md:mx-0  text-xl" >
+                  <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all   md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid  md:grid-cols-6 md:mx-0  text-xl" >
                   <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/'>Home</Link></div>
                  
                  {/* for About us */}

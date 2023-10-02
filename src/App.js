@@ -20,7 +20,10 @@ import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
 import EventPage from './Components/EventPage';
 
+
 import { AnimatePresence } from 'framer-motion';
+import EventListPage from './Components/EventListPage';
+import EventDetailPage from './Components/EventDetailPage';
 
 function App() {
   const location = useLocation();
@@ -34,7 +37,8 @@ function App() {
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
-      <Route path='/event' element={<EventPage />} />
+      <Route path='/event' element={<EventListPage />} />
+      <Route path='/events/:id' element={<EventDetailPage />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />

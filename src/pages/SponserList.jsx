@@ -8,10 +8,11 @@ function SponserList() {
     const [deleted, setDeleted] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [searchQuery, setSearchQuery] = useState('');
     //getting api data
     const fetchData = () => {
       axios
-        .get(`https://ayushkandel.pythonanywhere.com/sponser/list/?page=${currentPage}`)
+        .get(`https://ayushkandel.pythonanywhere.com/sponser/search/?search=${searchQuery}&?page=${currentPage}`)
         .then(response => {
           const { results, count } = response.data;
           setData(results);
@@ -23,7 +24,7 @@ function SponserList() {
     };
     useEffect(()=>{
         fetchData();
-    },[currentPage])
+    },[currentPage,searchQuery])
 
     //for pagination
     const handlePageChange = (page) => {
@@ -117,6 +118,20 @@ function SponserList() {
     
   return (
     <div>
+       {/* for searchbox */}
+       <div className='flex justify-end items-end mx-24  '>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Enter search query"
+          className='border p-2 rounded-2xl w-64 pl-12 '
+        />
+           <button onClick={() => setCurrentPage(1)}
+           className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'
+           >Search</button>
+          {/* <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button> */}
+        </div> 
     <div className="  overflow-auto rounded-lg shadow mx-24 mt-4  "  >
          <table className="w-full mb-8 ">
       <thead className='bg-white border-b-2 border-gray-200'>

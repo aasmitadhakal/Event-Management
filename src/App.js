@@ -24,6 +24,7 @@ import EventPage from './Components/EventPage';
 import { AnimatePresence } from 'framer-motion';
 import EventListPage from './Components/EventListPage';
 import EventDetailPage from './Components/EventDetailPage';
+import UserProfile from './Components/UserProfile';
 
 function App() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
       <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
       <Route path='/userform' element={<UserForm/>} />
+      <Route path='/userprofile' element={<UserProfile/>} />
       </Route>
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>

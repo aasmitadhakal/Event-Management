@@ -25,6 +25,7 @@ function Header() {
       initial={{x:'100vw'}}
       animate={{x:0}}
      transition={{duration:2.5}}
+     className="z-[-1]"
     >
      <img className="md:h-120"
      src={img} alt=""></img>

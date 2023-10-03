@@ -24,7 +24,8 @@ function ArtistList() {
               const { value, count } = result.data.results;
               setData(result.data.results);
               setTotalPages(Math.ceil(count / 10));
-             
+              // setData(result.data.results)
+               console.log(result.data.results)
             })
             .catch(error=>{
                 console.error(error);
@@ -32,7 +33,7 @@ function ArtistList() {
     }
     useEffect(()=>{
      getData()
-    },[searchQuery])
+    },[searchQuery,currentPage])
 
      //saving value on local storage for update
      const settoLocalstorage =(id,contact,gender,province,district,municipality,ward,photo,user,description,type_of_the_performer,performed_in)=>{
@@ -147,15 +148,18 @@ function ArtistList() {
   return (
     <div>
       {/* for searchbox */}
-       <div className='flex justify-end items-end mx-24'>
+       <div className='flex justify-end items-end mx-24  '>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Enter search query"
-          className='border p-2 rounded-2xl '
+          className='border p-2 rounded-2xl w-64 pl-12 '
         />
-          <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button>
+           <button onClick={() => setCurrentPage(1)}
+           className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'
+           >Search</button>
+          {/* <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button> */}
         </div>    
         <div className='overflow-auto mx-6  '>
             <table className='rounded-lg shadow  mx-4 mt-8 mb-4'>
@@ -176,6 +180,7 @@ function ArtistList() {
                     <th className=" p-2 text-sm font-semibold ">Description</th>
                     <th className=" p-2 text-sm font-semibold ">User</th>
                     <th className=" p-2 text-sm font-semibold ">Photo</th>
+                    <th className=" p-2 text-sm font-semibold ">Is Available</th>
                     <th className=" p-2 text-sm font-semibold ">Action</th>
               </tr>
              </thead>
@@ -196,7 +201,9 @@ function ArtistList() {
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.performed_in}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.description}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.id}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo} className='h-14 w-14 rounded-full'></img></td>
+           
+            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo} alt='' className='h-14 w-14 rounded-full'></img></td>
+            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.is_available ? 'true' : 'false'}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
               <Link to ="/aupdate">
               <button
@@ -216,8 +223,8 @@ function ArtistList() {
                 )}
               className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'>Update</button></Link>
             <button   onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
-            <td>
-            <button onClick={(e)=>{SendEmail(item.id,e)}} className='bg-orange-400 text-white px-8 py-2 rounded-lg hover:bg-orange-600 hover:text-red'> Email</button>
+            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
+            <button onClick={(e)=>{SendEmail(item.id,e)}} className='bg-orange-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 hover:text-red'> Send Email</button>
             </td>
          </tr>
              ))}

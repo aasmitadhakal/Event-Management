@@ -39,7 +39,7 @@ function ContentCreate() {
     },config)
     .then((result) => {
       console.log(result.data);
-      // navigate("/contentlist",{replace:true});
+       navigate("/contentlist",{replace:true});
     })
     .catch((error) => {
       console.log(error);

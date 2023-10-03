@@ -32,7 +32,7 @@ function EventList() {
 }
 useEffect(()=>{
  getData()
-},[])
+},[searchQuery,currentPage])
 //posting event complete
 const EventComplete=(id,e)=>{
   e.preventDefault();
@@ -134,9 +134,11 @@ const EventComplete=(id,e)=>{
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Enter search query"
-          className='border p-2 rounded-2xl '
+          className='border p-2 rounded-2xl w-64 pl-12'
         />
-          <button onClick={getData} className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'>Search</button>
+          <button onClick={() => setCurrentPage(1)}
+           className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'
+           >Search</button>
         </div>    
         <div className='overflow-auto mx-6  '>
             <table className='rounded-lg shadow  mx-4 mt-8 mb-4'>
@@ -168,8 +170,8 @@ const EventComplete=(id,e)=>{
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.artist}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
-            <button   onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete</button></td>
-           <td> <button   onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white px-4 py-2 rounded-lg hover:bg-orange-600 hover:text-red'>Event Complete</button></td>
+            <button onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete  </button></td>
+           <td className='p-2 text-sm text-gray-700 whitespace-nowrap'> <button  onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white py-1 px-6 rounded-lg hover:bg-orange-600 hover:text-red'><span>Event complete</span></button></td>
          </tr>
              ))}
          </tbody>

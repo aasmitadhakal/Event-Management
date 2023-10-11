@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import RecentEvent from './RecentEvent';
 import EventList from './EventList';
 import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
-const EventListPage = () => {
+import Navbar from './Navbar';
+const EventFinalPage = () => {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +23,7 @@ const EventListPage = () => {
       .catch((error) => {
         console.error('Error fetching data:', error);
         setLoading(false);
-      });
+      },);
   }, []);
   const config = {
     headers: {
@@ -33,13 +35,15 @@ const EventListPage = () => {
     // Navigate to the event detail page with the event data
     navigate(`/events/${event.id}`, { state:{event} });
   };
+ 
 
   return (
     <div>
-     
-     {loading?(
+      <Navbar/>
+      <RecentEvent/>
+      {loading?(
         <>
-        <div className='flex mt-24 items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
+        <div className='mt-12 flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
         <div  className='flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="40%" /></div>
         <div className='grid grid-cols-1 md:grid-cols-3 mt-12  md:mx-36 mx-12'>
         <div>
@@ -68,4 +72,4 @@ const EventListPage = () => {
   );
 };
 
-export default EventListPage;
+export default EventFinalPage;

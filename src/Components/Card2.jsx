@@ -11,6 +11,7 @@ import {CiSaveUp2} from 'react-icons/ci'
 import {FaPeopleGroup} from 'react-icons/fa6'
 import {BsFillHeartFill} from 'react-icons/bs'
 import img from '../assets/events.jpg'
+import Skeleton from '@mui/material/Skeleton';
 import { motion } from "framer-motion"
 function Card2() {
   const [data,setData] =useState('')
@@ -19,6 +20,7 @@ function Card2() {
   const userPassword = localStorage.getItem('passwordinput');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [isLoading,setIsLoading]=useState(false);
   const cardVariants = {
     hover: {
       y: -10, // Move the card 10 pixels up
@@ -40,6 +42,7 @@ function Card2() {
           setData(result.data.results);
           setTotalPages(Math.ceil(count / 10));
           // setData(result.data.results)
+          setIsLoading(true);
            console.log(result.data.results)
         })
         .catch(error=>{

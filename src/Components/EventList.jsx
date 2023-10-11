@@ -10,8 +10,9 @@ import {BsPeople} from 'react-icons/bs'
 import {CiSaveUp2} from 'react-icons/ci'
 import {FaPeopleGroup} from 'react-icons/fa6'
 import {BsFillHeartFill} from 'react-icons/bs'
-import img from '../assets/events.jpg'
-import { motion } from "framer-motion"
+import img from '../assets/event2.jpg'
+import { motion } from "framer-motion";
+import { Skeleton } from "@mui/material"
 const EventList = ({ events, onViewMoreClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -86,6 +87,29 @@ return (
         </button>
       </div>
     );}
+
+    if (!events) {
+      return <div>
+       
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-36 mx-12'>
+          <div>
+         <Skeleton variant="rectangular" width={210} height={118} />
+         <Skeleton width="40%" />
+          <Skeleton width="40%" />
+         </div>
+         <div>
+         <Skeleton variant="rectangular" width={210} height={118} />
+         <Skeleton width="40%" />
+          <Skeleton width="40%" />
+         </div>
+         <div>
+         <Skeleton variant="rectangular" width={210} height={118} />
+         <Skeleton width="40%" />
+          <Skeleton width="40%" />
+         </div>
+         </div>
+      </div>;
+    }
   return (
     <>
     {/* <Navbar /> */}
@@ -94,7 +118,7 @@ return (
     animate={{opacity:1}}
     exit={{opacity:0}}
     transition={{duration:0.5}}
-    className="  "
+    className="mb-12  "
     >
     <div className="">
      
@@ -104,7 +128,7 @@ return (
         <div><p className="text-4xl font-serif  text-gray-700 flex justify-center item-center ">Upcoming Events</p></div>   
         </div>
         < div className=' grid grid-cols-1 md:grid-cols-3 gap-8 md:mx-36 mx-12'>
-      {events.map((event) => (
+      {events&&events.map((event) => (
         <div className="" >
         <motion.div
         onClick={() => onViewMoreClick(event)}
@@ -125,17 +149,22 @@ return (
                <span className="bg-white text-red-400 px-1 py-1 pt-1  rounded-3xl"><BsFillHeartFill/></span>
               </div>
           </div>         
-                <div className="grid grid-cols-2 mt-4 mx-4">
-                  <div>
+                <div className="grid  mt-4 mx-4">
+                  <div className="flex justify-around">
                   <div className=" flex font-serif text-gray-600"><span className="text-purple-600 pr-2 mt-1"><BsCalendar2Date /></span> {event.date}</div>
+                  <div className="flex  text-gray-600"><span className="text-purple-600 pr-1 mt-1"> <CiLocationOn /></span>{event.location}</div>
                   </div>
                   <div>
-                  <div className="flex  text-gray-800 font-serif cursor-pointer ">{event.event_name}</div>
-                  <div className="flex  text-gray-600"><span className="text-purple-600 pr-1 mt-1"> <CiLocationOn /></span>{event.location}</div>
+                  <div className="flex text-xl text-gray-800 font-serif cursor-pointer ">{event.event_name}</div>
+
                 </div>
-                   
+                  <div  className="flex justify-end text-blue-500 ">
+                    <button 
+                  className="underline"
+                    onClick={() => onViewMoreClick(event)}>View More</button>
+                    </div> 
           </div>
-          <button onClick={() => onViewMoreClick(event)}>View More</button>
+          
         </motion.div>
         </div>
       ))}

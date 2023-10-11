@@ -4,8 +4,9 @@ import {BiAlignJustify}from "react-icons/bi";
 import {motion} from 'framer-motion';
 import Login from "./Login";
 import Register from "./Register";
+import img from '../assets/logo.jpg'
 import {MdOutlineNotificationsNone} from 'react-icons/md'
-function Navbar(){
+function Navbar({data}){
     const[toggle,settoggle]=useState('false')
     const[showNavbar,setShownavbar]=useState(false)
     const[hasaccount,setHasaccount]=useState(true)
@@ -42,7 +43,7 @@ function Navbar(){
          className={` ${navBackground} transition-colors duration-300  sticky top-0 z-10000  w-screen `}>
           <div className='grid grid-cols-2 border-b '>
               {/* for logo */}
-              <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src="logo.jpg" className="h-16 w-28"></img></div>
+              <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src={img} className="h-16 w-28"></img></div>
               <div className={"md:hidden block text-3xl font-bold ml-auto mt-2 pr-8"}
                  onClick={()=>setMobileview(!mobileView)}
                ><BiAlignJustify /></div>
@@ -58,6 +59,18 @@ function Navbar(){
                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Blog</Link></div>
                  {/* for Event */}
                    <div className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
+                   {/* {data ? (
+          <li>
+            <img
+              src={data.img} // Replace with the actual URL of the user's profile picture
+              alt="Profile"
+              width="30"
+              height="30"
+            />
+          </li>
+        ) : (
+          <li>Login</li>
+        )} */}
                   {/* for login button */}
                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
                   {/* for notification */}
@@ -77,6 +90,18 @@ function Navbar(){
                   {/* for Event */}
                     <div className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                    {/* for login button */}
+                   {/* {data ? (
+          <li>
+            <img
+              src={data.img} // Replace with the actual URL of the user's profile picture
+              alt="Profile"
+              width="30"
+              height="30"
+            />
+          </li>
+        ) : (
+          <li>Login</li>
+        )} */}
                    <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
                    {/* for notification */}
                    <div className="my-2 text-3xl font-bold"><MdOutlineNotificationsNone /></div>

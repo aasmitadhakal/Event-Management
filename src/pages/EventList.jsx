@@ -176,6 +176,7 @@ const EventComplete=(id,e)=>{
              ))}
          </tbody>
             </table>
+           
         </div>
         {renderPagination()}
         <ToastContainer/>

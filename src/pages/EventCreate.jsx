@@ -1,10 +1,13 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import axios from '../api/axios'
+import Select from 'react-select';
 import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate } from 'react-router-dom'
 function EventCreate() {
     const navigate = useNavigate()
+    const [selectedOption, setSelectedOption] = useState(''); // To store the selected option from the dropdown
+    const [options, setOptions] = useState([]); // To store the options fetched from the API
     const[event_name,setEvent_name]=useState('')
     const[date,setDate]=useState('')
     const[time,setTime]=useState('')
@@ -16,33 +19,64 @@ function EventCreate() {
     const[sponser,setSponser]=useState('')
     const username = localStorage.getItem('emailinput') 
   const userPassword = localStorage.getItem('passwordinput');
-    const handleEventName =(e)=>{
-        setEvent_name(e.target.value)
-      }
-      const handleDate =(e)=>{
-        setDate(e.target.value)
-      }
-      const handleTime =(e)=>{
-        setTime(e.target.value)
-      }
-      const handleLocation =(e)=>{
-        setLocation(e.target.value)
-      }
-      const handleCapacity =(e)=>{
-        setCapacity(e.target.value)
-      }
-      const handleEntryFee=(e)=>{
-        setentry_fee(e.target.value)
-      }
+  const [artists, setArtists] = useState([]);
+  const [formData, setFormData] = useState({
+    event_name: '',
+    date: '',
+    time: '',
+    location: '',
+    capacity: '',
+    entry_fee: '',
+    artist: [],
+    sponser: [],
+  });
+
+    // const handleEventName =(e)=>{
+    //     setEvent_name(e.target.value)
+    //   }
+    //   const handleDate =(e)=>{
+    //     setDate(e.target.value)
+    //   }
+    //   const handleTime =(e)=>{
+    //     setTime(e.target.value)
+    //   }
+    //   const handleLocation =(e)=>{
+    //     setLocation(e.target.value)
+    //   }
+    //   const handleCapacity =(e)=>{
+    //     setCapacity(e.target.value)
+    //   }
+    //   const handleEntryFee=(e)=>{
+    //     setentry_fee(e.target.value)
+    //   }
       const handleEventCompleted =(e)=>{
         setevent_completed(e.target.value)
       }
-      const handleArtist =(e)=>{
-        setArtist(e.target.value)
+     
+     
+      const handleIsAvailable=(e)=>{
+        setevent_completed(e.target.checked)
       }
-      const handleSponser =(e)=>{
-        setSponser(e.target.value)
-      }
+    
+      //for artist input field
+      const getArtistName = (artistId) => {
+        const artist = artists.find((a) => a.id === artistId);
+        return artist ? artist.user.name : '';
+      };
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'artist' || name === 'sponser') {
+          setFormData({
+            ...formData,
+            [name]: value.split(',').map(item => item.trim()), // Split and trim values
+          });
+        } else {
+          setFormData({
+            ...formData,
+            [name]: value,
+          });
+        }
+      };
       const config = {
         headers: {
           'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
@@ -52,17 +86,7 @@ function EventCreate() {
       const handleAPi =(e)=>{
         e.preventDefault();
         axios
-        .post("/event/create/", {
-         event_name : event_name,
-         date: date,
-         time: time,
-         location:location,
-         capacity:capacity,
-         entry_fee:entry_fee,
-         event_completed:event_completed,
-         artist:artist,
-         sponser:sponser
-        },config)
+        .post("/event/create/", formData,config)
         .then((result) => {
           console.log(result.data);
            navigate("/eventlist",{replace:true});
@@ -74,11 +98,26 @@ function EventCreate() {
           // setLoading(false);
         });
       }
+      //geting data from artist list 
+      useEffect(() => {
+        // Fetch data from the API when the component mounts
+        axios.get('https://ayushkandel.pythonanywhere.com/artist/list/?page=1',config)
+        .then((response) => {
+          setArtists(response.data.results);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+          });
+      }, []);
+      
+    
   return (
     <div className='  mt-18 flex justify-center items-center p-12 '>
     <form onSubmit={handleAPi}
      className='   p-6 border bg-white shadow-md rounded'>
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Event</div>
+    <div className='grid grid-cols-3'>
+      <div>
         {/* for eventname */}
         <div className='relative mb-8  mx-12 '>
         <label htmlFor="event_name" className="absolute   text-gray-600 cursor-text ">Heading</label>
@@ -87,8 +126,8 @@ function EventCreate() {
         id="event_name"
         type="text"
         name="event_name"
-        value={event_name}
-        onChange={handleEventName}
+        value={formData.event_name}
+        onChange={handleChange}
         />
 
         </div>
@@ -98,10 +137,10 @@ function EventCreate() {
         <input
         className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="date"
-        type="text"
+        type="date"
         name="date"
-        value={date}
-        onChange={handleDate}
+        value={formData.date}
+        onChange={handleChange}
         />   
        
         </div>
@@ -112,13 +151,15 @@ function EventCreate() {
         <input
         className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="time"
-        type="text"
-        name="status"
-        value={time}
-        onChange={handleTime}
+        type="time"
+        name="time"
+        value={formData.time}
+        onChange={handleChange}
         />   
+        
        
         </div>
+        
         {/* for location */}
         <div className='relative mb-4   mx-12  '> 
         <label htmlFor="location" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Location</label>
@@ -127,10 +168,14 @@ function EventCreate() {
         id="location"
         type="text"
         name="location"
-        value={location}
-        onChange={handleLocation}
+        value={formData.location}
+        onChange={handleChange}
         />   
         </div>
+       
+      </div>
+    
+      <div>
           {/* for capacity */}
           <div className='relative mb-4   mx-12  '> 
         <label htmlFor="capacity" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Capacity</label>
@@ -139,8 +184,8 @@ function EventCreate() {
         id="capacity"
         type="text"
         name="capacity"
-        value={capacity}
-        onChange={handleCapacity}
+        value={formData.capacity}
+        onChange={handleChange}
         />   
         </div>
           {/* for entryfeee */}
@@ -151,50 +196,57 @@ function EventCreate() {
         id="entry_fee"
         type="text"
         name="entry_fee"
-        value={entry_fee}
-        onChange={handleEntryFee}
+        value={formData.entry_fee}
+        onChange={handleChange}
         />   
         </div>
-          {/* for eventcompleted */}
-          <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="eventcompleted" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Event_Completed</label>
-        <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="eventcompleted"
-        type="text"
-        name="event_completed"
-        value={event_completed}
-        onChange={handleEventCompleted}
-        />   
-        </div>
-          {/* for artist */}
-          <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="artist" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Artist</label>
-        <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="artist"
-        type="text"
-        name="artist"
-        value={artist}
-        onChange={handleArtist}
-        />   
-        </div>
-          {/* for sponser */}
-          <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="sponser" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Sponser</label>
-        <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="sponser"
-        type="text"
-        name="sponser"
-        value={sponser}
-        onChange={handleSponser}
-        />   
-        </div>
+        <div>
+  <label>Artist:</label>
+  <Select
+    isMulti
+    name="artist"
+    value={formData.artist.map((artistId) => ({
+      value: artistId,
+      label: getArtistName(artistId),
+    }))}
+    onChange={(selectedOptions) => {
+      setFormData({
+        ...formData,
+        artist: selectedOptions.map((option) => option.value),
+      });
+    }}
+    options={artists.map((artist) => ({
+      value: artist.id,
+      label: artist.user.name,
+    }))}
+  />
+</div>
+{/* for sponser */}
 
+         {/* for eventcompleted */}
+         <div className=' relative mb-4   mx-12    '> 
+        <label htmlFor="eventcompleted" className="flex justify-center items-center absolute left-0 top-[-2] text-gray-600 cursor-text ">Event_Completed</label>
+        <input type ='radio'
+        className=' flex pt-2 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
+             checked={event_completed}
+         onChange={handleEventCompleted}
+            /> 
+        </div>
+      </div>   
         {/* for buttom */}
-        <div className=''>
-        <button className='bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4  px-8 mx-10 py-2  rounded-2xl'>Create Event</button>
+       
+        </div>
+        <div>
+        <label>Sponsors (comma-separated)::</label>
+        <input
+          type="text"
+          name="sponser"
+          value={formData.sponser}
+          onChange={handleChange}
+        />
+      </div>
+        <div className=' mx-36 py-2 flex items-center justify-center bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white   rounded-2xl'>
+        <button className= ''>Create Event</button>
         </div>
         </form>
         </div>

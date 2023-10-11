@@ -19,7 +19,7 @@ import UserLayout from './layout/UserLayout';
 import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
 import EventPage from './Components/EventPage';
-
+import EventFinalPage from './Components/EventFinalPage';
 
 import { AnimatePresence } from 'framer-motion';
 import EventListPage from './Components/EventListPage';
@@ -38,7 +38,7 @@ function App() {
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
-      <Route path='/event' element={<EventListPage />} />
+      <Route path='/event' element={<EventFinalPage />} />
       <Route path='/events/:id' element={<EventDetailPage />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />

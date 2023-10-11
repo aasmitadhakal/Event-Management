@@ -133,7 +133,9 @@ function AlluserList() {
             placeholder="Enter search query"
             className='border p-2 rounded-2xl  w-64 pl-12 '
           />
-         <button onClick={() => setCurrentPage(1)}
+         <button 
+          onClick={() => setCurrentPage(1)}
+          //  onClick={()=>getData()}
            className='bg-purple-400 text-white py-1 rounded-xl focus:outline-none  px-8 m-2'
            >Search</button>
         </div>

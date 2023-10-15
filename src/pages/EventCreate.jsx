@@ -6,6 +6,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate } from 'react-router-dom'
 function EventCreate() {
     const navigate = useNavigate()
+    const [photo, setPhoto] = useState('');
     const [selectedOption, setSelectedOption] = useState(''); // To store the selected option from the dropdown
     const [options, setOptions] = useState([]); // To store the options fetched from the API
     const[event_name,setEvent_name]=useState('')
@@ -18,9 +19,9 @@ function EventCreate() {
     const[artist,setArtist]=useState('')
     const[sponser,setSponser]=useState('')
     const username = localStorage.getItem('emailinput') 
-  const userPassword = localStorage.getItem('passwordinput');
-  const [artists, setArtists] = useState([]);
-  const [formData, setFormData] = useState({
+      const userPassword = localStorage.getItem('passwordinput');
+      const [artists, setArtists] = useState([]);
+      const [formData, setFormData] = useState({
     event_name: '',
     date: '',
     time: '',
@@ -29,8 +30,11 @@ function EventCreate() {
     entry_fee: '',
     artist: [],
     sponser: [],
+   
   });
-
+  const handlePhoto = (e) => {
+    setPhoto(e.target.files[0]);
+  };
     // const handleEventName =(e)=>{
     //     setEvent_name(e.target.value)
     //   }
@@ -83,13 +87,21 @@ function EventCreate() {
           'Content-Type': 'application/json'
         }
       };
-      const handleAPi =(e)=>{
+      const handleAPi = (e) => {
         e.preventDefault();
+        const postData = new FormData();
+        for (const key in formData) {
+          if (key === 'photo') {
+            postData.append('photo', formData.photo);
+          } else {
+            postData.append(key, formData[key]);
+          }
+        }
         axios
         .post("/event/create/", formData,config)
         .then((result) => {
           console.log(result.data);
-           navigate("/eventlist",{replace:true});
+          //  navigate("/eventlist",{replace:true});
         })
         .catch((error) => {
           console.log(error);
@@ -98,6 +110,7 @@ function EventCreate() {
           // setLoading(false);
         });
       }
+     
       //geting data from artist list 
       useEffect(() => {
         // Fetch data from the API when the component mounts
@@ -113,10 +126,10 @@ function EventCreate() {
     
   return (
     <div className='  mt-18 flex justify-center items-center p-12 '>
-    <form onSubmit={handleAPi}
+    <form onSubmit={handleAPi} encType="multipart/form-data"
      className='   p-6 border bg-white shadow-md rounded'>
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Event</div>
-    <div className='grid grid-cols-3'>
+    <div className='grid grid-cols-2'>
       <div>
         {/* for eventname */}
         <div className='relative mb-8  mx-12 '>
@@ -200,13 +213,16 @@ function EventCreate() {
         onChange={handleChange}
         />   
         </div>
-        <div>
-  <label>Artist:</label>
+        <div className='relative mb-4   mx-12 '>
+  <label htmlFor="artist" className='flex justify-center items-center absolute left-0 top-1 text-gray-600 mb-2 cursor-text ' >Artist:</label>
   <Select
     isMulti
     name="artist"
+    style={{ width: '800px' }}
+    className='flex  pt-6 justify-center items-center  py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors '
     value={formData.artist.map((artistId) => ({
       value: artistId,
+      
       label: getArtistName(artistId),
     }))}
     onChange={(selectedOptions) => {
@@ -216,36 +232,39 @@ function EventCreate() {
       });
     }}
     options={artists.map((artist) => ({
+      
       value: artist.id,
       label: artist.user.name,
     }))}
   />
 </div>
 {/* for sponser */}
-
-         {/* for eventcompleted */}
-         <div className=' relative mb-4   mx-12    '> 
-        <label htmlFor="eventcompleted" className="flex justify-center items-center absolute left-0 top-[-2] text-gray-600 cursor-text ">Event_Completed</label>
-        <input type ='radio'
-        className=' flex pt-2 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-             checked={event_completed}
-         onChange={handleEventCompleted}
-            /> 
-        </div>
-      </div>   
-        {/* for buttom */}
-       
-        </div>
-        <div>
-        <label>Sponsors (comma-separated)::</label>
+<div className='relative mb-4   mx-12 '>
+        <label className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text '>Sponsors </label>
         <input
+        className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
           type="text"
           name="sponser"
           value={formData.sponser}
           onChange={handleChange}
         />
       </div>
-        <div className=' mx-36 py-2 flex items-center justify-center bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white   rounded-2xl'>
+      
+         {/* for eventcompleted */}
+         {/* <div className=' relative mb-4   mx-12    '> 
+        <label htmlFor="eventcompleted" className="flex justify-center items-center absolute left-0 top-[-2] text-gray-600 cursor-text ">Event_Completed</label>
+        <input type ='radio'
+        className=' flex pt-2 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
+             checked={event_completed}
+         onChange={handleEventCompleted}
+            /> 
+        </div> */}
+      </div>   
+        {/* for buttom */}
+       
+        </div>
+       
+        <div className=' mx-44 py-2 flex items-center justify-center bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white  my-4 rounded-2xl'>
         <button className= ''>Create Event</button>
         </div>
         </form>

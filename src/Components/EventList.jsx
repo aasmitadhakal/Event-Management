@@ -12,7 +12,7 @@ import {FaPeopleGroup} from 'react-icons/fa6'
 import {BsFillHeartFill} from 'react-icons/bs'
 import img from '../assets/event2.jpg'
 import { motion } from "framer-motion";
-import { Skeleton } from "@mui/material"
+import { Button, Skeleton } from "@mui/material"
 const EventList = ({ events, onViewMoreClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -133,16 +133,16 @@ return (
         <motion.div
         onClick={() => onViewMoreClick(event)}
         key={event.id}
-        whileHover="hover" 
+        // whileHover="hover" 
          initial={{opacity :0}}
         animate={{opacity:2}}
         exit={{opacity:0}}
         transition={{duration:0.5}}
-        className="  shadow-xl bg-white mt-12 relative  rounded-2xl"
+        className=" z-10 shadow-xl bg-white mt-12   rounded-2xl"
          variants={cardVariants}
          >
          <div className="  flex  items-center  justify-center   "><img src={img} className="  rounded h-44 w-full" alt=""></img></div>
-         <div className="flex justify-between -top-0.5 absolute  mt-4   ">
+         <div className="flex justify-between   mt-4   ">
           <div className="  rounded mr-36 mx-8 bg-white text-gray-800 font-serif px-3 ">{event.entry_fee}</div>
               <div className="flex text-white gap-x-2">
                <span className="bg-white text-gray-800 px-1 pt-1 py-1 rounded-3xl "><CiSaveUp2/></span>
@@ -159,9 +159,9 @@ return (
 
                 </div>
                   <div  className="flex justify-end text-blue-500 ">
-                    <button 
+                    <Button 
                   className="underline"
-                    onClick={() => onViewMoreClick(event)}>View More</button>
+                    onClick={() => onViewMoreClick(event)}>View More</Button>
                     </div> 
           </div>
           

@@ -8,14 +8,14 @@ import Navbar from './Navbar';
 const EventFinalPage = () => {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const username = localStorage.getItem('emailinput') 
   const userPassword = localStorage.getItem('passwordinput');
   const navigate = useNavigate();
   useEffect(() => {
     // Make an Axios request to fetch event data
-    axios.get(`https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${currentPage}`,config)
+    axios.get(`https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${page}`,config)
       .then((response) => {
         setEvents(response.data.results);
         setLoading(false);
@@ -24,7 +24,7 @@ const EventFinalPage = () => {
         console.error('Error fetching data:', error);
         setLoading(false);
       },);
-  }, []);
+  }, [page,searchQuery]);
   const config = {
     headers: {
       'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
@@ -38,7 +38,7 @@ const EventFinalPage = () => {
  
 
   return (
-    <div>
+    <div className='mb-4'>
       <Navbar/>
       <RecentEvent/>
       {loading?(
@@ -61,12 +61,47 @@ const EventFinalPage = () => {
        <Skeleton width="40%" />
         <Skeleton width="40%" />
        </div>
+       
        </div>
         </>
        
         ) : (
-      
-      <EventList events={events} onViewMoreClick={onViewMoreClick} searchQuery={searchQuery} currentPage={currentPage} />
+      <>
+         <EventList events={events} onViewMoreClick={onViewMoreClick} searchQuery={searchQuery} currentPage={page} />
+         <div className="flex justify-center mt-8">
+        <button
+          onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
+          disabled={page === 1}
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-4"
+        >
+          Previous
+        </button>
+        <div className="flex">
+          {[...Array(5)].map((_, index) => {
+            const currentPage = page + index;
+            return (
+              <button
+                key={currentPage}
+                onClick={() => setPage(currentPage)}
+                className={`mx-1 px-3 py-2 rounded-full ${
+                  currentPage === page ? 'bg-purple-500 text-white' : 'bg-gray-300'
+                } hover:bg-purple-500 hover:text-white`}
+              >
+                {currentPage}
+              </button>
+            );
+          })}
+        </div>
+        <button
+          onClick={() => setPage((prevPage) => prevPage + 1)}
+          disabled={events.length === 0 || events.length < 10}
+          className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded ml-4"
+        >
+          Next
+        </button>
+      </div>
+      </>
+   
         )}
     </div>
   );

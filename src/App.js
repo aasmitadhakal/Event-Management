@@ -20,11 +20,13 @@ import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
 import EventPage from './Components/EventPage';
 import EventFinalPage from './Components/EventFinalPage';
-
+import Page from './Components/Page';
 import { AnimatePresence } from 'framer-motion';
 import EventListPage from './Components/EventListPage';
 import EventDetailPage from './Components/EventDetailPage';
 import UserProfile from './Components/UserProfile';
+import EventDetail from './Event/EventDetail';
+import EventItem from './Event/EventItem';
 
 function App() {
   const location = useLocation();
@@ -35,11 +37,12 @@ function App() {
     <Routes location={location} key={location.pathname}>
       <Route element ={<PublicLayout />}>
       <Route path='/' element={<Home/>}/>
+      <Route path="/page/:id" element={<Page/>} />
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
-      <Route path='/event' element={<EventFinalPage />} />
-      <Route path='/events/:id' element={<EventDetailPage />} />
+      <Route path='/event' element={<EventItem />} />
+      <Route path='/event/:id' element={<EventDetail />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />

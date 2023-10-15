@@ -27,6 +27,7 @@ import EventDetailPage from './Components/EventDetailPage';
 import UserProfile from './Components/UserProfile';
 import EventDetail from './Event/EventDetail';
 import EventItem from './Event/EventItem';
+import UpcomingDetail from './Event/UpcomingDetail';
 
 function App() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
       <Route path='/about' element={<About />} />
       <Route path='/event' element={<EventItem />} />
       <Route path='/event/:id' element={<EventDetail />} />
+      <Route path='/upcomingevent/:id' element={<UpcomingDetail />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />

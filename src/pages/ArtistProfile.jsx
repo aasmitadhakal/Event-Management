@@ -41,12 +41,20 @@ function ArtistProfile() {
       
       
       useEffect(() => {
+        // const config = {
+        //   headers: {
+        //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+        //     'Content-Type': 'application/json'
+        //   }
+        // };
+        const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
         const config = {
           headers: {
-            'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-            'Content-Type': 'application/json'
+              'Authorization': `Bearer ${token}`, // Use the Bearer token here
+              'Content-Type': 'application/json'
           }
-        };
+      }
     
         axios.get('https://ayushkandel.pythonanywhere.com/user-profile/', config)
           .then(response => {
@@ -87,12 +95,14 @@ function ArtistProfile() {
       const handleSaveClick = (e) => {
         e.preventDefault()
         setIsEditing(false);
+        const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
         const config = {
           headers: {
-            'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-            'Content-Type': 'application/json'
+              'Authorization': `Bearer ${token}`, // Use the Bearer token here
+              'Content-Type': 'application/json'
           }
-        };
+      }
         const formDataToSend = new FormData();
         formDataToSend.append('photo', formData.photo);
         formDataToSend.append('name', formData.name);

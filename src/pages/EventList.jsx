@@ -165,7 +165,7 @@ const EventComplete=(id,e)=>{
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.location}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.capacity}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.entry_fee}</td>
-            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo}></img></td> */}
+            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo}></img></td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.artist}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>

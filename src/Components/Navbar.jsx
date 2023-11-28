@@ -4,6 +4,7 @@ import {BiAlignJustify}from "react-icons/bi";
 import {motion} from 'framer-motion';
 import Login from "./Login";
 import Register from "./Register";
+import { Skeleton } from '@mui/material';
 import img from '../assets/logo.jpg'
 import axios from "axios";
 import {MdOutlineNotificationsNone} from 'react-icons/md'
@@ -13,6 +14,7 @@ function Navbar({data}){
     const[hasaccount,setHasaccount]=useState(true)
     const[mobileView,setMobileview]=useState(true)
     const [navbarData, setNavbarData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [navBackground, setNavBackground] = useState('bg-white');
     const handleclose=(e)=>{
       
@@ -24,9 +26,11 @@ function Navbar({data}){
     axios.get('https://ayushkandel.pythonanywhere.com/dynamic-heading/list/')
       .then((response) => {
         setNavbarData(response.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching navbar data:', error);
+        setLoading(false);
       });
   }, []);
     useEffect(() => {
@@ -44,6 +48,29 @@ function Navbar({data}){
     
         return () => window.removeEventListener('scroll', handleScroll);
       }, []);
+
+      if (loading) {
+        return (
+           <>
+           {/* <div className="md:flex grid-cols-1 mt-8  ">
+            <div className="ml-8 pl-24 pr-2 md:pr-64"> <Skeleton variant="circle" width={30} height={30}  /></div>
+            <div className="md:flex justify-around  gap-x-24">
+            <div><Skeleton variant="text" width={80}   sx={{ fontSize: '1rem' }} /></div>
+            <div>
+            <Skeleton variant="text" width={80}   sx={{ fontSize: '1rem' }} />
+            </div>
+            <div>
+            <Skeleton variant="text" width={80}   sx={{ fontSize: '1rem' }} />
+            </div>
+            <div>
+            <Skeleton variant="text" width={80}   sx={{ fontSize: '1rem' }} />
+            </div>
+            </div>
+         
+           </div> */}
+            </>
+        );
+    }
     return(
         <>
        
@@ -63,12 +90,12 @@ function Navbar({data}){
                   
         
          {navbarData.map((item) => (
-          <>
-          <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to={`/page/${item.id}`}>{item.heading}</Link></div> 
-          {/*  */}
-          </>
-          ))}
-          <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
+                <>
+                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to={`/page/${item.id}`}>{item.heading}</Link></div> 
+                {/*  */}
+                </>
+                ))}
+                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
 
                   {/* for login button */}
                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
@@ -80,34 +107,20 @@ function Navbar({data}){
                 {/* for mobile view */}
                 {mobileView &&(
                   <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all   md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid  md:grid-cols-6 md:mx-0 z-1000 text-xl" >
-                  <div className=" my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/'>Home</Link></div>
-                 
-                 {/* for About us */}
-                  <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>About</Link></div>
-                 {/* for Contact */}
-                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/about us'>Blog</Link></div>
-                  {/* for Event */}
-                    <div className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
+                 {navbarData.map((item) => (
+                <>
+                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to={`/page/${item.id}`}>{item.heading}</Link></div> 
+                
+                </>
+                ))}
+                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                    {/* for login button */}
-                   {/* {data ? (
-          <li>
-            <img
-              src={data.img} // Replace with the actual URL of the user's profile picture
-              alt="Profile"
-              width="30"
-              height="30"
-            />
-          </li>
-        ) : (
-          <li>Login</li>
-        )} */}
                    <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
-                   {/* for notification */}
                    <div className="my-2 text-3xl font-bold"><MdOutlineNotificationsNone /></div>
                   </div>
                 )}
                 
-                {/* <Login onClose={handleclose} visible={showNavbar} /> */}
+              
                 {hasaccount?
                 <>
                 <Login onClose={handleclose} visible={showNavbar} setHasaccount={setHasaccount}  />

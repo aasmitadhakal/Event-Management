@@ -15,14 +15,17 @@ function UserUpadate() {
   const [photo, setPhoto] = useState(null);
   const [user, setUser] = useState('');
   const [id, setNormalUserID] = useState(0);
-  const username = localStorage.getItem('emailinput');
-  const userPassword = localStorage.getItem('passwordinput');
+  // const username = localStorage.getItem('emailinput');
+  // const userPassword = localStorage.getItem('passwordinput');
+  
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
   const config = {
     headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
-    },
-  };
+        'Authorization': `Bearer ${token}`, // Use the Bearer token here
+        'Content-Type': 'application/json'
+    }
+}
 
   const handleContact = (e) => {
     setContact(e.target.value);

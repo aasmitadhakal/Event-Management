@@ -10,14 +10,16 @@ function AlluserUpdate() {
   const[Ausername,setAllUsername]=useState('')
   const[password,setPassword]=useState('')
   const[id,setID]=useState(0)
-  const username = localStorage.getItem('emailinput') 
-  const userPassword = localStorage.getItem('passwordinput');
-  const config = {
-    headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'application/json'
+  // const username = localStorage.getItem('emailinput') 
+  // const userPassword = localStorage.getItem('passwordinput');
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
+      const config = {
+        headers: {
+            'Authorization': `Bearer ${token}`, // Use the Bearer token here
+            'Content-Type': 'application/json'
+        }
     }
-  };
   const handleName=(e)=>{
     setName(e.target.value)
   }

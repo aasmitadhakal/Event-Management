@@ -20,13 +20,14 @@ function ArtistUpadate() {
   const[type_of_the_performer,setTypeofPerformer]=useState('')
   const username = localStorage.getItem('emailinput');
   const userPassword = localStorage.getItem('passwordinput');
-  const config = {
-    headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'multipart/form-data', // Set the content type to multipart/form-data
-    },
-  };
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
 
+  const config = {
+      headers: {
+          'Authorization': `Bearer ${token}`, // Use the Bearer token here
+          'Content-Type': 'application/json'
+      }
+  }
   const handleContact = (e) => {
     setContact(e.target.value);
   };

@@ -27,12 +27,14 @@ function ContentList() {
     const handleStatusChange =(event)=>{
       setStatuss(event.target.value);
     };
-    const config = {
+    const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
+  const config = {
       headers: {
-        'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-        'Content-Type': 'application/json'
+          'Authorization': `Bearer ${token}`, // Use the Bearer token here
+          'Content-Type': 'application/json'
       }
-    };
+  }
     
     const getData =()=>{
       axios.get(`https://ayushkandel.pythonanywhere.com/content-management/list/${statuss}/?page=${currentPage}`,config)

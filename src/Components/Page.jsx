@@ -21,7 +21,7 @@ const  Page = () => {
     <div>
       <Navbar/>
       {pageContent ? (
-        <div>
+        <div className='mt-24'>
           <h2>{pageContent.heading.heading}</h2>
           <p>{pageContent.content}</p>
         </div>

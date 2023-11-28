@@ -12,12 +12,14 @@ function ArtistList() {
     const userPassword = localStorage.getItem('passwordinput');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
     const config = {
         headers: {
-          'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-          'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`, // Use the Bearer token here
+            'Content-Type': 'application/json'
         }
-      };
+    }
     const getData =()=>{
             axios.get(`https://ayushkandel.pythonanywhere.com/artist/search/?search=${searchQuery}&page=${currentPage}`,config)
             .then(result=>{
@@ -26,6 +28,8 @@ function ArtistList() {
               setTotalPages(Math.ceil(count / 10));
               // setData(result.data.results)
                console.log(result.data.results)
+
+               
             })
             .catch(error=>{
                 console.error(error);

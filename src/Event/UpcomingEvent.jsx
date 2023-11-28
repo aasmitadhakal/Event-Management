@@ -36,7 +36,7 @@ const UpcomingEvent = () => {
       {loading?(
         <>
        
-        <div className='mt-18 flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
+        <div className='mt-24 flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
         <div  className='flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="40%" /></div>
         <div className='grid grid-cols-1 md:grid-cols-3 mt-12  md:mx-36 mx-12'>
         <div>
@@ -65,7 +65,7 @@ const UpcomingEvent = () => {
       <Link to={`/upcomingevent/${event.id}`} key={event.id}>
         <div className='shadow-xl bg-white mt-12 rounded-2xl'>
           {/* <img src='img.jpg' className='ml-4 h-64 w-72' /> */}
-          <img src={event.photo} className='ml-4 h-64 w-72' alt={event.event_name} />
+          <img src={'https://ayushkandel.pythonanywhere.com'+event.photo} className='ml-4 h-64 w-72' alt={event.photo} />
           <div className='flex mt-2'>
             <p className='font-medium font-serif text-gray-400 pl-6 my-2 '>
               {event.date}

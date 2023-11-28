@@ -7,7 +7,7 @@ import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList,} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,} from './pages';
 import Put from './Components/Put';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -18,22 +18,20 @@ import ArtistLayout from './layout/ArtistLayout';
 import UserLayout from './layout/UserLayout';
 import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
-import EventPage from './Components/EventPage';
-import EventFinalPage from './Components/EventFinalPage';
 import Page from './Components/Page';
 import { AnimatePresence } from 'framer-motion';
-import EventListPage from './Components/EventListPage';
-import EventDetailPage from './Components/EventDetailPage';
 import UserProfile from './Components/UserProfile';
 import EventDetail from './Event/EventDetail';
 import EventItem from './Event/EventItem';
 import UpcomingDetail from './Event/UpcomingDetail';
+import { TokenProvider } from './Authorization/TokenContext';
 
 function App() {
   const location = useLocation();
   return (
     <>
     <AuthProvider>
+    {/* <TokenProvider> */}
       <AnimatePresence wait>
     <Routes location={location} key={location.pathname}>
       <Route element ={<PublicLayout />}>
@@ -53,11 +51,9 @@ function App() {
       <Route path='/mform' element={<Managerform/>} />
       <Route path='/userform' element={<UserForm/>} />
       <Route path='/userprofile' element={<UserProfile/>} />
-      </Route>
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
-
       <Route path='/list' element={<List />} />
       <Route path='/nav' element={<Nav2 />} />
       <Route path='/listuser' element={<UserList/>} />
@@ -80,22 +76,24 @@ function App() {
       <Route path='/sponserupdate' element={<SponserUpdate />} />
       <Route path='/alluserlist' element={<AlluserList />} />
       <Route path='/alluserupdate' element={<AlluserUpdate />} />
-      
       </Route>
       </Route>
+      </Route>
+    
+
       {/* for userlayout */}
       <Route element={<ArtistLayout />}>
-     
-      <Route path='/profiles' element={<Profiles />} />
-      <Route path='/profilesss' element={<Profile />} />
+      {/* <Route path='/profile' element={<Profiles />} /> */}
+      <Route path='/ap' element={<ArtistProfile />} />
       </Route>
       {/* for usersLayout */}
       <Route element={<UserLayout />}>
-     
       <Route path='/user' element={<User />} />
       </Route>
+     
     </Routes>
     </AnimatePresence>
+    {/* </TokenProvider> */}
     </AuthProvider>
     </>
   );

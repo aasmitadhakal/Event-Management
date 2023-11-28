@@ -13,12 +13,20 @@ function UserList() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     
-    const config = {
-        headers: {
-          'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-          'Content-Type': 'application/json'
-        }
-      };
+    // const config = {
+    //     headers: {
+    //       'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+    //       'Content-Type': 'application/json'
+    //     }
+    //   };
+    const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
+const config = {
+    headers: {
+        'Authorization': `Bearer ${token}`, // Use the Bearer token here
+        'Content-Type': 'application/json'
+    }
+};
     const getData =()=>{
             axios.get(`https://ayushkandel.pythonanywhere.com/normal-user/search/?search=${searchQuery}&page=${currentPage}`,config)
             .then(result=>{

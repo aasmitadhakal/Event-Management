@@ -39,7 +39,10 @@ const EventItem = () => {
     <>
       {loading?(
         <>
-        <div className='mt-18 flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
+        <div className='mt-24 flex items-center justify-center'>
+        <Skeleton variant="rectangular" width={800} height={300} />
+        </div>
+        <div className='mt-24 flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="20%" /> </div>
         <div  className='flex items-center justify-center'><Skeleton variant="text" sx={{ fontSize: '1rem' }} width="40%" /></div>
         <div className='grid grid-cols-1 md:grid-cols-3 mt-12  md:mx-36 mx-12'>
         <div>
@@ -96,7 +99,8 @@ const EventItem = () => {
       </Link>
     ))}
   </div>
-  <div className="flex justify-center mt-8">
+  {/* for pagination */}
+  <div className="flex justify-center mt-8  mb-4">
         <button
           onClick={() => setPage((prevPage) => Math.max(prevPage - 1, 1))}
           disabled={page === 1}

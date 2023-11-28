@@ -11,14 +11,14 @@ function ContentUpadate() {
   const[updated_by,setUpdatedBy]=useState('')
   const[status,setStatus]=useState('')
   const[id,setID]=useState(0)
-  const username = localStorage.getItem('emailinput') 
-  const userPassword = localStorage.getItem('passwordinput');
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
   const config = {
     headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`, // Use the Bearer token here
+        'Content-Type': 'application/json'
     }
-  };
+}
    
   const handleHeading =(e)=>{
     setHeading(e.target.value)

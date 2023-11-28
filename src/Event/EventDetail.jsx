@@ -32,25 +32,30 @@ const EventDetail = () => {
 
     if (loading) {
         return (
-            <>
+           <>
+           <div className='flex items-center justify-center mt-24'> <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} /></div>
+            <div className='grid md:grid-cols-2 grid-cols-1 mt-12 gap-x-8 md:mx-36 mx-12'>
+                <div>
+                    <Skeleton variant="rectangular" width={510} height={300} />
+                  
+                </div>
+                <div>
+                <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text"width={250} sx={{ fontSize: '1rem' }} />
+                <div className='flex my-8 gap-x-12'>
+                <Skeleton variant="circular" width={50} height={50} />
+                <Skeleton variant="circular" width={50} height={50} />
+                <Skeleton variant="circular" width={50} height={50} />
+                </div>
+                <div className='mt-12'>
+                <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />  
+                </div>
+                </div>
+               
+            </div>
             </>
-            // <div className='grid grid-cols-1 md:grid-cols-3 mt-12 md:mx-36 mx-12'>
-            //     <div>
-            //         <Skeleton variant="rectangular" width={310} height={150} />
-            //         <Skeleton width="40%" />
-            //         <Skeleton width="40%" />
-            //     </div>
-            //     <div>
-            //         <Skeleton variant="rectangular" width={310} height={150} />
-            //         <Skeleton width="40%" />
-            //         <Skeleton width="40%" />
-            //     </div>
-            //     <div>
-            //         <Skeleton variant="rectangular" width={310} height={150} />
-            //         <Skeleton width="40%" />
-            //         <Skeleton width="40%" />
-            //     </div>
-            // </div>
         );
     }
 
@@ -93,7 +98,7 @@ const EventDetail = () => {
     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Sponser:{event.sponser}</div>
  
     </div>
-   <div className='flex justify-end'><button className='bg-gray-400 hover:bg-purple-600 text-white px-8 py-1 rounded '>Book Now</button></div>
+   <div className='flex justify-end'><button className='hover:bg-purple-400 bg-purple-500 text-white px-8 py-1 rounded '>Book Now</button></div>
         </div>
         </div>
         

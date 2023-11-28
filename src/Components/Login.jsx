@@ -1,5 +1,5 @@
 import {motion,AnimatePresence} from 'framer-motion';
-import { useState ,useRef} from 'react';
+import { useState ,useRef,useContext} from 'react';
 import axios from '../api/axios';
 import { useNavigate,Link } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
@@ -34,17 +34,27 @@ const handleApi =(e)=>{
     .then((result) => {
       console.log(result.data.token);
       setAuth({ token: result?.data?.token });
-      sessionStorage.setItem("token", result.data.token);
+    ;
       console.log(result.data)
-      localStorage.setItem("emailinput",emailData.current.value)
-      localStorage.setItem("passwordinput",passwordData.current.value)
+      // localStorage.setItem("emailinput",emailData.current.value)
+      // localStorage.setItem("passwordinput",passwordData.current.value)
     
+
+      //
+      if (result?.data?.token && result.data.token.access) {
+        localStorage.setItem("accessToken", result.data.token.access);
+        console.log(result.data.token.access)
+      }
+
+      setAuth({ token: result?.data?.token });
+      sessionStorage.setItem("token", result.data.token);
+
       notify("sucess","sucessfully login");
       if(result.data.user_is_admin='true'){
         navigate("/profile",{replace:true});
         } 
         else if(result.data.user_is_admin='false'){
-        navigate("/",{replace:true})
+        navigate("/ap",{replace:true})
         }
     })
     .catch((error) => {

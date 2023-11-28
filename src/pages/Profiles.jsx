@@ -11,6 +11,7 @@ function Profiles() {
         name: '',
         username: '',
         email: '',
+        photo:'',
         isUser: false,
         isAdmin: false,
         isArtist: false
@@ -25,6 +26,8 @@ function Profiles() {
             const data = response.data;
             setFormData({
               name: data.name,
+              // photo: data.artist.photo,
+              photo:data.photo,
               username: data.username,
               email: data.email,
               isUser: data.is_user,
@@ -44,12 +47,14 @@ function Profiles() {
           [name]: value
         }));
       };
+      const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
       const config = {
         headers: {
-          'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-          'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`, // Use the Bearer token here
+            'Content-Type': 'application/json'
         }
-      };
+    }
       const handleSaveClick = (e) => {
         e.preventDefault()
         setIsEditing(false);
@@ -66,14 +71,15 @@ function Profiles() {
           <form className="bg-white shadow-lg rounded px-8 pt-3 pb-8 mb-4   ">
             <div className="mb-2 text-gray-800 font-semibold text-center mx-auto">
               <h3 className="  py-2 block text-gray-700  font-bold mb-2 text text-xl">
-               My Profiles
+               My Profiless
               </h3>
               <div className="flex justify-center w-full">
                 <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 ">
                   <a >
                     <img
+                      // src={'https://ayushkandel.pythonanywhere.com'+formData.photo}
+                      // alt={formData.photo}
                       src={img}
-                      alt=""
                       className="w-full h-full rounded-full z-0 object-cover"
                     />
                   </a>
@@ -210,3 +216,18 @@ function Profiles() {
 }
 
 export default Profiles
+
+{/* <tbody>
+<tr>
+  <td>{apiData.artist.contact}</td>
+  <td><img src={apiData.artist.photo} alt="Artist Photo"></img></td>
+  <td>{apiData.artist.user.name}</td>
+</tr>
+<tr>
+  <td>{apiData.normaluser.contact}</td>
+  <td>
+    <img src={apiData.normaluser.photo} alt="Normal User Photo" />
+  </td>
+  <td>{apiData.normaluser.gender}</td>
+</tr>
+</tbody> */}

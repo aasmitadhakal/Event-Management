@@ -1,6 +1,6 @@
 // import Slider from './Slider';
 import {Navbar,Header} from '.'
-import EventListPage from './EventListPage'
+import UpcomingEvent from '../Event/UpcomingEvent';
 import { motion } from 'framer-motion';
 import Card2 from './Card2'
 function Home (){
@@ -16,7 +16,7 @@ function Home (){
         <Header />
         {/* <Card2/> */}
         {/* <Slider /> */}
-        <EventListPage   />
+        <UpcomingEvent/>
         </motion.div>
         
         </>

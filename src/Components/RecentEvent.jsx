@@ -3,7 +3,7 @@ import img from '../assets/img4.jpg'
 import {AiOutlinePlus} from 'react-icons/ai'
 function RecentEvent() {
   return (
-    <div className='mb-10'>
+    <div className='mb-10 mt-24'>
         <div>
             <div className='z-[-1] relative flex mt-8 justify-center items-center '><img className='rounded w-2/3 h-84 ' src={img}></img></div>
             <div className=' z-[-1] absolute top-72 right-24 bg-white h-72 shadow-xl w-80 p-4'>

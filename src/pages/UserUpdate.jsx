@@ -12,7 +12,7 @@ function UserUpadate() {
   const [district, setDistrict] = useState('');
   const [municipality, setMunicipality] = useState('');
   const [ward, setWard] = useState('');
-  const [photo, setPhoto] = useState(null);
+  const [photo, setPhoto] = useState('');
   const [user, setUser] = useState('');
   const [id, setNormalUserID] = useState(0);
   // const username = localStorage.getItem('emailinput');
@@ -51,17 +51,25 @@ function UserUpadate() {
     setWard(e.target.value);
   };
 
+  // const handlePhoto = (e) => {
+  //   setPhoto(e.target.files[0]);
+  // };
   const handlePhoto = (e) => {
-    setPhoto(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setPhoto(selectedFile);
+    } else {
+      // Handle when no file is selected (optional)
+      console.error('No file selected.');
+    }
   };
-
   const handleUser = (e) => {
     setUser(e.target.value);
   };
 
   const handleAPI = (e) => {
     e.preventDefault();
-
+   
     const formData = new FormData(); // Move the creation of formData here
     formData.append('contact', contact);
     formData.append('gender', gender);
@@ -98,7 +106,7 @@ function UserUpadate() {
 
   return (
     <div className='mt-18 flex justify-center items-center p-12'>
-      <form className='p-6 border bg-white shadow-md rounded'>
+      <form className='p-6 border bg-white shadow-md rounded ' encType='multipart/form-data' >
         <div className='mt-4 text-2xl mb-8 font-medium text-purple-400 flex justify-center items-center'>
           Update Normal User
         </div>

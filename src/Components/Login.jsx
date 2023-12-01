@@ -53,7 +53,7 @@ const handleApi =(e)=>{
       if(result.data.user_is_admin='true'){
         navigate("/profile",{replace:true});
         } 
-       if(result.data.user_is_admin='false'){
+      else if(result.data.user_is_admin='false'){
         navigate("/ap",{replace:true})
         }
     })

@@ -76,7 +76,7 @@ const EventItem = () => {
       <Link to={`/event/${event.id}`} key={event.id}>
         <div className='shadow-xl bg-white mt-12 rounded-2xl'>
             
-          <img src={img} className='ml-4 h-64 w-72' />
+          <img src={event.photo} className='ml-4 h-64 w-72' />
           
           <div className='flex mt-2'>
             <p className='font-medium font-serif text-gray-400 pl-6 my-2 '>

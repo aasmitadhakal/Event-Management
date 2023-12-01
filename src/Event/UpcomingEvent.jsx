@@ -15,18 +15,20 @@ const UpcomingEvent = () => {
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const fetchEvents = async () => {
-        try {
-            const response = await axios.get(
-                'https://ayushkandel.pythonanywhere.com/event/choice/upcome/'
-               
-            );
-            setLoading(false);
-            setEvents(response.data);
-        } catch (error) {
-            console.error('Error fetching data: ', error);
-            setLoading(false);
-        }
-    };
+      try {
+          const response = await axios.get('https://ayushkandel.pythonanywhere.com/event/choice/upcome/');
+          setLoading(false);
+          if (Array.isArray(response.data)) {
+              setEvents(response.data);
+          } else {
+              // Handle the case where response.data is not an array
+              console.error('Data received is not an array:', response.data);
+          }
+      } catch (error) {
+          console.error('Error fetching data: ', error);
+          setLoading(false);
+      }
+  };
 
     useEffect(() => {
         fetchEvents();

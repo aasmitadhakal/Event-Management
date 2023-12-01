@@ -18,7 +18,7 @@ const UpcomingDetail = () => {
                 const response = await axios.get(
                     `https://ayushkandel.pythonanywhere.com/event/choice/upcome/`
                 ); // Replace with the actual API endpoint to fetch the specific event
-                const eventData = response.data.find((event) => event.id === parseInt(id));
+                const eventData = response.data.results.find((event) => event.id === parseInt(id));
                 setEvent(eventData);
                 setLoading(false);
             } catch (error) {
@@ -68,7 +68,7 @@ const UpcomingDetail = () => {
         <div className='my-24 '>
         <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Upcoming Event <span className='pl-2 text-purple-400'>Details</span></div>
         <div className='grid  md:grid-cols-2 shadow-xl md:mx-44 p-12'>
-        <div ><img src={img} className=" h-80  " alt=""></img></div>
+        <div ><img src={'https://ayushkandel.pythonanywhere.com'+event.photo} className=" h-80  " alt=""></img></div>
         <div>
             <div className='text-xl font-serif pl-8  my-2'><span className=''>{event.event_name}</span></div>
             <div className='text-gray-400 font-serif ml-8 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>

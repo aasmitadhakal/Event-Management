@@ -18,11 +18,11 @@ const UpcomingEvent = () => {
       try {
           const response = await axios.get('https://ayushkandel.pythonanywhere.com/event/choice/upcome/');
           setLoading(false);
-          if (Array.isArray(response.data)) {
-              setEvents(response.data);
+          if (Array.isArray(response.data.results)) {
+              setEvents(response.data.results);
           } else {
               // Handle the case where response.data is not an array
-              console.error('Data received is not an array:', response.data);
+              console.error('Data received is not an array:', response.data.results);
           }
       } catch (error) {
           console.error('Error fetching data: ', error);

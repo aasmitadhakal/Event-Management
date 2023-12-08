@@ -6,6 +6,7 @@ import { Skeleton } from '@mui/material';
 import img from '../assets/img.jpg'
 import { Navbar } from '../Components';
 import RecentEvent from '../Components/RecentEvent';
+import Fotter from '../Components/Fotter';
 const EventDetail = () => {
     let { id } = useParams(); // Extracting event ID from URL
     // You can fetch the event details using this ID from the API and display them here
@@ -136,6 +137,7 @@ const EventItem = () => {
   </div>
       )
       }
+      <Fotter/>
       </>
 );
 };

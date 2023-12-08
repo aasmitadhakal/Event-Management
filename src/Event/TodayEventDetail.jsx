@@ -7,9 +7,10 @@ import {AiOutlineFieldTime} from 'react-icons/ai';
 import {CiLocationOn} from 'react-icons/ci'
 import { Navbar } from '../Components';
 import UpcomingEvent from './UpcomingEvent';
-import img from '../assets/img.jpg';
-import Fotter from '../Components/Fotter'
-const EventDetail = () => {
+import img from '../assets/img.jpg'
+import Fotter from '../Components/Fotter';
+
+const TodayEventDetail = () => {
     const { id } = useParams(); // Extracting event ID from URL
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -17,11 +18,10 @@ const EventDetail = () => {
         const fetchEvent = async () => {
             try {
                 const response = await axios.get(
-                    `https://ayushkandel.pythonanywhere.com/event/search/?search=&page=1`
+                    `https://ayushkandel.pythonanywhere.com/event/choice/today/`
                 ); // Replace with the actual API endpoint to fetch the specific event
                 const eventData = response.data.results.find((event) => event.id === parseInt(id));
                 setEvent(eventData);
-                console.log(eventData);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -34,9 +34,9 @@ const EventDetail = () => {
 
     if (loading) {
         return (
-           <>
-           <div className='flex items-center justify-center mt-24'> <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} /></div>
-            <div className='grid md:grid-cols-2 grid-cols-1 mt-12 gap-x-8 md:mx-36 mx-12'>
+            <>
+             <div className='flex items-center justify-center mt-24'> <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} /></div>
+            <div className='grid grid-cols-2 mt-12 gap-x-8 md:mx-36 mx-12'>
                 <div>
                     <Skeleton variant="rectangular" width={510} height={300} />
                   
@@ -52,12 +52,14 @@ const EventDetail = () => {
                 <div className='mt-12'>
                 <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
                 <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
+                <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />
                 <Skeleton variant="text" width={250} sx={{ fontSize: '1rem' }} />  
                 </div>
                 </div>
                
             </div>
             </>
+          
         );
     }
 
@@ -66,12 +68,12 @@ const EventDetail = () => {
     <Navbar/>
     
         <div className='my-24 '>
-        <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Event <span className='pl-2 text-purple-400'>Details</span></div>
+        <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Today Event <span className='pl-2 text-purple-400'>Details</span></div>
         <div className='grid  md:grid-cols-2 shadow-xl md:mx-44 p-12'>
-        <div ><img src={event.photo} className=" h-80  " alt=""></img></div>
+        <div ><img src={'https://ayushkandel.pythonanywhere.com'+event.photo} className=" h-80  " alt=""></img></div>
         <div>
-            <div className='text-xl font-serif mx-12  my-2'><span className=''>{event.event_name}</span></div>
-            <div className='text-gray-400 font-serif ml-12 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>
+            <div className='text-xl font-serif pl-8  my-2'><span className=''>{event.event_name}</span></div>
+            <div className='text-gray-400 font-serif ml-8 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>
             <div className='bg-white  grid grid-cols-3 gap-x-4 mt-4 mx-4 border-b '>
     {/* for date */}
     <div className='mb-2'>
@@ -104,14 +106,14 @@ const EventDetail = () => {
         </div>
         </div>
         
-        <UpcomingEvent/>
-       
+      <UpcomingEvent/>
+    
     </div>
     <Fotter/>
     </>
     );
 };
 
-export default EventDetail;
+export default TodayEventDetail;
 
     

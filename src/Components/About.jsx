@@ -4,7 +4,7 @@ function About() {
   return (
     <div>
         <Navbar />
-        About
+        <p className='mt-24'>Blog</p>
 
     </div>
   )

@@ -8,6 +8,7 @@ import {CiLocationOn} from 'react-icons/ci'
 import { Navbar } from '../Components';
 import UpcomingEvent from './UpcomingEvent';
 import img from '../assets/img.jpg'
+import Fotter from '../Components/Fotter';
 const UpcomingDetail = () => {
     const { id } = useParams(); // Extracting event ID from URL
     const [event, setEvent] = useState(null);
@@ -105,7 +106,9 @@ const UpcomingDetail = () => {
         </div>
         
       <UpcomingEvent/>
+    
     </div>
+    <Fotter/>
     </>
     );
 };

@@ -12,7 +12,8 @@ function UserUpadate() {
   const [district, setDistrict] = useState('');
   const [municipality, setMunicipality] = useState('');
   const [ward, setWard] = useState('');
-  const [photo, setPhoto] = useState('');
+
+  const[photo,setPhoto]=useState([])
   const [user, setUser] = useState('');
   const [id, setNormalUserID] = useState(0);
   // const username = localStorage.getItem('emailinput');
@@ -50,27 +51,17 @@ function UserUpadate() {
   const handleWard = (e) => {
     setWard(e.target.value);
   };
-
-  // const handlePhoto = (e) => {
-  //   setPhoto(e.target.files[0]);
-  // };
-  const handlePhoto = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      setPhoto(selectedFile);
-    } else {
-      // Handle when no file is selected (optional)
-      console.error('No file selected.');
-    }
-  };
   const handleUser = (e) => {
     setUser(e.target.value);
   };
+  const handlePhoto =(e)=>{
+    setPhoto(e.target.files[0])
+}
 
   const handleAPI = (e) => {
     e.preventDefault();
    
-    const formData = new FormData(); // Move the creation of formData here
+    const formData = new FormData();
     formData.append('contact', contact);
     formData.append('gender', gender);
     formData.append('province', province);
@@ -84,6 +75,7 @@ function UserUpadate() {
       .put(`/normal-user/update/${id}/`, formData, config)
       .then((result) => {
         console.log(result.data);
+        console.log(e.target.file)
         notify('success', 'Data updated successfully');
         navigate('/listuser', { replace: true });
       })
@@ -100,13 +92,13 @@ function UserUpadate() {
     setDistrict(localStorage.getItem('normaluserdistrict'));
     setMunicipality(localStorage.getItem('normalusermunicipality'));
     setWard(localStorage.getItem('normaluserward'));
-    setPhoto(localStorage.getItem('normaluserphoto'));
+    // setSelectedPhoto(localStorage.getItem('normaluserphoto'))
     setUser(localStorage.getItem('normaluseruser'));
   }, []);
 
   return (
     <div className='mt-18 flex justify-center items-center p-12'>
-      <form className='p-6 border bg-white shadow-md rounded ' encType='multipart/form-data' >
+      <form className='p-6 border bg-white shadow-md rounded '  >
         <div className='mt-4 text-2xl mb-8 font-medium text-purple-400 flex justify-center items-center'>
           Update Normal User
         </div>
@@ -199,17 +191,17 @@ function UserUpadate() {
               />
             </div>
             <div className='relative mx-10'>
-              <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
+              {/* <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
                 Photo
-              </label>
+              </label> */}
               <input
-                className='mb-8 pt-6 flex justify-center items-center py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                id='photo'
-                type='file'
-                name='photo'
-                onChange={handlePhoto}
-                accept='image/*'
-              />
+                  className="mt-1 sm:text-sm border-gray-300 rounded-md mb-4 pt-6 flex justify-center items-center py-1 transition-colors"
+                  id="photo"
+                  type="file"
+                  name="photo"
+                  onChange={handlePhoto}
+                  accept="image/*"
+                />
             </div>
             <div className='relative mb-4 mx-12'>
               <label htmlFor='user' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>

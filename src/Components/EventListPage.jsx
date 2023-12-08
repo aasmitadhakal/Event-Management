@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EventList from './EventList';
 import { useNavigate } from 'react-router-dom';
+import Fotter from './Fotter'
 import { Skeleton } from '@mui/material';
 const EventListPage = () => {
   const [events, setEvents] = useState([]);
@@ -63,6 +64,7 @@ const EventListPage = () => {
         ) : (
       
       <EventList events={events} onViewMoreClick={onViewMoreClick} searchQuery={searchQuery} currentPage={currentPage} />
+     
         )}
     </div>
   );

@@ -13,6 +13,7 @@ import {BsFillHeartFill} from 'react-icons/bs'
 import img from '../assets/event2.jpg'
 import { motion } from "framer-motion";
 import { Button, Skeleton } from "@mui/material"
+
 const EventList = ({ events, onViewMoreClick }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -176,6 +177,7 @@ return (
      {renderPagination()}
      </div>
     </motion.div>
+   
     </>
   );
 };

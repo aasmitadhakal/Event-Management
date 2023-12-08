@@ -8,9 +8,7 @@ import img from '../assets/img8.png'
 import img1 from '../assets/img6.png'
 import img2 from '../assets/img7.png'
 import img3 from '../assets/img5.png'
-import img4 from '../assets/img2.png'
-import img5 from '../assets/img4 (1).png'
-import img6 from '../assets/img4 (2).png'
+
 function Slider() {
   return (
     <>
@@ -55,16 +53,7 @@ function Slider() {
         className="mySwiper ,z-[-1]"
       >
         <SwiperSlide><img src={img} alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img1}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img2}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img3}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img4}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img5}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img6} alt=""className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img4}alt="" className='z-[-1]'></img></SwiperSlide>
-        <SwiperSlide><img src={img}alt="" className='z-[-1]'></img></SwiperSlide>
-        
-
+       
       </Swiper>
       </div>
       <div className="mt-12"></div>

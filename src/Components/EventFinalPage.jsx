@@ -5,6 +5,7 @@ import EventList from './EventList';
 import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '@mui/material';
 import Navbar from './Navbar';
+
 const EventFinalPage = () => {
   const [events, setEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -100,6 +101,7 @@ const EventFinalPage = () => {
           Next
         </button>
       </div>
+    
       </>
    
         )}

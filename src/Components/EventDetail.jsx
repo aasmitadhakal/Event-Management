@@ -14,6 +14,7 @@ import {BsFillHeartFill} from 'react-icons/bs'
 import img from '../assets/event2.jpg'
 import { Skeleton } from '@mui/material';
 import { motion } from "framer-motion"
+
 const EventDetail = ({ event }) => {
  
   const cardVariants = {
@@ -72,7 +73,9 @@ const EventDetail = ({ event }) => {
         </div>
       </div>
     </div> 
+   
   </motion.div>
+  {/* <Fotter/> */}
   </>
   );
 };

@@ -9,6 +9,7 @@ import Nav2 from './Components/Nav2';
 import { AuthProvider } from './contexs/auth';
 import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,} from './pages';
 import Put from './Components/Put';
+import Blog from './pages/Blog';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
 import ContentPublish from './pages/ContentPublish';
@@ -25,6 +26,7 @@ import EventDetail from './Event/EventDetail';
 import EventItem from './Event/EventItem';
 import UpcomingDetail from './Event/UpcomingDetail';
 import { TokenProvider } from './Authorization/TokenContext';
+import TodayEventDetail from './Event/TodayEventDetail';
 
 function App() {
   const location = useLocation();
@@ -40,9 +42,11 @@ function App() {
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
+      <Route path='/blog' element={<Blog />} />
       <Route path='/event' element={<EventItem />} />
       <Route path='/event/:id' element={<EventDetail />} />
       <Route path='/upcomingevent/:id' element={<UpcomingDetail />} />
+      <Route path='/todayeventdetail/:id' element={<TodayEventDetail />} />
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />

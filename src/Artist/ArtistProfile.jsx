@@ -3,7 +3,8 @@ import axios from 'axios';
 import {MdEmail} from 'react-icons/md'
  import {AiTwotoneEdit} from 'react-icons/ai'
 import {BsFillTelephoneFill} from 'react-icons/bs'
-import {IoLocationSharp} from 'react-icons/io5'
+import {IoLocationSharp} from 'react-icons/io5';
+import notify from "../utlis/notifier";
 function ArtistProfile() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -13,7 +14,7 @@ function ArtistProfile() {
         name: '',
         username: '',
         email: '',
-        photo:'',
+         photo:'',
         contact:'',
         ward:'',
         gender:'',
@@ -31,13 +32,13 @@ function ArtistProfile() {
         event.preventDefault();
         setIsEditing(true);
       };
-      const handlePhotoChange = (event) => {
-        const photo = event.target.files[0];
-        setFormData(prevData => ({
-          ...prevData,
-          photo: photo,
-        }));
-      };
+      // const handlePhotoChange = (event) => {
+      //   const photo = event.target.files[0];
+      //   setFormData(prevData => ({
+      //     ...prevData,
+      //     photo: photo,
+      //   }));
+      // };
       
       
       useEffect(() => {
@@ -62,7 +63,7 @@ function ArtistProfile() {
             setFormData({
               id: data.id,
               name: data.name,
-              photo: data.artist.photo,
+               photo: data.artist.photo,
               username: data.username,
               district: data.artist.district,
               email: data.email,
@@ -104,18 +105,28 @@ function ArtistProfile() {
           }
       }
         const formDataToSend = new FormData();
-        formDataToSend.append('photo', formData.photo);
+        // formDataToSend.append('photo', formData.photo);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('username', formData.username);
         formDataToSend.append('contact',formData.contact);
         formDataToSend.append('gender', formData.gender); 
+        formDataToSend.append('email', formData.email); 
+        formDataToSend.append('performed_in', formData.performed_in); 
+        formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
+        formDataToSend.append('province', formData.province); 
+        formDataToSend.append('ward', formData.ward);
+        formDataToSend.append('isUser', formData.isUser); 
+        formDataToSend.append('isAdmin', formData.isAdmin); 
+        formDataToSend.append('isArtist', formData.isArtist); 
         formDataToSend.append('municipality', formData.municipality); 
         formDataToSend.append('district', formData.district);
         formDataToSend.append('description', formData.description);  
         axios
-      .patch(`https://ayushkandel.pythonanywhere.com/user-profile-update/${formData.id}/`, formDataToSend, config)
-      .then((response) => {
-        // Handle the response if needed
+      .put('https://ayushkandel.pythonanywhere.com/login-user-profile-update/artist/', formDataToSend,config)
+      .then((result) => {
+        // console.log('Request successful:', result.data);
+        notify("success","data updated successfully")
+        console.log(formData.name);
         setIsEditing(false);
       })
       .catch((error) => {
@@ -134,7 +145,7 @@ function ArtistProfile() {
     <>
     <div>
     
-    <div className=" bg-transparent w-full  bg-gray-300 ">
+    <div className=" bg-transparent w-full mt-8 bg-gray-300 ">
           <form className="bg-white shadow-xl mx-24 ">
             <div className="mb-2 text-gray-800 font-semibold  ">
              {/* for upper section */}
@@ -153,13 +164,13 @@ function ArtistProfile() {
                 >
                   Upload
                 </span>
-                <input
+                {/* <input
                   id="fileInput"
                   type="file"
                   accept="image/*"
                   className="hidden"
                   onChange={handlePhotoChange}
-                />
+                /> */}
               </div>
               <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>
@@ -302,7 +313,7 @@ function ArtistProfile() {
                   value={formData.email}  
                   onChange={handleChange}
                   // disabled={!isEditing}
-                  readOnly={true}
+                  readOnly={!isEditing}
                 />
 
               </div>
@@ -352,7 +363,7 @@ function ArtistProfile() {
                   value={formData.district}  
                   onChange={handleChange}
                   // disabled={!isEditing}
-                  readOnly={true}
+                  readOnly={!isEditing}
                 />
 
               </div>
@@ -372,7 +383,7 @@ function ArtistProfile() {
                   value={formData.municipality}  
                   onChange={handleChange}
                   // disabled={!isEditing}
-                  readOnly={true}
+                  readOnly={!isEditing}
                 />
               </div>
               {/* for descrition */}

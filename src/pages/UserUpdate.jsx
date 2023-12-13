@@ -13,7 +13,7 @@ function UserUpadate() {
   const [municipality, setMunicipality] = useState('');
   const [ward, setWard] = useState('');
 
-  const[photo,setPhoto]=useState([])
+  const[photo,setPhoto]=useState(null);
   const [user, setUser] = useState('');
   const [id, setNormalUserID] = useState(0);
   // const username = localStorage.getItem('emailinput');
@@ -54,13 +54,17 @@ function UserUpadate() {
   const handleUser = (e) => {
     setUser(e.target.value);
   };
-  const handlePhoto =(e)=>{
-    setPhoto(e.target.files[0])
-}
+  const handlePhoto = (e) => {
+    const file = e.target.files[0];
+    console.log('Selected file:', file);
+    setPhoto(file);
+  };
 
   const handleAPI = (e) => {
     e.preventDefault();
-   
+  
+    console.log('Form submitted!');
+  
     const formData = new FormData();
     formData.append('contact', contact);
     formData.append('gender', gender);
@@ -69,18 +73,23 @@ function UserUpadate() {
     formData.append('municipality', municipality);
     formData.append('ward', ward);
     formData.append('user', user);
-    formData.append('photo', photo);
-
+  
+    console.log('Photo state:', photo);
+    if (photo) {
+      formData.append('photo', photo);
+    }
     axios
       .put(`/normal-user/update/${id}/`, formData, config)
       .then((result) => {
-        console.log(result.data);
-        console.log(e.target.file)
+        
+        console.log('Request successful:', result.data);
         notify('success', 'Data updated successfully');
         navigate('/listuser', { replace: true });
       })
       .catch((error) => {
-        console.log(error);
+        // console.log('Error occurred:', error);
+        console.log('Server error:', error.response.data);
+        notify('error', 'Failed to update data');
       });
   };
 
@@ -92,13 +101,13 @@ function UserUpadate() {
     setDistrict(localStorage.getItem('normaluserdistrict'));
     setMunicipality(localStorage.getItem('normalusermunicipality'));
     setWard(localStorage.getItem('normaluserward'));
-    // setSelectedPhoto(localStorage.getItem('normaluserphoto'))
+     setPhoto(localStorage.getItem('normaluserphoto'))
     setUser(localStorage.getItem('normaluseruser'));
   }, []);
 
   return (
     <div className='mt-18 flex justify-center items-center p-12'>
-      <form className='p-6 border bg-white shadow-md rounded '  >
+      <form className='p-6 border bg-white shadow-md rounded ' encType='multipart/form-data' >
         <div className='mt-4 text-2xl mb-8 font-medium text-purple-400 flex justify-center items-center'>
           Update Normal User
         </div>
@@ -191,9 +200,9 @@ function UserUpadate() {
               />
             </div>
             <div className='relative mx-10'>
-              {/* <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
+               <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
                 Photo
-              </label> */}
+              </label> 
               <input
                   className="mt-1 sm:text-sm border-gray-300 rounded-md mb-4 pt-6 flex justify-center items-center py-1 transition-colors"
                   id="photo"

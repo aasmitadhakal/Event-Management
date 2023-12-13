@@ -1,7 +1,7 @@
 import Nav2 from "../Components/Nav2";
 import { Outlet } from "react-router-dom";
 import { useState } from "react";
-import ArtistSidebar from "../Components/ArtistSidebar";
+import ArtistSidebar from "../Artist/ArtistSidebar";
 
 const  ArtistLayout=({})=>{
     const [sidebarOpen, setSidebarOpen] = useState(true)

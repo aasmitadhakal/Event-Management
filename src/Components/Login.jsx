@@ -50,11 +50,15 @@ const handleApi =(e)=>{
       sessionStorage.setItem("token", result.data.token);
 
       notify("sucess","sucessfully login");
-      if(result.data.user_is_admin===true){
-        navigate("/profile",{replace:true});
-        } 
-      else if(result.data.user_is_admin===false){
-        navigate("/ap",{replace:true})
+      if(result.data.nrmuser===true){
+        navigate("/user",{replace:true});
+
+        } if(result.data.user_is_admin===true){
+          navigate("/profile",{replace:true});
+          } 
+        
+       if(result.data.artist===true){
+        navigate("/artistprofile",{replace:true})
         }
     })
     .catch((error) => {

@@ -53,71 +53,112 @@ function ContentCreate() {
     <form onSubmit={handleAPi}
      className='   p-6 border bg-white shadow-md rounded'>
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Content</div>
-{/* for heading */}
- <div className='relative mb-8  mx-12 '>
- <label htmlFor="heading" className="absolute   text-gray-600 cursor-text ">Heading</label>
-<input
-className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
- id="heading"
- type="text"
- name="heading"
- value={heading}
- onChange={handleHeading}
-/>
+        {/* for heading */}
+        <div className='relative mb-8  mx-12 '>
+        <label htmlFor="heading" className="absolute   text-gray-600 cursor-text ">Heading</label>
+        <input
+        className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
+        id="heading"
+        type="text"
+        name="heading"
+        value={heading}
+        onChange={handleHeading}
+        />
 
-</div>
-{/* for content */}
-<div className='relative mb-4   mx-12  '> 
-<label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
-<Editor
- className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
- id="content"
- type="text"
- name="content"
- value={content}
- onEditorChange={(value) => setContent(value)}
-// onChange={handleContent}
-/>   
-</div>
-{/* for updated_by */}
-<div className='relative mb-4   mx-12  '> 
-<label htmlFor="updatedby" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
-<input
-className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-id="updated_by"
-type="text"
-name="updated_by"
-value={updated_by}
-onChange={handleUpadedBy}
-/>   
-</div>
-{/* for Status */}
-<div className='relative mb-4   mx-12  '> 
-<label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
-{/* <input
-className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-id="status"
-type="text"
-name="status"
-value={status}
-onChange={handleStatus}
-/>    */}
-<select
-value={status}
-onChange={handleStatus}
- className='flex pt-6 text-gray-800 justify-center items-center border-b py-1 px-10 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'>
-  <option className='text-gray-400 ' value='Publish' >Publish</option>
-  <option className='text-gray-400 ' value='Draft' >Draft</option>
-</select>
-</div>
+        </div>
+        {/* for content */}
+        {/* <div className='relative mb-4   mx-12  '> 
+        <label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
+        <Editor
+        className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        id="content"
+        type="text"
+        name="content"
+        value={content}
+        onEditorChange={(value) => setContent(value)}
+        // onChange={handleContent}
+        />   
+        </div> */}
+         <div className='relative mb-4 mx-12'>
+          <label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text">Content</label>
+          <Editor
+            initialValue="<p>This is the initial content of the editor</p>"
+            init={{
+              height: 500,
+              menubar: true,
+              plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+              ],
+              toolbar:
+                'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help | image'
+              ,
+              images_upload_handler: function (blobInfo, success, failure) {
+                // Implement your image upload logic here
+                // Example using fetch:
+                fetch('YOUR_IMAGE_UPLOAD_ENDPOINT', {
+                  method: 'POST',
+                  body: blobInfo.blob(),
+                })
+                  .then(response => response.json())
+                  .then(result => {
+                    // Handle successful image upload
+                    success(result.url); // Pass the URL of the uploaded image to TinyMCE
+                  })
+                  .catch(error => {
+                    // Handle failed image upload
+                    failure('Error uploading image'); // Inform TinyMCE about the failure
+                  });
+              },
+            }}
+            value={content}
+            onEditorChange={(value) => setContent(value)}
+          />
+        </div>
 
-{/* for buttom */}
-<div className=''>
-<button className='bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4  px-8 mx-10 py-2  rounded-2xl'>Create Content</button>
-</div>
-</form>
-</div>
-  )
-}
+        {/* for updated_by */}
+        <div className='relative mb-4   mx-12  '> 
+        <label htmlFor="updatedby" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
+        <input
+        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        id="updated_by"
+        type="text"
+        name="updated_by"
+        value={updated_by}
+        onChange={handleUpadedBy}
+        />   
+        </div>
+        {/* for Status */}
+        <div className='relative mb-4   mx-12  '> 
+        <label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
+        {/* <input
+        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        id="status"
+        type="text"
+        name="status"
+        value={status}
+        onChange={handleStatus}
+        />    */}
+        <select
+        value={status}
+        onChange={handleStatus}
+        className='flex pt-6 text-gray-800 justify-center items-center border-b py-1 px-10 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'>
+          <option className='text-gray-400 ' value='Publish' >Publish</option>
+          <option className='text-gray-400 ' value='Draft' >Draft</option>
+        </select>
+        </div>
 
-export default ContentCreate
+        {/* for buttom */}
+        <div className=''>
+        <button className='bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4  px-8 mx-10 py-2  rounded-2xl'>Create Content</button>
+        </div>
+        </form>
+        </div>
+          )
+        }
+
+        export default ContentCreate

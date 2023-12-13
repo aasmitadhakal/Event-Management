@@ -6,6 +6,9 @@ import PublicLayout from './layout/PublicLayout';
 import Protected from './utlis/Protected';
 import List from './Components/List';
 import Nav2 from './Components/Nav2';
+import UserChangePassword from './user/UserChangePassword';
+import ArtistChangePassword from './Artist/ArtistChangePassword';
+import UserProfile from './user/UserProfile';
 import { AuthProvider } from './contexs/auth';
 import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,} from './pages';
 import Put from './Components/Put';
@@ -21,13 +24,12 @@ import UsersForm from './Components/UsersForm';
 import AlluserUpdate from './pages/AlluserUpdate';
 import Page from './Components/Page';
 import { AnimatePresence } from 'framer-motion';
-import UserProfile from './Components/UserProfile';
 import EventDetail from './Event/EventDetail';
 import EventItem from './Event/EventItem';
 import UpcomingDetail from './Event/UpcomingDetail';
 import { TokenProvider } from './Authorization/TokenContext';
 import TodayEventDetail from './Event/TodayEventDetail';
-
+import YourComponent from './Components/Update';
 function App() {
   const location = useLocation();
   return (
@@ -59,6 +61,7 @@ function App() {
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
       <Route path='/list' element={<List />} />
+      <Route path='/put' element={<YourComponent />} />
       <Route path='/nav' element={<Nav2 />} />
       <Route path='/listuser' element={<UserList/>} />
       <Route path='/adduser' element={<UserCreate/>} />
@@ -82,19 +85,23 @@ function App() {
       <Route path='/alluserupdate' element={<AlluserUpdate />} />
       </Route>
       </Route>
-      </Route>
-    
-
-      {/* for userlayout */}
+      {/* for artistlayout */}
+      <Route element={<Protected />}>
       <Route element={<ArtistLayout />}>
-      {/* <Route path='/profile' element={<Profiles />} /> */}
-      <Route path='/ap' element={<ArtistProfile />} />
-      </Route>
-      {/* for usersLayout */}
-      <Route element={<UserLayout />}>
-      <Route path='/user' element={<User />} />
-      </Route>
      
+      <Route path='/artistprofile' element={<ArtistProfile />} />
+      <Route path='/artistchangepassword' element={<ArtistChangePassword />} />
+      </Route>
+      </Route>
+      </Route>
+  
+      {/* for usersLayout */}
+      <Route element={<Protected />}>
+      <Route element={<UserLayout />}>
+      <Route path='/user' element={<UserProfile />} />
+      <Route path='/userchangepassword' element={<UserChangePassword />} />
+      </Route>
+     </Route>
     </Routes>
     </AnimatePresence>
     {/* </TokenProvider> */}

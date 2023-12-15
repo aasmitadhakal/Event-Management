@@ -1,78 +1,70 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import notify from '../utlis/notifier';
-import { ToastContainer } from 'react-toastify';
-function ArtistCreate() {
-  const [data, setData] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  useEffect(() => {
-    fetchData();
-  }, [currentPage]);
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://ayushkandel.pythonanywhere.com/sponser/list/?page=${currentPage}`
-      );
-      const { results, count } = response.data;
-      setData(results);
-      setTotalPages(Math.ceil(count / 10)); // Assuming 10 items per page
-    } catch (error) {
-      // console.error('Error fetching API data:', error);
-    
-    }
-  };
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+import React, { useState } from 'react';
+import axios from '../api/axios';
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
+
+const ArtistCreate = () => {
+  const [formData, setFormData] = useState({
+    id: '',
+    content: '',
+    updated_by: '',
+    status: 'Draft',
+    heading: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-  return (
-    <div>
-    <table className="min-w-full">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Sponsor Type</th>
-          <th>Name</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item) => (
-          <tr key={item.id}>
-            <td>{item.id}</td>
-            <td>{item.sponser_type}</td>
-            <td>{item.name}</td>
-            <td>{item.amount}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-    <div className="flex justify-center mt-4">
-      <button
-        className="px-4 py-2 mr-2 bg-blue-500 text-white rounded"
-        onClick={handlePrevPage}
-      >
-        Previous
-      </button>
-      <button
-        className="px-4 py-2 bg-blue-500 text-white rounded"
-        onClick={handleNextPage}
-      >
-        Next
-      </button>
-      
-    </div>
-    <ToastContainer />
-  </div>
-  )
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
+  const config = {
+    headers: {
+        'Authorization': `Bearer ${token}`, // Use the Bearer token here
+        'Content-Type': 'application/json'
+    }
 }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-export default ArtistCreate
+    try {
+      const apiUrl = '/content-management/create/'; // Replace with your API endpoint
+      const response = await axios.post(apiUrl, formData,config);
+      console.log('POST request successful:', response.data);
+      // Handle success, update UI, etc.
+    } catch (error) {
+      console.error('Error making POST request:', error);
+      // Handle error, show error message, etc.
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>ID:</label>
+        <input type="text" name="id" value={formData.id} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Content:</label>
+        <input type="text" name="content" value={formData.content} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Updated By:</label>
+        <input type="text" name="updated_by" value={formData.updated_by} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Heading:</label>
+        <input type="text" name="heading" value={formData.heading} onChange={handleChange} />
+      </div>
+      <div>
+        <label>Status:</label>
+        <select name="status" value={formData.status} onChange={handleChange}>
+          <option value="Draft">Draft</option>
+          <option value="Publish">Publish</option>
+        </select>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+export default ArtistCreate;

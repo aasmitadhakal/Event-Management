@@ -67,7 +67,7 @@ function App() {
       <Route path='/adduser' element={<UserCreate/>} />
       <Route path='/updateuser' element={<UserUpdate/>} />
       <Route path='/alist' element={<ArtistList />} />
-      <Route path='/aadd' element={<ArtistCreate/>} />
+      <Route path='/trail' element={<ArtistCreate/>} />
       <Route path='/aupdate' element={<ArtistUpdate/>} />
       <Route path='/change' element={<ChangePassword />} />
       <Route path='/cdraft' element={<ContentDraft />} />
@@ -76,7 +76,7 @@ function App() {
       <Route path='/eventadd' element={<EventCreate />} />
       <Route path='/eventlist' element={<EventList />} />
       <Route path='/contentlist' element={<ContentList />} />
-      <Route path='/put' element={<ContentUpadate />} />
+      <Route path='/contentupdate' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />
       <Route path='/sponseradd' element={<SponserCreate/>} />
       <Route path='/sponserlist' element={<SponserList />} />

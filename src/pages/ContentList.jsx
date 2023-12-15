@@ -181,11 +181,13 @@ function ContentList() {
           <tr className="bg-white border-r text-center border-b text-sm text-gray-600" key={item.id}>
             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.heading}</td>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.content}</td>
+            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>
+                <div dangerouslySetInnerHTML={{ __html: item.content }} />
+              </td>
             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.updated_by}</td>
             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.status}</td>
             <td>
-              <Link to ="/put">
+              <Link to ="/contentupdate">
               <button
                 onClick={(e)=>settoLocalstorage(
                   item.id,

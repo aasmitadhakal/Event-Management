@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { useState ,useRef} from 'react'
 import axios from '../api/axios'
 import { Editor } from '@tinymce/tinymce-react'
+
+
 import { useNavigate } from 'react-router-dom'
 function ContentCreate() {
   const navigate =useNavigate()
@@ -8,33 +10,42 @@ function ContentCreate() {
   const[content,setContent]=useState('')
   const[updated_by,setUpdatedBy]=useState('')
   const[status,setStatus]=useState('Publish')
-  const username = localStorage.getItem('emailinput') 
-  const userPassword = localStorage.getItem('passwordinput');
+  // const username = localStorage.getItem('emailinput') 
+  // const userPassword = localStorage.getItem('passwordinput');
   const handleHeading =(e)=>{
     setHeading(e.target.value)
   }
+ 
+  // const handleUpadedBy =(e)=>{
+  //   setUpdatedBy(e.target.value)
+  // }
   const handleContent =(e)=>{
     setContent(e.target.value)
-  }
-  const handleUpadedBy =(e)=>{
-    setUpdatedBy(e.target.value)
   }
   const handleStatus =(e)=>{
     setStatus(e.target.value)
   }
+  // const config = {
+  //   headers: {
+  //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+  //     'Content-Type': 'application/json'
+  //   }
+  // };
+  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+
   const config = {
     headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'application/json'
+        'Authorization': `Bearer ${token}`, // Use the Bearer token here
+        'Content-Type': 'application/json'
     }
-  };
+}
   const handleAPi =(e)=>{
     e.preventDefault();
     axios
     .post("/content-management/create/", {
      heading : heading,
      content: content,
-     updated_by: updated_by,
+     
      status:status,
     },config)
     .then((result) => {
@@ -48,6 +59,61 @@ function ContentCreate() {
       // setLoading(false);
     });
   }
+  const editorRef = useRef(null);
+  const log = () => {
+    if (editorRef.current) {
+      console.log(editorRef.current.getContent());
+    }
+  };
+  //for editor
+  const handleImageUpload = (blobInfo, progress, failure) => {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "http://localhost:8000/server.php", true);
+
+      const formData = new FormData();
+      formData.append("file", blobInfo.blob(), blobInfo.filename());
+      //console.log(blobInfo.filename())
+
+      xhr.upload.onprogress = (e) => {
+        progress((e.loaded / e.total) * 100);
+        if (progress && typeof progress === "function") {
+          const percent = 0;
+          progress(percent);
+        }
+      };
+
+      xhr.onload = () => {
+        if (xhr.status === 403) {
+          reject({ message: "HTTP Error: " + xhr.status, remove: true });
+          return;
+        }
+
+        if (xhr.status < 200 || xhr.status >= 300) {
+          reject("HTTP Error: " + xhr.status);
+          return;
+        }
+
+        const json = JSON.parse(xhr.responseText);
+
+        if (!json || typeof json.location != "string") {
+          reject("Invalid JSON: " + xhr.responseText);
+          return;
+        }
+
+        resolve(json.location);
+      };
+
+      xhr.onerror = () => {
+        reject({ message: "Image upload failed", remove: true });
+        if (failure && typeof failure === "function") {
+          failure("Image upload failed");
+        }
+      };
+
+      xhr.send(formData);
+    });
+  };
   return (
     <div className='  mt-18 flex justify-center items-center p-12 '>
     <form onSubmit={handleAPi}
@@ -59,79 +125,60 @@ function ContentCreate() {
         <input
         className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
         id="heading"
-        type="text"
+        type="number"
         name="heading"
         value={heading}
         onChange={handleHeading}
         />
 
         </div>
-        {/* for content */}
-        {/* <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Content</label>
-        <Editor
-        className="h-64 w-64  flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="content"
-        type="text"
+       
+         <div className='relative mb-4 mx-12'>
+          
+       
+           <Editor
+      
+        apiKey="no-api-key"
+        onInit={(evt, editor) => editorRef.current = editor}
+        initialValue="<p>Try adding an image with image upload!</p>"
         name="content"
         value={content}
         onEditorChange={(value) => setContent(value)}
-        // onChange={handleContent}
-        />   
-        </div> */}
-         <div className='relative mb-4 mx-12'>
-          <label htmlFor="content" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text">Content</label>
-          <Editor
-            initialValue="<p>This is the initial content of the editor</p>"
-            init={{
-              height: 500,
-              menubar: true,
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-              ],
-              toolbar:
-                'undo redo | formatselect | ' +
-                'bold italic backcolor | alignleft aligncenter ' +
-                'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | help | image'
-              ,
-              images_upload_handler: function (blobInfo, success, failure) {
-                // Implement your image upload logic here
-                // Example using fetch:
-                fetch('YOUR_IMAGE_UPLOAD_ENDPOINT', {
-                  method: 'POST',
-                  body: blobInfo.blob(),
-                })
-                  .then(response => response.json())
-                  .then(result => {
-                    // Handle successful image upload
-                    success(result.url); // Pass the URL of the uploaded image to TinyMCE
-                  })
-                  .catch(error => {
-                    // Handle failed image upload
-                    failure('Error uploading image'); // Inform TinyMCE about the failure
-                  });
-              },
-            }}
-            value={content}
-            onEditorChange={(value) => setContent(value)}
-          />
-        </div>
-
-        {/* for updated_by */}
-        <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="updatedby" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated_by</label>
-        <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="updated_by"
-        type="text"
-        name="updated_by"
-        value={updated_by}
-        onChange={handleUpadedBy}
-        />   
-        </div>
+        init={{
+          height: 500,
+          plugins: [
+            "advlist",
+            "autolink",
+            "lists",
+            "link",
+            "image",
+            "charmap",
+            "preview",
+            "anchor",
+            "searchreplace",
+            "visualblocks",
+            "code",
+            "fullscreen",
+            "insertdatetime",
+            "media",
+            "table",
+            "code",
+            "help",
+            "wordcount",
+            
+          ],
+          toolbar:
+            "undo redo | styles | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+          images_upload_url: "http://localhost:8000/server.php",
+          automatic_uploads: true,
+          images_reuse_filename: true,
+          images_upload_handler: handleImageUpload,
+        }}
+          
+  
+      />
+       </div> 
+     
         {/* for Status */}
         <div className='relative mb-4   mx-12  '> 
         <label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>

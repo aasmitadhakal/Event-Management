@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 const  Page = () => {
   const { id } = useParams();
-  const [pageContent, setPageContent] = useState(null);
+  const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
     // Make an Axios request to fetch the page content based on the 'id' parameter
     axios.get(`https://ayushkandel.pythonanywhere.com/event-management/${id}/`)
       .then((response) => {
-        setPageContent(response.data[0]);
+        setApiData(response.data);
+        
       })
       .catch((error) => {
         console.error('Error fetching page content:', error);
@@ -20,13 +21,26 @@ const  Page = () => {
   return (
     <div>
       <Navbar/>
-      {pageContent ? (
+      {/* {pageContent ? (
         <div className='mt-24'>
-          <h2>{pageContent.heading.heading}</h2>
-          <p>{pageContent.content}</p>
+          
+          <div dangerouslySetInnerHTML={{ __html: pageContent.heading.heading }} />
+          <div dangerouslySetInnerHTML={{ __html: pageContent.content}} />
         </div>
       ) : (
         <p>Loading...</p>
+      )} */}
+      
+      {Array.isArray(apiData) && apiData.length > 0 ? (
+        apiData.map(item => (
+          <div
+          className='mt-24'
+          key={item.id}>
+                     <div dangerouslySetInnerHTML={{ __html: item.content}} />
+          </div>
+        ))
+      ) : (
+        <p>Loading or no data available</p>
       )}
     </div>
   );

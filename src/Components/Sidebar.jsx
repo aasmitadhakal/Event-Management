@@ -139,7 +139,7 @@ const routes = [
       {
         name: "Update",
         icon: <FaRegListAlt />,
-        path: "/put",
+        path: "/contentupdate",
       },
     ],
   },

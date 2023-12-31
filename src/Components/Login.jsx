@@ -1,6 +1,7 @@
 import {motion,AnimatePresence} from 'framer-motion';
 import { useState ,useRef,useContext} from 'react';
-import axios from '../api/axios';
+// import axios from '../api/axios';
+import axios from 'axios';
 import { useNavigate,Link } from 'react-router-dom';
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
@@ -27,7 +28,7 @@ const handleApi =(e)=>{
   e.preventDefault();
   if(validate()){
     axios
-    .post("login/", {
+    .post("http://api.rgsw.com.np/login/", {
       email: email,
       password: password,
     })

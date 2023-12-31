@@ -32,22 +32,11 @@ function ArtistProfile() {
         event.preventDefault();
         setIsEditing(true);
       };
-      // const handlePhotoChange = (event) => {
-      //   const photo = event.target.files[0];
-      //   setFormData(prevData => ({
-      //     ...prevData,
-      //     photo: photo,
-      //   }));
-      // };
+     
       
       
       useEffect(() => {
-        // const config = {
-        //   headers: {
-        //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-        //     'Content-Type': 'application/json'
-        //   }
-        // };
+       
         const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
 
         const config = {

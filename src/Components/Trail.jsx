@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import notify from '../utlis/notifier';
 import { ToastContainer } from 'react-toastify';
 
-function UserUpadate() {
+function Trail() {
   const navigate = useNavigate();
   const [contact, setContact] = useState('');
   const [gender, setGender] = useState('');
@@ -238,4 +238,4 @@ function UserUpadate() {
   );
 }
 
-export default UserUpadate;
+export default Trail;

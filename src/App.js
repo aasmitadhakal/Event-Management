@@ -30,6 +30,7 @@ import UpcomingDetail from './Event/UpcomingDetail';
 import { TokenProvider } from './Authorization/TokenContext';
 import TodayEventDetail from './Event/TodayEventDetail';
 import YourComponent from './Components/Update';
+import Trail from './Components/Trail';
 function App() {
   const location = useLocation();
   return (
@@ -56,12 +57,13 @@ function App() {
       <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
       <Route path='/userform' element={<UserForm/>} />
+      <Route path='/put' element={<YourComponent />} />
       <Route path='/userprofile' element={<UserProfile/>} />
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
       <Route path='/list' element={<List />} />
-      <Route path='/put' element={<YourComponent />} />
+     
       <Route path='/nav' element={<Nav2 />} />
       <Route path='/listuser' element={<UserList/>} />
       <Route path='/adduser' element={<UserCreate/>} />
@@ -78,6 +80,7 @@ function App() {
       <Route path='/contentlist' element={<ContentList />} />
       <Route path='/contentupdate' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />
+      <Route path='/trail' element={<Put />} />
       <Route path='/sponseradd' element={<SponserCreate/>} />
       <Route path='/sponserlist' element={<SponserList />} />
       <Route path='/sponserupdate' element={<SponserUpdate />} />

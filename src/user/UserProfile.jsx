@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import axios from 'axios';
+import axios from '../api/axios';
 import {MdEmail} from 'react-icons/md'
  import {AiTwotoneEdit} from 'react-icons/ai'
 import {BsFillTelephoneFill} from 'react-icons/bs'
@@ -52,7 +52,7 @@ function UserProfile() {
           }
       }
     
-        axios.get('https://ayushkandel.pythonanywhere.com/user-profile/', config)
+        axios.get('user-profile/', config)
           .then(response => {
             const data = response.data;
             setFormData({
@@ -117,7 +117,7 @@ function UserProfile() {
         formDataToSend.append('district', formData.district);
         // formDataToSend.append('description', formData.description);  
         axios
-      .put('https://ayushkandel.pythonanywhere.com/login-user-profile-update/user/', formDataToSend,config)
+      .put('login-user-profile-update/user/', formDataToSend,config)
       .then((result) => {
         // console.log('Request successful:', result.data);
         notify("success","data updated successfully")

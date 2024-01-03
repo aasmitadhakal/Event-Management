@@ -13,7 +13,7 @@ function ChangePassword() {
   const handlePassword2 =(e)=>{
     setPassword2(e.target.value)
   }
-  const apiUrl = 'https://ayushkandel.pythonanywhere.com/password-change/'; // Replace with your API URL
+  const apiUrl = 'password-change/'; // Replace with your API URL
   const username = localStorage.getItem('emailinput') // Replace with your username
   const userPassword = localStorage.getItem('passwordinput'); // Replace with your password
 

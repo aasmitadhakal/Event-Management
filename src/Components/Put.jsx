@@ -1,5 +1,5 @@
 import { useState,useEffect } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 // import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate } from 'react-router-dom'
 import { Editor } from '@tinymce/tinymce-react'
@@ -25,7 +25,7 @@ function Put() {
   const handleAPi =(e)=>{
     e.preventDefault();
     axios
-    .put(`https://ayushkandel.pythonanywhere.com/content-management/update/${id}/`, {
+    .put(`content-management/update/${id}/`, {
      heading : heading,
      content: content,
      updated_by: updated_by,

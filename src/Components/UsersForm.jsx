@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import notify from '../utlis/notifier';
 const UsersForm = () => {
   const [contact, setContact] = useState('');
@@ -59,7 +59,7 @@ const UsersForm = () => {
     console.log(formData);
 
     axios
-      .post('https://ayushkandel.pythonanywhere.com/normal-user/create/', formData)
+      .post('normal-user/create/', formData)
       .then((response) => {
         // Handle successful response
         console.log(response.data);

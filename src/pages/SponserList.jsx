@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import axios from "axios";
+import axios from "../api/axios";
 import { ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom";
 import notify from "../utlis/notifier";
@@ -12,7 +12,7 @@ function SponserList() {
     //getting api data
     const fetchData = () => {
       axios
-        .get(`https://ayushkandel.pythonanywhere.com/sponser/search/?search=${searchQuery}&?page=${currentPage}`)
+        .get(`sponser/search/?search=${searchQuery}&?page=${currentPage}`)
         .then(response => {
           const { results, count } = response.data;
           setData(results);
@@ -96,7 +96,7 @@ function SponserList() {
     //posting delete api
     const DeleteData=(id,e)=>{
         e.preventDefault();
-        axios.delete(`https://ayushkandel.pythonanywhere.com/sponser/delete/${id}`)
+        axios.delete(`sponser/delete/${id}`)
         .then(response => {
           console.log('Data deleted successfully:', response);
           notify("success","Data Deleted successfully")

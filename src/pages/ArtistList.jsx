@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier'
 import { ToastContainer } from 'react-toastify'
@@ -21,7 +21,7 @@ function ArtistList() {
         }
     }
     const getData =()=>{
-            axios.get(`https://ayushkandel.pythonanywhere.com/artist/search/?search=${searchQuery}&page=${currentPage}`,config)
+            axios.get(`artist/search/?search=${searchQuery}&page=${currentPage}`,config)
             .then(result=>{
               const { value, count } = result.data.results;
               setData(result.data.results);
@@ -57,7 +57,7 @@ function ArtistList() {
     //sending email
     const SendEmail=(id,e)=>{
       e.preventDefault();
-      axios.post(`https://ayushkandel.pythonanywhere.com/send-email/${id}/`,config)
+      axios.post(`send-email/${id}/`,config)
       .then(response => {
         console.log('Email send successfully:', response);
         notify("success","Email send successfully")
@@ -70,7 +70,7 @@ function ArtistList() {
      //posting delete api
      const DeleteData=(id,e)=>{
       e.preventDefault();
-      axios.delete(`https://ayushkandel.pythonanywhere.com/artist/delete/${id}`,config)
+      axios.delete(`artist/delete/${id}`,config)
       .then(response => {
         console.log('Data deleted successfully:', response);
         notify("success","Data Deleted successfully")

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 const  Page = () => {
@@ -8,7 +8,7 @@ const  Page = () => {
 
   useEffect(() => {
     // Make an Axios request to fetch the page content based on the 'id' parameter
-    axios.get(`https://ayushkandel.pythonanywhere.com/event-management/${id}/`)
+    axios.get(`event-management/${id}/`)
       .then((response) => {
         setApiData(response.data);
         

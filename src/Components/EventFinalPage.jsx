@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import RecentEvent from './RecentEvent';
 import EventList from './EventList';
 import { useNavigate } from 'react-router-dom';
@@ -16,7 +16,7 @@ const EventFinalPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
     // Make an Axios request to fetch event data
-    axios.get(`https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${page}`,config)
+    axios.get(`event/search/?search=${searchQuery}&page=${page}`,config)
       .then((response) => {
         setEvents(response.data.results);
         setLoading(false);

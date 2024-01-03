@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier';
 import { ToastContainer } from 'react-toastify';
@@ -28,7 +28,7 @@ const config = {
     }
 };
     const getData =()=>{
-            axios.get(`https://ayushkandel.pythonanywhere.com/normal-user/search/?search=${searchQuery}&page=${currentPage}`,config)
+            axios.get(`normal-user/search/?search=${searchQuery}&page=${currentPage}`,config)
             .then(result=>{
               const { value, count } = result.data.results;
               setData(result.data.results);
@@ -45,7 +45,7 @@ const config = {
           //posting delete api
     const DeleteData=(id,e)=>{
       e.preventDefault();
-      axios.delete(`https://ayushkandel.pythonanywhere.com/normal-user/delete/${id}`,config)
+      axios.delete(`normal-user/delete/${id}`,config)
       .then(response => {
         console.log('Data deleted successfully:', response);
         notify("success","Data Deleted successfully")

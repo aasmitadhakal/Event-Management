@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react'
 import { ToastContainer } from 'react-toastify';
  import notify from '../utlis/notifier'
-import axios from 'axios';
+import axios from '../api/axios';
 import img9 from '../assets/img9.png'
 import { useNavigate } from 'react-router-dom';
 export default function UserForm({setHasaccount}) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 
 function UserProfile() {
   const [apiData, setApiData] = useState(null);
@@ -15,7 +15,7 @@ function UserProfile() {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get('https://ayushkandel.pythonanywhere.com/user-profile/',config)
+        .get('user-profile/',config)
         .then((response) => {
           console.log(response.data); // Do something with the response data
           setApiData(response.data)

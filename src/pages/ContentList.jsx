@@ -37,7 +37,7 @@ function ContentList() {
   }
     
     const getData =()=>{
-      axios.get(`https://ayushkandel.pythonanywhere.com/content-management/list/${statuss}/?page=${currentPage}`,config)
+      axios.get(`content-management/list/${statuss}/?page=${currentPage}`,config)
       .then(response => {
         const { results, count } = response.data;
           setData(results);

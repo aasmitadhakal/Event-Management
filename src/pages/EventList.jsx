@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier'
 import { ToastContainer } from 'react-toastify'
@@ -19,7 +19,7 @@ function EventList() {
       const limit = 10; // Assuming the limit of items per page is 10
 
       const getData = () => {
-        axios.get(`https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${page}`, config)
+        axios.get(`event/search/?search=${searchQuery}&page=${page}`, config)
           .then(result => {
             setData(result.data.results);
           })
@@ -33,7 +33,7 @@ useEffect(()=>{
 //posting event complete
 const EventComplete=(id,e)=>{
   e.preventDefault();
-  axios.post(`https://ayushkandel.pythonanywhere.com/event/complete/${id}/`,config)
+  axios.post(`event/complete/${id}/`,config)
   .then(response => {
     console.log('Event Complete successfully:', response);
     notify("success"," Event Complete successfully")
@@ -46,7 +46,7 @@ const EventComplete=(id,e)=>{
  //posting delete api
  const DeleteData=(id,e)=>{
     e.preventDefault();
-    axios.delete(`https://ayushkandel.pythonanywhere.com/event/delete/${id}`,config)
+    axios.delete(`event/delete/${id}`,config)
     .then(response => {
       console.log('Data deleted successfully:', response);
       notify("success","Data Deleted successfully")

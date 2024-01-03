@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import axios from 'axios';
+import axios from '../api/axios';
 import {MdEmail} from 'react-icons/md'
  import {AiTwotoneEdit} from 'react-icons/ai'
 import {BsFillTelephoneFill} from 'react-icons/bs'
@@ -46,7 +46,7 @@ function ArtistProfile() {
           }
       }
     
-        axios.get('https://ayushkandel.pythonanywhere.com/user-profile/', config)
+        axios.get('user-profile/', config)
           .then(response => {
             const data = response.data;
             setFormData({
@@ -111,7 +111,7 @@ function ArtistProfile() {
         formDataToSend.append('district', formData.district);
         formDataToSend.append('description', formData.description);  
         axios
-      .put('https://ayushkandel.pythonanywhere.com/login-user-profile-update/artist/', formDataToSend,config)
+      .put('login-user-profile-update/artist/', formDataToSend,config)
       .then((result) => {
         // console.log('Request successful:', result.data);
         notify("success","data updated successfully")
@@ -142,7 +142,7 @@ function ArtistProfile() {
               <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 mt-4">
                 <a>
                   <img
-                    src={'https://ayushkandel.pythonanywhere.com' + formData.photo}
+                    src={'http://127.0.0.1:8000/' + formData.photo}
                     alt={formData.photo}
                     className="h-44 w-64 rounded-full z-0 object-cover"
                   />

@@ -1,6 +1,6 @@
 import Navbar from "./Navbar"
 import {useState,useEffect} from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 import {BsCalendar2Date }from 'react-icons/bs'
 import {AiOutlineFieldTime} from 'react-icons/ai'
 import {CiLocationOn} from 'react-icons/ci'

@@ -42,7 +42,7 @@ function ContentCreate() {
   const handleAPi =(e)=>{
     e.preventDefault();
     axios
-    .post("/content-management/create/", {
+    .post("content-management/create/", {
      heading : heading,
      content: content,
      

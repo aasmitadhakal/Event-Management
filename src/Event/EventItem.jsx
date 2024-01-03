@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from 'react-router-dom';
 import {CiLocationOn} from 'react-icons/ci'
 import { Skeleton } from '@mui/material';
@@ -21,7 +21,7 @@ const EventItem = () => {
     const fetchEvents = async () => {
         try {
             const response = await axios.get(
-                `https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${page}`
+                `event/search/?search=${searchQuery}&page=${page}`
                
             );
             setLoading(false);

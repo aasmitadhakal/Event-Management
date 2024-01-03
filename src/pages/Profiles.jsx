@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react"
-import axios from 'axios';
+import axios from '../api/axios';
 import {MdVerified} from 'react-icons/md'
 import {AiTwotoneEdit} from 'react-icons/ai'
  import img from '../assets/avatar.png'
@@ -21,7 +21,7 @@ function Profiles() {
         setIsEditing(true);
       };
       useEffect(() => {
-        axios.get('https://ayushkandel.pythonanywhere.com/user-profile/',config)
+        axios.get('user-profile/',config)
           .then(response => {
             const data = response.data;
             setFormData({

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from 'react-router-dom';
 import {CiLocationOn} from 'react-icons/ci';
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
@@ -19,7 +19,7 @@ const TodayEvent = () => {
     const [loading, setLoading] = useState(true);
     const fetchEvents = async () => {
       try {
-          const response = await axios.get('https://ayushkandel.pythonanywhere.com/event/choice/today/');
+          const response = await axios.get('event/choice/today/');
           setLoading(false);
           if (Array.isArray(response.data.results)) {
               setEvents(response.data.results.slice(0, 3));

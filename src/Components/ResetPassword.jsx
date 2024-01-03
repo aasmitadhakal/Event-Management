@@ -1,5 +1,5 @@
 import { useState } from "react"
-import axios from "axios";
+import axios from "../api/axios";
 import notify from '../utlis/notifier'
 import img5 from '../assets/img8.png'
 import { ToastContainer } from "react-toastify";
@@ -13,7 +13,7 @@ function ResetPassword() {
     
     const SendLink =(e)=>{
         e.preventDefault();   
-        axios.post("https://ayushkandel.pythonanywhere.com/send-reset-password-email/", {
+        axios.post("send-reset-password-email/", {
             email: email,
            
           })

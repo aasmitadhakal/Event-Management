@@ -6,7 +6,7 @@ import "./styles.css";
 import { Pagination ,Autoplay} from "swiper";
 import img from '../assets/card.jpg'
 import {useState,useEffect} from 'react'
-import axios from 'axios'
+import axios from '../api/axios'
 function EventSlider() {
     const [data,setData] =useState('')
     const [searchQuery, setSearchQuery] = useState('');
@@ -15,7 +15,7 @@ function EventSlider() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const getData =()=>{
-        axios.get(`https://ayushkandel.pythonanywhere.com/event/search/?search=${searchQuery}&page=${currentPage}`,config)
+        axios.get(`event/search/?search=${searchQuery}&page=${currentPage}`,config)
         .then(result=>{
           const { value, count } = result.data.results;
           setData(result.data.results);

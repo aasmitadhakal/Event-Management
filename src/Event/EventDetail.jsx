@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import { Skeleton } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import {BsCalendar2Date }from 'react-icons/bs'
@@ -17,7 +17,7 @@ const EventDetail = () => {
         const fetchEvent = async () => {
             try {
                 const response = await axios.get(
-                    `https://ayushkandel.pythonanywhere.com/event/search/?search=&page=1`
+                    `event/search/?search=&page=1`
                 ); // Replace with the actual API endpoint to fetch the specific event
                 const eventData = response.data.results.find((event) => event.id === parseInt(id));
                 setEvent(eventData);

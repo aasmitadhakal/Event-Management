@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../api/axios';
 import { useState } from 'react';
 import img from '../assets/img6.png'
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ const PasswordReset2 = () => {
 
     // Make the API request using Axios
     axios
-      .post(`https://ayushkandel.pythonanywhere.com/reset-password/${uid}/${token}/`, {
+      .post(`reset-password/${uid}/${token}/`, {
         password,
         password2: confirmPassword,
       })

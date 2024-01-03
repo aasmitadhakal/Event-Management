@@ -6,7 +6,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { Skeleton } from '@mui/material';
 import img from '../assets/logo.jpg'
-import axios from "axios";
+import axios from "../api/axios";
 import {MdOutlineNotificationsNone} from 'react-icons/md'
 function Navbar({data}){
     const[toggle,settoggle]=useState('false')
@@ -23,7 +23,7 @@ function Navbar({data}){
    //geting heading from api 
    useEffect(() => {
     // Make an Axios request to fetch the data from your API
-    axios.get('https://ayushkandel.pythonanywhere.com/dynamic-heading/list/')
+    axios.get('dynamic-heading/list/')
       .then((response) => {
         setNavbarData(response.data);
         setLoading(false);

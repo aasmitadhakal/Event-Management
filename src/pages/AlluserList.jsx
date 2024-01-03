@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
 import notify from '../utlis/notifier';
 import { Link } from 'react-router-dom';
 function AlluserList() {
@@ -20,7 +20,7 @@ function AlluserList() {
       
     // calling api data
     const getData =()=>{
-        axios.get(`https://ayushkandel.pythonanywhere.com/all-user-data-search/?search=${searchQuery}&page=${currentPage}`,config)
+        axios.get(`all-user-data-search/?search=${searchQuery}&page=${currentPage}`,config)
         .then(result=>{
           const { value, count } = result.data.results;
           setData(result.data.results);
@@ -46,7 +46,7 @@ function AlluserList() {
          //posting delete api
     const DeleteData=(id,e)=>{
       e.preventDefault();
-      axios.delete(`https://ayushkandel.pythonanywhere.com/all-user-data-delete/${id}`,config)
+      axios.delete(`all-user-data-delete/${id}`,config)
       .then(response => {
         console.log('Data deleted successfully:', response);
         notify("success","Data Deleted successfully")

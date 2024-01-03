@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api/axios';
+import CountdownTimer from './CountdownTimer';
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from 'react-router-dom';
 import {CiLocationOn} from 'react-icons/ci'
 import { Skeleton } from '@mui/material';
@@ -12,13 +13,14 @@ const UpcomingDetail = () => {
 };
 
 const UpcomingEvent = () => {
+  const targetDate = new Date('2024-12-31T23:59:59');
     const [events, setEvents] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const fetchEvents = async () => {
       try {
-          const response = await axios.get('https://ayushkandel.pythonanywhere.com/event/choice/upcome/');
+          const response = await axios.get('event/choice/upcome/');
           setLoading(false);
           if (Array.isArray(response.data.results)) {
               setEvents(response.data.results.slice(0,3));
@@ -94,7 +96,7 @@ const UpcomingEvent = () => {
   </div>
       )
       }
-  
+     <CountdownTimer targetDate={targetDate} />
       </>
       
       

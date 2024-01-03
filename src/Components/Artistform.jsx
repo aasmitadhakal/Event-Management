@@ -1,6 +1,6 @@
 import { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api/axios';
 import notify from '../utlis/notifier';
 import { ToastContainer } from 'react-toastify';
 import img9 from '../assets/img9.png'
@@ -82,7 +82,7 @@ export default function ArtistForm({setHasaccount}) {
 
   const handleApi = (e) => {
     e.preventDefault();
-    axios.post("https://ayushkandel.pythonanywhere.com/artist/create/", formData )
+    axios.post("artist/create/", formData )
       .then((response) => {
         console.log(e.target.file)
         console.log(response.data);

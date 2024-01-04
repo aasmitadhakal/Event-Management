@@ -22,7 +22,6 @@ const EventItem = () => {
         try {
             const response = await axios.get(
                 `event/search/?search=${searchQuery}&page=${page}`
-               
             );
             setLoading(false);
             setEvents(response.data.results);

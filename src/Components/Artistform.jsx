@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import img9 from '../assets/img9.png'
 export default function ArtistForm({setHasaccount}) {
   const navigate = useNavigate();
-  const[user,setUser]=useState('')
+  // const[user,setUser]=useState('')
   const[district,setDistrict]=useState('')
   const[municipality,setMunicipality]=useState('')
   const[contact,setContact]=useState('')
@@ -55,13 +55,13 @@ export default function ArtistForm({setHasaccount}) {
   const handleManager=(e)=>{
     setManager(e.target.checked)
   } 
-  const handleUser=(e)=>{
-    setUser(e.target.value)
-  } 
+  // const handleUser=(e)=>{
+  //   setUser(e.target.value)
+  // } 
   //for automatic value on uid
-  useEffect(()=>{
-    setUser(localStorage.getItem("uid"));
- },[])
+//   useEffect(()=>{
+//     setUser(localStorage.getItem("uid"));
+//  },[])
   const formData = new FormData();
   console.log(photo);
   formData.append('contact', contact);
@@ -70,7 +70,7 @@ export default function ArtistForm({setHasaccount}) {
   formData.append('district', district);
   formData.append('municipality', municipality);
   formData.append('ward', ward);
-  formData.append('user', user);
+  // formData.append('user', user);
   formData.append('photo', photo);
   formData.append('type_of_the_performer', type_of_the_performer);
   formData.append('performed_in', performed_in);
@@ -116,7 +116,7 @@ export default function ArtistForm({setHasaccount}) {
         <div  className='grid md:grid-cols-2 grid-cols-1 md:gap-8'>
         <div className='md:pl-8 pl-2'>
             {/* for User */}
-      <div className='relative'>
+      {/* <div className='relative'>
       <label for="user" class="absolute left-0 top-1 text-gray-600 cursor-text  ">User</label>
           <input
             className="mb-4 pt-6 flex justify-center items-center py-1 border-b  focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors  " autoComplete='off'
@@ -126,7 +126,7 @@ export default function ArtistForm({setHasaccount}) {
             value={user}
             onChange={handleUser}
           />
-      </div>
+      </div> */}
         {/* for photo */}
         <div className='relative'>
         {/* <label for="photo" class="absolute left-0 top-1 text-gray-600 cursor-text ">photo</label> */}

@@ -149,9 +149,9 @@ const EventComplete=(id,e)=>{
                     <th className=" p-2 text-sm font-semibold ">Location</th>
                     <th className=" p-2 text-sm font-semibold ">Capacity</th>
                     <th className=" p-2 text-sm font-semibold ">Entry Fee</th>
-                    <th className=" p-2 text-sm font-semibold ">Event Completed</th>
+                    <th className=" p-2 text-sm font-semibold ">photo</th>
                     <th className=" p-2 text-sm font-semibold ">Artist</th>
-                    <th className=" p-2 text-sm font-semibold ">Sponser</th>
+                    <th className=" p-2 text-sm font-semibold ">Action</th>
 
               </tr>
              </thead>
@@ -167,10 +167,10 @@ const EventComplete=(id,e)=>{
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.entry_fee}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo}></img></td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.artist}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td>
+            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td> */}
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
             <button onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete  </button></td>
-           <td className='p-2 text-sm text-gray-700 whitespace-nowrap'> <button  onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white py-1 px-6 rounded-lg hover:bg-orange-600 hover:text-red'><span>Event complete</span></button></td>
+           {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'> <button  onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white py-1 px-6 rounded-lg hover:bg-orange-600 hover:text-red'><span>Event complete</span></button></td> */}
          </tr>
              ))}
          </tbody>

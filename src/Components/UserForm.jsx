@@ -55,7 +55,7 @@ export default function UserForm({setHasaccount}) {
     
   const handleApi =(e)=>{
   e.preventDefault();
-  axios.post("https://ayushkandel.pythonanywhere.com/normal-user/create/", formData )
+  axios.post("normal-user/create/", formData )
     .then((response) => {
       console.log(e.target.file)
       console.log(response.data);

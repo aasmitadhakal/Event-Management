@@ -25,7 +25,7 @@ function ArtistUpadate() {
   const config = {
       headers: {
           'Authorization': `Bearer ${token}`, // Use the Bearer token here
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
       }
   }
   const handleContact = (e) => {

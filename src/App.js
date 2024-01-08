@@ -1,4 +1,4 @@
-import {Route,Routes, useLocation} from 'react-router-dom'
+import {Route,Routes, useLocation,useParams} from 'react-router-dom'
 import {Header, Home,Login,Register,Artistform,Managerform,UserForm,EventSlider} from './Components';
 import ResetPassword from './Components/ResetPassword';
 import PrivateLayout from './layout/PrivateLayout';
@@ -31,8 +31,21 @@ import { TokenProvider } from './Authorization/TokenContext';
 import TodayEventDetail from './Event/TodayEventDetail';
 import YourComponent from './Components/Update';
 import Trail from './Components/Trail';
+import { useEffect } from 'react';
 function App() {
   const location = useLocation();
+  const params = useParams();
+ 
+ 
+  useEffect(() => {
+    // Check if the 'id' parameter exists in the URL params
+    if (params.id) {
+      // Use the 'id' obtained from the URL params
+      console.log('Dynamic ID:', params.id);
+      // You can perform actions with the 'id' here
+    }
+  }, [params.id]);
+
   return (
     <>
     <AuthProvider>
@@ -40,7 +53,7 @@ function App() {
       <AnimatePresence wait>
     <Routes location={location} key={location.pathname}>
       <Route element ={<PublicLayout />}>
-      <Route path='/' element={<Home/>}/>
+      {/* <Route path='/' element={<Home/>}/> */}
       <Route path="/page/:id" element={<Page/>} />
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />

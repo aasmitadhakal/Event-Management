@@ -6,7 +6,7 @@ import { Editor } from '@tinymce/tinymce-react'
 import { useNavigate } from 'react-router-dom'
 function EventCreate() {
     const navigate = useNavigate()
-    const [photo, setPhoto] = useState('');
+   
     const [selectedOption, setSelectedOption] = useState(''); // To store the selected option from the dropdown
     const [options, setOptions] = useState([]); // To store the options fetched from the API
     const[event_name,setEvent_name]=useState('')
@@ -22,19 +22,17 @@ function EventCreate() {
       const userPassword = localStorage.getItem('passwordinput');
       const [artists, setArtists] = useState([]);
       const [formData, setFormData] = useState({
-    event_name: '',
-    date: '',
-    time: '',
-    location: '',
-    capacity: '',
-    entry_fee: '',
-    artist: [],
-    sponser: [],
-   
+          event_name: '',
+          date: '',
+          time: '',
+          location: '',
+          capacity: '',
+          entry_fee: '',
+          artist: [],
+          sponser: [],
+        
   });
-  const handlePhoto = (e) => {
-    setPhoto(e.target.files[0]);
-  };
+
     // const handleEventName =(e)=>{
     //     setEvent_name(e.target.value)
     //   }
@@ -249,6 +247,21 @@ function EventCreate() {
           onChange={handleChange}
         />
       </div>
+      <div className='relative mb-4 mx-12'>
+  <label htmlFor="photo" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text">Photo</label>
+  <input
+    className="flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
+    id="photo"
+    type="file"
+    name="photo"
+    onChange={(e) => {
+      setFormData({
+        ...formData,
+        photo: e.target.files[0], // Store the selected file in formData
+      });
+    }}
+  />
+</div>
       
          {/* for eventcompleted */}
          {/* <div className=' relative mb-4   mx-12    '> 

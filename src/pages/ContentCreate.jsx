@@ -16,9 +16,9 @@ function ContentCreate() {
     setHeading(e.target.value)
   }
  
-  // const handleUpadedBy =(e)=>{
-  //   setUpdatedBy(e.target.value)
-  // }
+  const handleUpadedBy =(e)=>{
+    setUpdatedBy(e.target.value)
+  }
   const handleContent =(e)=>{
     setContent(e.target.value)
   }
@@ -45,7 +45,7 @@ function ContentCreate() {
     .post("content-management/create/", {
      heading : heading,
      content: content,
-     
+     updated_by:updated_by,
      status:status,
     },config)
     .then((result) => {
@@ -69,7 +69,7 @@ function ContentCreate() {
   const handleImageUpload = (blobInfo, progress, failure) => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open("POST", "http://localhost:8000/server.php", true);
+      xhr.open("POST", "http://127.0.0.1:8000", true);
 
       const formData = new FormData();
       formData.append("file", blobInfo.blob(), blobInfo.filename());
@@ -169,7 +169,7 @@ function ContentCreate() {
           ],
           toolbar:
             "undo redo | styles | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-          images_upload_url: "http://localhost:8000/server.php",
+          images_upload_url: "http://127.0.0.1:8000",
           automatic_uploads: true,
           images_reuse_filename: true,
           images_upload_handler: handleImageUpload,
@@ -179,17 +179,17 @@ function ContentCreate() {
       />
        </div> 
      
-        {/* for Status */}
+        {/* for updated_by */}
         <div className='relative mb-4   mx-12  '> 
-        <label htmlFor="status" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Status</label>
-        {/* <input
+        <label htmlFor="updated_by" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Updated By</label>
+        <input
         className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
-        id="status"
+        id="updated_by"
         type="text"
-        name="status"
-        value={status}
-        onChange={handleStatus}
-        />    */}
+        name="updated_by"
+        value={updated_by}
+        onChange={handleUpadedBy}
+        />   
         <select
         value={status}
         onChange={handleStatus}

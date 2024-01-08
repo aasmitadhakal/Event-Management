@@ -32,12 +32,33 @@ const CountdownTimer = () => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const remaining = calculateTimeRemaining();
+  //     setTimeRemaining(remaining);
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [eventData]);
   useEffect(() => {
     const interval = setInterval(() => {
       const remaining = calculateTimeRemaining();
-      setTimeRemaining(remaining);
+  
+      if (remaining.hours === 0 && remaining.minutes === 0 && remaining.seconds === 0) {
+        // If the countdown reaches zero
+        changeCircleoffset(0, 0, 0); // Adjust circles
+        clearInterval(interval); // Clear the interval
+      } else {
+        // Update countdown and circles
+        changeCircleoffset(remaining.seconds, remaining.minutes, remaining.hours);
+        setTimeRemaining({
+          hours: remaining.hours,
+          minutes: remaining.minutes,
+          seconds: remaining.seconds,
+        });
+      }
     }, 1000);
-
+  
     return () => clearInterval(interval);
   }, [eventData]);
 
@@ -58,6 +79,7 @@ const CountdownTimer = () => {
         return { hours: 0, minutes: 0, seconds: 0 };
       }
     }
+   
     return { hours: 0, minutes: 0, seconds: 0 };
   };
 
@@ -66,7 +88,10 @@ const CountdownTimer = () => {
       const { hours, minutes, seconds } = timeRemaining;
 
       return (
-        <div className="flex h-96 flex-col md:flex-row justify-center items-center bg-gradient-to-l sm:bg-gradient-to-t from-[#88adf1] to-[#374b9c]">
+        <div className='bg-gradient-to-l sm:bg-gradient-to-t from-[#88adf1] to-[#374b9c] h-96 my-8'>
+            <div className='flex justify-center items-center text-white text-3xl pt-8 font-bold'>Coming out soon</div>
+        <div className="  flex  flex-col md:flex-row justify-center items-center ">
+        
          <div className="relative">
         <svg className="-rotate-90 h-48 w-48">
           <circle
@@ -148,6 +173,7 @@ const CountdownTimer = () => {
         </div>
       </div>
         </div>
+        </div>
     //   <div className="bg-[#191A24] h-screen">
     //   <div className="flex flex-col items-center justify-center w-full h-full gap-8 sm:gap-16">
     //     <span className="text-2xl sm:text-3xl font-semibold text-white text-center tracking-widest px-2">
@@ -201,10 +227,8 @@ const CountdownTimer = () => {
 
   return (
     <div className="z-[-1]">
-      <div className="">
-       
         <div className=" z-[-1] text-2xl">{renderClock()}</div>
-      </div>
+     
     </div>
   );
 };

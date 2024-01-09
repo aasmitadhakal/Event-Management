@@ -28,6 +28,7 @@ function EventCreate() {
           location: '',
           capacity: '',
           entry_fee: '',
+          photo:null,
           artist: [],
           sponser: [],
         
@@ -82,7 +83,7 @@ function EventCreate() {
       const config = {
         headers: {
           'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       };
       const handleAPi = (e) => {

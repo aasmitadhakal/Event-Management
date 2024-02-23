@@ -87,15 +87,13 @@ function Navbar({data}){
                 
               <div className={`z-1000 hidden font-sans-serif text-grays z-1000 transition-all my-2 duration-500 ease-in md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36 md:flex justify-around md:mx-0  text-xl `}>
                    
-                  
-        
-         {navbarData.map((item) => (
-                <>
-                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to={`/page/${item.id}`}>{item.heading}</Link></div> 
-                {/*  */}
-                </>
-                ))}
-                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
+
+              {navbarData.map((item, index) => (
+              <div key={index} className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400">
+                <Link to={`/page/${item.id}`}>{item.heading}</Link>
+              </div>
+            ))}
+                            <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
 
                   {/* for login button */}
                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
@@ -107,12 +105,11 @@ function Navbar({data}){
                 {/* for mobile view */}
                 {mobileView &&(
                   <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all   md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid  md:grid-cols-6 md:mx-0 z-1000 text-xl" >
-                 {navbarData.map((item) => (
-                <>
-                <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to={`/page/${item.id}`}>{item.heading}</Link></div> 
-                
-                </>
-                ))}
+                 {navbarData.map((item, index) => (
+                    <div key={index} className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400">
+                      <Link to={`/page/${item.id}`}>{item.heading}</Link>
+                    </div>
+                  ))}
                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                    {/* for login button */}
                    <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>

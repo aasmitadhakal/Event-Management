@@ -16,9 +16,12 @@ function ContentCreate() {
     setHeading(e.target.value)
   }
  
-  const handleUpadedBy =(e)=>{
-    setUpdatedBy(e.target.value)
-  }
+  // const handleUpadedBy =(e)=>{
+  //   setUpdatedBy(e.target.value)
+  // }
+  const handleUpadedBy = (e) => {
+    setUpdatedBy(e.target.value);
+  };
   const handleContent =(e)=>{
     setContent(e.target.value)
   }
@@ -135,18 +138,16 @@ function ContentCreate() {
        
          <div className='relative mb-4 mx-12'>
           
-       
-           <Editor
-      
-        apiKey="no-api-key"
-        onInit={(evt, editor) => editorRef.current = editor}
-        initialValue="<p>Try adding an image with image upload!</p>"
-        name="content"
-        value={content}
-        onEditorChange={(value) => setContent(value)}
-        init={{
-          height: 500,
-          plugins: [
+         <Editor
+    apiKey="1shhj6gxnyfno4jx3wlcldgdjf7ej27d5oat6u8nldxdcuyy"
+    onInit={(evt, editor) => editorRef.current = editor}
+    initialValue="<p>Try adding an image with image upload!</p>"
+    name="content"
+    value={content}
+    onEditorChange={(value) => setContent(value)}
+    init={{
+        height: 500,
+        plugins: [
             "advlist",
             "autolink",
             "lists",
@@ -165,18 +166,28 @@ function ContentCreate() {
             "code",
             "help",
             "wordcount",
-            
-          ],
-          toolbar:
+        ],
+        toolbar:
             "undo redo | styles | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-          images_upload_url: "http://127.0.0.1:8000",
-          automatic_uploads: true,
-          images_reuse_filename: true,
-          images_upload_handler: handleImageUpload,
-        }}
-          
-  
-      />
+        images_upload_url: "http://127.0.0.1:8000/media/Event Photos/",
+        automatic_uploads: true,
+        images_reuse_filename: true,
+        images_upload_handler: handleImageUpload,
+
+        // Add the setup function to make touchstart event listeners passive
+        setup: function (editor) {
+          editor.on('init', function () {
+              const editorContainer = editor.getContainer();
+              const touchStartListeners = editorContainer.querySelectorAll('*');
+              touchStartListeners.forEach(function (el) {
+                  el.addEventListener('touchstart', function (e) {
+                      e.preventDefault();
+                  }, { passive: true }); // Set { passive: true } here to mark the event listener as passive
+              });
+          });
+      }
+    }}
+/>
        </div> 
      
         {/* for updated_by */}

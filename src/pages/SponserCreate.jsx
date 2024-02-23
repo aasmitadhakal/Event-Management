@@ -49,7 +49,7 @@ function SponserCreate() {
      <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Add Sponser</div>
       {/* for sponser_type */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">SponserType</label>
+      <label  className="absolute   text-gray-600 cursor-text ">SponserType</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
@@ -60,7 +60,7 @@ function SponserCreate() {
       </div>
       {/* forname */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Name</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Name</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"
@@ -71,7 +71,7 @@ function SponserCreate() {
       </div>
       {/* for amount */}
       <div className='relative mb-8  mx-12 '>
-      <label  class="absolute   text-gray-600 cursor-text ">Amount</label>
+      <label  className="absolute   text-gray-600 cursor-text ">Amount</label>
       <input
       className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
       type="text"

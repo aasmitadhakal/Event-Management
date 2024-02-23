@@ -18,8 +18,9 @@ function EventCreate() {
     const[event_completed,setevent_completed]=useState('')
     const[artist,setArtist]=useState('')
     const[sponser,setSponser]=useState('')
-    const username = localStorage.getItem('emailinput') 
-      const userPassword = localStorage.getItem('passwordinput');
+    const token = localStorage.getItem('accessToken'); 
+    // const username = localStorage.getItem('emailinput') 
+    //   const userPassword = localStorage.getItem('passwordinput');
       const [artists, setArtists] = useState([]);
       const [formData, setFormData] = useState({
           event_name: '',
@@ -80,12 +81,18 @@ function EventCreate() {
           });
         }
       };
+      // const config = {
+      //   headers: {
+      //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+      //     'Content-Type': 'multipart/form-data'
+      //   }
+      // };
       const config = {
         headers: {
-          'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-          'Content-Type': 'multipart/form-data'
+            'Authorization': `Bearer ${token}`, // Use the Bearer token here
+            'Content-Type': 'multipart/form-data'
         }
-      };
+    }
       const handleAPi = (e) => {
         e.preventDefault();
         const postData = new FormData();
@@ -100,7 +107,7 @@ function EventCreate() {
         .post("/event/create/", formData,config)
         .then((result) => {
           console.log(result.data);
-          //  navigate("/eventlist",{replace:true});
+            navigate("/eventlist",{replace:true});
         })
         .catch((error) => {
           console.log(error);
@@ -113,7 +120,7 @@ function EventCreate() {
       //geting data from artist list 
       useEffect(() => {
         // Fetch data from the API when the component mounts
-        axios.get('https://ayushkandel.pythonanywhere.com/artist/list/?page=1',config)
+        axios.get('/artist/list/',config)
         .then((response) => {
           setArtists(response.data.results);
           })

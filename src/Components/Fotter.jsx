@@ -5,13 +5,14 @@ import {IoLocationSharp} from 'react-icons/io5'
 import { FaFacebookF } from "react-icons/fa";
 import { CiInstagram } from "react-icons/ci";
 import { FaWhatsapp } from "react-icons/fa";
-function Fotter() {
+
+function Footer() {
   return (
     <div className='bg-black text-white'>
         <div className='grid grid-cols-3 p-10 mx-36 '>
             {/* for quick link */}
             <div className='text-lg'>
-                <ui className='text-xl font-semibold font-sans'>Quick Link</ui>
+                <ul className='text-xl font-semibold font-sans'>Quick Link</ul>
                 <li>About Us</li>
                 <li>Event</li>
                 <li>Contact</li>
@@ -30,8 +31,8 @@ function Fotter() {
             </div>
             {/* contact */}
             <div className='p-1'>
-            <ui className='text-xl font-semibold font-sans list-outside'>Contact</ui>
-                <div  className='flex '><span className='mx-2'><BsFillTelephoneFill/></span>9846464646</div>
+                <ul className='text-xl font-semibold font-sans list-outside'>Contact</ul>
+                <div className='flex '><span className='mx-2'><BsFillTelephoneFill/></span>9846464646</div>
                 <div className='flex'><span className='mx-2'><MdEmail/></span >Email</div>
                 <div className='flex'><span className='mx-2'><IoLocationSharp /></span>Location</div>
             </div>
@@ -41,4 +42,4 @@ function Fotter() {
   )
 }
 
-export default Fotter
+export default Footer;

@@ -12,6 +12,7 @@ import UserProfile from './user/UserProfile';
 import { AuthProvider } from './contexs/auth';
 import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,} from './pages';
 import Put from './Components/Put';
+import Booking from './Components/Booking';
 import Blog from './pages/Blog';
 import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
@@ -31,6 +32,7 @@ import { TokenProvider } from './Authorization/TokenContext';
 import TodayEventDetail from './Event/TodayEventDetail';
 import YourComponent from './Components/Update';
 import Trail from './Components/Trail';
+import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 function App() {
   const location = useLocation();
@@ -54,11 +56,13 @@ function App() {
     <Routes location={location} key={location.pathname}>
       <Route element ={<PublicLayout />}>
       {/* <Route path='/' element={<Home/>}/> */}
+      <Route path="/" element={<Navigate to="/page/1" />} />
       <Route path="/page/:id" element={<Page/>} />
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
       <Route path='/blog' element={<Blog />} />
+      <Route path='/boking' element={<Booking />} />
       <Route path='/event' element={<EventItem />} />
       <Route path='/event/:id' element={<EventDetail />} />
       <Route path='/upcomingevent/:id' element={<UpcomingDetail />} />
@@ -66,12 +70,15 @@ function App() {
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
+      <Route path='/trail' element={<Trail/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
       <Route path='/userform' element={<UserForm/>} />
       <Route path='/put' element={<YourComponent />} />
       <Route path='/userprofile' element={<UserProfile/>} />
+
+
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
@@ -82,7 +89,7 @@ function App() {
       <Route path='/adduser' element={<UserCreate/>} />
       <Route path='/updateuser' element={<UserUpdate/>} />
       <Route path='/alist' element={<ArtistList />} />
-      <Route path='/trail' element={<ArtistCreate/>} />
+     
       <Route path='/aupdate' element={<ArtistUpdate/>} />
       <Route path='/change' element={<ChangePassword />} />
       <Route path='/cdraft' element={<ContentDraft />} />

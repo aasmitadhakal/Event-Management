@@ -73,8 +73,10 @@ const EventItem = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-40 mx-20 mb-10'>
             
     {events.map((event) => (
-      <Link to={`/event/${event.id}`} key={event.id}>
-        <div className='shadow-xl bg-white mt-12 rounded-2xl'>
+       <div key={event.id} className='shadow-xl bg-white mt-12 rounded-2xl'>
+         <Link to={`/event/${event.id}`}>
+
+       
             
           <img src={event.photo} className='ml-4 h-64 w-72' />
           
@@ -95,8 +97,9 @@ const EventItem = () => {
             <Link to={`/event/${event.id}`} key={event.id} className='px-4 hover:bg-gray-100 mb-4 py-1 rounded text-gray-500 bg-gray-200'>View Detail</Link>
           </div>
          
-        </div>
+       
       </Link>
+      </div>
     ))}
   </div>
   {/* for pagination */}

@@ -1,241 +1,86 @@
-import { useState, useEffect } from 'react';
-import axios from '../api/axios';
-import { useNavigate } from 'react-router-dom';
-import notify from '../utlis/notifier';
-import { ToastContainer } from 'react-toastify';
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Trail() {
-  const navigate = useNavigate();
-  const [contact, setContact] = useState('');
-  const [gender, setGender] = useState('');
-  const [province, setProvince] = useState('');
-  const [district, setDistrict] = useState('');
-  const [municipality, setMunicipality] = useState('');
-  const [ward, setWard] = useState('');
-    const[photo,setPhoto]=useState(null);
-  const [user, setUser] = useState('');
-  const [id, setNormalUserID] = useState(0);
+    const [event, setEvent] = useState(null);
+    const [quantity, setQuantity] = useState();
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [eventId, setEventId] = useState(null);
+    const token = localStorage.getItem('accessToken');
+    const config = {
+      headers: {
+          'Authorization': `Bearer ${token}`, // Use the Bearer token here
+          'Content-Type': 'application/json'
+      }
+  }
+    useEffect(() => {
+        const fetchEventData = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/event/search/?page=1',config);
+                const eventData = response.data.results[0];
+                setEvent(eventData);
+                setEventId(eventData.id); // Set the event ID
+                setTotalPrice(eventData.entry_fee); // Set initial total price
+            } catch (error) {
+                console.error('Error fetching event data: ', error);
+            }
+        };
 
-  
-  const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
+        fetchEventData();
+    }, []);
 
-  const config = {
-    headers: {
-        'Authorization': `Bearer ${token}`, // Use the Bearer token here
-        'Content-Type': 'application/json'
+    const incrementQuantity = () => {
+        setQuantity(quantity + 1);
+        setTotalPrice((quantity + 1) * event.entry_fee);
+    };
+
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+            setTotalPrice((quantity - 1) * event.entry_fee);
+        }
+    };
+
+    const handleEventIdChange = (e) => {
+        setEventId(e.target.value);
+    };
+
+    const handlePayClick = () => {
+        axios.post(`http://127.0.0.1:8000/ticket/booking/${eventId}/`, { quantity, total_price: totalPrice,event:eventId },config)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
+
+    if (!event) {
+        return <div>Loading...</div>;
     }
-}
 
-  const handleContact = (e) => {
-    setContact(e.target.value);
-  };
-
-  const handleGender = (e) => {
-    setGender(e.target.value);
-  };
-
-  const handleDistrict = (e) => {
-    setDistrict(e.target.value);
-  };
-
-  const handleProvince = (e) => {
-    setProvince(e.target.value);
-  };
-
-  const handleMunicipality = (e) => {
-    setMunicipality(e.target.value);
-  };
-
-  const handleWard = (e) => {
-    setWard(e.target.value);
-  };
-  const handleUser = (e) => {
-    setUser(e.target.value);
-  };
-  const handlePhoto = (e) => {
-    const file = e.target.files[0];
-    console.log('Selected file:', file);
-    setPhoto(file);
-  };
-
-  const handleAPI = (e) => {
-    e.preventDefault();
-  
-    console.log('Form submitted!');
-  
-    const formData = new FormData();
-    formData.append('contact', contact);
-    formData.append('gender', gender);
-    formData.append('province', province);
-    formData.append('district', district);
-    formData.append('municipality', municipality);
-    formData.append('ward', ward);
-    formData.append('user', user);
-  
-    console.log('Photo state:', photo);
-    if (photo) {
-      formData.append('photo', photo);
-    }
-    axios
-      .put(`/normal-user/update/${id}/`, formData, config)
-      .then((result) => {
-        
-        console.log('Request successful:', result.data);
-        notify('success', 'Data updated successfully');
-        navigate('/listuser', { replace: true });
-      })
-      .catch((error) => {
-        // console.log('Error occurred:', error);
-        console.log('Server error:', error.response.data);
-        notify('error', 'Failed to update data');
-      });
-  };
-
-  useEffect(() => {
-    setNormalUserID(localStorage.getItem('normaluserid'));
-    setContact(localStorage.getItem('normalusercontact'));
-    setGender(localStorage.getItem('normalusergender'));
-    setProvince(localStorage.getItem('normaluserprovince'));
-    setDistrict(localStorage.getItem('normaluserdistrict'));
-    setMunicipality(localStorage.getItem('normalusermunicipality'));
-    setWard(localStorage.getItem('normaluserward'));
-     setPhoto(localStorage.getItem('normaluserphoto'))
-    setUser(localStorage.getItem('normaluseruser'));
-  }, []);
-
-  return (
-    <div className='mt-18 flex justify-center items-center p-12'>
-      <form className='p-6 border bg-white shadow-md rounded ' encType='multipart/form-data' >
-        <div className='mt-4 text-2xl mb-8 font-medium text-purple-400 flex justify-center items-center'>
-          Update Normal User
+    return (
+        <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-xl font-semibold mb-2">{event.event_name}</h2>
+            <p><span className="font-semibold">Capacity:</span> {event.capacity}</p>
+            <p><span className="font-semibold">Entry Fee:</span> {event.entry_fee}</p>
+            <div className="mt-4 flex items-center">
+                <button className="px-3 py-1 bg-blue-500 text-white" onClick={decrementQuantity}>-</button>
+                <input type="number" className="mx-3 w-16 text-center" value={quantity} readOnly />
+                <button className="px-3 py-1 bg-blue-500 text-white" onClick={incrementQuantity}>+</button>
+            </div>
+            <div className="mt-4 flex items-center">
+                <span className="font-semibold">Total Price:</span>
+                <input type="number" className="mx-3 w-16 text-center" value={totalPrice} readOnly />
+            </div>
+            <div className="mt-4 flex items-center">
+                <span className="font-semibold">Event ID:</span>
+                <input type="text" className="mx-3 w-16" value={eventId} onChange={handleEventIdChange} />
+            </div>
+            <button className="mt-4 px-4 py-2 bg-green-500 text-white" onClick={handlePayClick}>Pay</button>
         </div>
-        <div className='grid grid-cols-2'>
-          <div>
-            <div className='relative mb-8 mx-12'>
-              <label htmlFor='email' className='absolute text-gray-600 cursor-text'>
-                Contact
-              </label>
-              <input
-                className='flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer'
-                autoComplete='off'
-                id='contact'
-                type='text'
-                name='contact'
-                value={contact}
-                onChange={handleContact}
-              />
-            </div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='province' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                Province
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='province'
-                type='text'
-                name='province'
-                value={province}
-                onChange={handleProvince}
-              />
-            </div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='gender' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                Gender
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='gender'
-                type='text'
-                name='gender'
-                value={gender}
-                onChange={handleGender}
-              />
-            </div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='municipality' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                Municipality
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='municipality'
-                type='text'
-                name='municipality'
-                value={municipality}
-                onChange={handleMunicipality}
-              />
-            </div>
-          </div>
-          <div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='ward' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                Ward
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='ward'
-                type='text'
-                name='ward'
-                value={ward}
-                onChange={handleWard}
-              />
-            </div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='district' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                District
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='district'
-                type='text'
-                name='district'
-                value={district}
-                onChange={handleDistrict}
-              />
-            </div>
-            <div className='relative mx-10'>
-               <label htmlFor='photo' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                Photo
-              </label> 
-              <input
-                  className="mt-1 sm:text-sm border-gray-300 rounded-md mb-4 pt-6 flex justify-center items-center py-1 transition-colors"
-                  id="photo"
-                  type="file"
-                  name="photo"
-                  onChange={handlePhoto}
-                  accept="image/*"
-                />
-            </div>
-            <div className='relative mb-4 mx-12'>
-              <label htmlFor='user' className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text'>
-                User
-              </label>
-              <input
-                className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-                autoComplete='off'
-                id='user'
-                type='text'
-                name='user'
-                value={user}
-                readOnly
-                onChange={handleUser}
-              />
-            </div>
-          </div>
-        </div>
-        <div>
-          <button onClick={handleAPI} className='mx-64 bg-gradient-to-r hover:text-white hover:to-blue-400 from-blue-300 to-purple-600 text-white mt-4 mb-4 px-20 py-2 rounded-2xl'>
-            Update
-          </button>
-        </div>
-        <ToastContainer />
-      </form>
-    </div>
-  );
+    );
 }
 
 export default Trail;

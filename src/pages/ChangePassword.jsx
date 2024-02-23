@@ -4,8 +4,8 @@ import notify from '../utlis/notifier'
 import { ToastContainer } from 'react-toastify'
 import { useState } from 'react'
 function ChangePassword() {
-  const[password,setPassword]=useState()
-  const[password2,setPassword2]=useState()
+  const[password,setPassword]=useState('')
+  const[password2,setPassword2]=useState('')
 
   const handlePassword =(e)=>{
     setPassword(e.target.value)

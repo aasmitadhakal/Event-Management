@@ -9,14 +9,21 @@ function AlluserList() {
     const [deleted, setDeleted] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const token = localStorage.getItem('accessToken');
     const userPassword = localStorage.getItem('passwordinput');
     //for authorization
+    // const config = {
+    //     headers: {
+    //       'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+    //       'Content-Type': 'application/json'
+    //     }
+    //   };
     const config = {
-        headers: {
-          'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+      headers: {
+          'Authorization': `Bearer ${token}`, // Use the Bearer token here
           'Content-Type': 'application/json'
-        }
-      };
+      }
+  }
       
     // calling api data
     const getData =()=>{
@@ -45,7 +52,9 @@ function AlluserList() {
     }
          //posting delete api
     const DeleteData=(id,e)=>{
+
       e.preventDefault();
+
       axios.delete(`all-user-data-delete/${id}`,config)
       .then(response => {
         console.log('Data deleted successfully:', response);
@@ -189,9 +198,9 @@ function AlluserList() {
                 )}
               className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'>Update</button></Link>
             <button
-              onClick={(e)=>{DeleteData(item.id,e)}}
+            onClick={(e)=>{DeleteData(item.id,e)}}
              className='bg-red-400 text-white px-4 py-2 mr-4 rounded-lg hover:bg-red-800 hover:text-red'>
-                delete
+                deletess
                 </button>
                 </td>
            </tr>

@@ -21,7 +21,7 @@ function ArtistList() {
         }
     }
     const getData =()=>{
-            axios.get(`artist/search/?search=${searchQuery}&page=${currentPage}`,config)
+            axios.get(`artist/search/`,config)
             .then(result=>{
               const { value, count } = result.data.results;
               setData(result.data.results);

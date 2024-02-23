@@ -84,7 +84,7 @@ function Booking({ onClose }) {
 
   return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div ref={popUpRef} className="bg-white p-4 rounded shadow-md my-24">
+          <div ref={popUpRef} className="bg-white p-4 rounded shadow-md  mx-36">
               <button onClick={onClose} className="absolute top-44 right-32 text-white p-2  md:mx-44">
                   Close
               </button>
@@ -125,10 +125,10 @@ function Booking({ onClose }) {
                                  <span className="font-serif text-gray-600 mx-4 my-2 text-lg">Total Price:</span>
                                   <input type="number" className="mx-3 w-16 text-center" value={totalPrice} readOnly />
                                  </div>
-                                  <div className=" flex items-center">
+                                  {/* <div className=" flex items-center">
                                       <span className="font-serif text-gray-600 mx-4 my-2 text-lg">Event ID:</span>
                                       <input type="text" placeholder='entry id' className="mx-3 w-16" value={eventId} onChange={handleEventIdChange} />
-                                  </div>
+                                  </div> */}
                                   <div>
                                   <span className="font-serif text-gray-600 mx-4 my-2 text-lg">Quantity</span>
                                   <button className="px-3 py-1 bg-gray-300 text-white font-bold rounded" onClick={decrementQuantity}>-</button>
@@ -138,7 +138,7 @@ function Booking({ onClose }) {
                                   </div>
                               </div>
                               </div>
-                              <button className="hover:bg-purple-400 bg-purple-500 text-white px-12 py-1 mx-44 rounded " onClick={handlePayClick}>Pay Now</button>
+                              <button className="hover:bg-purple-400 bg-purple-500 text-white px-12 py-1 mx-36 rounded " onClick={handlePayClick}>Pay Now</button>
                           </div>
                       </div>
                   </div>

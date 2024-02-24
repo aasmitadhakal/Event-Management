@@ -32,7 +32,16 @@ function ArtistProfile() {
         event.preventDefault();
         setIsEditing(true);
       };
-     
+      const handlePhotoChange = (event) => {
+        const photo = event.target.files[0];
+        setFormData(prevData => ({
+          ...prevData,
+          photo: photo,
+          photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
+        }));
+      };
+      
+      
       
       
       useEffect(() => {
@@ -82,6 +91,7 @@ function ArtistProfile() {
         }));
       };
      
+     
       const handleSaveClick = (e) => {
         e.preventDefault()
         setIsEditing(false);
@@ -90,9 +100,10 @@ function ArtistProfile() {
         const config = {
           headers: {
               'Authorization': `Bearer ${token}`, // Use the Bearer token here
-              'Content-Type': 'application/json'
+              'Content-Type': 'multipart/form-data'
           }
       }
+    
         const formDataToSend = new FormData();
         // formDataToSend.append('photo', formData.photo);
         formDataToSend.append('name', formData.name);
@@ -123,11 +134,21 @@ function ArtistProfile() {
       });
       };
       const handleUploadClick = () => {
+        setIsEditing(true);
         const fileInput = document.getElementById('fileInput');
         if (fileInput) {
           fileInput.click();
         }
       };
+      
+      useEffect(() => {
+        return () => {
+          if (formData.photoPreview) {
+            URL.revokeObjectURL(formData.photoPreview);
+          }
+        };
+      }, []);
+      
       
   
   return (
@@ -139,13 +160,14 @@ function ArtistProfile() {
             <div className="mb-2 text-gray-800 font-semibold  ">
              {/* for upper section */}
               <div className=" grid grid-cols-3 mx-36">
-              <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 mt-4">
+              <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-36 h-36 mt-4 ring-2 ring-purple-500 ">
                 <a>
-                  <img
-                    src={'http://127.0.0.1:8000/' + formData.photo}
-                    alt={formData.photo}
-                    className="h-44 w-64 rounded-full z-0 object-cover"
-                  />
+               
+                <img
+                  src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
+                  alt={formData.photo}
+                  className="h-44 w-64 rounded-full z-0 object-cover"
+                />    
                 </a>
                 <span
                   onClick={handleUploadClick}
@@ -153,13 +175,13 @@ function ArtistProfile() {
                 >
                   Upload
                 </span>
-                {/* <input
+                <input
                   id="fileInput"
                   type="file"
                   accept="image/*"
                   className="hidden"
                   onChange={handlePhotoChange}
-                /> */}
+                />
               </div>
               <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>

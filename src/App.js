@@ -18,6 +18,7 @@ import About from './Components/About';
 import ContentDraft from './pages/ContentDraft';
 import ContentPublish from './pages/ContentPublish';
 import Profiles from './pages/Profiles';
+import Tiketbooked from './user/Tiketbooked';
 import PasswordReset2 from './Components/PasswordReset2';
 import ArtistLayout from './layout/ArtistLayout';
 import UserLayout from './layout/UserLayout';
@@ -123,6 +124,8 @@ function App() {
       <Route element={<UserLayout />}>
       <Route path='/user' element={<UserProfile />} />
       <Route path='/userchangepassword' element={<UserChangePassword />} />
+      <Route path='/userticketdetail' element={<Tiketbooked />} />
+     
       </Route>
      </Route>
     </Routes>

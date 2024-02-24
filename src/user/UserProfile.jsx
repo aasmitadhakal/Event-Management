@@ -32,54 +32,58 @@ function UserProfile() {
         event.preventDefault();
         setIsEditing(true);
       };
-      // const handlePhotoChange = (event) => {
-      //   const photo = event.target.files[0];
-      //   setFormData(prevData => ({
-      //     ...prevData,
-      //     photo: photo,
-      //   }));
-      // };
+      const handlePhotoChange = (event) => {
+        const photo = event.target.files[0];
+        setFormData(prevData => ({
+          ...prevData,
+          photo: photo,
+          photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
+        }));
+      };
       
       
       useEffect(() => {
-      
-        const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
-
-        const config = {
-          headers: {
-              'Authorization': `Bearer ${token}`, // Use the Bearer token here
-              'Content-Type': 'application/json'
-          }
-      }
-    
-        axios.get('user-profile/', config)
-          .then(response => {
-            const data = response.data;
-            setFormData({
-              id: data.id,
-              name: data.name,
-               photo: data.normaluser.photo,
-              username: data.username,
-              district: data.normaluser.district,
-              email: data.email,
-              contact: data.normaluser.contact,
-              province:data.normaluser.province,
-              gender: data.normaluser.gender,
-            //   performed_in: data.normaluser.performed_in,
-            //   type_of_the_performer: data.normaluser.type_of_the_performer,
-            //   description:data.normaluser.description,
-               ward:data.normaluser.ward,
-              municipality:data.normaluser.municipality,
-              isUser: data.is_user,
-              isAdmin: data.is_admin,
-              isArtist: data.is_artist
-            });
-            setIsEditing(false);
-          })
-          .catch(error => {
-            console.error('Error fetching data:', error);
-          });
+        fetchUserProfile();
       }, [username, userPassword]);
+      
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('accessToken');
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                };
+    
+                const response = await axios.get('user-profile/', config);
+                const data = response.data;
+    
+                setFormData({
+                    id: data.id,
+                    name: data.name,
+                    photo: data.normaluser.photo,
+                    username: data.username,
+                    district: data.normaluser.district,
+                    email: data.email,
+                    contact: data.normaluser.contact,
+                    province: data.normaluser.province,
+                    gender: data.normaluser.gender,
+                    ward: data.normaluser.ward,
+                    municipality: data.normaluser.municipality,
+                    isUser: data.is_user,
+                    isAdmin: data.is_admin,
+                    isArtist: data.is_artist
+                });
+    
+                setIsEditing(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+    
+        
+
       const handleChange = event => {
         const { name, value } = event.target;
         setFormData(prevData => ({
@@ -96,18 +100,18 @@ function UserProfile() {
         const config = {
           headers: {
               'Authorization': `Bearer ${token}`, // Use the Bearer token here
-              'Content-Type': 'application/json'
+              'Content-Type': 'multipart/form-data'
           }
       }
         const formDataToSend = new FormData();
-        // formDataToSend.append('photo', formData.photo);
+        if (formData.photo instanceof File) {
+          formDataToSend.append('photo', formData.photo);
+      }
         formDataToSend.append('name', formData.name);
         formDataToSend.append('username', formData.username);
         formDataToSend.append('contact',formData.contact);
         formDataToSend.append('gender', formData.gender); 
         formDataToSend.append('email', formData.email); 
-        // formDataToSend.append('performed_in', formData.performed_in); 
-        // formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
         formDataToSend.append('province', formData.province); 
         formDataToSend.append('ward', formData.ward);
         formDataToSend.append('isUser', formData.isUser); 
@@ -121,7 +125,12 @@ function UserProfile() {
       .then((result) => {
         // console.log('Request successful:', result.data);
         notify("success","data updated successfully")
-        console.log(formData.name);
+          // Update the formData.photo state with the URL of the newly uploaded photo
+            setFormData(prevData => ({
+              ...prevData,
+              photo: result.data.photo // Assuming result.data.photo contains the new photo URL
+          }));
+        fetchUserProfile();
         setIsEditing(false);
       })
       .catch((error) => {
@@ -129,29 +138,37 @@ function UserProfile() {
       });
       };
       const handleUploadClick = () => {
+        setIsEditing(true);
         const fileInput = document.getElementById('fileInput');
         if (fileInput) {
           fileInput.click();
         }
       };
       
-  
+      useEffect(() => {
+        return () => {
+          if (formData.photoPreview) {
+            URL.revokeObjectURL(formData.photoPreview);
+          }
+        };
+      }, []);
   return (
     <>
     <div>
     
     <div className=" bg-transparent w-full mt-8 bg-gray-300 ">
-          <form className="bg-white shadow-xl mx-24 ">
+          <form className="bg-white shadow-xl mx-44 ">
             <div className="mb-2 text-gray-800 font-semibold  ">
              {/* for upper section */}
               <div className=" grid grid-cols-3 mx-36">
-              <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-32 h-32 mt-4">
+              <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-36 h-36 mt-4 ring-2 ring-purple-500 ">
                 <a>
-                  <img
-                    src={'https://ayushkandel.pythonanywhere.com' + formData.photo}
-                    alt={formData.photo}
-                    className="h-44 w-64 rounded-full z-0 object-cover"
-                  />
+               
+                <img
+                  src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
+                  alt={formData.photo}
+                  className="h-44 w-64 rounded-full z-0 object-cover"
+                />    
                 </a>
                 <span
                   onClick={handleUploadClick}
@@ -159,13 +176,13 @@ function UserProfile() {
                 >
                   Upload
                 </span>
-                {/* <input
+                <input
                   id="fileInput"
                   type="file"
                   accept="image/*"
                   className="hidden"
                   onChange={handlePhotoChange}
-                /> */}
+                />
               </div>
               <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>
@@ -204,15 +221,15 @@ function UserProfile() {
         </div>
       )}
                 </div>     
-                <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-4">Account Information</div>
-            <div className=" grid grid-cols-2 mt-12 mx-36">
+                <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-2">Account Information</div>
+            <div className=" grid grid-cols-2 mt-8 mx-8">
               {/* for half divison */}
               <div>
               
               {/* for name */}
               <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="Name"
                 //   onChange={handleFileUpload}
                 >
@@ -234,7 +251,7 @@ function UserProfile() {
 
                 <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="username"
                 //   onChange={handleFileUpload}
                 >
@@ -255,7 +272,7 @@ function UserProfile() {
 
                <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="contact"
                 //   onChange={handleFileUpload}
                 >
@@ -275,7 +292,7 @@ function UserProfile() {
               {/* for gender */}
             <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="gender"
                 //   onChange={handleFileUpload}
                 >
@@ -295,7 +312,7 @@ function UserProfile() {
            {/* for email */}
            <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="Name"
                 //   onChange={handleFileUpload}
                 >
@@ -315,7 +332,7 @@ function UserProfile() {
                          {/* for province */}
                          <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="province"
                 //   onChange={handleFileUpload}
                 >
@@ -345,7 +362,7 @@ function UserProfile() {
             {/* for district */}
             <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="district"
                 //   onChange={handleFileUpload}
                 >
@@ -365,7 +382,7 @@ function UserProfile() {
                {/* for municipality */}
                <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="municipality"
                 //   onChange={handleFileUpload}
                 >
@@ -384,7 +401,7 @@ function UserProfile() {
               {/* for descrition */}
             <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="description"
                 //   onChange={handleFileUpload}
                 >
@@ -406,7 +423,7 @@ function UserProfile() {
                    {/* for ward */}
                    <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="type_of_the_performer"
                
                 >
@@ -426,7 +443,7 @@ function UserProfile() {
               {/* for performed_in */}
               <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="performed_in"
                
                 >
@@ -446,7 +463,7 @@ function UserProfile() {
                {/* for ward */}
                <div className="   mb-4 text-left ">
                 <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
+                  className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="ward"
                 //   onChange={handleFileUpload}
                 >

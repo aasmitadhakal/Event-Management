@@ -28,6 +28,11 @@ const routes = [
     name: "Change Password",
     icon: <MdPassword />,
   },
+  {
+    path: "/userticketdetail",
+    name: "Ticket Details",
+    icon: <MdPassword />,
+  },
   
  
  

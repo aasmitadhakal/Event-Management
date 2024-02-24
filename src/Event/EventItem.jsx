@@ -81,20 +81,20 @@ const EventItem = () => {
           <img src={event.photo} className='ml-4 h-64 w-72' />
           
           <div className='flex mt-2'>
-            <p className='font-medium font-serif text-gray-400 pl-6 my-2 '>
+            <p className='font-medium font-serif text-gray-600 pl-6 my-2 '>
               {event.date}
               <span className='mx-1'>||</span>
             </p>
-            <p className='font-medium font-serif text-gray-400  my-2'>{event.time}</p>
+            <p className='font-medium font-serif text-gray-600 my-2'>{event.time}</p>
           </div>
           <div className='font-serif pl-4 '>{event.event_name}</div>
-          <div className='flex pr-2 pl-4 font-serif text-gray-400 '>
-            <CiLocationOn className='mt-1 mr-1' />
+          <div className='flex pr-2 pl-4 font-serif text-gray-800'>
+            <CiLocationOn className='mt-1 mr-1 text-lg font-bold' />
             <span className=''>{event.location}</span>
           </div>
 
           <div className='flex justify-end mx-4 text-sm font-serif'>
-            <Link to={`/event/${event.id}`} key={event.id} className='px-4 hover:bg-gray-100 mb-4 py-1 rounded text-gray-500 bg-gray-200'>View Detail</Link>
+            <Link to={`/event/${event.id}`} key={event.id} className='px-4 hover:bg-purple-400 hover:text-white mb-4 py-1 rounded text-gray-600 bg-gray-200'>View Detail</Link>
           </div>
          
        

@@ -14,19 +14,19 @@ function ArtistProfile() {
         name: '',
         username: '',
         email: '',
-         photo:'',
-        contact:'',
-        ward:'',
-        gender:'',
-        province:'',
-        district:'',
-        municipality:'',
-        description:'',
-        performed_in:'',
-        type_of_the_performer:'',
-        isUser: false,
-        isAdmin: false,
-        isArtist: false
+        // photo:'',
+        // contact:'',
+        // ward:'',
+        // gender:'',
+        // province:'',
+        // district:'',
+        // municipality:'',
+        // description:'',
+        // performed_in:'',
+        // type_of_the_performer:'',
+        // isUser: false,
+        // isAdmin: false,
+        // isArtist: false
       });
       const handleEditClick = (event) => {
         event.preventDefault();
@@ -37,45 +37,45 @@ function ArtistProfile() {
         setFormData(prevData => ({
           ...prevData,
           photo: photo,
-          photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
+          // photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
         }));
       };
       
       
       
-      
       useEffect(() => {
-       
-        const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
-
+        const token = localStorage.getItem('accessToken');
         const config = {
           headers: {
-              'Authorization': `Bearer ${token}`, // Use the Bearer token here
-              'Content-Type': 'application/json'
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
           }
-      }
-    
+        };
+      
         axios.get('user-profile/', config)
           .then(response => {
             const data = response.data;
+            const artistData = data.artist || {}; // Check if artist data exists
+      
             setFormData({
               id: data.id,
               name: data.name,
-               photo: data.artist.photo,
-              username: data.username,
-              district: data.artist.district,
               email: data.email,
-              contact: data.artist.contact,
-              province:data.artist.province,
-              gender: data.artist.gender,
-              performed_in: data.artist.performed_in,
-              type_of_the_performer: data.artist.type_of_the_performer,
-              description:data.artist.description,
-              ward:data.artist.ward,
-              municipality:data.artist.municipality,
-              isUser: data.is_user,
-              isAdmin: data.is_admin,
-              isArtist: data.is_artist
+            
+              // photo: artistData.photo || '', // Access photo property with fallback
+              // username: data.username,
+              // district: artistData.district || '', // Access other properties with fallbacks
+              // contact: artistData.contact,
+              // province: artistData.province || '',
+              // gender: artistData.gender || '',
+              // performed_in: artistData.performed_in || '',
+              // type_of_the_performer: artistData.type_of_the_performer || '',
+              // description: artistData.description || '',
+              // ward: artistData.ward || '',
+              // municipality: artistData.municipality || '',
+              // isUser: data.is_user,
+              // isAdmin: data.is_admin,
+              // isArtist: data.is_artist
             });
             setIsEditing(false);
           })
@@ -83,6 +83,9 @@ function ArtistProfile() {
             console.error('Error fetching data:', error);
           });
       }, [username, userPassword]);
+      
+     
+
       const handleChange = event => {
         const { name, value } = event.target;
         setFormData(prevData => ({
@@ -108,19 +111,20 @@ function ArtistProfile() {
         // formDataToSend.append('photo', formData.photo);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('username', formData.username);
-        formDataToSend.append('contact',formData.contact);
-        formDataToSend.append('gender', formData.gender); 
         formDataToSend.append('email', formData.email); 
-        formDataToSend.append('performed_in', formData.performed_in); 
-        formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
-        formDataToSend.append('province', formData.province); 
-        formDataToSend.append('ward', formData.ward);
-        formDataToSend.append('isUser', formData.isUser); 
-        formDataToSend.append('isAdmin', formData.isAdmin); 
-        formDataToSend.append('isArtist', formData.isArtist); 
-        formDataToSend.append('municipality', formData.municipality); 
-        formDataToSend.append('district', formData.district);
-        formDataToSend.append('description', formData.description);  
+        // formDataToSend.append('contact',formData.contact);
+        // formDataToSend.append('gender', formData.gender); 
+       
+        // formDataToSend.append('performed_in', formData.performed_in); 
+        // formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
+        // formDataToSend.append('province', formData.province); 
+        // formDataToSend.append('ward', formData.ward);
+        // formDataToSend.append('isUser', formData.isUser); 
+        // formDataToSend.append('isAdmin', formData.isAdmin); 
+        // formDataToSend.append('isArtist', formData.isArtist); 
+        // formDataToSend.append('municipality', formData.municipality); 
+        // formDataToSend.append('district', formData.district);
+        // formDataToSend.append('description', formData.description);  
         axios
       .put('login-user-profile-update/artist/', formDataToSend,config)
       .then((result) => {
@@ -141,13 +145,13 @@ function ArtistProfile() {
         }
       };
       
-      useEffect(() => {
-        return () => {
-          if (formData.photoPreview) {
-            URL.revokeObjectURL(formData.photoPreview);
-          }
-        };
-      }, []);
+      // useEffect(() => {
+      //   return () => {
+      //     if (formData.photoPreview) {
+      //       URL.revokeObjectURL(formData.photoPreview);
+      //     }
+      //   };
+      // }, []);
       
       
   
@@ -164,7 +168,8 @@ function ArtistProfile() {
                 <a>
                
                 <img
-                  src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
+                  // src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
+                  src={formData.photo}
                   alt={formData.photo}
                   className="h-44 w-64 rounded-full z-0 object-cover"
                 />    
@@ -183,14 +188,14 @@ function ArtistProfile() {
                   onChange={handlePhotoChange}
                 />
               </div>
-              <div className="mt-4 ">
+              {/* <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>
-                {/* <div className="flex justify-center items-center text-slate-500 pl-4  ">{formData.username}<MdVerified className="text-blue-600   "/></div> */}
+               
                 <div className="flex justify-center items-center text-slate-500 pl-10 my-1"><IoLocationSharp className="text-purple-400 text-lg mr-2" />{formData.district},{formData.municipality}</div>
                 <div className="flex justify-center items-center text-slate-500 my-1 "><BsFillTelephoneFill className="text-purple-400 text-lg mr-2"/>{formData.contact}</div>
                 <div className="flex justify-center items-center text-slate-500 pl-10 "><MdEmail className="text-purple-400 text-lg mr-2" />{formData.email}</div>
                 
-              </div>
+              </div> */}
               </div>
              
             </div>
@@ -221,7 +226,7 @@ function ArtistProfile() {
       )}
                 </div>     
                 <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-4">Account Information</div>
-            <div className=" grid grid-cols-2 mt-12 mx-36">
+           
               {/* for half divison */}
               <div>
               
@@ -269,11 +274,11 @@ function ArtistProfile() {
               </div>
                {/* for contact */}
 
-               <div className="   mb-4 text-left ">
+               {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="contact"
-                //   onChange={handleFileUpload}
+                
                 >
                  contact :
                 </label>
@@ -285,15 +290,15 @@ function ArtistProfile() {
                   onChange={handleChange}
                   // disabled={!isEditing}
                   readOnly={!isEditing}
-                />
+                /> */}
 
-              </div>
+           
               {/* for gender */}
-            <div className="   mb-4 text-left ">
+            {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="gender"
-                //   onChange={handleFileUpload}
+                
                 >
                  Gender :
                 </label>
@@ -307,7 +312,7 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-           </div>
+           </div> */}
            {/* for email */}
            <div className="   mb-4 text-left ">
                 <label
@@ -329,7 +334,7 @@ function ArtistProfile() {
 
               </div>
                          {/* for province */}
-                         <div className="   mb-4 text-left ">
+                         {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="province"
@@ -348,7 +353,7 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div>
+              </div> */}
              
              
                 
@@ -359,11 +364,11 @@ function ArtistProfile() {
               {/* <div className="text-medium font-serif text-gray-600 text-lg  my-4">Account Information</div> */}
                  
             {/* for district */}
-            <div className="   mb-4 text-left ">
+            {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="district"
-                //   onChange={handleFileUpload}
+              
                 >
                   District :
                 </label>
@@ -377,10 +382,10 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div>
+              </div> */}
                {/* for municipality */}
                <div className="   mb-4 text-left ">
-                <label
+                {/* <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="municipality"
                 //   onChange={handleFileUpload}
@@ -396,9 +401,9 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
               {/* for descrition */}
-            <div className="   mb-4 text-left ">
+            {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="description"
@@ -417,10 +422,10 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div>
+              </div> */}
     {/* for type_of_the_performer */}
                    {/* for ward */}
-                   <div className="   mb-4 text-left ">
+                   {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="type_of_the_performer"
@@ -438,9 +443,9 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
               {/* for performed_in */}
-              <div className="   mb-4 text-left ">
+              {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="performed_in"
@@ -458,9 +463,9 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
                {/* for ward */}
-               <div className="   mb-4 text-left ">
+               {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="ward"
@@ -478,7 +483,7 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
               </div>
             </div>
 
@@ -495,17 +500,3 @@ function ArtistProfile() {
 
 export default ArtistProfile
 
-{/* <tbody>
-<tr>
-  <td>{apiData.artist.contact}</td>
-  <td><img src={apiData.artist.photo} alt="Artist Photo"></img></td>
-  <td>{apiData.artist.user.name}</td>
-</tr>
-<tr>
-  <td>{apiData.normaluser.contact}</td>
-  <td>
-    <img src={apiData.normaluser.photo} alt="Normal User Photo" />
-  </td>
-  <td>{apiData.normaluser.gender}</td>
-</tr>
-</tbody> */}

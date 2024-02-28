@@ -5,7 +5,7 @@ import {BsCalendar2Date }from 'react-icons/bs'
 import {AiOutlineFieldTime} from 'react-icons/ai';
 import {CiLocationOn} from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
-function Booking({ onClose }) {
+function BookingupcomingEvent({ onClose }) {
   const popUpRef = useRef(null);
   const { id } = useParams(); // Extracting event ID from URL
   const [event, setEvent] = useState(null);
@@ -43,7 +43,7 @@ function Booking({ onClose }) {
   useEffect(() => {
       const fetchEvent = async () => {
           try {
-              const response = await axios.get(`event/search/?search=&page=1`);
+              const response = await axios.get(`event/choice/upcome/`);
               const eventData = response.data.results.find((event) => event.id === parseInt(id));
               setEvent(eventData);
               setTotalPrice(eventData.entry_fee);
@@ -93,7 +93,7 @@ function Booking({ onClose }) {
                   <div className=' '>
                       <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Book <span className='pl-2 text-purple-400'>Event</span></div>
                       <div className='grid  md:grid-cols-2  p-12'>
-                          <div ><img src={event.photo} className=" h-80  " alt=""></img></div>
+                          <div ><img src={'http://127.0.0.1:8000'+event.photo} className=" h-80  " alt=""></img></div>
                           <div>
                               <div className='text-xl font-serif mx-12  my-2'><span className=''>{event.event_name}</span></div>
                               <div className='text-gray-400 font-serif ml-12 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>
@@ -116,12 +116,9 @@ function Booking({ onClose }) {
                               </div>
                               <div className='my-4 pl-4 grid grid-cols-2'>
                                 <div>
-                                <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
-        <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{event.artist}</span>)}</div>
-        <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Sponsor: {event.sponser.map((sponser, index) => <span key={index}>{sponser.name}</span>)}</div>
-                                  {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
+                                  <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
                                   <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist:{event.artist}</div>
-                                  <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Sponser:{event.sponser}</div> */}
+                                  <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Sponser:{event.sponser}</div>
                                   </div>
                                   <div>
                                   <div className=" flex items-center">
@@ -153,4 +150,4 @@ function Booking({ onClose }) {
   )
 }
 
-export default Booking;
+export default BookingupcomingEvent;

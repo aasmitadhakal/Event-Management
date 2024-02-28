@@ -33,8 +33,10 @@ import { TokenProvider } from './Authorization/TokenContext';
 import TodayEventDetail from './Event/TodayEventDetail';
 import YourComponent from './Components/Update';
 import Trail from './Components/Trail';
+import TodayEvent from './Event/TodayEvent';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import Graph from './Artist/Graph';
 function App() {
   const location = useLocation();
   const params = useParams();
@@ -71,10 +73,12 @@ function App() {
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
-      <Route path='/trail' element={<Trail/>} />
+     
       <Route path='/register' element={<Register/>} />
       <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
+      <Route path='/today' element={<TodayEvent/>} />
+      
       <Route path='/userform' element={<UserForm/>} />
       <Route path='/put' element={<YourComponent />} />
       <Route path='/userprofile' element={<UserProfile/>} />
@@ -84,7 +88,7 @@ function App() {
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />
       <Route path='/list' element={<List />} />
-     
+      <Route path='/trail' element={<Trail/>} />
       <Route path='/nav' element={<Nav2 />} />
       <Route path='/listuser' element={<UserList/>} />
       <Route path='/adduser' element={<UserCreate/>} />
@@ -112,7 +116,7 @@ function App() {
       {/* for artistlayout */}
       <Route element={<Protected />}>
       <Route element={<ArtistLayout />}>
-     
+      <Route path='/artistgraph' element={<Graph />} />
       <Route path='/artistprofile' element={<ArtistProfile />} />
       <Route path='/artistchangepassword' element={<ArtistChangePassword />} />
       </Route>

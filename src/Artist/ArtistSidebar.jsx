@@ -24,7 +24,11 @@ const routes = [
     icon: <MdPassword />,
   },
   
- 
+  {
+    path: "/artistgraph",
+    name: "Graph",
+    icon: <FaUser />,
+  },
  
  
  

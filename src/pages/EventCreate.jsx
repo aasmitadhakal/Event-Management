@@ -2,26 +2,13 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import axios from '../api/axios'
 import Select from 'react-select';
-import { Editor } from '@tinymce/tinymce-react'
-import { useNavigate } from 'react-router-dom'
+
 function EventCreate() {
-    const navigate = useNavigate()
+    
    
-    const [selectedOption, setSelectedOption] = useState(''); // To store the selected option from the dropdown
-    const [options, setOptions] = useState([]); // To store the options fetched from the API
-    const[event_name,setEvent_name]=useState('')
-    const[date,setDate]=useState('')
-    const[time,setTime]=useState('')
-    const[location,setLocation]=useState('')
-    const[capacity,setCapacity]=useState('')
-    const[entry_fee,setentry_fee]=useState('')
-    const[event_completed,setevent_completed]=useState('')
-    const[artist,setArtist]=useState('')
-    const[sponser,setSponser]=useState('')
-    const token = localStorage.getItem('accessToken'); 
-    // const username = localStorage.getItem('emailinput') 
-    //   const userPassword = localStorage.getItem('passwordinput');
-      const [artists, setArtists] = useState([]);
+   
+  const [artistList, setArtistList] = useState([]); 
+  const [sponserlist, setSponserlist] = useState([]); 
       const [formData, setFormData] = useState({
           event_name: '',
           date: '',
@@ -35,65 +22,46 @@ function EventCreate() {
         
   });
 
-    // const handleEventName =(e)=>{
-    //     setEvent_name(e.target.value)
-    //   }
-    //   const handleDate =(e)=>{
-    //     setDate(e.target.value)
-    //   }
-    //   const handleTime =(e)=>{
-    //     setTime(e.target.value)
-    //   }
-    //   const handleLocation =(e)=>{
-    //     setLocation(e.target.value)
-    //   }
-    //   const handleCapacity =(e)=>{
-    //     setCapacity(e.target.value)
-    //   }
-    //   const handleEntryFee=(e)=>{
-    //     setentry_fee(e.target.value)
-    //   }
-      const handleEventCompleted =(e)=>{
-        setevent_completed(e.target.value)
-      }
-     
-     
-      const handleIsAvailable=(e)=>{
-        setevent_completed(e.target.checked)
-      }
-    
+  const token = localStorage.getItem('accessToken'); 
+  const config = {
+    headers: {
+      'Authorization': `Bearer ${token}`, // Use the Bearer token here
+      'Content-Type': 'multipart/form-data'
+    }
+  };
       //for artist input field
-      const getArtistName = (artistId) => {
-        const artist = artists.find((a) => a.id === artistId);
-        return artist ? artist.user.name : '';
-      };
+      useEffect(() => {
+        // Fetch artist list from the API
+        axios.get('/artist/list/', config)
+          .then(response => {
+            setArtistList(response.data.results);
+          })
+          .catch(error => {
+            console.error('Error fetching artist list:', error);
+          });
+      }, []); // Empty dependency array ensures this effect runs only once on component mount
+      // for sponserlist from api
+      useEffect(() => {
+        // Fetch artist list from the API
+        axios.get('/sponser/list/', config)
+          .then(response => {
+            setSponserlist(response.data.results);
+          })
+          .catch(error => {
+            console.error('Error fetching artist list:', error);
+          });
+      }, []); 
       const handleChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'artist' || name === 'sponser') {
-          setFormData({
-            ...formData,
-            [name]: value.split(',').map(item => item.trim()), // Split and trim values
-          });
-        } else {
-          setFormData({
-            ...formData,
-            [name]: value,
-          });
-        }
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
       };
-      // const config = {
-      //   headers: {
-      //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      //     'Content-Type': 'multipart/form-data'
-      //   }
-      // };
-      const config = {
-        headers: {
-            'Authorization': `Bearer ${token}`, // Use the Bearer token here
-            'Content-Type': 'multipart/form-data'
-        }
-    }
-      const handleAPi = (e) => {
+    
+    
+    
+      const handleSubmit = (e) => {
         e.preventDefault();
         const postData = new FormData();
         for (const key in formData) {
@@ -103,36 +71,20 @@ function EventCreate() {
             postData.append(key, formData[key]);
           }
         }
-        axios
-        .post("/event/create/", formData,config)
-        .then((result) => {
-          console.log(result.data);
-            navigate("/eventlist",{replace:true});
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          // setLoading(false);
-        });
-      }
-     
-      //geting data from artist list 
-      useEffect(() => {
-        // Fetch data from the API when the component mounts
-        axios.get('/artist/list/',config)
-        .then((response) => {
-          setArtists(response.data.results);
+        axios.post('event/create/', postData, config)
+          .then((response) => {
+            console.log('Success:', response);
+            
           })
-          .catch(error => {
-            console.error('Error fetching data:', error);
+          .catch((error) => {
+            console.error('Error:', error);
           });
-      }, []);
-      
+      };
+    
     
   return (
     <div className='  mt-18 flex justify-center items-center p-12 '>
-    <form onSubmit={handleAPi} encType="multipart/form-data"
+    <form onSubmit={handleSubmit} encType="multipart/form-data"
      className='   p-6 border bg-white shadow-md rounded'>
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Event</div>
     <div className='grid grid-cols-2'>
@@ -220,40 +172,32 @@ function EventCreate() {
         />   
         </div>
         <div className='relative mb-4   mx-12 '>
-  <label htmlFor="artist" className='flex justify-center items-center absolute left-0 top-1 text-gray-600 mb-2 cursor-text ' >Artist:</label>
-  <Select
-    isMulti
-    name="artist"
-    style={{ width: '800px' }}
-    className='flex  pt-6 justify-center items-center  py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors '
-    value={formData.artist.map((artistId) => ({
-      value: artistId,
-      
-      label: getArtistName(artistId),
-    }))}
-    onChange={(selectedOptions) => {
-      setFormData({
-        ...formData,
-        artist: selectedOptions.map((option) => option.value),
-      });
-    }}
-    options={artists.map((artist) => ({
-      
-      value: artist.id,
-      label: artist.user.name,
-    }))}
-  />
+       
+        <select
+        name="artist"
+        value={formData.artist}
+        onChange={handleChange}
+        className="w-2/3 border rounded-md px-4 py-2 mb-4"
+      >
+        <option value="">Select Artist</option>
+        {artistList.map(artist => (
+          <option key={artist.id} value={artist.id}>{artist.user.name}</option>
+        ))}
+      </select>
 </div>
 {/* for sponser */}
 <div className='relative mb-4   mx-12 '>
-        <label className='flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text '>Sponsors </label>
-        <input
-        className='flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'
-          type="text"
-          name="sponser"
-          value={formData.sponser}
-          onChange={handleChange}
-        />
+<select
+        name="sponser"
+        value={formData.sponser}
+        onChange={handleChange}
+        className="w-2/3 border rounded-md px-4 py-2 mb-4"
+      >
+        <option value="">Select Sponser</option>
+        {sponserlist.map(sponser => (
+          <option key={sponser.id} value={sponser.id}>{sponser.name}</option>
+        ))}
+      </select>
       </div>
       <div className='relative mb-4 mx-12'>
   <label htmlFor="photo" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text">Photo</label>

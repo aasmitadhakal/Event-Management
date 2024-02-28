@@ -71,7 +71,7 @@ const UpcomingEvent = () => {
       <Link to={`/upcomingevent/${event.id}`} key={event.id}>
         <div className='shadow-xl bg-white mt-12 rounded-2xl'>
           {/* <img src='img.jpg' className='ml-4 h-64 w-72' /> */}
-          <img src={'http://127.0.0.1:8000/'+event.photo} className='ml-4 h-64 w-72' alt={event.photo} />
+          <img src={'http://127.0.0.1:8000'+event.photo} className='ml-4 h-64 w-72' alt={event.photo} />
           <div className='flex mt-2'>
             <p className='font-medium font-serif text-gray-400 pl-6 my-2 '>
               {event.date}
@@ -96,7 +96,7 @@ const UpcomingEvent = () => {
   </div>
       )
       }
-     <CountdownTimer  />
+     {/* <CountdownTimer  /> */}
       </>
       
       

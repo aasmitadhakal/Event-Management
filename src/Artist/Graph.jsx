@@ -72,7 +72,7 @@ const Graph = () => {
     setChartInstance(newChartInstance);
   };
 
-  return <canvas id="myChart" />;
+  return <canvas className='mx-24 my-2' id="myChart" />;
 };
 
 export default Graph;

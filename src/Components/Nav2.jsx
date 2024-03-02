@@ -11,13 +11,13 @@ const Nav2 = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="bg-white m-4 flex justify-between ">
+    <nav className="bg-purple-400 p-2   flex justify-between ">
       <div className="flex ">
         
       </div>
       <div className="">
         <button
-          className="bg-purple-400 rounded-full px-5 p-1 text-white  justify-end "
+          className="bg-white rounded-full px-5 p-1  text-purple-400  justify-end "
             onClick={logout}
         >
           LogOut

@@ -5,6 +5,7 @@ import {MdEmail} from 'react-icons/md'
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {IoLocationSharp} from 'react-icons/io5';
 import notify from "../utlis/notifier";
+import { ToastContainer } from 'react-toastify';
 function UserProfile() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -93,49 +94,46 @@ function UserProfile() {
       };
      
       const handleSaveClick = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         setIsEditing(false);
-        const token = localStorage.getItem('accessToken'); // Retrieve the Bearer token from local storage
-
+        const token = localStorage.getItem('accessToken');
         const config = {
           headers: {
-              'Authorization': `Bearer ${token}`, // Use the Bearer token here
-              'Content-Type': 'multipart/form-data'
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
           }
-      }
+        };
+      
         const formDataToSend = new FormData();
         if (formData.photo instanceof File) {
           formDataToSend.append('photo', formData.photo);
-      }
+        }
         formDataToSend.append('name', formData.name);
         formDataToSend.append('username', formData.username);
-        formDataToSend.append('contact',formData.contact);
-        formDataToSend.append('gender', formData.gender); 
-        formDataToSend.append('email', formData.email); 
-        formDataToSend.append('province', formData.province); 
+        formDataToSend.append('contact', formData.contact);
+        formDataToSend.append('gender', formData.gender);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('province', formData.province);
         formDataToSend.append('ward', formData.ward);
-        formDataToSend.append('isUser', formData.isUser); 
-        formDataToSend.append('isAdmin', formData.isAdmin); 
-        formDataToSend.append('isArtist', formData.isArtist); 
-        formDataToSend.append('municipality', formData.municipality); 
+        formDataToSend.append('isUser', formData.isUser);
+        formDataToSend.append('isAdmin', formData.isAdmin);
+        formDataToSend.append('isArtist', formData.isArtist);
+        formDataToSend.append('municipality', formData.municipality);
         formDataToSend.append('district', formData.district);
-        // formDataToSend.append('description', formData.description);  
-        axios
-      .put('login-user-profile-update/user/', formDataToSend,config)
-      .then((result) => {
-        // console.log('Request successful:', result.data);
-        notify("success","data updated successfully")
-          // Update the formData.photo state with the URL of the newly uploaded photo
+      
+        axios.put('login-user-profile-update/user/', formDataToSend, config)
+          .then((result) => {
             setFormData(prevData => ({
               ...prevData,
               photo: result.data.photo // Assuming result.data.photo contains the new photo URL
-          }));
-        fetchUserProfile();
-        setIsEditing(false);
-      })
-      .catch((error) => {
-        console.error("Error updating data:", error);
-      });
+            }));
+            notify("success", "Data updated successfully"); // Notify success
+            fetchUserProfile();
+          })
+          .catch((error) => {
+            console.error("Error updating data:", error);
+            notify("error", "Failed to update data"); // Notify error
+          });
       };
       const handleUploadClick = () => {
         setIsEditing(true);
@@ -156,7 +154,7 @@ function UserProfile() {
     <>
     <div>
     
-    <div className=" bg-transparent w-full mt-8 bg-gray-300 ">
+    <div className=" bg-transparent w-full mt-12 bg-gray-300 ">
           <form className="bg-white shadow-xl mx-44 ">
             <div className="mb-2 text-gray-800 font-semibold  ">
              {/* for upper section */}
@@ -221,8 +219,8 @@ function UserProfile() {
         </div>
       )}
                 </div>     
-                <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-2">Account Information</div>
-            <div className=" grid grid-cols-2 mt-8 mx-8">
+                {/* <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-2">Account Information</div> */}
+            <div className=" grid grid-cols-2  mx-8">
               {/* for half divison */}
               <div>
               
@@ -329,27 +327,7 @@ function UserProfile() {
                 />
 
               </div>
-                         {/* for province */}
-                         <div className="   mb-4 text-left ">
-                <label
-                  className=" text-gray-800 text-sm font-medium mb-2"
-                  htmlFor="province"
-                //   onChange={handleFileUpload}
-                >
-                  Province :
-                </label>
-                <input
-                  className="  text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3 leading-tight "
-                  type="text"
-                  name="province"
-                  placeholder="province"
-                  value={formData.province}  
-                  onChange={handleChange}
-                  // disabled={!isEditing}
-                  readOnly={!isEditing}
-                />
-
-              </div>
+                        
              
              
                 
@@ -398,8 +376,29 @@ function UserProfile() {
                   readOnly={!isEditing}
                 />
               </div>
+               {/* for province */}
+               <div className="   mb-4 text-left ">
+                <label
+                  className=" text-gray-800 text-sm font-medium mb-2"
+                  htmlFor="province"
+                //   onChange={handleFileUpload}
+                >
+                  Province :
+                </label>
+                <input
+                  className="  text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3 leading-tight "
+                  type="text"
+                  name="province"
+                  placeholder="province"
+                  value={formData.province}  
+                  onChange={handleChange}
+                  // disabled={!isEditing}
+                  readOnly={!isEditing}
+                />
+
+              </div>
               {/* for descrition */}
-            <div className="   mb-4 text-left ">
+            {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="description"
@@ -418,10 +417,10 @@ function UserProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div>
+              </div> */}
     {/* for type_of_the_performer */}
                    {/* for ward */}
-                   <div className="   mb-4 text-left ">
+                   {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="type_of_the_performer"
@@ -439,9 +438,9 @@ function UserProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
               {/* for performed_in */}
-              <div className="   mb-4 text-left ">
+              {/* <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-800 text-sm font-medium mb-2"
                   htmlFor="performed_in"
@@ -459,7 +458,7 @@ function UserProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div>
+              </div> */}
                {/* for ward */}
                <div className="   mb-4 text-left ">
                 <label
@@ -488,7 +487,7 @@ function UserProfile() {
           </form>
         </div>
 
-
+        <ToastContainer />
     </div>
     </>
   )

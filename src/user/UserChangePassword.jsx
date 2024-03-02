@@ -13,42 +13,43 @@ function ChangePassword() {
   const handlePassword2 =(e)=>{
     setPassword2(e.target.value)
   }
-  const apiUrl = 'https://ayushkandel.pythonanywhere.com/password-change/'; // Replace with your API URL
-  const username = localStorage.getItem('emailinput') // Replace with your username
-  const userPassword = localStorage.getItem('passwordinput'); // Replace with your password
+  const apiUrl = 'password-change/'; // Replace with your API URL
+  // const username = localStorage.getItem('emailinput') // Replace with your username
+  // const userPassword = localStorage.getItem('passwordinput'); // Replace with your password
 
-//   const config = {
-//     headers: {
-//       'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-//       'Content-Type': 'application/json'
-//     }
-//   };
+  const token = localStorage.getItem('accessToken');
+  const config = {
+      headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      }
+  };
 
   const data = {
     password,
     password2
   };
   const handleApi =(e)=>{
-    // e.preventDefault();
-    // axios.post(apiUrl, data, config)
-    // .then(response => {
-    //   console.log('Password changed successfully', response.data);
-    //   notify("success","Password changed successfully")
-    //   setPassword('')
-    //   setPassword2('')
-    //   // Handle success or redirect to a different page
-    // })
-    // .catch(error => {
-    //   console.error('Error changing password', error);
-    //   if (error.response && error.response.data && error.response.data.errors) {
-    //     const errorMessages = Object.values(error.response.data.errors).flat(); 
-    //      errorMessages.forEach(errorMessage => {
-    //      notify("error",errorMessage)
-    //     });
-    //   } else {
-    //     console.log("Error:", error);
-    //   }
-    // });
+    e.preventDefault();
+    axios.post(apiUrl, data, config)
+    .then(response => {
+      console.log('Password changed successfully', response.data);
+      notify("success","Password changed successfully");
+      setPassword('')
+      setPassword2('')
+      // Handle success or redirect to a different page
+    })
+    .catch(error => {
+      console.error('Error changing password', error);
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errorMessages = Object.values(error.response.data.errors).flat(); 
+         errorMessages.forEach(errorMessage => {
+         notify("error",errorMessage)
+        });
+      } else {
+        console.log("Error:", error);
+      }
+    });
 
   }
   return (

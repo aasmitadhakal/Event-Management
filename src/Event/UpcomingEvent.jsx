@@ -68,16 +68,16 @@ const UpcomingEvent = () => {
              <div className='flex items-center justify-center mt-20 text-3xl font-serif '>Upcoming <span className='mx-3 text-purple-600'>Events</span> </div>
         <div className='grid grid-cols-1 md:grid-cols-3 mt-12 gap-8 md:mx-40 mx-20 mb-10'>
     {events.map((event) => (
-      <Link to={`/upcomingevent/${event.id}`} key={event.id}>
+      <Link to={`/event/${event.id}`} key={event.id}>
         <div className='shadow-xl bg-white mt-12 rounded-2xl'>
           {/* <img src='img.jpg' className='ml-4 h-64 w-72' /> */}
           <img src={'http://127.0.0.1:8000'+event.photo} className='ml-4 h-64 w-72' alt={event.photo} />
           <div className='flex mt-2'>
-            <p className='font-medium font-serif text-gray-400 pl-6 my-2 '>
+            <p className='font-medium font-serif text-purple-400 pl-6 my-2 '>
               {event.date}
               <span className='mx-1'>||</span>
             </p>
-            <p className='font-medium font-serif text-gray-400  my-2'>{event.time}</p>
+            <p className='font-medium font-serif text-purple-400  my-2'>{event.time}</p>
           </div>
           <div className='font-serif pl-4 '>{event.event_name}</div>
           <div className='flex pr-2 pl-4 font-serif text-gray-400 '>
@@ -86,7 +86,7 @@ const UpcomingEvent = () => {
           </div>
 
           <div className='flex justify-end mx-4 text-sm font-serif'>
-            <Link to={`/upcomingevent/${event.id}`} key={event.id} className='px-4 hover:bg-gray-100 mb-4 py-1 rounded text-gray-500 bg-gray-200'>View Detail</Link>
+            <Link to={`/event/${event.id}`} key={event.id} className='px-4 hover:bg-gray-100 mb-4 py-1 rounded text-gray-500 bg-gray-200'>View Detail</Link>
           </div>
         </div>
       </Link>

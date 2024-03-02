@@ -34,6 +34,8 @@ import TodayEventDetail from './Event/TodayEventDetail';
 import YourComponent from './Components/Update';
 import Trail from './Components/Trail';
 import TodayEvent from './Event/TodayEvent';
+import ArtistEventDetail from './Artist/ArtistEventDetail';
+import ArtistCreateEvent from './Artist/ArtistCreateEvent';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Graph from './Artist/Graph';
@@ -118,6 +120,8 @@ function App() {
       <Route element={<ArtistLayout />}>
       <Route path='/artistgraph' element={<Graph />} />
       <Route path='/artistprofile' element={<ArtistProfile />} />
+      <Route path='/artisteventdetail' element={<ArtistEventDetail />} />
+      <Route path='/artistcreatename' element={<ArtistCreateEvent />} />
       <Route path='/artistchangepassword' element={<ArtistChangePassword />} />
       </Route>
       </Route>

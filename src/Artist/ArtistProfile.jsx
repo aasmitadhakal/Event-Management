@@ -5,6 +5,8 @@ import {MdEmail} from 'react-icons/md'
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {IoLocationSharp} from 'react-icons/io5';
 import notify from "../utlis/notifier";
+import { ToastContainer } from 'react-toastify';
+import img from '../assets/avatar.png'
 function ArtistProfile() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -14,30 +16,39 @@ function ArtistProfile() {
         name: '',
         username: '',
         email: '',
-        // photo:'',
-        // contact:'',
-        // ward:'',
-        // gender:'',
-        // province:'',
-        // district:'',
-        // municipality:'',
-        // description:'',
-        // performed_in:'',
-        // type_of_the_performer:'',
-        // isUser: false,
-        // isAdmin: false,
-        // isArtist: false
+        photo:'',
+        contact:'',
+        ward:'',
+        gender:'',
+        province:'',
+        district:'',
+        municipality:'',
+        description:'',
+        performed_in:'',
+        type_of_the_performer:'',
+        isUser: false,
+        isAdmin: false,
+        isArtist: false
       });
       const handleEditClick = (event) => {
         event.preventDefault();
         setIsEditing(true);
       };
+      // const handlePhotoChange = (event) => {
+      //   const photo = event.target.files[0];
+      //   setFormData(prevData => ({
+      //     ...prevData,
+      //     photo: photo,
+      //     // photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
+      //   }));
+      // };
+      
       const handlePhotoChange = (event) => {
         const photo = event.target.files[0];
         setFormData(prevData => ({
           ...prevData,
           photo: photo,
-          // photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
+          photoPreview: URL.createObjectURL(photo) // Create a temporary URL for preview
         }));
       };
       
@@ -61,21 +72,20 @@ function ArtistProfile() {
               id: data.id,
               name: data.name,
               email: data.email,
-            
-              // photo: artistData.photo || '', // Access photo property with fallback
-              // username: data.username,
-              // district: artistData.district || '', // Access other properties with fallbacks
-              // contact: artistData.contact,
-              // province: artistData.province || '',
-              // gender: artistData.gender || '',
-              // performed_in: artistData.performed_in || '',
-              // type_of_the_performer: artistData.type_of_the_performer || '',
-              // description: artistData.description || '',
-              // ward: artistData.ward || '',
-              // municipality: artistData.municipality || '',
-              // isUser: data.is_user,
-              // isAdmin: data.is_admin,
-              // isArtist: data.is_artist
+              photo: artistData.photo || '', // Access photo property with fallback
+              username: data.username,
+              district: artistData.district || '', // Access other properties with fallbacks
+              contact: artistData.contact,
+              province: artistData.province || '',
+              gender: artistData.gender || '',
+              performed_in: artistData.performed_in || '',
+              type_of_the_performer: artistData.type_of_the_performer || '',
+              description: artistData.description || '',
+              ward: artistData.ward || '',
+              municipality: artistData.municipality || '',
+              isUser: data.is_user,
+              isAdmin: data.is_admin,
+              isArtist: data.is_artist
             });
             setIsEditing(false);
           })
@@ -108,29 +118,28 @@ function ArtistProfile() {
       }
     
         const formDataToSend = new FormData();
-        // formDataToSend.append('photo', formData.photo);
+         formDataToSend.append('photo', formData.photo);
         formDataToSend.append('name', formData.name);
         formDataToSend.append('username', formData.username);
         formDataToSend.append('email', formData.email); 
-        // formDataToSend.append('contact',formData.contact);
-        // formDataToSend.append('gender', formData.gender); 
-       
-        // formDataToSend.append('performed_in', formData.performed_in); 
-        // formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
-        // formDataToSend.append('province', formData.province); 
-        // formDataToSend.append('ward', formData.ward);
-        // formDataToSend.append('isUser', formData.isUser); 
-        // formDataToSend.append('isAdmin', formData.isAdmin); 
-        // formDataToSend.append('isArtist', formData.isArtist); 
-        // formDataToSend.append('municipality', formData.municipality); 
-        // formDataToSend.append('district', formData.district);
-        // formDataToSend.append('description', formData.description);  
+        formDataToSend.append('contact',formData.contact);
+        formDataToSend.append('gender', formData.gender); 
+        formDataToSend.append('performed_in', formData.performed_in); 
+        formDataToSend.append('type_of_the_performer', formData.type_of_the_performer); 
+        formDataToSend.append('province', formData.province); 
+        formDataToSend.append('ward', formData.ward);
+        formDataToSend.append('isUser', formData.isUser); 
+        formDataToSend.append('isAdmin', formData.isAdmin); 
+        formDataToSend.append('isArtist', formData.isArtist); 
+        formDataToSend.append('municipality', formData.municipality); 
+        formDataToSend.append('district', formData.district);
+        formDataToSend.append('description', formData.description);  
         axios
       .put('login-user-profile-update/artist/', formDataToSend,config)
       .then((result) => {
-        // console.log('Request successful:', result.data);
-        notify("success","data updated successfully")
-        console.log(formData.name);
+         console.log('Request successful:', result.data);
+         notify("success", "Data updated successfully"); 
+        // console.log(formData.name);
         setIsEditing(false);
       })
       .catch((error) => {
@@ -145,13 +154,13 @@ function ArtistProfile() {
         }
       };
       
-      // useEffect(() => {
-      //   return () => {
-      //     if (formData.photoPreview) {
-      //       URL.revokeObjectURL(formData.photoPreview);
-      //     }
-      //   };
-      // }, []);
+      useEffect(() => {
+        return () => {
+          if (formData.photoPreview) {
+            URL.revokeObjectURL(formData.photoPreview);
+          }
+        };
+      }, []);
       
       
   
@@ -159,19 +168,20 @@ function ArtistProfile() {
     <>
     <div>
     
-    <div className=" bg-transparent w-full mt-8 bg-gray-300 ">
-          <form className="bg-white shadow-xl mx-24 ">
+    <div className=" bg-transparent w-full mt-20 bg-gray-300  ">
+          <form className="bg-white shadow-xl mx-12 p-2">
             <div className="mb-2 text-gray-800 font-semibold  ">
              {/* for upper section */}
-              <div className=" grid grid-cols-3 mx-36">
+              <div className=" flex mx-12 ">
               <div className=" flex flex-col relative rounded-full overflow-clip -z-5 w-36 h-36 mt-4 ring-2 ring-purple-500 ">
                 <a>
                
                 <img
-                  // src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
-                  src={formData.photo}
+                  src={formData.photoPreview || `http://127.0.0.1:8000${formData.photo}`}
+                  // src={formData.photo}
                   alt={formData.photo}
                   className="h-44 w-64 rounded-full z-0 object-cover"
+                  // src={img}
                 />    
                 </a>
                 <span
@@ -188,19 +198,19 @@ function ArtistProfile() {
                   onChange={handlePhotoChange}
                 />
               </div>
-              {/* <div className="mt-4 ">
+              <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>
                
                 <div className="flex justify-center items-center text-slate-500 pl-10 my-1"><IoLocationSharp className="text-purple-400 text-lg mr-2" />{formData.district},{formData.municipality}</div>
                 <div className="flex justify-center items-center text-slate-500 my-1 "><BsFillTelephoneFill className="text-purple-400 text-lg mr-2"/>{formData.contact}</div>
                 <div className="flex justify-center items-center text-slate-500 pl-10 "><MdEmail className="text-purple-400 text-lg mr-2" />{formData.email}</div>
                 
-              </div> */}
+              </div>
               </div>
              
             </div>
             {/* for editing part */}
-            <div className="mt-4 flex mx-36 gap-2">
+            <div className="mt-4 flex  gap-2 mx-12">
                   {/* for icons */}
                   <div className="border rounded px-1 py-2 border-purple-400">
                     <AiTwotoneEdit  onClick={handleEditClick} className="text-purple-400"/>
@@ -225,13 +235,14 @@ function ArtistProfile() {
         </div>
       )}
                 </div>     
-                <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-4">Account Information</div>
+                {/* <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-4">Account Information</div> */}
            
               {/* for half divison */}
-              <div>
               
+              <div className="grid grid-cols-3 mt-8 ml-12 mx-2">
+                <div>
               {/* for name */}
-              <div className="   mb-4 text-left ">
+              <div className="mt-2   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="Name"
@@ -253,7 +264,7 @@ function ArtistProfile() {
               </div>
                 {/* for username */}
 
-                <div className="   mb-4 text-left ">
+                <div className="  mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="username"
@@ -272,49 +283,8 @@ function ArtistProfile() {
                 />
 
               </div>
-               {/* for contact */}
-
-               {/* <div className="   mb-4 text-left ">
-                <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
-                  htmlFor="contact"
-                
-                >
-                 contact :
-                </label>
-                <input
-                  className=" text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
-                  type="number"
-                  name="contact"
-                  value={formData.contact}  
-                  onChange={handleChange}
-                  // disabled={!isEditing}
-                  readOnly={!isEditing}
-                /> */}
-
-           
-              {/* for gender */}
-            {/* <div className="   mb-4 text-left ">
-                <label
-                  className=" text-gray-500 text-sm font-medium mb-2"
-                  htmlFor="gender"
-                
-                >
-                 Gender :
-                </label>
-                <input
-                  className=" text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
-                  type="text"
-                  name="gender"
-                  value={formData.gender}  
-                  onChange={handleChange}
-                  // disabled={!isEditing}
-                  readOnly={!isEditing}
-                />
-
-           </div> */}
-           {/* for email */}
-           <div className="   mb-4 text-left ">
+               {/* for email */}
+           <div className="  mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="Name"
@@ -333,8 +303,53 @@ function ArtistProfile() {
                 />
 
               </div>
+               {/* for contact */}
+
+            <div className="   mb-4 text-left ">
+                <label
+                  className=" text-gray-500 text-sm font-medium mb-2"
+                  htmlFor="contact"
+                
+                >
+                 contact :
+                </label>
+                <input
+                  className=" text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
+                  type="number"
+                  name="contact"
+                  value={formData.contact}  
+                  onChange={handleChange}
+                  // disabled={!isEditing}
+                  readOnly={!isEditing}
+                /> 
+
+           </div>
+           </div>
+           {/* for division */}
+           <div>
+              {/* for gender */}
+            <div className="   mb-4 text-left ">
+                <label
+                  className=" text-gray-500 text-sm font-medium mb-2"
+                  htmlFor="gender"
+                
+                >
+                 Gender :
+                </label>
+                <input
+                  className=" text-gray-500 text-sm font-medium  outline-none appearance-none  rounded w-64 py-2 px-3  leading-tight "
+                  type="text"
+                  name="gender"
+                  value={formData.gender}  
+                  onChange={handleChange}
+                  // disabled={!isEditing}
+                  readOnly={!isEditing}
+                />
+
+           </div>
+          
                          {/* for province */}
-                         {/* <div className="   mb-4 text-left ">
+                         <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="province"
@@ -353,18 +368,18 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div> */}
+              </div>
              
              
                 
-                 
-              </div>
+                
+              
               {/* for half division */}
-              <div>
+          
               {/* <div className="text-medium font-serif text-gray-600 text-lg  my-4">Account Information</div> */}
                  
             {/* for district */}
-            {/* <div className="   mb-4 text-left ">
+            <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="district"
@@ -382,10 +397,10 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div> */}
+              </div>
                {/* for municipality */}
                <div className="   mb-4 text-left ">
-                {/* <label
+                <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="municipality"
                 //   onChange={handleFileUpload}
@@ -401,9 +416,12 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div> */}
+              </div>
+              </div>
+              {/* for division */}
+              <div>
               {/* for descrition */}
-            {/* <div className="   mb-4 text-left ">
+            <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="description"
@@ -422,10 +440,10 @@ function ArtistProfile() {
                   readOnly={!isEditing}
                 />
 
-              </div> */}
+              </div>
     {/* for type_of_the_performer */}
                    {/* for ward */}
-                   {/* <div className="   mb-4 text-left ">
+                   <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="type_of_the_performer"
@@ -443,9 +461,9 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div> */}
+              </div>
               {/* for performed_in */}
-              {/* <div className="   mb-4 text-left ">
+              <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="performed_in"
@@ -463,9 +481,9 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div> */}
+              </div>
                {/* for ward */}
-               {/* <div className="   mb-4 text-left ">
+               <div className="   mb-4 text-left ">
                 <label
                   className=" text-gray-500 text-sm font-medium mb-2"
                   htmlFor="ward"
@@ -483,15 +501,16 @@ function ArtistProfile() {
                   // disabled={!isEditing}
                   readOnly={!isEditing}
                 />
-              </div> */}
               </div>
-            </div>
+              </div>
+              </div>
 
-            
+              
  
           </form>
+          <ToastContainer/>
         </div>
-
+       
 
     </div>
     </>

@@ -77,7 +77,7 @@ function Navbar({data}){
         <motion.div
       
          className={` ${navBackground} transition-colors duration-300  fixed top-0 z-10000  w-screen `}>
-          <div className='grid grid-cols-2 border-b '>
+          <div className='grid grid-cols-2 shadow-xl '>
               {/* for logo */}
               <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src={img} className="h-16 w-28"></img></div>
               <div className={"md:hidden block text-3xl font-bold ml-auto mt-2 pr-8"}
@@ -112,7 +112,7 @@ function Navbar({data}){
                   ))}
                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                    {/* for login button */}
-                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
+                   <div className="my-2 bg-purple-400 text-white" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
                    <div className="my-2 text-3xl font-bold"><MdOutlineNotificationsNone /></div>
                   </div>
                 )}

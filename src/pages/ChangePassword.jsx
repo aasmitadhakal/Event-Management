@@ -14,15 +14,23 @@ function ChangePassword() {
     setPassword2(e.target.value)
   }
   const apiUrl = 'password-change/'; // Replace with your API URL
+  const token = localStorage.getItem('accessToken');
+                const config = {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                };
   const username = localStorage.getItem('emailinput') // Replace with your username
   const userPassword = localStorage.getItem('passwordinput'); // Replace with your password
 
-  const config = {
-    headers: {
-      'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
-      'Content-Type': 'application/json'
-    }
-  };
+  // const config = {
+  //   headers: {
+  //     'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
+  //     'Content-Type': 'application/json'
+  //   }
+  // };
+
 
   const data = {
     password,

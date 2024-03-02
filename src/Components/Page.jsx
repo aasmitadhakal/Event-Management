@@ -34,7 +34,7 @@ const  Page = () => {
       {Array.isArray(apiData) && apiData.length > 0 ? (
         apiData.map(item => (
           <div
-          className='mt-24'
+          className='mt-24 mx-24'
           key={item.id}>
                      <div dangerouslySetInnerHTML={{ __html: item.content}} />
           </div>

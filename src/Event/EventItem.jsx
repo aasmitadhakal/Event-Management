@@ -81,13 +81,13 @@ const EventItem = () => {
           <img src={event.photo} className='ml-4 h-64 w-72' />
           
           <div className='flex mt-2'>
-            <p className='font-medium font-serif text-gray-600 pl-6 my-2 '>
+            <p className='font-medium font-serif text-purple-600 pl-6 my-2 '>
               {event.date}
               <span className='mx-1'>||</span>
             </p>
-            <p className='font-medium font-serif text-gray-600 my-2'>{event.time}</p>
+            <p className='font-medium font-serif text-purple-600 my-2'>{event.time}</p>
           </div>
-          <div className='font-serif pl-4 '>{event.event_name}</div>
+          <div className='font-serif pl-4 font-medium '>{event.event_name}</div>
           <div className='flex pr-2 pl-4 font-serif text-gray-800'>
             <CiLocationOn className='mt-1 mr-1 text-lg font-bold' />
             <span className=''>{event.location}</span>

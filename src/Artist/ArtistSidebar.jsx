@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { BsGraphUpArrow ,BsTicketDetailed} from "react-icons/bs";
+
 import {
   FaRegListAlt,
   FaUser,
@@ -18,18 +20,28 @@ const routes = [
     name: "Profile",
     icon: <FaUser />,
   },
+  
+  
+  {
+    path: "/artistgraph",
+    name: "Graph",
+    icon: <BsGraphUpArrow />,
+  },
+  {
+    path: "/artisteventdetail",
+    name: "Event Detail",
+    icon: <BsTicketDetailed />,
+  },
+  {
+    path: "/artistcreatename",
+    name: "Create Event",
+    icon: <BsTicketDetailed />,
+  },
   {
     path: "/artistchangepassword",
     name: "Change Password",
     icon: <MdPassword />,
   },
-  
-  {
-    path: "/artistgraph",
-    name: "Graph",
-    icon: <FaUser />,
-  },
- 
  
  
 ];
@@ -43,7 +55,7 @@ const SideItem = ({ routeObj }) => {
   return routeObj.submenus ? (
     <div className={`w-full  h-full `} onClick={toggleSubMenu}>
         {/* for submenu */}
-      <div className=" text-purple-500  cursor-pointer justify-start  hover:bg-light-white py-2  px-3  rounded flex gap-4 items-center">
+      <div className=" text-white  cursor-pointer justify-start  hover:bg-light-white py-2  px-3  rounded flex gap-4 items-center">
         <span className={`text-xl ${showSubMenu && activetoggleCss && activeRouteCss }`}>
           {" "}
           {routeObj.icon}
@@ -58,7 +70,7 @@ const SideItem = ({ routeObj }) => {
               <NavLink
                 to={submenu.path}
                 className={({ isActive }) =>
-                `text-purple-500 justify-start  font-bold  px-3  hover:bg-light-white py-2  rounded flex  gap-2 items-center ${
+                `text-white justify-start  font-bold  px-3  hover:bg-light-white py-2  rounded flex  gap-2 items-center ${
                     isActive && activeRouteCss && activeHoverCss
                   } `
                 }
@@ -75,7 +87,7 @@ const SideItem = ({ routeObj }) => {
     <NavLink
       to={routeObj.path}
       className={({ isActive }) =>
-        `  px-3   rounded flex justify-start gap-4 items-center hover:bg-light-white py-2 text-purple-500 ${
+        `  px-3   rounded flex justify-start gap-4 items-center hover:bg-light-white py-2 text-white ${
             isActive && activeRouteCss && activeHoverCss
         }`
       }
@@ -90,7 +102,7 @@ const SideItem = ({ routeObj }) => {
 const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
   return (
     <>
-      <div className=" shadow-xl cursor-pointer w-full h-screen overflow-auto z-99 bg-gradient-to-t bg-white text-purple-700  font-sans font font-medium text-sm">
+      <div className=" shadow-xl cursor-pointer w-full h-screen overflow-auto z-99 bg-gradient-to-t bg-gradient-to-t from-blue-200 to-purple-400 text-white  font-sans font font-medium text-sm">
         {/* Top Header */}
         <div className=" border-b border-red-500 border-b-white flex justify-between lg:justify-center items-center py-2">
            {/* <div className="h-12 w-12 ">
@@ -99,12 +111,12 @@ const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
            {
             sidebarOpen ? (
                 <div className="flex">
-             <h1 className="text-xl my-2 font-medium text-purple inline">Artist Profile </h1>
+             <h1 className="text-xl my-2 font-medium text-purple font-serif inline">Artist Profile </h1>
              <div className="flex">
         <span onClick={toggleSidebar}>
-         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-purple-500 ml-2 mt-1 text-xs font-medium' /> */}
+         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-white ml-2 mt-1 text-xs font-medium' /> */}
           <svg
-            className="  w-6 h-6 mt-3 text-purple-500 ml-2  text-xs font-medium"
+            className="  w-6 h-6 mt-3 text-white ml-2  text-xs font-medium"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -125,9 +137,9 @@ const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
             (
             <div onClick={toggleSidebar}>
                 <span onClick={toggleSidebar}>
-         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-purple-500 ml-2 mt-1 text-xs font-medium' /> */}
+         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-white ml-2 mt-1 text-xs font-medium' /> */}
           <svg
-            className="  w-6 h-6 text-purple-500 ml-2 mt-1 text-xs font-medium"
+            className="  w-6 h-6 text-white ml-2 mt-1 text-xs font-medium"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

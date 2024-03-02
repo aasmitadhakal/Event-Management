@@ -31,6 +31,7 @@ function Tiketbooked() {
     {tickets.map((ticket) => (
       <div key={ticket.ticket_id} className="shadow-xl font-serif rounded-lg p-4 mb-4 mx-44 my-18">
         {/* <div className='h-44 w-2/3'><img src={ticket.event.photo}></img></div> */}
+      
         <div className="flex justify-between mb-2">
           <h2 className=" font-bold">{ticket.event.event_name}</h2>
           <span className="text-gray-600 "><span className='font-bold'>Ticket Num:</span>{ticket.ticket_num}</span>

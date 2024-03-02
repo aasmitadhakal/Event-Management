@@ -1,6 +1,7 @@
 import React from "react";
 import { AiOutlineClose, AiFillCaretDown, AiOutlineKey } from "react-icons/ai";
-import {MdPassword} from "react-icons/md"
+import {MdPassword} from "react-icons/md";
+import {  BsTicketDetailed} from "react-icons/bs";
 import { NavLink } from "react-router-dom";
 import {
   FaRegListAlt,
@@ -23,14 +24,15 @@ const routes = [
     icon: <FaUser />,
   },
   
-  {
-    path: "/userchangepassword",
-    name: "Change Password",
-    icon: <MdPassword />,
-  },
+  
   {
     path: "/userticketdetail",
     name: "Ticket Details",
+    icon: <BsTicketDetailed />,
+  },
+  {
+    path: "/userchangepassword",
+    name: "Change Password",
     icon: <MdPassword />,
   },
   
@@ -105,7 +107,7 @@ const UserSidebar = ({sidebarOpen,toggleSidebar }) => {
            {
             sidebarOpen ? (
                 <div className="flex">
-             <h1 className="text-xl my-2 font-medium text-white inline">User Dashboard </h1>
+             <h1 className="text-xl my-2 font-medium font-serif text-white inline">User Dashboard </h1>
              <div className="flex">
         <span onClick={toggleSidebar}>
          {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-white ml-2 mt-1 text-xs font-medium' /> */}

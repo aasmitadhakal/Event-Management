@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import Recommandation from './Recommandation';
 const  Page = () => {
   const { id } = useParams();
   const [apiData, setApiData] = useState([]);
@@ -11,6 +12,7 @@ const  Page = () => {
     axios.get(`event-management/${id}/`)
       .then((response) => {
         setApiData(response.data);
+        console.log(response.data);
         
       })
       .catch((error) => {
@@ -37,11 +39,14 @@ const  Page = () => {
           className='mt-24 mx-24'
           key={item.id}>
                      <div dangerouslySetInnerHTML={{ __html: item.content}} />
+                     
           </div>
+        
         ))
       ) : (
         <p>Loading or no data available</p>
       )}
+      <Recommandation/>
     </div>
   );
 };

@@ -36,6 +36,8 @@ import Trail from './Components/Trail';
 import TodayEvent from './Event/TodayEvent';
 import ArtistEventDetail from './Artist/ArtistEventDetail';
 import ArtistCreateEvent from './Artist/ArtistCreateEvent';
+import Recommandation from './Components/Recommandation';
+import Notification from './Components/Notification';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import Graph from './Artist/Graph';
@@ -66,6 +68,8 @@ function App() {
       <Route path='/users' element={<UsersForm />} />
       <Route path='/header' element={<Header />} />
       <Route path='/about' element={<About />} />
+      <Route path='/notification' element={<Notification />} />
+      <Route path='/recomm' element={<Recommandation />} />
       <Route path='/blog' element={<Blog />} />
       <Route path='/boking' element={<Booking />} />
       <Route path='/event' element={<EventItem />} />

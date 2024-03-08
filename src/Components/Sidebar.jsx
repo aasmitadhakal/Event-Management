@@ -1,5 +1,9 @@
 import React from "react";
 import { AiOutlineClose, AiFillCaretDown,AiOutlineDown, AiOutlineKey } from "react-icons/ai";
+import { MdOutlineMedicalInformation } from "react-icons/md";
+import { FaPeopleCarryBox } from "react-icons/fa6";
+import { SiEventbrite } from "react-icons/si";
+import { CiUser } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import {
   FaRegListAlt,
@@ -25,7 +29,7 @@ const routes = [
   },
   {
     name: "Normal Users",
-    icon: <FaUsers />,
+    icon: <CiUser />,
     submenus: [
       {
         name: "View Users",
@@ -59,11 +63,11 @@ const routes = [
   },
   {
     name: "Artist",
-    icon: <FaBook />,
+    icon: <MdOutlineMedicalInformation />,
     submenus: [
       {
         name: "View Artist",
-        icon: <FaRegListAlt />,
+        icon: <MdLibraryAdd />,
         path: "/alist",
       },
       {
@@ -80,7 +84,7 @@ const routes = [
   },
   {
     name: "Spon",
-    icon: <FaBook />,
+    icon: <FaPeopleCarryBox />,
     submenus: [
       {
         name: "View Sponser",
@@ -102,7 +106,7 @@ const routes = [
   
   {
     name: "Event",
-    icon: <FaBook />,
+    icon: <SiEventbrite />,
     submenus: [
       {
         name: "View Event",

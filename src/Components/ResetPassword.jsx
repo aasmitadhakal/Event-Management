@@ -13,7 +13,7 @@ function ResetPassword() {
     
     const SendLink =(e)=>{
         e.preventDefault();   
-        axios.post("send-reset-password-email/", {
+        axios.post("send-reset-password-email/ ", {
             email: email,
            
           })

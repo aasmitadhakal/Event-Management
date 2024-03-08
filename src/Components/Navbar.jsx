@@ -98,7 +98,7 @@ function Navbar({data}){
                   {/* for login button */}
                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
                   {/* for notification */}
-                  <div className="my-2 text-3xl font-bold"><MdOutlineNotificationsNone /></div>
+                  <Link to ='/notification' className="my-2 text-3xl font-bold "><MdOutlineNotificationsNone /></Link>
                   </div>
                   
                 </div>

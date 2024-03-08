@@ -7,7 +7,6 @@ import { AiOutlineFieldTime } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
 import { Navbar } from '../Components';
 import UpcomingEvent from './UpcomingEvent';
-import img from '../assets/img.jpg';
 import Fotter from '../Components/Fotter';
 import Booking from '../Components/Booking';
 
@@ -16,8 +15,7 @@ const EventDetail = () => {
     const [event, setEvent] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showPopUp, setShowPopUp] = useState(false);
-    const [dataToShow, setDataToShow] = useState(null);
-    const [page, setPage] = useState(1); // State for pagination
+    const [dataToShow, setDataToShow] = useState(null); // Define dataToShow state variable
     const [remainingTime, setRemainingTime] = useState(null);
 
     const handleOpenPopUp = () => {
@@ -114,65 +112,53 @@ const EventDetail = () => {
                                 </div>
                                 <div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>No_of_Participant: {event.no_of_participant}</div>
-                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{event.artist}</span>)}</div>
+                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{artist.user.name}</span>)}</div>
                                     {/* for timer */}
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                                {remainingTime > 0 ? (
-                                   <div className=" space-x-2">
-                                  
-                                   <div className=" ">
-                                     {/* Display the countdown timer */}
-                                     {/* <div>Remaning Time</div> */}
-                                     <div className="grid grid-cols-3 auto-cols-max ">
-                                       
-                                       <div className=" text-sm text-center  text-neutral-content bg-purple-300 border  "><span className='countdown font-mono  '>{formatTime(remainingTime).hours}</span><br />Hours</div>
-                                       <div className=" text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).minutes}</span><br />Minutes</div>
-                                       <div className="text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).seconds}</span><br />Seconds</div>
-                                     </div>
-                                   </div>
-                                 </div>
-                                ) : "Event has started"}
-                            </div>
+                                        {remainingTime > 0 ? (
+                                            <div className=" space-x-2">
+                                                <div className=" ">
+                                                    {/* Display the countdown timer */}
+                                                    <div className="grid grid-cols-3 auto-cols-max ">
+                                                        <div className=" text-sm text-center  text-neutral-content bg-purple-300 border  "><span className='countdown font-mono  '>{formatTime(remainingTime).hours}</span><br />Hours</div>
+                                                        <div className=" text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).minutes}</span><br />Minutes</div>
+                                                        <div className="text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).seconds}</span><br />Seconds</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : "Event has started"}
+                                    </div>
                                 </div>
                             </div>
-                             {/* Display the countdown timer */}
-                             {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                                {remainingTime > 0 ? (
-                                   <div className=" space-x-2">
-                                  
-                                   <div className=" ">
-                                 
-                                     <div className="grid grid-cols-3 auto-cols-max ">
-                                       
-                                       <div className="  text-center  text-neutral-content bg-purple-300 border  "><span className='countdown font-mono text-2xl '>{formatTime(remainingTime).hours}</span><br />Hours</div>
-                                       <div className="text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono text-2xl'>{formatTime(remainingTime).minutes}</span><br />Minutes</div>
-                                       <div className="text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono text-2xl'>{formatTime(remainingTime).seconds}</span><br />Seconds</div>
-                                     </div>
-                                   </div>
-                                 </div>
-                                ) : "Event has started"}
-                            </div> */}
-                            
                             {/* for sponser */}
                             <div className='flex'>
-                            <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'> Sponsor: {event.sponser.map((sponser, index) => <span key={index}>{sponser.name}</span>)}</div>
-                            <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
-                                {event.sponser.map((sponser, index) => <span key={index}><span key={index}>sponsor_type:{sponser.sponser_type}</span></span>)}
+                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
+                                    Sponsors:
+                                    {event.sponser.map((sponsor, index) => (
+                                        <div key={index}>
+                                            <div>{sponsor.name}</div>
+                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
+                                            <img src={sponsor.photo} className='h-12 w-16' alt={sponsor.name} />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                            <div>
-                                {event.sponser.map((sponser, index) => <span key={index}><img src={sponser.photo} className='h-16 w-16'></img></span>)}
+                            {/* for artist */}
+                            <div className='flex'>
+                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
+                                    Artist:
+                                    {event.artist.map((artist, index) => (
+                                        <div key={index}>
+                                            <div>{artist.user.name}</div>
+                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
+                                            <img src={artist.photo} className='h-12 w-16' alt={artist.name} />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                           
                         </div>
-
-                        </div>
-
                     </div>
                     <div className='flex justify-end '><button onClick={handleOpenPopUp} className='hover:bg-purple-400 bg-purple-500 text-white px-36 py-1 rounded '>Book Now</button></div>
-                  
-                       
-                           
-                        
                 </div>
                 <UpcomingEvent />
                 {showPopUp && (

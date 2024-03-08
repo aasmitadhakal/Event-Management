@@ -136,15 +136,15 @@ function ContentCreate() {
               images_upload_handler: handleImageUpload,
               setup: function (editor) {
                 editor.on('init', function () {
-                  const editorContainer = editor.getContainer();
-                  const touchStartListeners = editorContainer.querySelectorAll('*');
-                  touchStartListeners.forEach(function (el) {
-                    el.addEventListener('touchstart', function (e) {
-                      e.preventDefault();
-                    }, { passive: true });
-                  });
+                    const editorContainer = editor.getContainer();
+                    const touchStartListeners = editorContainer.querySelectorAll('*');
+                    touchStartListeners.forEach(function (el) {
+                        el.addEventListener('touchstart', function (e) {
+                            // Remove the call to preventDefault() here
+                        }, { passive: true });
+                    });
                 });
-              }
+            }
             }}
           />
         </div>

@@ -35,12 +35,12 @@ const EventDetail = ({ event }) => {
     
     <motion.div
     
-    className="  md:z-[-1] z-[-1] bg-white  relative "
+    className="  laptop:z-[-1] z-[-1] bg-white  relative "
     
      >
  <div className=''>
     <div className=" relative flex   justify-center items-center  "><img src={img} className="opacity-80  w-full h-84  rounded " alt=""></img></div>
-    <div className="p-2 rounded-xl font-serif top-36 mx-4 md:mx-72 text-3xl  absolute left-10 text-black-900 cursor-pointer bg-purple-200 ">{event.event_name}</div>
+    <div className="p-2 rounded-xl font-serif top-36 mx-4 laptop:mx-72 text-3xl  absolute left-10 text-black-900 cursor-pointer bg-purple-200 ">{event.event_name}</div>
     <div className='top-56  flex justify-center item-center  text-xl  absolute left-80 mx-64 bg-purple-300 text-black-900 px-4 py-2 rounded-xl hover:bg-purple-600 hover:text-white  '><button >Book Now</button></div>
     
       <div className='bg-white absolute top-80 shadow-xl h-64 w-2/3 mx-44  grid grid-cols-3 gap-x-12'>

@@ -8,7 +8,7 @@ import { Skeleton } from '@mui/material';
 import img from '../assets/logo.jpg'
 import axios from "../api/axios";
 import {MdOutlineNotificationsNone} from 'react-icons/md'
-function Navbar({data}){
+function Navbar({ toggleNotifications }){
     const[toggle,settoggle]=useState('false')
     const[showNavbar,setShownavbar]=useState(false)
     const[hasaccount,setHasaccount]=useState(true)
@@ -98,13 +98,13 @@ function Navbar({data}){
                   {/* for login button */}
                   <div className="my-2" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
                   {/* for notification */}
-                  <Link to ='/notification' className="my-2 text-3xl font-bold "><MdOutlineNotificationsNone /></Link>
+                  <div  className="my-2 text-3xl font-bold "><MdOutlineNotificationsNone  onClick={toggleNotifications}  /></div>
                   </div>
                   
                 </div>
                 {/* for mobile view */}
                 {mobileView &&(
-                  <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all   md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36  md:grid  md:grid-cols-6 md:mx-0 z-1000 text-xl" >
+                  <div className="font-sans-serif block md:hidden duration-150 ease-out md:ease-in text-grays z-1000 transition-all   md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36   md:grid-cols-6 md:mx-0 z-1000 text-xl" >
                  {navbarData.map((item, index) => (
                     <div key={index} className="my-2 decoration-clone hover:scale-125 duration-300 hover:text-purple-400">
                       <Link to={`/page/${item.id}`}>{item.heading}</Link>
@@ -113,7 +113,9 @@ function Navbar({data}){
                 <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                    {/* for login button */}
                    <div className="my-2 bg-purple-400 text-white" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400   " onClick={()=>setShownavbar(true)}>Login </button></div>
-                   <div className="my-2 text-3xl font-bold"><MdOutlineNotificationsNone /></div>
+                   <div className="my-2 text-3xl font-bold">
+                    <MdOutlineNotificationsNone onClick={toggleNotifications} />
+                  </div>
                   </div>
                 )}
                 

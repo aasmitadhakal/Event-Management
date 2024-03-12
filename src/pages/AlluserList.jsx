@@ -159,14 +159,14 @@ function AlluserList() {
            <th className=" p-3  text-sm font-semibold ">Name</th>
            <th className=" p-3 text-sm font-semibold ">UserName</th>
            <th className=" p-3 text-sm font-semibold ">Email</th>
-           <th className=" p-3 text-sm font-semibold ">is_artist</th>
-           <th className=" p-3 text-sm font-semibold ">is_user</th>
+           {/* <th className=" p-3 text-sm font-semibold ">is_artist</th>
+           <th className=" p-3 text-sm font-semibold ">is_user</th> */}
            <th className=" p-3 text-sm font-semibold ">is_active</th>
            <th className=" p-3 text-sm font-semibold ">is_admin</th>
            <th className=" p-3 text-sm font-semibold ">artist</th>
            <th className=" p-3 text-sm font-semibold ">normaluser</th>
            <th className=" p-3 text-sm font-semibold ">Date_created</th>
-           <th className=" p-3 text-sm font-semibold ">date_updated</th>
+           {/* <th className=" p-3 text-sm font-semibold ">date_updated</th> */}
            <th className=" p-3 text-sm font-semibold ">Action</th>
            
          </tr>
@@ -178,14 +178,14 @@ function AlluserList() {
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.name}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.username}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.email}</td>
-             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_artist?'Yes':'No'}</td>
-             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_user?'Yes':'No'}</td>
+             {/* <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_artist?'Yes':'No'}</td>
+             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_user?'Yes':'No'}</td> */}
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_active?'Yes':'No'}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.is_admin?'Yes':'No'}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.artist?item.artist:item.artist}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.normaluser?item.normaluser:'Null'}</td>
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.date_created}</td>
-             <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.date_updated}</td>
+             {/* <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.date_updated}</td> */}
              <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>
               <Link to ="/alluserupdate">
               <button

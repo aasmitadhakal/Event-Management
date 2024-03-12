@@ -68,7 +68,7 @@ function ChangePassword() {
        <div className='relative mb-8  mx-12 '>
        <label   htmlFor="new password" className="absolute    text-gray-600 cursor-text ">New Password</label>
     <input
-      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer w-64" autoComplete="off"
        id="Password"
        type="text"
        name="password"
@@ -81,7 +81,7 @@ function ChangePassword() {
  <div className='relative mb-4   mx-12  '> 
   <label   htmlFor="password"  className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Confirm Password</label>
     <input
-      className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autoComplete="off"
+      className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors w-64" autoComplete="off"
       id="password"
       type="password"
       name="password"

@@ -118,10 +118,10 @@ function Booking({ onClose }) {
                   <div>
                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                        Artist: {event.artist ? event.artist.map((artist, index) => <span key={index}>{artist.user.name}</span>) : ''}
+                        Artist: {event.artist ? event.artist.map((artist, index) => <span key={index}>{artist.user?.name}</span>) : ''}
                         </div>
                         <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                        Sponsor: {event.sponsor ? event.sponsor.map((sponsor, index) => <span key={index}>{sponsor.name}</span>) : ''}
+                        Sponsor: {event.sponsor ? event.sponsor.map((sponsor, index) => <span key={index}>{sponsor?.name}</span>) : ''}
                         </div>
                   </div>
                   <div>

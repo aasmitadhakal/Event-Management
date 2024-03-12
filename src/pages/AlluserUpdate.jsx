@@ -72,7 +72,7 @@ function AlluserUpdate() {
       <div className='relative mb-8  mx-12 '>
       <label  className="absolute   text-gray-600 cursor-text ">Email</label>
       <input
-      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer w-64" autoComplete="off"
       type="text"
       name="email"
       value={email}
@@ -83,7 +83,7 @@ function AlluserUpdate() {
       <div className='relative mb-8  mx-12 '>
       <label  className="absolute   text-gray-600 cursor-text ">Name</label>
       <input
-      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer w-64" autoComplete="off"
       type="text"
       name="name"
       value={name}
@@ -94,7 +94,7 @@ function AlluserUpdate() {
       <div className='relative mb-8  mx-12 '>
       <label  className="absolute   text-gray-600 cursor-text ">Username</label>
       <input
-      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer w-64" autoComplete="off"
       type="text"
       name="username"
       value={Ausername}
@@ -105,7 +105,7 @@ function AlluserUpdate() {
        <div className='relative mb-8  mx-12 '>
       <label  className="absolute   text-gray-600 cursor-text ">Password</label>
       <input
-      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+      className="flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer w-64" autoComplete="off"
       
       name="password"
       value={password}

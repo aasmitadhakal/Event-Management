@@ -46,11 +46,11 @@ function ArtistList() {
       localStorage.setItem("artistgender",gender)
       localStorage.setItem("artistprovince",province)
       localStorage.setItem("artistdistrict",district)
-      localStorage.setItem("artistmunicipality",municipality)
-      localStorage.setItem("artistward",ward)
+      // localStorage.setItem("artistmunicipality",municipality)
+      // localStorage.setItem("artistward",ward)
       localStorage.setItem("artistphoto",photo)
       localStorage.setItem("artistperformed_in",performed_in)
-      localStorage.setItem("artistdescription",description)
+      // localStorage.setItem("artistdescription",description)
       localStorage.setItem("artistPerformer",type_of_the_performer)
       localStorage.setItem("artistuser",user)
     }
@@ -176,12 +176,12 @@ function ArtistList() {
                     <th className=" p-2 text-sm font-semibold ">Gender</th>
                     <th className=" p-2 text-sm font-semibold ">Province</th>
                     <th className=" p-2 text-sm font-semibold ">District</th>
-                    <th className=" p-2 text-sm font-semibold ">Municipality</th>
-                    <th className=" p-2 text-sm font-semibold ">Ward</th>
+                    {/* <th className=" p-2 text-sm font-semibold ">Municipality</th>
+                    <th className=" p-2 text-sm font-semibold ">Ward</th> */}
                     <th className=" p-2 text-sm font-semibold ">Email</th>
                     <th className=" p-2 text-sm font-semibold ">Type of Performer</th>
                     <th className=" p-2 text-sm font-semibold ">Performed In</th>
-                    <th className=" p-2 text-sm font-semibold ">Description</th>
+                    {/* <th className=" p-2 text-sm font-semibold ">Description</th> */}
                     <th className=" p-2 text-sm font-semibold ">User</th>
                     <th className=" p-2 text-sm font-semibold ">Photo</th>
                     <th className=" p-2 text-sm font-semibold ">Is Available</th>
@@ -198,12 +198,12 @@ function ArtistList() {
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.gender}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.province}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.district}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.municipality}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.ward}</td>
+            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.municipality}</td>
+            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.ward}</td> */}
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.email}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.type_of_the_performer}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.performed_in}</td>
-            <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.description}</td>
+            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.description}</td> */}
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.user.id}</td>
            
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'><img src={item.photo} alt='' className='h-14 w-14 rounded-full'></img></td>

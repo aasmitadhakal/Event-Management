@@ -99,7 +99,7 @@ return result;
               <div className='relative mb-8  mx-12 '>
                <label htmlFor='email' className="absolute left-0 top-1 text-gray-600 cursor-text ">Email</label>
                 <input
-                className="flex justify-center items-center pt-6 border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autoComplete="off"
+                className="w-64 flex justify-center items-center pt-6 border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " autoComplete="off"
                 id="email"
                 type="text"
                 ref={emailData}
@@ -113,7 +113,7 @@ return result;
               <div className='relative mb-4   mx-12  '> 
                <label htmlFor='password' className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text ">Password</label>
                 <input
-                className=" pt-6 flex justify-center  items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
+                className=" pt-6 w-64 flex justify-center  items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" autoComplete="off"
                 id="password"
                 ref={passwordData}
                 type="password"

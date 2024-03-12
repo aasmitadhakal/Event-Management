@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { useParams } from 'react-router-dom';
-import Navbar from './Navbar';
+// import Navbar from './Navbar';
 import Recommandation from './Recommandation';
 const  Page = () => {
   const { id } = useParams();
@@ -22,7 +22,7 @@ const  Page = () => {
 
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       {/* {pageContent ? (
         <div className='mt-24'>
           

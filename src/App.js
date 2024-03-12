@@ -88,7 +88,7 @@ function App() {
       <Route path='/userform' element={<UserForm/>} />
       <Route path='/put' element={<YourComponent />} />
       <Route path='/userprofile' element={<UserProfile/>} />
-
+      </Route>
 
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
@@ -129,7 +129,7 @@ function App() {
       <Route path='/artistchangepassword' element={<ArtistChangePassword />} />
       </Route>
       </Route>
-      </Route>
+      
   
       {/* for usersLayout */}
       <Route element={<Protected />}>

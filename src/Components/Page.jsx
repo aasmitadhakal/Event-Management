@@ -21,9 +21,9 @@ const Page = () => {
   }, [id]);
 
   return (
-    <>
+    <div className='mx-24'>
       <div className='grid grid-cols-3'>
-        <div className='mt-24 mx-24 col-span-2'>
+        <div className='mt-24  col-span-2'>
           {Array.isArray(apiData) && apiData.length > 0 ? (
             apiData.map(item => (
               <div key={item.id}>
@@ -39,7 +39,7 @@ const Page = () => {
         </div>
       </div>
       {id === '1' && <Recommandation />}
-    </>
+    </div>
   );
 };
 

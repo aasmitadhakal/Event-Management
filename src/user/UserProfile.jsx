@@ -1,6 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from '../api/axios';
-import {MdEmail} from 'react-icons/md'
+import { MdEmail } from "react-icons/md";
  import {AiTwotoneEdit} from 'react-icons/ai'
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {IoLocationSharp} from 'react-icons/io5';
@@ -63,15 +63,15 @@ function UserProfile() {
                 setFormData({
                     id: data.id,
                     name: data.name,
-                    photo: data.normaluser.photo,
+                    photo: data.artist.photo,
                     username: data.username,
-                    district: data.normaluser.district,
+                    district: data.artist.district,
                     email: data.email,
-                    contact: data.normaluser.contact,
-                    province: data.normaluser.province,
-                    gender: data.normaluser.gender,
-                    ward: data.normaluser.ward,
-                    municipality: data.normaluser.municipality,
+                    contact: data.artist.contact,
+                    province: data.artist.province,
+                    gender: data.artist.gender,
+                    ward: data.artist.ward,
+                    municipality: data.artist.municipality,
                     isUser: data.is_user,
                     isAdmin: data.is_admin,
                     isArtist: data.is_artist
@@ -185,9 +185,9 @@ function UserProfile() {
               <div className="mt-4 ">
               <div className="text-xl font-bold flex justify-center items-center ">{formData.name}</div>
                 {/* <div className="flex justify-center items-center text-slate-500 pl-4  ">{formData.username}<MdVerified className="text-blue-600   "/></div> */}
-                <div className="flex justify-center items-center text-slate-500 pl-10 my-1"><IoLocationSharp className="text-purple-400 text-lg mr-2" />{formData.district},{formData.municipality}</div>
-                <div className="flex justify-center items-center text-slate-500 my-1 "><BsFillTelephoneFill className="text-purple-400 text-lg mr-2"/>{formData.contact}</div>
-                <div className="flex justify-center items-center text-slate-500 pl-10 "><MdEmail className="text-purple-400 text-lg mr-2" />{formData.email}</div>
+                {/* <div className="flex justify-center items-center text-slate-500 pl-10 my-1"><IoLocationSharp className="text-purple-400 text-lg mr-2" />{formData.district},{formData.municipality}</div> */}
+                {/* <div className="flex justify-center items-center text-slate-500 my-1 "><BsFillTelephoneFill className="text-purple-400 text-lg mr-2"/>{formData.contact}</div> */}
+                <div className="text-slate-500  ">< MdEmail className="x" />{formData.email}</div>
                 
               </div>
               </div>
@@ -220,7 +220,7 @@ function UserProfile() {
       )}
                 </div>     
                 {/* <div className="text-medium flex justify-center items-center  border-purple-500 font-serif text-gray-600 text-xl my-2">Account Information</div> */}
-            <div className=" grid grid-cols-2  mx-8">
+            <div className=" grid md:grid-cols-2  grid-cols-1 md:mx-8">
               {/* for half divison */}
               <div>
               

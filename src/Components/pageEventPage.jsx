@@ -57,7 +57,7 @@ const PageEventPage = () => {
             <div className='flex p-4'>
          <div><img src={event.photo} className='h-24 w-36' /></div> 
          <div>
-          <div className='text-sm text-gray-800 font-[500] mt-2'>{event.event_name}</div>
+          <div className='text-sm text-gray-800 font-[500] mt-2 mx-2'>{event.event_name}</div>
           <div className='flex justify-around mt-2'>
           <div className='text-sm text-gray-700 flex justify-center items-center'><CiLocationOn className='text-purple-900 mx-2'/>{event.location}</div>
           <div className='text-sm text-gray-700 flex justify-center items-center '><IoIosTimer className='text-purple-900 mx-2'/>{event.date}</div>

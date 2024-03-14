@@ -159,7 +159,7 @@ function ContentList() {
       
       </select>
       </div>
-    <div className="  overflow-auto rounded-lg shadow mx-24 mt-8 "  >
+    <div className="  overflow-auto rounded-lg shadow mx-12 mt-8 "  >
          
  
          <table className="w-full mb-4 ">
@@ -176,17 +176,17 @@ function ContentList() {
           
         </tr>
       </thead>
-      <tbody className='divide-y divide-gray-100'>
+      <tbody className='divide-y divide-gray-100 text-wrap'>
         {data.map(item => (
           <tr className="bg-white border-r text-center border-b text-sm text-gray-600" key={item.id}>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.id}</td>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.heading}</td>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>
+            <td className='p-3 text-sm text-gray-700 text-wrap'>{item.id}</td>
+            <td className='p-3 text-sm text-gray-700 text-wrap'>{item.heading}</td>
+            <td className='p-3 text-sm text-gray-700 text-wrap'>
                 <div dangerouslySetInnerHTML={{ __html: item.content }} />
               </td>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.updated_by}</td>
-            <td className='p-3 text-sm text-gray-700 whitespace-nowrap'>{item.status}</td>
-            <td>
+            <td className='p-3 text-sm text-gray-700 text-wrap'>{item.updated_by}</td>
+            <td className='p-3 text-sm text-gray-700 text-wrap'>{item.status}</td>
+            <td className='flex mt-2 mx-1'>
               <Link to ="/contentupdate">
               <button
                 onClick={(e)=>settoLocalstorage(

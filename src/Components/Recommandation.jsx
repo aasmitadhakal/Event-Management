@@ -38,8 +38,8 @@ const Recommandation = () => {
     }, []);
 
     return (
-        <div className='mt-24 my-24 z-[-100]'>
-    <h1 className='text-purple-400 font-serif text-[20px] font-[500] pl-12 '>Recommended Event</h1>
+        <div className='mt-24 my-24 z-[-100] mx-24'>
+    <h1 className='text-purple-400 font-serif text-[20px] font-[500]  '>Recommended Event</h1>
     <Swiper
         slidesPerView={1}
         centeredSlides={false}
@@ -59,14 +59,14 @@ const Recommandation = () => {
             clickable: true,
         }}
         className="mySwiper "
-        style={{ position: 'relative', zIndex: '-1' }}
+        // style={{ position: 'relative', zIndex: '-1' }}
     >
         {events.map(event => (
             <SwiperSlide key={event.id} className="swiper-slide"
            
             >
                 <Link to={`/event/${event.id}`} className="slide-link"
-                 style={{ position: 'relative', zIndex: '1' }}>
+                >
                     <div className='rounded px-4 py-4 '>
                         <div className='h-44 w-80'>
                             <img src={'http://127.0.0.1:8000'+event.photo} alt={event.event_name} className='rounded-t-lg w-full h-full object-cover z-negative' />

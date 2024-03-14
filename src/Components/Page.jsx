@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { useParams } from 'react-router-dom';
-// import Navbar from './Navbar';
+import PageEventPage from './pageEventPage';
 import Recommandation from './Recommandation';
-const  Page = () => {
+
+const Page = () => {
   const { id } = useParams();
   const [apiData, setApiData] = useState([]);
 
@@ -13,7 +14,6 @@ const  Page = () => {
       .then((response) => {
         setApiData(response.data);
         console.log(response.data);
-        
       })
       .catch((error) => {
         console.error('Error fetching page content:', error);
@@ -21,34 +21,26 @@ const  Page = () => {
   }, [id]);
 
   return (
-    <div>
-      {/* <Navbar/> */}
-      {/* {pageContent ? (
-        <div className='mt-24'>
-          
-          <div dangerouslySetInnerHTML={{ __html: pageContent.heading.heading }} />
-          <div dangerouslySetInnerHTML={{ __html: pageContent.content}} />
+    <>
+      <div className='grid grid-cols-3'>
+        <div className='mt-24 mx-24 col-span-2'>
+          {Array.isArray(apiData) && apiData.length > 0 ? (
+            apiData.map(item => (
+              <div key={item.id}>
+                <div dangerouslySetInnerHTML={{ __html: item.content}} />
+              </div>
+            ))
+          ) : (
+            <p>Loading or no data available</p>
+          )}
         </div>
-      ) : (
-        <p>Loading...</p>
-      )} */}
-      
-      {Array.isArray(apiData) && apiData.length > 0 ? (
-        apiData.map(item => (
-          <div
-          className='mt-24 mx-24'
-          key={item.id}>
-                     <div dangerouslySetInnerHTML={{ __html: item.content}} />
-                     
-          </div>
-        
-        ))
-      ) : (
-        <p>Loading or no data available</p>
-      )}
-      <Recommandation/>
-    </div>
+        <div>
+          <PageEventPage/>
+        </div>
+      </div>
+      {id === '1' && <Recommandation />}
+    </>
   );
 };
 
-export default  Page;
+export default Page;

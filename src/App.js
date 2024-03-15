@@ -10,7 +10,7 @@ import UserChangePassword from './user/UserChangePassword';
 import ArtistChangePassword from './Artist/ArtistChangePassword';
 import UserProfile from './user/UserProfile';
 import { AuthProvider } from './contexs/auth';
-import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,} from './pages';
+import {Profile,User,UserCreate, ArtistCreate,ArtistList ,ContentCreate,ChangePassword,ArtistUpdate,ContentList,ContentUpadate,SponserCreate,SponserList,SponserUpdate, UserList, UserUpdate, AlluserList,Card2, EventCreate,EventList, ArtistProfile,BlogList,BlogCreate, BlogUpdate} from './pages';
 import Put from './Components/Put';
 import Booking from './Components/Booking';
 import Blog from './pages/Blog';
@@ -112,6 +112,9 @@ function App() {
       <Route path='/contentupdate' element={<ContentUpadate />} />
       <Route path='/puts' element={<Put />} />
       <Route path='/trail' element={<Put />} />
+      <Route path='/bloglist' element={<BlogList />} />
+      <Route path='/blogcreate' element={<BlogCreate />} />
+      <Route path='/blogUpdate' element={<BlogUpdate />} />
       <Route path='/sponseradd' element={<SponserCreate/>} />
       <Route path='/sponserlist' element={<SponserList />} />
       <Route path='/sponserupdate' element={<SponserUpdate />} />

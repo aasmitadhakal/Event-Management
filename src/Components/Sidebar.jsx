@@ -126,6 +126,27 @@ const routes = [
       },
     ],
   },
+  {
+    name: "Blog",
+    icon: <MdOutlineEventSeat />,
+    submenus: [
+      {
+        name: "View Blog",
+        icon: <FaRegListAlt />,
+        path: "/bloglist",
+      },
+      {
+        name: "Add Blog ",
+        icon: <MdLibraryAdd />,
+        path: "/blogcreate",
+      },
+      {
+        name: "Update Blog",
+        icon: <MdLibraryAdd />,
+        path: "/blogupdate",
+      },
+    ],
+  },
   
   {
     name: "CMS",
@@ -216,7 +237,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     <div className="cursor-pointer w-full h-screen overflow-auto z-99 bg-gradient-to-t from-blue-200 to-purple-400 font-sans font font-medium text-sm">
       {/* Top Header */}
       <div className="border-b border-b-white flex justify-between lg:justify-center items-center py-2">
-        <h1 className="text-xl my-2 font-medium text-white inline">Admin Dashboard </h1>
+        <h1 className="text-xl my-2 font-medium text-white inline">Admin </h1>
         <span onClick={toggleSidebar}>
           <svg
             className="w-6 h-6 mt-3 text-white ml-2 text-xs font-medium"

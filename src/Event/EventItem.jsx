@@ -3,8 +3,10 @@ import axios from '../api/axios';
 import { BrowserRouter as Router, Route, Link, Switch, useParams } from 'react-router-dom';
 import {CiLocationOn} from 'react-icons/ci'
 import { Skeleton } from '@mui/material';
-import img from '../assets/img.jpg'
-import { Navbar } from '../Components';
+import img from '../assets/img.jpg';
+import Aos from 'aos'; // Import Aos
+import 'aos/dist/aos.css'; // Import Aos CSS
+
 import RecentEvent from '../Components/RecentEvent';
 import Fotter from '../Components/Fotter';
 
@@ -31,7 +33,18 @@ const EventItem = () => {
             setLoading(false);
         }
     };
-
+    useEffect(() => {
+      Aos.init({
+        duration: 1000,
+        easing: "ease-in-out",
+        // offset: "10",
+        delay: "10",
+        mirror: "false",
+        once: "false",
+        anchorPlacement: "top-center",
+        disable: "mobile",
+      }); // Initialize AOS with your preferred configuration
+    }, []);
     useEffect(() => {
         fetchEvents();
     }, [searchQuery, page]);
@@ -66,27 +79,27 @@ const EventItem = () => {
        </> 
       ):(
         <div>
-            <Navbar/>
-           <RecentEvent className='mt-4'/>
+            {/* <Navbar/> */}
+           <RecentEvent className=''/>
         {/* <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center   ">Event</p></div> */}
         <div><p className="text-4xl font-serif  text-purple-700 flex justify-center item-center mt-24 "> Events</p></div>   
        
-        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-40 mx-20 mb-10'>
+        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-14 mx-20 mb-10 ' data-aos="fade-up">
             
     {events.map((event) => (
-       <div key={event.id} className='shadow-xl bg-white mt-12 rounded-2xl'>
+       <div data-aos="fade-up" key={event.id} className='shadow-xl bg-white mt-12 rounded-2xl'>
          <Link to={`/event/${event.id}`}>
 
        
             
-          <img src={event.photo} className='ml-4 h-64 w-72' />
+          <img src={event.photo} className='rounded-t-lg w-[478px] h-[232px]' />
           
           <div className='flex mt-2'>
-            <p className='font-medium font-serif text-purple-600 pl-6 my-2 '>
+            <p className=' font-serif text-gray-700 pl-6 my-2 font-[500] '>
               {event.date}
               <span className='mx-1'>||</span>
             </p>
-            <p className='font-medium font-serif text-purple-600 my-2'>{event.time}</p>
+            <p className='font-[500] font-serif text-gray-700 my-2'>{event.time}</p>
           </div>
           <div className='font-serif pl-4 font-medium '>{event.event_name}</div>
           <div className='flex pr-2 pl-4 font-serif text-gray-800'>

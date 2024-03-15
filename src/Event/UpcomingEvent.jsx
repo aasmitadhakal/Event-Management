@@ -66,7 +66,7 @@ const UpcomingEvent = () => {
       ):(
         <div>
              <div className='flex items-center justify-center mt-20 text-3xl font-serif '>Upcoming <span className='mx-3 text-purple-600'>Events</span> </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 mt-12 gap-8 md:mx-40 mx-20 mb-10'>
+        <div className='grid grid-cols-1 md:grid-cols-3 mt-12 gap-8  mx-20 mb-10'>
     {events.map((event) => (
       <Link to={`/event/${event.id}`} key={event.id}>
         <div className='shadow-xl bg-white mt-12 rounded-2xl'>

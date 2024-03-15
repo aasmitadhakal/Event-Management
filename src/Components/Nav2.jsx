@@ -11,7 +11,7 @@ const Nav2 = ({ toggleSidebar }) => {
   };
 
   return (
-    <nav className="bg-purple-400 p-2   flex justify-between ">
+    <nav className="bg-purple-400 p-3   flex justify-between ">
       <div className="flex ">
         
       </div>

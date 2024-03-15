@@ -5,11 +5,11 @@ import { useParams } from 'react-router-dom';
 import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
-import { Navbar } from '../Components';
 import UpcomingEvent from './UpcomingEvent';
 import Fotter from '../Components/Fotter';
 import Booking from '../Components/Booking';
-
+import PageEventPage from '../Components/pageEventPage';
+import img from '../assets/events.jpg'
 const EventDetail = () => {
     const { id } = useParams(); // Extracting event ID from URL
     const [event, setEvent] = useState(null);
@@ -78,16 +78,32 @@ const EventDetail = () => {
 
     return (
         <>
-            <Navbar />
-            <div className='my-24 '>
-                <div className='shadow-xl md:mx-36 p-12'>
-                    <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Event <span className='pl-2 text-purple-400'>Details</span></div>
-                    <div className='grid  md:grid-cols-2 '>
-                        <div><img src={event.photo} className=" h-full  " alt={event.photo}></img></div>
-                        <div>
-                            <div className='text-xl font-serif mx-12  my-2'><span className=''>{event.event_name}</span></div>
-                            <div className='text-gray-400 font-serif ml-12 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>
-                            <div className='bg-white  grid grid-cols-3 gap-x-4 mt-4 mx-4 border-b '>
+        {/* Header section */}
+    <div className='relative'>
+      <div className='w-full h-96' style={{ position: 'absolute', backgroundColor: '#051721', opacity: '0.7', zIndex: '1'}}></div>
+        
+        {/* Image */}
+        <img className='w-full h-96' src={img} alt="Travel" style={{ zIndex: '0'}} />
+        
+        {/* Text */}
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'white', width: '100%', zIndex: '2' }}>
+          <div className='font-montserrat font-[700]  md:text-[45px] text-[25px] leading-[56px]'>
+            Event Detail's
+          {/* <p>experience at our upcoming event!</p>  */}
+          </div>
+          <p className='font-karla font-[400] md:text-[20px] text-[15px] leading-[30px'>Special offer to suit you plan</p>
+        </div>
+    </div>
+            {/* event detailPart */}
+            <div className='my-12 grid grid-cols-3'>
+                <div className='col-span-2'>
+                    {/* <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Event <span className='pl-2 text-purple-400'>Details</span></div> */}
+                    <div className=''>
+                        <div className='mx-8'><img src={event.photo} className="rounded-xl h-[400px] w-[750px]  " alt={event.photo}></img></div>
+                        
+                            <div className='text-[24px] font-[500] font-serif ml-12  my-1'><span className=''>{event.event_name}</span></div>
+                            <div className='text-gray-600 font-serif ml-12 flex'>Deal of the Day: {event.entry_fee}</div>
+                            <div className='bg-white  grid grid-cols-3 gap-x-4 mt-4 mx-8 border-b '>
                                 <div className='mb-2'>
                                     <div className='text-2xl text-gray-500 mx-8'><BsCalendar2Date /></div>
                                     <div className='font-serif text-lg mx-4  text-gray-700'>Event Date</div>
@@ -104,15 +120,16 @@ const EventDetail = () => {
                                     <div className='font-serif text-gray-600 mx-4'>{event.location}</div>
                                 </div>
                             </div>
-                            <div className='my-4 pl-4 grid grid-cols-2'>
+                            <div className='my-4 mx-8 grid grid-cols-2 '>
                                 <div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Entry Price:{event.entry_fee}</div>
-                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Remaining Capacity:{event.remaining_capacity}</div>
+                                    
                                 </div>
                                 <div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>No_of_Participant: {event.no_of_participant}</div>
-                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{artist.user.name}</span>)}</div>
+                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Remaining Capacity:{event.remaining_capacity}</div>
+                                   
                                     {/* for timer */}
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
                                         {remainingTime > 0 ? (
@@ -128,43 +145,54 @@ const EventDetail = () => {
                                             </div>
                                         ) : "Event has started"}
                                     </div>
+                                    {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{artist.user.name}</span>)}</div> */}
                                 </div>
                             </div>
-                            {/* for sponser */}
-                            <div className='flex'>
+                             {/* for artist */}
+                             <div className='flex'>
                                 <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
-                                    Sponsors:
-                                    {event.sponser.map((sponsor, index) => (
-                                        <div key={index}>
-                                            <div>{sponsor.name}</div>
-                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
-                                            <img src={sponsor.photo} className='h-12 w-16' alt={sponsor.name} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            {/* for artist */}
-                            <div className='flex'>
-                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
-                                    Artist:
+                                  
                                     {event.artist.map((artist, index) => (
-                                        <div key={index}>
-                                            <div>{artist.user.name}</div>
+                                        <div key={index} className='mx-12'>
+                                            <p className='font-[500] mb-2 text-[30px] text-gray-700'>Artist ({artist.user.name}) </p>
                                             {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
-                                            <img src={artist.photo} className='h-12 w-16' alt={artist.name} />
+                                            <img src={artist.photo} className='rounded-xl h-[200px] w-[350px] ' alt={artist.name} />
+                                            <div className='text-[24px] font-[500] text-gray-700 '></div>
+                                        </div>
+                                    ))}
+                                </div>
+                                 {/* for sponser */}
+                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
+                                  
+                                    {event.sponser.map((sponsor, index) => (
+                                        <div key={index} className='mx-12'>
+                                            
+                                            <div className='font-[500] mb-2 text-[30px] text-gray-700'>Sponser ({sponsor.name})</div>
+                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
+                                            <img src={sponsor.photo} className='rounded-xl h-[200px] w-[350px]' alt={sponsor.name} />
                                         </div>
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                           
+                            {/* <div className='flex'> */}
+                                
+                            {/* </div> */}
+                          <button onClick={handleOpenPopUp} className='my-8 mx-12  bg-purple-500 text-white px-36 py-1 rounded '>Book Now</button>
+                        
                     </div>
-                    <div className='flex justify-end '><button onClick={handleOpenPopUp} className='hover:bg-purple-400 bg-purple-500 text-white px-36 py-1 rounded '>Book Now</button></div>
+                  
                 </div>
-                <UpcomingEvent />
+                {/* for side part */}
+                <div>
+                     <PageEventPage/>                       
+                </div>
+                
                 {showPopUp && (
                     <Booking data={dataToShow} onClose={handleClosePopUp} />
                 )}
             </div>
+            <UpcomingEvent />
             <Fotter />
         </>
     );

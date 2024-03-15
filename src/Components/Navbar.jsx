@@ -7,6 +7,7 @@ import Register from "./Register";
 import { Skeleton } from '@mui/material';
 import img from '../assets/logo.jpg';
 import axios from "../api/axios";
+import './index.css'
 import { MdOutlineNotificationsNone } from 'react-icons/md';
 import Notification from "./Notification";
 
@@ -16,6 +17,7 @@ function Navbar({ toggleNotifications }) {
     const [hasaccount, setHasaccount] = useState(true);
     const [mobileView, setMobileview] = useState(true);
     const [navbarData, setNavbarData] = useState([]);
+    const [isScrolled, setIsScrolled] = useState(false);
     const [loading, setLoading] = useState(true);
     const [navBackground, setNavBackground] = useState('bg-white');
     const [notifications, setNotifications] = useState([]);
@@ -36,7 +38,18 @@ function Navbar({ toggleNotifications }) {
         setShownavbar(false);
         setShowNotifications(false);
     };
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollTop = window.scrollY;
+        setIsScrolled(scrollTop > 100); // Change to 100 to trigger sticky behavior after scrolling 100 pixels
+       
+      };
+      window.addEventListener('scroll', handleScroll);
 
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
     useEffect(() => {
         axios.get('dynamic-heading/list/')
             .then((response) => {
@@ -98,7 +111,7 @@ function Navbar({ toggleNotifications }) {
 
     return (
         <>
-            <motion.div className={` ${navBackground} transition-colors duration-300  fixed top-0 z-10000  w-screen `}>
+            <motion.div className={` ${navBackground} ${isScrolled ? 'sicky-nav ' : ''}  transition-colors duration-300  z-10000  w-screen  `}>
                 <div className='grid grid-cols-2 shadow-xl '>
                     <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src={img} className="h-16 w-28" /></div>
                     <div className={"md:hidden block text-3xl font-bold ml-auto mt-2 pr-8"} onClick={() => setMobileview(!mobileView)}><BiAlignJustify /></div>

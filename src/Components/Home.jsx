@@ -1,5 +1,5 @@
 // import Slider from './Slider';
-import {Navbar,Header} from '.'
+// import {Navbar,Header} from '.'
 import UpcomingEvent from '../Event/UpcomingEvent';
 import { motion } from 'framer-motion';
 import Card2 from './Card2'
@@ -15,8 +15,8 @@ function Home (){
     exit={{opacity:0}}
     transition={{duration:0.5}}
     >
-        <Navbar />
-        <Header />
+        {/* <Navbar /> */}
+        {/* <Header /> */}
       {/* <Slider/> */}
         <TodayEvent/>
         <UpcomingEvent/>

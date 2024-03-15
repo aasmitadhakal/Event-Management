@@ -17,3 +17,25 @@
 .swiper-button-next {
   right: 10px;
 }
+.sicky-nav {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  animation: fadeInDown 0.5s ease-in-out 0s 1 normal none running;
+  transition: 0.5s;
+}
+
+@keyframes fadeInDown {
+  0% {
+      -webkit-transform: translate3d(0, -100%, 0);
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+      -webkit-transform: translateZ(0);
+      opacity: 1;
+      transform: translateZ(0);
+  }
+}

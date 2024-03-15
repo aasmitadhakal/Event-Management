@@ -45,9 +45,9 @@ const PageEventPage = () => {
       
         <div>
            
-        <div><p className="text-xl font-serif  text-purple-700  mt-24"> Recent Event</p></div>   
+        <div><p className="text-xl font-serif  text-purple-700 flex item-center justify-center  mt-4"> Recent Event</p></div>   
        
-        <div className='grid grid-cols-1   '>
+        <div className='grid grid-cols-1  mx-4 '>
             
     {events.map((event) => (
        <div key={event.id} className='shadow-xl bg-white mt-4 rounded-2xl'>

@@ -40,7 +40,7 @@ const Recommandation = () => {
 
     return (
         <div className='mt-24 my-24 z-[-100] '>
-    <h1 className='text-purple-400 font-serif text-[20px] font-[500]  '>Recommended Event</h1>
+    <h1 className='text-gray-700 font-serif text-[24px] font-[700] flex items-center justify-center '>Recommended Event</h1>
     <Swiper
         slidesPerView={1}
         centeredSlides={false}

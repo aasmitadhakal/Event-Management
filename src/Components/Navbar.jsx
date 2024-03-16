@@ -121,6 +121,7 @@ function Navbar({ toggleNotifications }) {
                                 <Link to={`/page/${item.id}`}>{item.heading}</Link>
                             </div>
                         ))}
+                        <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/blog'>Blog</Link></div>
                         <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
                         <div className="my-2">
                             <button className="hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400" onClick={handleToggleNavbar}>Login</button>

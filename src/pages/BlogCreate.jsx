@@ -2,8 +2,11 @@ import { useState ,useRef} from 'react';
 import axios from '../api/axios';
 import { Editor } from '@tinymce/tinymce-react';
 import { useNavigate } from 'react-router-dom';
+
 function BlogCreate() {
     const [content, setContent] = useState('');
+    const [imageUrl, setImageUrl] = useState('');
+
     const navigate = useNavigate();
     const handleApi = (e) => {
         e.preventDefault();
@@ -54,14 +57,23 @@ function BlogCreate() {
           return;
         }
 
-        const imageUrl = xhr.responseText;
-        if (!imageUrl || typeof imageUrl !== "string") {
-          reject("Invalid URL: " + imageUrl);
-          return;
-        }
+      //   const imageUrl = xhr.responseText;
+      //   if (!imageUrl || typeof imageUrl !== "string") {
+      //     reject("Invalid URL: " + imageUrl);
+      //     return;
+      //   }
 
-        resolve(imageUrl);
-      };
+      //   resolve(imageUrl);
+      // };
+      const response = JSON.parse(xhr.responseText);
+      const imageUrl = response.url;
+      if (!imageUrl || typeof imageUrl !== "string") {
+        reject("Invalid URL:"+ imageUrl)
+        return;
+      }
+      setImageUrl(imageUrl); 
+      resolve(imageUrl);
+     };
 
       xhr.onerror = () => {
         reject({ message: "Image upload failed", remove: true });

@@ -114,7 +114,7 @@ const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
              <h1 className="text-xl my-2 font-medium text-purple font-serif inline">Artist Profile </h1>
              <div className="flex">
         <span onClick={toggleSidebar}>
-         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-white ml-2 mt-1 text-xs font-medium' /> */}
+       
           <svg
             className="  w-6 h-6 mt-3 text-white ml-2  text-xs font-medium"
             fill="none"
@@ -137,7 +137,7 @@ const ArtistSidebar = ({sidebarOpen,toggleSidebar }) => {
             (
             <div onClick={toggleSidebar}>
                 <span onClick={toggleSidebar}>
-         {/* <FiArrowRightCircle className='absolute -right-8 top-2 w-6 h-6 text-white ml-2 mt-1 text-xs font-medium' /> */}
+       
           <svg
             className="  w-6 h-6 text-white ml-2 mt-1 text-xs font-medium"
             fill="none"

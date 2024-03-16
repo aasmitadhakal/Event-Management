@@ -40,6 +40,7 @@ import Recommandation from './Components/Recommandation';
 import Notification from './Components/Notification';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import BlogPage from './Components/BlogPage';
 import Graph from './Artist/Graph';
 function App() {
   const location = useLocation();
@@ -70,7 +71,7 @@ function App() {
       <Route path='/about' element={<About />} />
       <Route path='/notification' element={<Notification />} />
       <Route path='/recomm' element={<Recommandation />} />
-      <Route path='/blog' element={<Blog />} />
+      <Route path='/blog' element={<BlogPage />} />
       <Route path='/boking' element={<Booking />} />
       <Route path='/event' element={<EventItem />} />
       <Route path='/event/:id' element={<EventDetail />} />
@@ -79,17 +80,14 @@ function App() {
       <Route path='/reset' element={<ResetPassword />} />
       <Route path='/user/reset/:uid/:token' element={<PasswordReset2 />} />
       <Route path='/login' element={<Login/>} />
-     
       <Route path='/register' element={<Register/>} />
       <Route path='/artistform' element={<Artistform/>} />
       <Route path='/mform' element={<Managerform/>} />
       <Route path='/today' element={<TodayEvent/>} />
-      
       <Route path='/userform' element={<UserForm/>} />
       <Route path='/put' element={<YourComponent />} />
       <Route path='/userprofile' element={<UserProfile/>} />
       </Route>
-
       <Route element={<Protected />}>
       <Route element={<PrivateLayout/>}>
       <Route path='/profile' element={<Profiles />} />

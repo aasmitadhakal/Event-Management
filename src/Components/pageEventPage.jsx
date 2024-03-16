@@ -43,7 +43,7 @@ const PageEventPage = () => {
     return (
     <>
       
-        <div>
+        <div className='sticky top-20'>
            
         <div><p className="text-xl font-serif  text-purple-700 flex item-center justify-center  mt-4"> Recent Event</p></div>   
        

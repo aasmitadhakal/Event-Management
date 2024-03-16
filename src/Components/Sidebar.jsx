@@ -237,7 +237,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
     <div className="cursor-pointer w-full h-screen overflow-auto z-99 bg-gradient-to-t from-blue-200 to-purple-400 font-sans font font-medium text-sm">
       {/* Top Header */}
       <div className="border-b border-b-white flex justify-between lg:justify-center items-center py-2">
-        <h1 className="text-xl my-2 font-medium text-white inline">Admin </h1>
+        {/* <h1 className="text-xl my-2 font-medium text-white inline">Admin </h1>
         <span onClick={toggleSidebar}>
           <svg
             className="w-6 h-6 mt-3 text-white ml-2 text-xs font-medium"
@@ -248,7 +248,55 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
+        </span> */}
+          {
+            sidebarOpen ? (
+                <div className="flex gap-x-8">
+             <h1 className="text-xl my-2 font-medium text-white font-serif inline">Admin </h1>
+             <div className="flex ">
+        <span onClick={toggleSidebar}>
+       
+          <svg
+            className="  w-6 h-6 mt-3 text-white ml-2  text-xs font-medium"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          </span>
+         </div>
+             </div>
+            )
+            :
+            (
+            <div onClick={toggleSidebar}>
+                <span onClick={toggleSidebar}>
+       
+          <svg
+            className="  w-6 h-6 text-white ml-2 mt-1 text-xs font-medium"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
         </span>
+                </div>
+            )
+           }
       </div>
       {/* Routes Area */}
       <div className="w-full mt-3 p-3 flex flex-col gap-3">

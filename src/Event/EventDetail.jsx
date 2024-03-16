@@ -8,7 +8,7 @@ import { CiLocationOn } from 'react-icons/ci';
 import UpcomingEvent from './UpcomingEvent';
 import Fotter from '../Components/Fotter';
 import Booking from '../Components/Booking';
-import PageEventPage from '../Components/pageEventPage';
+// import PageEventPage from '../Components/pageEventPage';
 import img from '../assets/events.jpg'
 const EventDetail = () => {
     const { id } = useParams(); // Extracting event ID from URL
@@ -95,8 +95,8 @@ const EventDetail = () => {
         </div>
     </div>
             {/* event detailPart */}
-            <div className='my-12 grid grid-cols-3'>
-                <div className='col-span-2'>
+            <div className='my-12 '>
+                <div className=''>
                     {/* <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Event <span className='pl-2 text-purple-400'>Details</span></div> */}
                     <div className=''>
                         <div className='mx-8'><img src={event.photo} className="rounded-xl h-[400px] w-[750px]  " alt={event.photo}></img></div>
@@ -185,7 +185,7 @@ const EventDetail = () => {
                 </div>
                 {/* for side part */}
                 <div>
-                     <PageEventPage/>                       
+                     {/* <PageEventPage/>                        */}
                 </div>
                 
                 {showPopUp && (

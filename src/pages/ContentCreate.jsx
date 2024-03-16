@@ -9,6 +9,7 @@ function ContentCreate() {
   const [content, setContent] = useState('');
   const [updated_by, setUpdatedBy] = useState('');
   const [status, setStatus] = useState('Publish');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleHeading = (e) => {
     setHeading(e.target.value);
@@ -79,14 +80,24 @@ function ContentCreate() {
           return;
         }
 
-        const imageUrl = xhr.responseText;
-        if (!imageUrl || typeof imageUrl !== "string") {
-          reject("Invalid URL: " + imageUrl);
-          return;
-        }
+      //   // const imageUrl = xhr.responseText;
+      //   // if (!imageUrl || typeof imageUrl !== "string") {
+      //   //   reject("Invalid URL: " + imageUrl);
+      //   //   return;
+      //   // }
 
-        resolve(imageUrl);
-      };
+      //   resolve(imageUrl);
+      // };
+      const response = JSON.parse(xhr.responseText);
+      const imageUrl = response.url;
+      if (!imageUrl || typeof imageUrl !== "string") {
+        reject("Invalid URL:"+ imageUrl)
+        return;
+      }
+      setImageUrl(imageUrl); 
+      resolve(imageUrl);
+  };
+
 
       xhr.onerror = () => {
         reject({ message: "Image upload failed", remove: true });

@@ -27,6 +27,9 @@ module.exports = {
         '120px': '120px',
         '98px': '98px',
       },
+      padding: {
+        '3px': '3px',
+      },
       backgroundImage: {
         'music': "url('image.jpeg')",
       

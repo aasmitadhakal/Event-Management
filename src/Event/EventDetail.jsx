@@ -79,27 +79,14 @@ const EventDetail = () => {
     return (
         <>
         {/* Header section */}
-    <div className='relative'>
-      <div className='w-full h-96' style={{ position: 'absolute', backgroundColor: '#051721', opacity: '0.7', zIndex: '1'}}></div>
-        
-        {/* Image */}
-        <img className='w-full h-96' src={img} alt="Travel" style={{ zIndex: '0'}} />
-        
-        {/* Text */}
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center', color: 'white', width: '100%', zIndex: '2' }}>
-          <div className='font-montserrat font-[700]  md:text-[45px] text-[25px] leading-[56px]'>
-            Event Detail's
-          {/* <p>experience at our upcoming event!</p>  */}
-          </div>
-          <p className='font-karla font-[400] md:text-[20px] text-[15px] leading-[30px'>Special offer to suit you plan</p>
-        </div>
-    </div>
+    
             {/* event detailPart */}
-            <div className='my-12 '>
-                <div className=''>
-                    {/* <div className='flex items-center justify-center text-3xl font-serif mb-2 text-gray-700 '>Event <span className='pl-2 text-purple-400'>Details</span></div> */}
+            <div className='my-24  flex justify-center item-center md:mx-64'>
+                <div className=' shadow-xl'>
+                    <p className='flex justify-center item-center font-[700] text-[24px] text-gray-700 my-4'>Event Details</p>
+                  
                     <div className=''>
-                        <div className='mx-8'><img src={event.photo} className="rounded-xl h-[400px] w-[750px]  " alt={event.photo}></img></div>
+                        <div className='mx-8'><img src={event.photo} className="rounded-xl h-[400px] w-full " alt={event.photo}></img></div>
                         
                             <div className='text-[24px] font-[500] font-serif ml-12  my-1'><span className=''>{event.event_name}</span></div>
                             <div className='text-gray-600 font-serif ml-12 flex'>Deal of the Day: {event.entry_fee}</div>
@@ -149,44 +136,42 @@ const EventDetail = () => {
                                 </div>
                             </div>
                              {/* for artist */}
-                             <div className='flex'>
-                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
+                            
+                                <div className='font-serif text-gray-500 mx-4  text-lg '>
                                   
                                     {event.artist.map((artist, index) => (
                                         <div key={index} className='mx-12'>
-                                            <p className='font-[500] mb-2 text-[30px] text-gray-700'>Artist ({artist.user.name}) </p>
-                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
-                                            <img src={artist.photo} className='rounded-xl h-[200px] w-[350px] ' alt={artist.name} />
-                                            <div className='text-[24px] font-[500] text-gray-700 '></div>
+                                             <img src={artist.photo} className='rounded-full h-36 w-36 ' alt={artist.name}  />
+                                            <p className='font-[500] mb-2 mx-4 text-gray-700'>Artist ({artist.user.name}) </p>
+                                          
+                                          
                                         </div>
                                     ))}
                                 </div>
                                  {/* for sponser */}
-                                <div className='font-serif text-gray-500 mx-4  text-lg flex justify-center items-center'>
+                                <div className='font-serif text-gray-500 mx-4   flex '>
                                   
                                     {event.sponser.map((sponsor, index) => (
                                         <div key={index} className='mx-12'>
+                                            <img src={sponsor.photo} className='rounded-full h-24 w-24' alt={sponsor.name} />
+                                            <div className='font-[500] mb-2  text-gray-700'>Sponser ({sponsor.name})</div>
+                                           
                                             
-                                            <div className='font-[500] mb-2 text-[30px] text-gray-700'>Sponser ({sponsor.name})</div>
-                                            {/* <div>sponsor_type: {sponsor.sponser_type}</div> */}
-                                            <img src={sponsor.photo} className='rounded-xl h-[200px] w-[350px]' alt={sponsor.name} />
                                         </div>
                                     ))}
-                                </div>
+                                
+                               
                             </div>
                            
                             {/* <div className='flex'> */}
                                 
                             {/* </div> */}
-                          <button onClick={handleOpenPopUp} className='my-8 mx-12  bg-purple-500 text-white px-36 py-1 rounded '>Book Now</button>
+                        
                         
                     </div>
-                  
+                    <div className='flex justify-center items-center'><button onClick={handleOpenPopUp} className='my-8   bg-purple-500 text-white px-36 py-1 rounded '>Book Now</button></div>
                 </div>
-                {/* for side part */}
-                <div>
-                     {/* <PageEventPage/>                        */}
-                </div>
+              
                 
                 {showPopUp && (
                     <Booking data={dataToShow} onClose={handleClosePopUp} />

@@ -111,8 +111,8 @@ function Navbar({ toggleNotifications }) {
 
     return (
         <>
-            <motion.div className={` ${navBackground} ${isScrolled ? 'sicky-nav ' : ''}  transition-colors duration-300  z-10000  w-screen  `}>
-                <div className='grid grid-cols-2 shadow-xl '>
+            <motion.div className={` ${navBackground} fixed top-0     transition-colors duration-300  z-10000  w-screen  `}>
+                <div className='grid grid-cols-2 shadow-xl h-20 '>
                     <div className="pl-4 font-bold text-2xl ml-8 mt-2"><img src={img} className="h-16 w-28" /></div>
                     <div className={"md:hidden block text-3xl font-bold ml-auto mt-2 pr-8"} onClick={() => setMobileview(!mobileView)}><BiAlignJustify /></div>
                     <div className={`z-1000 hidden font-sans-serif text-grays z-1000 transition-all my-2 duration-500 ease-in md:w-auto bg-white w-full absolute md:static md:z-auto  md:px-0 px-36 md:flex justify-around md:mx-0  text-xl `}>

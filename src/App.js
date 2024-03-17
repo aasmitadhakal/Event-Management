@@ -41,7 +41,9 @@ import Notification from './Components/Notification';
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import BlogPage from './Components/BlogPage';
+import BlogDetail from './Components/BlogDetail'
 import Graph from './Artist/Graph';
+import EventRequest from './Components/EventRequest';
 function App() {
   const location = useLocation();
   const params = useParams();
@@ -72,6 +74,7 @@ function App() {
       <Route path='/notification' element={<Notification />} />
       <Route path='/recomm' element={<Recommandation />} />
       <Route path='/blog' element={<BlogPage />} />
+      <Route path="/blog/:id" component={<BlogDetail/>} />
       <Route path='/boking' element={<Booking />} />
       <Route path='/event' element={<EventItem />} />
       <Route path='/event/:id' element={<EventDetail />} />
@@ -98,7 +101,7 @@ function App() {
       <Route path='/adduser' element={<UserCreate/>} />
       <Route path='/updateuser' element={<UserUpdate/>} />
       <Route path='/alist' element={<ArtistList />} />
-     
+      <Route path='/eventrequest' element={<EventRequest />} />
       <Route path='/aupdate' element={<ArtistUpdate/>} />
       <Route path='/change' element={<ChangePassword />} />
       <Route path='/cdraft' element={<ContentDraft />} />

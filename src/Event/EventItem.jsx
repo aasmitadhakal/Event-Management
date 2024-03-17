@@ -80,7 +80,7 @@ const EventItem = () => {
       ):(
         <div>
             {/* <Navbar/> */}
-           <RecentEvent className=''/>
+           {/* <RecentEvent className=''/> */}
         {/* <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center   ">Event</p></div> */}
         <div><p className="text-4xl font-serif  text-purple-700 flex justify-center item-center mt-24 "> Events</p></div>   
        

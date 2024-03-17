@@ -104,6 +104,11 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/eventrequest",
+    name: "Event Request",
+    icon: <FaUser />,
+  },
   
   {
     name: "Event",

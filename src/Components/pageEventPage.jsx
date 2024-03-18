@@ -44,19 +44,19 @@ const PageEventPage = () => {
     <>
       
         <div 
-        // className='sticky top-20 ' style={{ zIndex: '1' }}
+        //  className='sticky top-20 ' style={{ zIndex: '1' }}
         >
            
         <div><p className="text-xl font-serif  text-purple-700 flex item-center mt-24 justify-center  "> Recent Event</p></div>   
        
-        <div className='grid grid-cols-1  mx-4 '>
+        <div className='grid grid-cols-1  md:mx-4 '>
             
     {events.map((event) => (
        <div key={event.id} className='shadow-xl bg-white mt-4 rounded-2xl' >
          <Link to={`/event/${event.id}`}>
 
        
-            <div className='flex p-4'>
+            <div className='md:flex md:p-4'>
          <div><img src={event.photo} className='h-24 w-36' /></div> 
          <div>
           <div className='text-sm text-gray-800 font-[500] mt-2 mx-2'>{event.event_name}</div>

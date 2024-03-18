@@ -3,6 +3,8 @@ import axios from '../api/axios';
 import {MdVerified} from 'react-icons/md'
 import {AiTwotoneEdit} from 'react-icons/ai'
  import img from '../assets/avatar.png'
+import { ToastContainer } from "react-toastify";
+import notify from "../utlis/notifier";
 function Profiles() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -55,11 +57,24 @@ function Profiles() {
             'Content-Type': 'application/json'
         }
     }
-      const handleSaveClick = (e) => {
-        e.preventDefault()
-        setIsEditing(false);
+      // const handleSaveClick = (e) => {
+      //   e.preventDefault()
+      //   setIsEditing(false);
         
-      };
+      // };
+      const handleSaveClick = event => {
+        event.preventDefault();
+        axios.put('login-user-profile-update/admin/', formData, config)
+            .then(response => {
+                console.log('Profile updated successfully:', response.data);
+                notify("success", "Data updated successfully");
+                setIsEditing(false);
+            })
+            .catch(error => {
+                console.error('Error updating profile:', error);
+            });
+    };
+
     
 
   
@@ -211,23 +226,10 @@ function Profiles() {
 
 
     </div>
+    <ToastContainer/>
     </>
   )
 }
 
 export default Profiles
 
-{/* <tbody>
-<tr>
-  <td>{apiData.artist.contact}</td>
-  <td><img src={apiData.artist.photo} alt="Artist Photo"></img></td>
-  <td>{apiData.artist.user.name}</td>
-</tr>
-<tr>
-  <td>{apiData.normaluser.contact}</td>
-  <td>
-    <img src={apiData.normaluser.photo} alt="Normal User Photo" />
-  </td>
-  <td>{apiData.normaluser.gender}</td>
-</tr>
-</tbody> */}

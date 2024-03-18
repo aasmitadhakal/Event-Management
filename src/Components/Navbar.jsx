@@ -145,7 +145,7 @@ function Navbar({ toggleNotifications }) {
                             </div>
                         ))}
                         <div className="my-2  decoration-clone hover:scale-125 duration-300 hover:text-purple-400"><Link to='/event'>Event</Link></div>
-                        <div className="my-2 bg-purple-400 text-white" ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400" onClick={handleToggleNavbar}>Login</button></div>
+                        <div className="my-2  " ><button className=" hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400" onClick={handleToggleNavbar}>Login</button></div>
                         <div className="my-2 text-3xl font-bold">
                             <MdOutlineNotificationsNone onClick={(e) => handleToggleNotifications(e)} />
                             {unreadCount > 0 && (

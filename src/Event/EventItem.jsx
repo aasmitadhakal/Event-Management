@@ -79,15 +79,16 @@ const EventItem = () => {
        </> 
       ):(
         <div>
-            {/* <Navbar/> */}
-           {/* <RecentEvent className=''/> */}
-        {/* <div><p className="text-purple-600 font-bold text-xl flex justify-center item-center   ">Event</p></div> */}
+          
         <div><p className="text-4xl font-serif  text-purple-700 flex justify-center item-center mt-24 "> Events</p></div>   
        
-        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-14 mx-20 mb-10 ' data-aos="fade-up">
+        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-14 mx-20 mb-10 z-[-10] '
+        >
             
     {events.map((event) => (
-       <div data-aos="fade-up" key={event.id} className='shadow-xl bg-white mt-12 rounded-2xl'>
+       <div 
+      //  data-aos="fade-up"
+        key={event.id} className='shadow-xl bg-white mt-12 rounded-2xl '>
          <Link to={`/event/${event.id}`}>
 
        

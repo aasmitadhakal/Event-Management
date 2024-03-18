@@ -2,7 +2,7 @@ import React from "react";
 import { AiOutlineClose, AiFillCaretDown,AiOutlineDown, AiOutlineKey } from "react-icons/ai";
 import { MdOutlineMedicalInformation } from "react-icons/md";
 import { FaPeopleCarryBox } from "react-icons/fa6";
-
+import { FaCodePullRequest } from "react-icons/fa6";
 import { CiUser } from "react-icons/ci";
 import { NavLink } from "react-router-dom";
 import { MdOutlineEventSeat } from "react-icons/md";
@@ -107,7 +107,7 @@ const routes = [
   {
     path: "/eventrequest",
     name: "Event Request",
-    icon: <FaUser />,
+    icon: <FaCodePullRequest />,
   },
   
   {

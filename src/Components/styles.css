@@ -10,7 +10,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000; /* Ensure arrows are on top of other elements */
+  /* z-index: 1000; Ensure arrows are on top of other elements */
   cursor: pointer;
 }
 

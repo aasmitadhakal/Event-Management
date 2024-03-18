@@ -137,24 +137,26 @@ const EventDetail = () => {
                             </div>
                              {/* for artist */}
                             
-                                <div className='font-serif text-gray-500 mx-4  text-lg '>
-                                  
+                                <div className=' '>
+                                <p className='text-gray-700 text-[20px] font-[500] mx-12 my-2'>Artist</p> 
                                     {event.artist.map((artist, index) => (
-                                        <div key={index} className='mx-12'>
+                                        <div key={index} className='mx-12 font-serif text-gray-500   text-lg'>
                                              <img src={artist.photo} className='rounded-full h-36 w-36 ' alt={artist.name}  />
-                                            <p className='font-[500] mb-2 mx-4 text-gray-700'>Artist ({artist.user.name}) </p>
+                                            <p className='font-[500] mb-2 mx-12 text-gray-700'> {artist.user.name} </p>
                                           
                                           
                                         </div>
                                     ))}
                                 </div>
                                  {/* for sponser */}
-                                <div className='font-serif text-gray-500 mx-4   flex '>
-                                  
+                                 <p className='text-gray-700 text-[20px] font-[500] mx-12'>Sponsers</p> 
+                                <div className='font-serif text-gray-500 mx-4  grid grid-cols-3 '>
+                                
                                     {event.sponser.map((sponsor, index) => (
                                         <div key={index} className='mx-12'>
-                                            <img src={sponsor.photo} className='rounded-full h-24 w-24' alt={sponsor.name} />
-                                            <div className='font-[500] mb-2  text-gray-700'>Sponser ({sponsor.name})</div>
+                                            
+                                            <img src={sponsor.photo} className='rounded-full h-10 w-10' alt={sponsor.name} />
+                                            <div className='font-[500] mb-2  text-gray-700'> {sponsor.name}</div>
                                            
                                             
                                         </div>

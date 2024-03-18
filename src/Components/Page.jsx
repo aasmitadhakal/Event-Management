@@ -23,8 +23,8 @@ const Page = () => {
 
   return (
     <>
-    <div className='pl-16 mx-6'>
-      <div className='grid grid-cols-3'>
+    <div className='pl-16 md:mx-6'>
+      <div className='grid md:grid-cols-3'>
         <div className='mt-12  col-span-2'>
           {Array.isArray(apiData) && apiData.length > 0 ? (
             apiData.map(item => (
@@ -35,12 +35,13 @@ const Page = () => {
           ) : (
             <p>Loading or no data available</p>
           )}
+            {id === '1' && <Recommandation />}
         </div>
         <div>
           <PageEventPage/>
         </div>
       </div>
-      {id === '1' && <Recommandation />}
+      {/* {id === '1' && <Recommandation />} */}
     
     </div>
     <Footer/>

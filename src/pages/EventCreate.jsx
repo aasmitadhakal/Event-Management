@@ -87,13 +87,13 @@ function EventCreate() {
     <form onSubmit={handleSubmit} encType="multipart/form-data"
      className='   p-6 border bg-white shadow-md rounded'>
     <div className='mt-4 text-xl mb-8 font-bold text-purple-400 flex justify-center items-center  '>Create Event</div>
-    <div className='grid grid-cols-2'>
+    <div className='grid grid-cols-2 gap-x-24'>
       <div>
         {/* for eventname */}
-        <div className='relative mb-8  mx-12 '>
+        <div className='relative mb-8    '>
         <label htmlFor="event_name" className="absolute   text-gray-600 cursor-text ">Heading</label>
         <input
-        className="  flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
+        className=" w-full flex justify-center pt-4 items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer" 
         id="event_name"
         type="text"
         name="event_name"
@@ -103,10 +103,10 @@ function EventCreate() {
 
         </div>
         {/* for date */}
-        <div className='relative mb-4   mx-12  '> 
+        <div className='relative mb-4     '> 
         <label htmlFor="date" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Date</label>
         <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        className="w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="date"
         type="date"
         name="date"
@@ -117,10 +117,10 @@ function EventCreate() {
         </div>
        
         {/* for time */}
-        <div className='relative mb-4   mx-12  '> 
+        <div className='relative mb-4     '> 
         <label htmlFor="time" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Time</label>
         <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        className="w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="time"
         type="time"
         name="time"
@@ -132,10 +132,10 @@ function EventCreate() {
         </div>
         
         {/* for location */}
-        <div className='relative mb-4   mx-12  '> 
+        <div className='relative mb-4     '> 
         <label htmlFor="location" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Location</label>
         <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        className=" w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="location"
         type="text"
         name="location"
@@ -148,10 +148,10 @@ function EventCreate() {
     
       <div>
           {/* for capacity */}
-          <div className='relative mb-4   mx-12  '> 
+          <div className='relative mb-4     '> 
         <label htmlFor="capacity" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Capacity</label>
         <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        className="w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="capacity"
         type="text"
         name="capacity"
@@ -160,10 +160,10 @@ function EventCreate() {
         />   
         </div>
           {/* for entryfeee */}
-          <div className='relative mb-4   mx-12  '> 
+          <div className='relative mb-4     '> 
         <label htmlFor="entry_fee" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">Entry_Fee</label>
         <input
-        className=" flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        className="w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
         id="entry_fee"
         type="text"
         name="entry_fee"
@@ -171,13 +171,13 @@ function EventCreate() {
         onChange={handleChange}
         />   
         </div>
-        <div className='relative mb-4   mx-12 '>
+        <div className='relative mb-4    '>
        
         <select
         name="artist"
         value={formData.artist}
         onChange={handleChange}
-        className="w-2/3 border rounded-md px-4 py-2 mb-4"
+        className="w-full border rounded-md px-4 py-2 mb-4"
       >
         <option value="">Select Artist</option>
         {artistList.map(artist => (
@@ -186,12 +186,12 @@ function EventCreate() {
       </select>
 </div>
 {/* for sponser */}
-<div className='relative mb-4   mx-12 '>
+<div className='relative mb-4    '>
 <select
         name="sponser"
         value={formData.sponser}
         onChange={handleChange}
-        className="w-2/3 border rounded-md px-4 py-2 mb-4"
+        className="w-full border rounded-md px-4 py-2 mb-4"
       >
         <option value="">Select Sponser</option>
         {sponserlist.map(sponser => (
@@ -199,10 +199,10 @@ function EventCreate() {
         ))}
       </select>
       </div>
-      <div className='relative mb-4 mx-12'>
+      <div className='relative mb-4 '>
   <label htmlFor="photo" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text">Photo</label>
   <input
-    className="flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
+    className=" w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors"
     id="photo"
     type="file"
     name="photo"
@@ -216,7 +216,7 @@ function EventCreate() {
 </div>
       
          {/* for eventcompleted */}
-         {/* <div className=' relative mb-4   mx-12    '> 
+         {/* <div className=' relative mb-4       '> 
         <label htmlFor="eventcompleted" className="flex justify-center items-center absolute left-0 top-[-2] text-gray-600 cursor-text ">Event_Completed</label>
         <input type ='radio'
         className=' flex pt-2 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors'

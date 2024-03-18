@@ -27,17 +27,7 @@ const EventRequest = () => {
   return (
     <>
       
-      {/* <ul>
-        {events.map(event => (
-          <li key={event.id}>
-            <img src={event.photo} alt={event.event_name} />
-            <p>{event.event_name}</p>
-            <p>Date: {event.date}</p>
-            <p>Location: {event.location}</p>
-           
-          </li>
-        ))}
-      </ul> */}
+     
       <div className='overflow-auto mx-6  '>
             <table className='rounded-lg shadow  mx-4 mt-8 mb-4'>
             <thead className='bg-white border-b-2 border-gray-200'>
@@ -49,6 +39,7 @@ const EventRequest = () => {
                     <th className=" p-2  text-sm font-semibold ">Capacity</th>
                     <th className=" p-2  text-sm font-semibold ">Entry Fee</th>
                     <th className=" p-2  text-sm font-semibold ">Photo</th>
+                    {/* <th className=" p-2  text-sm font-semibold ">artist photo</th> */}
                    
                     <th className=" p-2 text-sm font-semibold ">Action</th>
               </tr>
@@ -65,7 +56,7 @@ const EventRequest = () => {
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{event.capacity}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{event.entry_fee}</td>
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>  <img src={event.photo} alt={event.event_name} className='h-16 w-24' /></td>
-            
+            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>  <img src={event.artist.photo} alt={event.artist.event_name} className='h-16 w-24' /></td> */}
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
               <Link to ="/">
               <button

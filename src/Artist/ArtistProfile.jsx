@@ -6,7 +6,7 @@ import {BsFillTelephoneFill} from 'react-icons/bs'
 import {IoLocationSharp} from 'react-icons/io5';
 import notify from "../utlis/notifier";
 import { ToastContainer } from 'react-toastify';
-import img from '../assets/avatar.png'
+
 function ArtistProfile() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
@@ -72,7 +72,7 @@ function ArtistProfile() {
               id: data.id,
               name: data.name,
               email: data.email,
-              photo: artistData.photo || '', // Access photo property with fallback
+              photo: artistData.photo, // Access photo property with fallback
               username: data.username,
               district: artistData.district || '', // Access other properties with fallbacks
               contact: artistData.contact,

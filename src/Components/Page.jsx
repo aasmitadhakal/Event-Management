@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { useParams } from 'react-router-dom';
 import PageEventPage from './pageEventPage';
-import Recommandation from './Recommandation';
+import NewRecommandation from './NewRecommendation';
 import Footer from './Fotter';
 
 const Page = () => {
@@ -35,14 +35,14 @@ const Page = () => {
           ) : (
             <p>Loading or no data available</p>
           )}
-            {id === '1' && <Recommandation />}
+            
         </div>
         <div>
           <PageEventPage/>
         </div>
       </div>
       {/* {id === '1' && <Recommandation />} */}
-    
+      {id === '1' && <NewRecommandation />}
     </div>
     <Footer/>
     </>

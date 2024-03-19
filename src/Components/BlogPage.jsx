@@ -28,7 +28,7 @@ const BlogPage=()=> {
   return (
     <>
     <div className='font-[700] text-[24px] text-gray-700 flex justify-center items-center mt-24 my-4 '>Blog</div>
-    <div className="grid grid-cols-3 mx-24 gap-8 mb-24">
+    <div className="grid md:grid-cols-3 grid-cols-1 mx-8 md:mx-24 gap-8 mb-24">
       {apiData.map(item => (
         <div key={item.id} className=" shadow-xl ">
             <Link to={`/blogss/${item.id}`} key={item.id}>

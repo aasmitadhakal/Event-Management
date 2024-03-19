@@ -4,6 +4,7 @@ import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
 import { useParams } from 'react-router-dom';
+import KhaltiCheckout from 'khalti-checkout-web'; // Import Khalti SDK
 
 function Booking({ onClose }) {
   const popUpRef = useRef(null);
@@ -72,20 +73,53 @@ function Booking({ onClose }) {
     setEventId(e.target.value);
   };
 
+  const khaltiCheckout = new KhaltiCheckout({
+    publicKey: 'test_public_key_c2ed31f24cb147f9a06636fd1dba1bcb', // Replace 'your_public_key' with your actual Khalti public key
+    productIdentity: '1234567890',
+    productName: 'Event Ticket',
+    productUrl: 'http://example.com/event-ticket',
+    eventHandler: {
+      onSuccess(payload) {
+        console.log('Payment successful:', payload);
+        // Proceed with API call or any further processing
+      },
+      onError(error) {
+        console.error('Payment error:', error);
+        // Handle payment error here
+      },
+      onClose() {
+        console.log('Payment window closed.');
+        // Handle closure of payment window here
+      }
+    }
+  });
+
   const handlePayClick = () => {
-    axios.post(`http://127.0.0.1:8000/ticket/booking/${eventId}/`, { quantity, total_price: totalPrice, event: eventId }, config)
-      .then(response => {
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+    khaltiCheckout.show({ amount: totalPrice * 100 }); // Convert totalPrice to paisa
   };
+  // const handlePayClick = async () => {
+  //   try {
+  //     // Send payment data to backend
+  //     const response = await axios.post('payments/', {
+  //       amount: totalPrice * 100, // Convert totalPrice to paisa
+  //       eventId: eventId, // Send event ID or any other necessary data
+  //       // Include other payment details as needed
+  //     }, config);
+  
+  //     // If payment is successful, proceed with further actions
+  //     console.log('Payment successful:', response.data);
+  //     // You can handle further actions like updating UI, showing confirmation, etc.
+  
+  //   } catch (error) {
+  //     console.error('Payment error:', error);
+  //     // Handle payment error here, show error message to the user, etc.
+  //   }
+  // };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       <div ref={popUpRef} className="bg-white p-4 rounded shadow-md mx-36">
-        <button onClick={onClose} className="absolute top-44 right-32 text-white p-2 md:mx-44">
+        <button onClick={onClose} className="absolute top-24 right-2 text-purple-400 p-2 md:mx-44">
           Close
         </button>
         {/* for form */}
@@ -96,7 +130,7 @@ function Booking({ onClose }) {
               <div ><img src={event.photo} className="h-80" alt=""></img></div>
               <div>
                 <div className='text-xl font-serif mx-12 my-2'><span className=''>{event.event_name}</span></div>
-                <div className='text-gray-400 font-serif ml-12 text-purple-500 flex'>Deal of the Day: {event.entry_fee}</div>
+                <div className='text-gray-400 font-serif ml-12  flex'>Deal of the Day: {event.entry_fee}</div>
                 <div className='bg-white grid grid-cols-3 gap-x-4 mt-4 mx-4 border-b '>
                   <div className='mb-2'>
                     <div className='text-2xl text-gray-500 mx-8'><BsCalendar2Date /></div>
@@ -117,12 +151,6 @@ function Booking({ onClose }) {
                 <div className='my-4 pl-4 grid grid-cols-2'>
                   <div>
                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
-                    {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                        Artist: {event.artist ? event.artist.map((artist, index) => <span key={index}>{artist.user?.name}</span>) : ''}
-                        </div> */}
-                        {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                        Sponsor: {event.sponsor ? event.sponsor.map((sponsor, index) => <span key={index}>{sponsor?.name}</span>) : ''}
-                        </div> */}
                   </div>
                   <div>
                     <div className="flex items-center">
@@ -137,7 +165,7 @@ function Booking({ onClose }) {
                     </div>
                   </div>
                 </div>
-                <button className="hover:bg-purple-400 bg-purple-500 text-white px-12 py-1 mx-36 rounded " onClick={handlePayClick}>Pay Now</button>
+                <button className="hover:bg-purple-400 bg-purple-500 text-white px-12 py-2 mx-24 rounded " onClick={handlePayClick}>Pay with khalti</button>
               </div>
             </div>
           </div>

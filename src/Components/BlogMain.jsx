@@ -28,10 +28,10 @@ function BlogMain() {
 
     return (
         <>
-        <div className='grid grid-cols-3'>
-        <div className='mt-44 text-gray-500 font-[600] col-span-2'>
+        <div className='grid md:grid-cols-3'>
+        <div className='md:mt-44 mt-24 text-gray-500 font-[600] col-span-2'>
            
-            <div className="mx-24 mb-24">
+            <div className="md:mx-24 mx-8 md:mb-24 ">
                 {loading ? (
                     <div>Loading...</div>
                 ) : (
@@ -48,7 +48,7 @@ function BlogMain() {
           
             </div>
               {/* for recent content */}
-              <div>
+              <div className='md:mx-0 mx-4'>
                 <RecentBlog/>
             </div>
         </div>

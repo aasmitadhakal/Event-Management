@@ -24,7 +24,7 @@ const EventItem = () => {
     const fetchEvents = async () => {
         try {
             const response = await axios.get(
-                `event/search/?search=${searchQuery}&page=${page}`
+                `http://127.0.0.1:8000/event/list/user/`
             );
             setLoading(false);
             setEvents(response.data.results);
@@ -82,7 +82,7 @@ const EventItem = () => {
           
         <div><p className="text-4xl font-serif  text-purple-700 flex justify-center item-center mt-24 "> Events</p></div>   
        
-        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-14 mx-20 mb-10 z-[-10] '
+        <div className='grid grid-cols-1 md:grid-cols-3 mt-2 gap-8 md:mx-14 mx-8 mb-10 z-[-10] '
         >
             
     {events.map((event) => (

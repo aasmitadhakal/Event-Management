@@ -134,8 +134,8 @@ function BlogMain() {
                     <div className='text-[24px] font-[700] text-gray-700 font-sans flex item center justify-center'>Comments</div>
                     {data.map(item => (
                         <div key={item.id} className="border shadow-xl mx-12 my-4 p-2 rounded">
-                            <h2 className="text-[20px] font-[600] text-gray-700 font-sans">{item.name}</h2>
-                            <p className="text-purple-500 text-[14px] font-[400] leading-[20px] ">{item.content}</p>
+                            <h2 className="text-[16px] font-[600] text-purple-700 my-1 font-sans">{item.name}</h2>
+                            <p className="text-gray-500 text-[17px] font-[400] leading-[20px] ">{item.content}</p>
                         </div>
                     ))}
                 </div>

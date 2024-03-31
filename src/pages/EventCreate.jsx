@@ -2,7 +2,7 @@ import React from 'react'
 import { useState,useEffect } from 'react'
 import axios from '../api/axios'
 import Select from 'react-select';
-
+import { useNavigate } from 'react-router-dom';
 function EventCreate() {
     
    
@@ -19,9 +19,9 @@ function EventCreate() {
           photo:null,
           artist: [],
           sponser: [],
-        
+          genres:'',
   });
-
+  const navigate = useNavigate();
   const token = localStorage.getItem('accessToken'); 
   const config = {
     headers: {
@@ -74,7 +74,7 @@ function EventCreate() {
         axios.post('event/create/', postData, config)
           .then((response) => {
             console.log('Success:', response);
-            
+            navigate("/eventlist", { replace: true });
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -140,6 +140,18 @@ function EventCreate() {
         type="text"
         name="location"
         value={formData.location}
+        onChange={handleChange}
+        />   
+        </div>
+         {/* for genres */}
+         <div className='relative mb-4     '> 
+        <label htmlFor="genres" className="flex justify-center items-center absolute left-0 top-1 text-gray-600 cursor-text  ">genres</label>
+        <input
+        className=" w-full flex pt-6 justify-center items-center border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors " 
+        id="genres"
+        type="text"
+        name="genres"
+        value={formData.genres}
         onChange={handleChange}
         />   
         </div>

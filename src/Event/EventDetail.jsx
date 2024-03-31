@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../api/axios';
 import { Skeleton } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
@@ -86,7 +86,7 @@ const EventDetail = () => {
                     <p className='flex justify-center item-center font-[700] text-[24px] text-gray-700 my-4'>Event Details</p>
                   
                     <div className=''>
-                        <div className='mx-8'><img src={event.photo} className="rounded-xl h-[400px] w-full " alt={event.photo}></img></div>
+                        <div className='mx-8 mb-5'><img src={event.photo} className="rounded-xl h-[400px] w-full " alt={event.photo}></img></div>
                         
                             <div className='text-[24px] font-[500] font-serif ml-12  my-1'><span className=''>{event.event_name}</span></div>
                             <div className='text-gray-600 font-serif ml-12 flex'>Deal of the Day: {event.entry_fee}</div>
@@ -108,7 +108,7 @@ const EventDetail = () => {
                                 </div>
                             </div>
                             <div className='my-4 mx-8 grid grid-cols-2 '>
-                                <div>
+                                <div>   
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Capacity: {event.capacity}</div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Entry Price:{event.entry_fee}</div>
                                     
@@ -116,46 +116,57 @@ const EventDetail = () => {
                                 <div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>No_of_Participant: {event.no_of_participant}</div>
                                     <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>Remaining Capacity:{event.remaining_capacity}</div>
-                                   
-                                    {/* for timer */}
-                                    <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
-                                        {remainingTime > 0 ? (
-                                            <div className=" space-x-2">
-                                                <div className=" ">
-                                                    {/* Display the countdown timer */}
-                                                    <div className="grid grid-cols-3 auto-cols-max ">
-                                                        <div className=" text-sm text-center  text-neutral-content bg-purple-300 border  "><span className='countdown font-mono  '>{formatTime(remainingTime).hours}</span><br />Hours</div>
-                                                        <div className=" text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).minutes}</span><br />Minutes</div>
-                                                        <div className="text-sm text-center  text-neutral-content  bg-purple-300 border "><span className='countdown font-mono '>{formatTime(remainingTime).seconds}</span><br />Seconds</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ) : "Event has started"}
-                                    </div>
-                                    {/* <div className='font-serif text-gray-600 mx-4 my-2 text-lg'> Artist: {event.artist.map((artist, index) => <span key={index}>{artist.user.name}</span>)}</div> */}
                                 </div>
                             </div>
+                            {/* for timer */}
+                            <div className='my-4 mx-8'>
+                                <div className='font-serif text-gray-600 mx-4 my-2 text-lg'>
+                                    Remaining Time To Book The Event: 
+                                </div>
+                                <div className='flex justify-center space-x-1'>
+                                    {remainingTime > 0 ? (
+                                        <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 border-2 border-black">
+                                            <span className="text-lg font-mono">{formatTime(remainingTime).hours}</span>
+                                        </div>
+                                    ) : null}
+                                    {remainingTime > 0 ? (
+                                        <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 border-2 border-black">
+                                            <span className="text-lg font-mono">{formatTime(remainingTime).minutes}</span>
+                                        </div>
+                                    ) : null}
+                                    {remainingTime > 0 ? (
+                                        <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 border-2 border-black">
+                                            <span className="text-lg font-mono">{formatTime(remainingTime).seconds}</span>
+                                        </div>
+                                    ) : null}
+                                </div>
+                                {remainingTime <= 0 && <div>Event has started</div>}
+                            </div>
+
+
                              {/* for artist */}
                             
                                 <div className=' '>
-                                <p className='text-gray-700 text-[20px] font-[500] mx-12 my-2'>Artist</p> 
+                                <p className='font-serif  text-gray-600 text-[20px] font-[500] mx-12 my-2'>Artists:</p> 
+                                <div className='font-serif text-gray-500 mx-4  grid grid-cols-3  '>
                                     {event.artist.map((artist, index) => (
                                         <div key={index} className='mx-12 font-serif text-gray-500   text-lg'>
-                                             <img src={artist.photo} className='rounded-full h-36 w-36 ' alt={artist.name}  />
-                                            <p className='font-[500] mb-2 mx-12 text-gray-700'> {artist.user.name} </p>
+                                            <img src={artist.photo} className='rounded-full h-24 w-24 mb-2' alt={artist.name}  />
+                                            <p className='font-serif font-[500] mb-2 mx-2 text-gray-700'> {artist.user.name} </p>
                                           
                                           
                                         </div>
                                     ))}
                                 </div>
+                                </div>
                                  {/* for sponser */}
-                                 <p className='text-gray-700 text-[20px] font-[500] mx-12'>Sponsers</p> 
+                                <p className='font-serif  text-gray-600 text-[20px] font-[500] mx-12'>Sponsers:</p>
                                 <div className='font-serif text-gray-500 mx-4  grid grid-cols-3 '>
                                 
                                     {event.sponser.map((sponsor, index) => (
                                         <div key={index} className='mx-12'>
                                             
-                                            <img src={sponsor.photo} className='rounded-full h-10 w-10' alt={sponsor.name} />
+                                            <img src={sponsor.photo} className='rounded-full h-12 w-12 mb-2' alt={sponsor.name} />
                                             <div className='font-[500] mb-2  text-gray-700'> {sponsor.name}</div>
                                            
                                             

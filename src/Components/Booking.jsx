@@ -3,17 +3,28 @@ import axios from '../api/axios';
 import { BsCalendar2Date } from 'react-icons/bs';
 import { AiOutlineFieldTime } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import KhaltiCheckout from 'khalti-checkout-web'; // Import Khalti SDK
+import Login from './Login'; // Import the Login component
 
 function Booking({ onClose }) {
+  const navigate = useNavigate(); // Initialize useNavigate
   const popUpRef = useRef(null);
   const { id } = useParams(); // Extracting event ID from URL
   const [event, setEvent] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState();
   const [eventId, setEventId] = useState(id);
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage.getItem('accessToken');  //cookies ma rakhnii..
+
+  useEffect(() => {
+    // Check if user is authenticated, otherwise redirect to login page
+    if (!token) {
+      navigate('/login'); // Redirect to login page
+    }
+  }, [token, navigate]);
+
 
   const config = {
     headers: {
@@ -73,30 +84,75 @@ function Booking({ onClose }) {
     setEventId(e.target.value);
   };
 
-  const khaltiCheckout = new KhaltiCheckout({
-    publicKey: 'test_public_key_c2ed31f24cb147f9a06636fd1dba1bcb', // Replace 'your_public_key' with your actual Khalti public key
-    productIdentity: '1234567890',
-    productName: 'Event Ticket',
-    productUrl: 'http://example.com/event-ticket',
-    eventHandler: {
-      onSuccess(payload) {
-        console.log('Payment successful:', payload);
-        // Proceed with API call or any further processing
-      },
-      onError(error) {
-        console.error('Payment error:', error);
-        // Handle payment error here
-      },
-      onClose() {
-        console.log('Payment window closed.');
-        // Handle closure of payment window here
-      }
-    }
-  });
 
   const handlePayClick = () => {
-    khaltiCheckout.show({ amount: totalPrice * 100 }); // Convert totalPrice to paisa
-  };
+    // const tokens = localStorage.getItem('accessToken');
+    const tokens = localStorage.getItem('accessToken');
+    console.log("Token:", tokens);
+    // Send payment details to the backend
+    axios.post(
+        'payments/',
+        {
+            quantity: quantity,
+            amount: totalPrice * 100, // Convert totalPrice to paisa
+            return_url: `http://127.0.0.1:8000/payment/verification/`,
+            purchase_order_id: eventId, // Event ID or any other identifier
+        },  {          
+        headers: {
+          'Authorization': `Bearer ${token}`, // Include the authentication token in the request headers
+      },
+  }    
+  )
+    .then(response => {
+        // Handle response from the backend if needed
+        const paymentUrl = response.data.payment_url;
+        if (paymentUrl) {
+            window.location.href = paymentUrl;
+        } else {
+            console.error('Payment URL not found in response');
+        }
+    })
+    .catch(error => {
+      if (error.response) {
+        const errorMessage = error.response.data.error || 'An error occurred. Please try again.';
+        console.error('Error initiating payment:', errorMessage);
+        // Display the error message to the user (e.g., using a toast or modal)
+        // Example using window.alert:
+        window.alert(errorMessage);
+    } else if (error.request) {
+        console.error('No response received from the server.');
+    } else {
+        console.error('Error occurred while processing the request.');
+    }
+        console.error('Error initiating payment:', error);
+        // Handle error (e.g., display error message to the user)
+    });
+};
+
+const khaltiCheckout = new KhaltiCheckout({
+  publicKey: 'da9976f660084bdf95e76bfd1f6d0486', // Replace 'your_public_key' with your actual Khalti public key
+  productIdentity: '1234567890',
+  productName: 'Event Ticket',
+  productUrl: 'http://example.com/event-ticket',
+  eventHandler: {
+    onSuccess(payload) {
+      console.log('Payment successful:', payload);
+      // Proceed with API call or any further processing
+      navigate('/login');
+    },
+    onError(error) {
+      console.error('Payment error:', error);
+      // Handle payment error here
+    },
+    onClose() {
+      console.log('Payment window closed.');
+      // Handle closure of payment window here
+    }
+  }
+});
+
+    // khaltiCheckout.show({ amount: totalPrice * 100 }); // Convert totalPrice to paisa
+  // };
   // const handlePayClick = async () => {
   //   try {
   //     // Send payment data to backend
@@ -169,7 +225,8 @@ function Booking({ onClose }) {
               </div>
             </div>
           </div>
-        ) : (
+        ) : 
+        (
           <div>Loading...</div>
         )}
       </div>

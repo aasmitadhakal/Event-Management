@@ -28,3 +28,10 @@
   left: 10px; /* Adjust arrow position as needed */
   margin-left: -10px; /* Pull it slightly outside of the container */
 }
+
+.hovered {
+  background-color: #f9feff ;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+

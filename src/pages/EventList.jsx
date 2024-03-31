@@ -3,6 +3,7 @@ import axios from '../api/axios'
 import { Link } from 'react-router-dom'
 import notify from '../utlis/notifier'
 import { ToastContainer } from 'react-toastify'
+import { useParams } from 'react-router-dom'
 function EventList() {
     const [data,setData] =useState([])
     const [deleted, setDeleted] = useState(false);
@@ -10,6 +11,7 @@ function EventList() {
     const username = localStorage.getItem('emailinput') 
     const userPassword = localStorage.getItem('passwordinput');
     const [page, setPage] = useState(1);
+    let { id } = useParams();
     const config = {
         headers: {
           'Authorization': `Basic ${btoa(`${username}:${userPassword}`)}`,
@@ -58,71 +60,18 @@ const EventComplete=(id,e)=>{
       console.error('Error deleting data:', error);
     });
   }
-  //     //for pagination
-  //     const handlePageChange = (page) => {
-  //       if (page >= 1 && page <= totalPages) {
-  //         setCurrentPage(page);
-  //       }
-  //       getData(page);
-  //     };
-    
-  //     const handlePrevPage = () => {
-  //       if (currentPage > 1) {
-  //         setCurrentPage(currentPage - 1);
-  //       }
-  //     };
-    
-  //     const handleNextPage = () => {
-  //       if (currentPage < totalPages) {
-  //         setCurrentPage(currentPage + 1);
-  //       }
-  //     };
-   
-  //     const renderPagination = () => {
-  //       if (totalPages === 1) return null;
-    
-  //       const pageNumbers = [];
-  //       const visiblePages = 4; // Number of visible page buttons (excluding Previous and Next)
-        
-  //       // Calculate start and end page numbers based on the current page and the number of visible pages
-  //       let startPage = Math.max(currentPage - Math.floor(visiblePages / 2), 1);
-  //       let endPage = Math.min(startPage + visiblePages - 1, totalPages);
-      
-  //       if (endPage - startPage + 1 < visiblePages) {
-  //         startPage = Math.max(endPage - visiblePages + 1, 1);
-  //       }
-      
-  //       for (let i = startPage; i <= endPage; i++) {
-  //         pageNumbers.push(i);
-  //       }
-  // return (
-  //   <div className="flex items-center justify-center mt-4 mb-12">
-  //         <button
-  //           className="px-3 py-2 mr-2 bg-purple-400 text-white rounded"
-  //           onClick={handlePrevPage}
-  //         >
-  //           Previous
-  //         </button>
-  //         {pageNumbers.map((page) => (
-  //           <button
-  //             key={page}
-  //             className={`px-3 py-2 mx-1 ${
-  //               page === currentPage ? 'bg-purple-400 text-white' : 'bg-white text-purple-400'
-  //             } rounded`}
-  //             onClick={() => handlePageChange(page)}
-  //           >
-  //             {page}
-  //           </button>
-  //         ))}
-  //         <button
-  //           className="px-3 py-2 ml-2 bg-purple-400 text-white rounded"
-  //           onClick={handleNextPage}
-  //         >
-  //           Next
-  //         </button>
-  //       </div>
-  //     );}
-   
+  const settoLocalstorage =(id,artist,sponser,event_name,date,time,location,photo,capacity,entry_fee)=>{
+    localStorage.setItem("eventid",id)
+    localStorage.setItem("eventartist",artist)
+    localStorage.setItem("eventsponser",sponser)
+    localStorage.setItem("event_name",event_name)
+    localStorage.setItem("eventdate",date)
+    localStorage.setItem("eventtime",time)
+    localStorage.setItem("eventlocation",location)
+    localStorage.setItem("eventphoto",photo)
+    localStorage.setItem("eventcapacity",capacity)
+    localStorage.setItem("evententry_fee",entry_fee)
+  }
   return (
     <div className='mb-8'>
       {/* for searchbox */}
@@ -169,6 +118,10 @@ const EventComplete=(id,e)=>{
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.artist}</td>
             {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>{item.sponser}</td> */}
             <td className='p-2 text-sm text-gray-700 whitespace-nowrap'>
+            <Link to ={`/eventupdate/${item.id}`}>
+              <button
+                
+              className='bg-purple-400 text-white px-4 py-2 mr-4 rounded-lg  hover:bg-purple-800 hover:text-green'>Update</button></Link>
             <button onClick={(e)=>{DeleteData(item.id,e)}} className='bg-red-400 text-white px-4 py-2 rounded-lg hover:bg-red-800 hover:text-red'>delete  </button></td>
            {/* <td className='p-2 text-sm text-gray-700 whitespace-nowrap'> <button  onClick={(e)=>{EventComplete(item.id,e)}} className='bg-orange-400 text-white py-1 px-6 rounded-lg hover:bg-orange-600 hover:text-red'><span>Event complete</span></button></td> */}
          </tr>

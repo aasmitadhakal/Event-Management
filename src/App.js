@@ -44,6 +44,7 @@ import BlogPage from './Components/BlogPage';
 import BlogMain from './Components/BlogMain';
 import Graph from './Artist/Graph';
 import EventRequest from './Components/EventRequest';
+import EventUpdate from './pages/EventUpdate';
 function App() {
   const location = useLocation();
   const params = useParams();
@@ -103,6 +104,7 @@ function App() {
       <Route path='/alist' element={<ArtistList />} />
       <Route path='/eventrequest' element={<EventRequest />} />
       <Route path='/aupdate' element={<ArtistUpdate/>} />
+      <Route path='/eventupdate/:id' element={<EventUpdate />} />
       <Route path='/change' element={<ChangePassword />} />
       <Route path='/cdraft' element={<ContentDraft />} />
       <Route path='/clist' element={<ContentPublish />} />

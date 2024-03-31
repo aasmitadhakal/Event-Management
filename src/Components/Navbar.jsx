@@ -12,9 +12,10 @@ import { MdOutlineNotificationsNone } from 'react-icons/md';
 import Notification from "./Notification";
 
 function Navbar({ toggleNotifications }) {
+    // const navigate = useNavigate();
     const [toggle, settoggle] = useState(false); //'false'
     const [showNavbar, setShownavbar] = useState(false);
-    const [hasaccount, setHasaccount] = useState(true);
+    const [hasaccount, setHasaccount] = useState(true);   
     const [mobileView, setMobileview] = useState(true);
     const [navbarData, setNavbarData] = useState([]);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -23,10 +24,14 @@ function Navbar({ toggleNotifications }) {
     const [notifications, setNotifications] = useState([]);
     const [unreadCount, setUnreadCount] = useState(0);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [highlightNotifications, setHighlightNotifications] = useState(false);
+
 
     const handleToggleNotifications = (e) => {
         e.stopPropagation();
         setShowNotifications((prevShowNotifications) => !prevShowNotifications);
+        setUnreadCount(0); // Reset unread count when opening notifications
+        setHighlightNotifications(false); // Remove highlight when opening notifications
     };
 
     const handleToggleNavbar = () => {
@@ -38,6 +43,12 @@ function Navbar({ toggleNotifications }) {
         setShownavbar(false);
         setShowNotifications(false);
     };
+
+    const handleReadNotification = () => {
+        // Decrease unread count when a notification is read
+        setUnreadCount((prevCount) => Math.max(prevCount - 1, 0));
+      };
+
     useEffect(() => {
       const handleScroll = () => {
         const scrollTop = window.scrollY;
@@ -89,7 +100,8 @@ function Navbar({ toggleNotifications }) {
             const recent_notification = parsedData.recent_notifications;
             console.log(recent_notification);
             setNotifications((prevNotifications) => [...prevNotifications, ...recent_notification]);
-            setUnreadCount((prevCount) => prevCount + recent_notification.length);
+            setUnreadCount((prevCount) => prevCount + 1);
+            setHighlightNotifications(true); // Highlight the notifications button when new notifications arrive
         };
 
         ws.onclose = () => {
@@ -127,10 +139,11 @@ function Navbar({ toggleNotifications }) {
                             <button className="hover:underline decoration-pink-500 decoration-clone hover:scale-125 duration-300 hover:text-purple-400" onClick={handleToggleNavbar}>Login</button>
                         </div>
                         <div className="my-2 text-3xl font-bold">
-                            <MdOutlineNotificationsNone onClick={(e) => handleToggleNotifications(e)} />
+                            <MdOutlineNotificationsNone onClick={(e) => handleToggleNotifications(e)} className={highlightNotifications ? "text-purple-500" : ""} />
                             {unreadCount > 0 && (
                                 // <span className="bg-red-500 text-white rounded-full px-2 ml-1">
-                                <span className="bg-red-500 text-white rounded-full px-2 ml-1 absolute -top-0.5 -right-0.5 text-xs">
+                                // <span className="bg-red-500 text-white rounded-full px-2 ml-1 absolute top-0.5 right-0.5 text-xs">
+                                <span className="bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center absolute top-1 right-1 text-xs">
                                     {unreadCount}
                                 </span>
                             )}
@@ -168,4 +181,5 @@ function Navbar({ toggleNotifications }) {
 }
 
 export default Navbar;
+
 
